@@ -1,0 +1,224 @@
+Historically, Eilenberg and Mac Lane observed that some functions in algebraic topology were more than mere functions. These functions commuted with a certain kind of transformation - namely the natural transformations which we introduce in subsection \ref{sec:nt}. This naturality property is often necessary in algebraic topology to make things work. Anyways, to precisely formulate what they meant they needed the notion of categories as auxiliary concept. But actually they gave birth to a new theory. Category Theory. While introducing categories from this perspective seems intuitive for algebraic topologists and is, in fact, often introduced in this way there, it is not really helpful for anyone else. Even an algebraic topologist will eventually gain from the more modern approach we present. At some point in history people observed that a category defined as a certain set\footnote{as usual in mathematics} is an interpretation of some first order-theory - called category theory - in set theory. Hence categories make sense without any surrounding set theory. This is the addressed more modern approach and we will see that it is way more fundamental as the fact that it is a deductive system already suggests.
+\\
+Remember that in a set theory such as Zermelo-Fraenkel set theory with choice (abbr. ZFC) or Tarski-Grothendieck set theory (abbr. TG) the idea is that the only mathematical objects inhabiting the mathematical universe are sets. Preformally, a set is seen as a collection of things. Set theories like ZFC or TG do not directly say what a set is but they rather characterize them by their properties.\footnote{but rememeber G\"odel's incompleteness theorems} ZFC and TG for example say that given two sets we can test if one set is in the collection made up by the other set. This testing is the (by mathematicians) well-known binary relation {\glqq}is element of{\grqq} $\in$ and ZFC and TG, respectively, is a list of intuitively (more or less) sensible assumptions which govern the relation $\in$ and the mathematical universe.
+\\
+Directed paths - that is, paths which can be gone only in one direction - are for category theory what sets are for ZFC and TG. So, in category theory, we consider directed paths as the only mathematical objects inhabiting the mathematical universe. Now what is special about the directed path we have in mind. How can we characterize directed paths? First of all, we symbolize a directed path by an arrow\footnote{indeed, some use the notion of arrows here rather than this of directed paths as we do}
+\begin{align*}
+  \longrightarrow
+\end{align*}
+Certainly a directed path has two different ends. Namely
+\begin{enumerate}
+\item[(1)]
+a starting point - a source from which the arrow points away
+\item[(2)]
+a terminus (an ending point) - a target to which the arrow points.
+\end{enumerate}
+If a directed path starts where another one ends we consider it sensible to be able to patch these directed paths together to a single directed path. That is, we want to be able to compose directed paths. In an arrow picture:
+\[
+\begin{tikzcd}[sep=large]
+  \phantom{1}
+  \arrow[shift left=1ex]{r}{}
+  \arrow[shift right=1ex]{rr}{}
+  &
+  \phantom{1}
+  \arrow[shift left=1ex]{r}{}
+  &
+  \phantom{1}
+\end{tikzcd}
+\]
+For consistency we should demand that if a given directed path is the composition of a first and a second directed path then, of course, the terminus of the first directed path is the starting point of the second directed path. Moreover, the starting point of the given directed path should be the starting point of the first directed path while the terminus of the given directed path should be the terminus of the second one. Next, this composition operation should not depend on the order we compose three (or more) directed paths. This is expressed by the picture
+\begin{align*}
+  \left(
+    \longrightarrow
+    \quad
+    \longrightarrow
+  \right)
+  \quad
+  \longrightarrow
+  \qquad
+  &=
+  \qquad
+  \longrightarrow
+  \quad
+  \left(
+    \longrightarrow
+    \quad
+    \longrightarrow
+  \right)
+\end{align*}
+What is not clear so far is which mathematical objects the starting point and terminus of a directed path shall be. Since the only mathematical objects we believe to exist here are directed paths they must clearly be directed paths. Hence for any given directed path we should demand the existence of two directed paths which when composed with the given directed path at the starting point and the terminus, respectively, reproduce the directed path. That is, we have directed paths
+\begin{align*}
+  \rightharpoonup
+\end{align*}
+and
+\begin{align*}
+  \rightharpoondown
+\end{align*}
+such that
+\begin{align*}
+  \rightharpoonup
+  \quad
+  \longrightarrow
+  \qquad
+  &=
+  \qquad
+  \longrightarrow  
+  \qquad
+  =
+  \qquad
+  \longrightarrow
+  \quad
+  \rightharpoondown
+\end{align*}
+These seem to be reasonable choices since by repeating the process of composing such directed paths nothing happens. These identity directed paths are somehow stationary. The starting point and terminus of an identity directed path are clearly the same. All this can be interpreted as that an identity directed path points to itself and the starting point and terminus, respectively, does not change.
+\\
+To encode this formally in a first-order theory we need
+\begin{enumerate}
+\item[(1)]
+a unary function symbol
+\begin{align*}
+  \mathrm{s}
+\end{align*}
+intended to represent a function mapping an arbitrary directed path to the directed path encoding the starting point (or say source of the arrow)
+\item[(2)]
+a unary function symbol
+\begin{align*}
+  \mathrm{t}
+\end{align*}
+intended to represent a function mapping an arbitrary directed path to the directed path encoding the terminus (or say target of the arrow)
+\item[(3)]
+a $3$-ary relation symbol
+\begin{align*}
+  \mathrm{c}
+\end{align*}
+intended to represent a relation of three arguments checking if the directed path in the third argument is the compostion of the preceding two
+\end{enumerate}
+As variables for directed paths we take $a,a_{1},a_{2},\ldots$ and so on. Then the properties we assume our directed paths to have are (formally) expressed by the following list.
+\begin{enumerate}
+\item[(CT1)]
+We demand a unique composition of $a_{1}$ and $a_{2}$ if the terminus of $a_{1}$ is the starting point of $a_{2}$. As a formula
+\begin{align*}
+  \mathrm{t}(a_{1})
+  =
+  \mathrm{s}(a_{2})
+  \qquad
+  &\Rightarrow
+  \qquad
+  \exists!
+  a
+  \left(
+    \mathrm{c}(a_{1},a_{2},a)
+  \right)
+\end{align*}
+\item[(CT2)]
+A necessary condition for $a$ to be the composition of $a_{1}$ and $a_{2}$ is that the terminus of $a_{1}$ is the starting point of $a_{2}$ and that the starting point of $a$ is the starting point of $a_{1}$ while the terminus of $a$ should be the terminus of $a_{2}$. As a formula
+\begin{align*}
+  \mathrm{c}(a_{1},a_{2},a)
+  \qquad
+  &\Rightarrow
+  \qquad
+  \left(
+    \mathrm{t}(a_{1})
+    =
+    \mathrm{s}(a_{2})
+    \quad
+    \land
+    \quad
+    \mathrm{s}(a)
+    =
+    \mathrm{s}(a_{1})
+    \quad
+    \land
+    \quad
+    \mathrm{t}(a)
+    =
+    \mathrm{t}(a_{2})
+  \right)
+\end{align*}
+\item[(CT3)]
+There should be an associative law, that is, given directed paths $a_{1},a_{2},a_{3}$ such that $\mathrm{t}(a_{1}) = \mathrm{s}(a_{2})$ as well as $\mathrm{t}(a_{2}) = \mathrm{s}(a_{3})$ then it should not matter if we first compose $a_{1}$ with $a_{2}$ and then the result with $a_{3}$ or if we compose $a_{1}$ with the result of composing $a_{2}$ with $a_{3}$. As a formula 
+\begin{align*}
+  \left(
+    \mathrm{c}(a_{1},a_{2},a_{4})
+    \quad
+    \land
+    \quad
+    \mathrm{c}(a_{2},a_{3},a_{5})
+  \right)
+  \qquad
+  &\Rightarrow
+  \qquad
+  \left(
+    \mathrm{c}(a_{4},a_{3},a)
+    \quad
+    \Leftrightarrow
+    \quad
+    \mathrm{c}(a_{1},a_{5},a)
+  \right)
+\end{align*}
+\item[(CT4)]
+The starting point of a directed path $a$ should be a directed path whose starting point and terminus are equal and a corresponding statement should hold for the terminus of $a$. As a formula
+\begin{align*}
+  \mathrm{s}(\mathrm{s}(a))
+  =
+  \mathrm{s}(a)
+  =
+  \mathrm{t}(\mathrm{s}(a))
+  \qquad
+  &\land
+  \qquad
+  \mathrm{s}(t(a))
+  =
+  \mathrm{t}(a)
+  =
+  \mathrm{t}(\mathrm{t}(a))
+\end{align*}
+
+\item[(CT5)]
+There should be an identity law, that is, composing the starting point of a directed path $a$ with $a$ should give $a$ while composing $a$ with its terminus should give $a$, too. As a formula
+\begin{align*}
+  \mathrm{c}(\mathrm{s}(a),a,a)
+  \qquad
+  &\land
+  \qquad
+  \mathrm{c}(a,\mathrm{t}(a),a)
+\end{align*}
+\end{enumerate}
+The first-order theory as stated so is called category theory and can be regarded as a theory of directed paths (in the sense of the paths in homotopy theory but with a direction). But as usual in mathematics category theory is not done in this formal first-order manner. One rather builds a model of the theory of discourse in a theory which is well-understood, well-accepted and universal enough. This is usually a set theory as described by ZFC or TG. The model is built as an interpretation in set theory. One then reasons in this theory but usually in a way more informal manner. And so do we in subsection \ref{sec:cat} in a mathematical universe of sets which obeys the rules of TG.
+\\
+It is pretty apparent that functions $f = (Y_{1},Y_{2},\Gamma_{f})$ as $3$-tuples consisting of the domain $Y_{1}$ the codomain $Y_{2}$ and the graph $\Gamma_{f}$ have among other properties the same as our directed paths. The identity function of a set contains essentially just the information of which set it is the identity function. This suggests that the starting point of a function regarded only w.r.t.  its directed path aspect is just its domain while the terminus is just its codomain. If $\circ$ denotes the usual function composition and $\mathrm{dom}_{\mathrm{f}}$ denotes taking the domain of a function while $\mathrm{cod}_{\mathrm{f}}$ denotes taking the codomain of a function then setting
+\begin{align*}
+  \mathrm{s}
+  &:=
+  \mathrm{dom}_{\mathrm{f}}
+  \\
+  \mathrm{t}
+  &:=
+  \mathrm{cod}_{\mathrm{f}}
+  \\
+  \mathrm{c}(f_{1},f_{2},f)
+  \quad
+  &:\Leftrightarrow
+  \quad
+  f
+  =
+  f_{2}
+  \circ
+  f_{1}
+\end{align*}
+make the formulas (CT1)-(CT5) true. $f,f_{1},f_{2}$ are clearly function variables here. Thus one could have abstracted category theory from function composition. But note that category theory is not a formalization of the function idea since the crucial part of the function idea is \underline{how} elements of a collection are mapped to elements of another collection. Yet it is common to adjust terminology to the function case. This has historical reasons. Originally, categories have been thought of as sets of structure-preserving functions. We will also adapt to this historical inaccuracy (or philosophical stance with set theory the theory of everything and category theory only reasonable if interpreted in there) and adjust terminology:
+\begin{enumerate}
+\item[(1)]
+directed path is synonymous to arrow which in turn is synonymous to morphism\footnote{this terminology is dealt with in subsection \ref{sec:cat} and might not be clear yet but it has to do with the original examples of categories}
+\item[(2)]
+starting point is synonymous to source which in turn is synonymous to domain
+\item[(3)]
+terminus is synonymous to target which in turn is synonymous to codomain
+\item[(4)]
+composition stays composition
+\end{enumerate}
+Now there is another thing one can do. Since category theory is a first-order theory we can add more axioms. For example, some which bring arrows closer to the idea of functions. This idea is very fruitful and culminates in topos theory which adds some axioms such that the resulting universe of arrows make the identity arrows behave like sets. This is how topos theory provides a bunch of foundations of mathematics. In particular, one can add axioms to topos theory such that the resulting theory is sufficiently close to ZFC for the purpose of ordinary\footnote{it lacks a version of a replacement axiom but this is not really a constraint and if still needed there is an arrow version of it which can be added} mathematics. It is called ETCS abbreviating {\glqq}Elementary Theory of the Category of Sets{\grqq}. Actually, theories as ETCS are even better suited from a practical perspective since they capture only the structural aspect of sets and not the material ones. This means that the elements of a set are just elements and not necessarily sets themselves as in material set theories such as ZFC or TG. Moreover we can compare only elements of a given set for equality and not elements of different sets in general. We return to ETCS later in section \ref{sec:metaidea} when we know enough about categories. On the whole this shows that category theory is a very fundamental idea with a deep impact on mathematics and more astonishingly on physics, too, as we will allude here and there in the course of the notes.
+\\
+Last but not least, note that a directed path can be regarded as a way of how to go from one identity directed path to another. Hence directed paths kind of structure the collection of identity directed paths. This is in contrast to the fact that a set is a collection without any relationship of its members. It is, roughly speaking, just a bag of points. A set can be regarded as a category with only identity directed paths and so a category is something more general than a set with sets being just some lower-dimensional\footnote{this terminology becomes clear later} discrete special case. This is further evidence that one should consider category theory apart from set theory. The next question then is if we can think of a theory which structures the collection of all directed paths in a similar vein? This is to say: is there some kind of 2-directed path with starting point and terminus identity 2-directed paths which stand for ordinary ($1$-)directed paths? And if so, can we go higher to $3$-directed paths or even $n$-directed paths for some natural number $n$? This leads to the idea of higher category theory and the idea to replace sets as fundamental mathematical objects by higher categories. This would yield a {\glqq}directed homotopy theory{\glqq} in our interpretation as hopefully becomes clear in these notes. However, this has not been very successful yet. But the case where all directed paths are reversible seems more promising. A directed path is reversible if there is a directed path which composed with the original one in any way is an identity directed path. Categories with all directed paths reversible are groupoids and we will briefly discuss them in subsection \ref{sec:nt}. This should then yield just ordinary homotopy theory with ordinary (undirected) paths. The more succesful foundation attempt we are talking about is the Univalent Foundation Program with its Homotopy Type Theory as described in the HoTT book \cite{1ba1603e} as {\glqq}synthetic{\grqq} homotopy theory. We abbreviate this by UFP-HoTT when referring to it. The basic mathematical objects are higher groupoids - so called $\infty$-groupoids - or equivalently homotopy types. We shall discuss these higher directed path idea more thoroughly in subsection \ref{sec:nt} and again in section \ref{sec:metaidea}.
+\\\\
+But first we have to understand categories better. A category alone is not worth much without the notions of functor and natural transformation. These together with categories make up the (not so holy as we will see in section \ref{sec:metaidea}) trinity of category theory. After shining some light on categories modeled as sets in subsection \ref{sec:cat} we deal with structure preserving functions between categories called functors in subsection \ref{sec:func} before we deal with structure preserving functions between functors called natural transformations in subsection \ref{sec:nt}.

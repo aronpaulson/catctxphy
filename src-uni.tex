@@ -1,0 +1,1859 @@
+%\nocite{0b0672dc}
+%\nocite{4dc38f27}
+%TODO
+%  mutual special cases of each other due to universe level?
+Universality is essentially what makes category theory so great. This is the section you most likely want to read. Despite we do not (and cannot) directly say what it is. Yet you will soon know. And, hopefully, after (or even in the course of) this section you will understand why it is so great. Universality can be seen as a phenomenon which manifests itself in seemingley different ways. We provide four formulations of universality and show that they are essentially equivalent. Each idea can be regarded as the most intuitive one depending on the perspective or better say depending from which branch of mathematics you are coming.\footnote{also try compare how other authors \cite{e837ef86}, \cite{52fbba46}, \cite{dc6f686f} and \cite{wiki-nlab0000} introduce the notion of universality} The four formulations and the reason you might consider it intuitive are listed bellow:
+\begin{enumerate}
+\item[(1)]
+Universal Arrows - You think that directed paths are the most elementary mathematical objects
+\item[(2)]
+$F$-Universal Arrows - You have been doing mathematics for a long time and observed some general pattern (esp. in abstract algebra)
+\item[(3)]
+Universal Elements - You love bundle theory and you know the worth of the universal ones
+\item[(4)]
+Representability of Functors - You are in the position of the preceding list entry but you consider the base space of the universal bundle more fundamental since with some machinery you can reconstruct a universal bundle from it
+\end{enumerate}
+While we show that these notions are the same we will find a theorem called Yoneda lemma which will be part of your life if you seriously consider to do category theory in future. It is omnipresent and not just in this section. But as always in category it is not too hard to prove. After this, amazing things happen. By interpreting the above, we are led to ideas which have a revolutionary character since it somehow opens a door for category theory to the realms of physics. This raises some questions and we realize that we need more machinery which is developed in some of the succeding subsections. Each of these succeding subsections is devoted to a special part of universality.
+\begin{enumerate}
+\item[$\bullet$]
+limits/colimits in subsection \ref{sec:limit}
+\item[$\bullet$]
+adjoints in subsection \ref{sec:adjoint}
+\end{enumerate}
+We will see that universality can be considered a special case of limits and vice versa. For adjoints the same should hold according to \cite{wiki-nlab0000}: category theory. But we do not show that. There they suggest to extend the list by
+\begin{enumerate}
+\item[$\bullet$]
+Kan extensions: we discuss them a bit in subsubsection \ref{sec:coyoneda2}
+\item[$\bullet$]
+ends/coends: this is actually the same idea as for limits but with natural transformations replaced by so-called \textit{dinatural transformations} which are appropriate in the context of functors with domain $\mathbf{C}^{\mathrm{op}} \times \mathbf{C}$ and is for instance discussed in \cite{0b0672dc}
+\end{enumerate}
+and we should actually devote own subsections to these concepts. One could even attach
+\begin{enumerate}
+\item[$\bullet$]
+dependent sums/products: this is the categorical model of some very important primitive constructions in UFP-HoTT
+\end{enumerate}
+The list entries\footnote{note that representability (and perhaps universal elements) belongs rather to this list than to the one above} go by the name {\glqq}universal constructions{\grqq}.\footnote{there seem to be even some more like weighted limits for example} Anyways, in the according \cite{wiki-nlab0000} article they claim that all of these can be regarded as special cases of each other. At least in {\glqq}good{\grqq} cases. Whatever that means. As a meta-idea: applying category theory is often just a universal construction and then applying some general theorems about these universal constructions. Here this means: apply the theorem provided by the subsections about limits and adjoints to those constructions. But now let us begin with universal arrows.
+\\\\
+Category theory is a deductive system capturing the intuitive notion of directed paths. In particular, directed paths can be the composition of other directed paths. There may be directed paths such that any other directed path can be gone uniquely over this {\glqq}universal{\grqq} one. And hence there is the following far reaching observation: the arrows of a category sometimes decompose in a {\glqq}universal{\grqq} part which is the same for all {\glqq}fitting{\grqq} arrows and an arrow uniquely defined by the arrow to be decomposed. Hence the following definitions: Given a category $\mathbf{C}$
+\begin{enumerate}
+\item[(1)]
+a morphism $t \in \mathrm{Mor}_{\mathbf{C}}$ is called a \textbf{terminal morphism} if
+\begin{enumerate}
+\item[(TP)]
+for all $X$ and
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,\mathrm{cod}_{\mathbf{C}}(t))
+\end{align*}
+there is exactly one
+\begin{align*}
+  f_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,\mathrm{dom}_{\mathbf{C}}(t))
+\end{align*}
+such that
+\begin{align*}
+  f
+  &=
+  t
+  \circ
+  f_{!}
+\end{align*}
+that is, such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  \mathrm{dom}_{\mathbf{C}}(t)
+  \arrow{dr}{t}
+  &
+  \\
+  X
+  \arrow{ur}{f_{!}}
+  \arrow{rr}{f}
+  &
+  &
+  \mathrm{cod}_{\mathbf{C}}(t)
+\end{tikzcd}
+\]
+commutes
+\end{enumerate}
+we refer to (TP) as \textbf{terminal property (for $t$)}
+\item[(2)]
+a morphism $i \in \mathrm{Mor}_{\mathbf{C}}$ is called an \textbf{initial morphism} if
+\begin{enumerate}
+\item[(IP)]
+for all $X$ and
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(\mathrm{dom}_{\mathbf{C}}(i),X)
+\end{align*}
+there is exactly one
+\begin{align*}
+  f_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(\mathrm{cod}_{\mathbf{C}}(i),X)
+\end{align*}
+such that
+\begin{align*}
+  f
+  &=
+  f_{!}
+  \circ
+  i
+\end{align*}
+that is, such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  \mathrm{cod}_{\mathbf{C}}(i)
+  \arrow[swap]{dl}{f_{!}}
+  &
+  \\
+  X
+  &
+  &
+  \mathrm{dom}_{\mathbf{C}}(i)
+  \arrow{ll}{f}
+  \arrow[swap]{lu}{i}
+\end{tikzcd}
+\]
+commutes
+\end{enumerate}
+we refer to (IP) as \textbf{initial property (for $i$)}
+\item[(3)]
+a morphism $u \in \mathrm{Mor}_{\mathbf{C}}$ is called a \textbf{universal morphism} if it is a terminal or initial morphism and a \textbf{universal property (for $u$)} is a terminal property for $u$ or an initial property for $u$
+\end{enumerate}
+First we note that terminal and initial are dual to each other. Just reverse the arrows in the diagram of (IP) and write $t$ instead of $i$ to obtain the diagram in (TP). Therefore authors sometimes use coterminal for initial or coinitial for terminal. We will only use terminal and intial since we do not know a good reason why to prefer the one over the other. Anyways, the formulas denoted by (TP) and (IP)
+ are dual to each other and hence the duality principle \ref{thm:dp} applies.
+\\
+Actually, there should follow some examples here which illustrate these definitions. But it is more enlightening to consider one which does not quite. For while the idea of universal arrow above is quite intuitive from a pre-formal directed path perspective, in daily mathematical practice one rather encounters a formally similar idea that additionally involves a functor. The example will be about some algebraic properties of lists (i. e. strings) which can be concatenated. A list entry can be filled by one of some priorly determined tokens. We will model this idea in the category $\mathbf{Set}$. The priorly determined tokens make up a set we call $Y$. A list will then be a sequence in $Y$. Note that we allow the empty sequence. This will then be the identity of the algebraic structure made up by the lists - or better say sequences in $Y$ - we concatenate. It is clear that this algebraic structure will be associative because concatenation obviously is. Hence we end up with a monoid which seems to contain $Y$ in a {\glqq}universal way{\grqq}. More formally
+\\
+\begin{exa}
+\label{exa:freemon}
+Take a set $Y \in \mathrm{ob}_{\mathbf{Set}}$. Look a the set $M_{\textrm{f}} \doteq M_{\textrm{f}}(Y)$ consisting of finite sequences in $Y$ - namely
+\begin{align*}
+  M_{\textrm{f}}
+  &:=
+  \left\lbrace
+      s
+    \,
+    \vert
+    \,
+      \exists
+      n
+      \in
+      \mathbb{N}
+      \text{ such that }
+      s
+      \in
+      \mathrm{mor}_{\mathbf{Set}}(\mathbb{N}_{n}^{\times},Y)
+  \right\rbrace
+\end{align*}
+and concatenation of finite sequences in $Y$ defined in the following way: Given
+\begin{align*}
+  s_{1}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}(\mathbb{N}_{n_{1}}^{\times},Y)
+  \\
+  s_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}(\mathbb{N}_{n_{2}}^{\times},Y)
+\end{align*}
+for some $n_{1},n_{2} \in \mathbb{N}$ we define a function $\circ_{\textrm{f}}$ called \textbf{concatenation (of finite sequences in $Y$)} by
+\begin{align*}
+  \left(
+    s_{1}
+    \cdot_{\textrm{f}}
+    s_{2}
+  \right)
+  (n)
+  &:=
+  \begin{cases}
+    s_{1}(n)
+    &
+    \text{if }
+    1
+    \leq
+    n
+    \leq
+    n_{1}
+    \\
+    s_{2}(n)
+    &
+    \text{if }
+    n_{1}
+    +
+    1
+    \leq
+    n
+    \leq
+    n_{1}
+    +
+    n_{2}
+  \end{cases}
+\end{align*}
+$(M_{\textrm{f}},\cdot_{\textrm{f}},s_{\emptyset})$ is clearly a monoid with the sequence
+\begin{align*}
+  s_{\emptyset}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}(\emptyset,Y)
+\end{align*}
+as identity.
+\begin{align*}
+  (M_{\textrm{f}},\cdot)
+  &\doteq
+  (M_{\textrm{f}},\cdot_{\textrm{f}},s_{\emptyset})
+\end{align*}
+is called the \textbf{free monoid (with generators $Y$)}. For each $y \in Y$ define
+\begin{align*}
+  s_{y}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}(\mathbb{N}_{1}^{\times},Y)
+\end{align*}
+by
+\begin{align*}
+  s_{y}(1)
+  &:=
+  y
+\end{align*}
+Then there is clearly an (injective) function
+\begin{align*}
+  i
+  \colon
+  Y
+  &\rightarrow
+  M_{\textrm{f}}
+  \\
+  y
+  &\mapsto
+  s_{y}
+\end{align*}
+Now assume another monoid $(M,\cdot_{M},e_{M})$ and a function
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}(Y,M)
+\end{align*}
+Then
+\begin{align*}
+  f_{!}
+  &\colon
+  M_{\textrm{f}}
+  \rightarrow
+  M
+  ,\qquad
+  s
+  \mapsto
+  \begin{cases}
+    f(s(1))
+    \cdot_{M}
+    \ldots
+    \cdot_{M}
+    f(s(n))
+    &
+    \text{if }
+    \mathrm{dom}_{\mathbf{Set}}(s)
+    =
+    \mathbb{N}_{n}^{\times}
+    \text{ for some }
+    n
+    \in
+    \mathbb{N}^{\times}
+    \\
+    e_{M}
+    &
+    \text{if }
+    s
+    =
+    s_{\emptyset}
+  \end{cases}
+\end{align*}
+is the unique morphism in $\mathbf{Mon}$ such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  M_{\textrm{f}}
+  \arrow[swap]{dl}{f_{!}}
+  &
+  \\
+  M
+  &
+  &
+  X
+  \arrow{ll}{f}
+  \arrow[swap]{lu}{i}
+\end{tikzcd}
+\]
+commutes.
+\end{exa}
+\begin{prf}
+Details are left to the reader.\footnote{example \ref{exa:grothengr} contains a statement analogous to the unique factorization statement here and a proof (if you need help)}
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+At first glance, $i$ from example \ref{exa:freemon} seems to be an initial morphism. But it is not quite since $f_{!}$ is considered a morphism in the category $\mathbf{Mon}$ and not in the category $\mathbf{Set}$. Of course, we could also consider $f_{!}$ as such but then, as a mere function, it is not necessarily unique anymore. Still, $i$ is strikingly reminiscent of an initial morphism. So let us inspect the situation in greater detail. We have the (faithful) functor $F_{\textrm{Mon}} \colon \mathbf{Mon} \rightarrow \mathbf{Set}$ defined by
+\begin{align*}
+  (M,\cdot_{M},e_{M})
+  &\mapsto
+  M
+  \\
+  f
+  &\mapsto
+  f
+\end{align*}
+making $(\mathbf{Mon},F_{\textrm{Mon}})$ a concrete category. So the virtual-universal-property diagram from example \ref{exa:freemon} becomes
+\[
+\begin{tikzcd}[sep=large]
+  &
+  F_{\textrm{Mon}}((M_{\textrm{f}},\cdot_{\textrm{f}},s_{\emptyset}))
+  \arrow[swap]{dl}{F_{\textrm{Mon}}(f_{!})}
+  &
+  \\
+  F_{\textrm{Mon}}((M,\cdot_{M},e_{M}))
+  &
+  &
+  X
+  \arrow{ll}{f}
+  \arrow[swap]{lu}{i}
+\end{tikzcd}
+\]
+Hence we abstract the following definition: Given a functor $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\omega}$
+\begin{enumerate}
+\item[(1)]
+an object $X$ together with a morphism
+\begin{align*}
+  t
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(F(X),X^{\omega})
+\end{align*}
+is called a \textbf{($F$-)terminal morphism (for $X^{\omega}$)} if
+\begin{enumerate}
+\item[(FTP)]
+for all $X_{1}$ and
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(F(X_{1}),X^{\omega})
+\end{align*}
+there is exactly one
+\begin{align*}
+  f_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+\end{align*}
+such that
+\begin{align*}
+  f
+  &=
+  t
+  \circ
+  F(f_{!})
+\end{align*}
+that is, such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  F(X)
+  \arrow{rd}{t}
+  &
+  \\
+  F(X_{1})
+  \arrow{ru}{F(f_{!})}
+  \arrow{rr}{f}
+  &
+  &
+  X^{\omega}
+\end{tikzcd}
+\]
+commutes
+\end{enumerate}
+we refer to (FTP) as \textbf{($F$-)terminal property (for $t$ w.r.t. $X^{\omega}$)}
+\item[(2)]
+an object $X$ together with a morphism
+\begin{align*}
+  i
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X^{\omega},F(X))
+\end{align*}
+is called an \textbf{($F$-)initial morphism (for $X^{\omega}$)} if
+\begin{enumerate}
+\item[(FIP)]
+for all $X_{1}$ and
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X^{\omega},F(X_{1}))
+\end{align*}
+there is exactly one
+\begin{align*}
+  f_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,X_{1})
+\end{align*}
+such that
+\begin{align*}
+  f
+  &=
+  F(f_{!})
+  \circ
+  i
+\end{align*}
+that is, such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  F(X)
+  \arrow[swap]{dl}{F(f_{!})}
+  &
+  \\
+  F(X_{1})
+  &
+  &
+  X^{\omega}
+  \arrow{ll}{f}
+  \arrow[swap]{lu}{i}
+\end{tikzcd}
+\]
+commutes
+\end{enumerate}
+we refer to (FIP) as \textbf{($F$-)initial property (for $i$ w.r.t. $X^{\omega}$)}
+\item[(3)]
+an object $X$ together with a morphism $u \in \mathrm{Mor}_{\mathbf{C}_{\omega}}$ is called a \textbf{($F$-)universal morphism (for $X^{\omega}$)} if it is a $F$-terminal or $F$-initial morphism for $X^{\omega}$ and a \textbf{universal property (for $u$ w.r.t. $X^{\omega}$)} is a $F$-terminal property for $u$ w.r.t. $X^{\omega}$ or an $F$-initial property for $u$ w.r.t. $X^{\omega}$
+\end{enumerate}
+The object $X$ of a $F$-universal morphism $(X,u)$ is often let implicit and we adopt this convention in these notes. With this definition, $i$ from example \ref{exa:freemon} is just an $F_{\textrm{Mon}}$-initial morphism for $X$. Replacing $(\mathbf{Mon},F_{\textrm{Mon}})$ by any concrete category yields the generalization of free monoid to free object, particularly covering all the well-known {\grqq}free{\grqq} constructions from algebra conceptually equal to that of the free monoid: Given a concrete category $(\mathbf{C},F)$ and an $F$-initial morphism $i \colon Y \rightarrow F(X)$ for some $Y \in \mathrm{ob}_{\mathbf{Set}}$ we call $X$ the \textbf{free object (with generators $Y$)}. This covers all the well-known {\grqq}free{\grqq} constructions from algebra.
+\\
+Of course, taking $F = \mathrm{id}_{\mathbf{C}}$ clearly reduces $F$-universal to universal. Again note that what has been said about duality in the case $F = \mathrm{id}_{\mathbf{C}}$ still holds in this seemingly more general case. {\glqq}Seemingly{\grqq}, since the $F$-universal case can also be viewed as special case of universal by using an auxiliary category in the guise of a certain comma category which was introduced in subsection \ref{sec:comcat}. To this end let us introduce some terminology for the case that the identity is a universal morphism. Given a category
+\begin{enumerate}
+\item[(1)]
+an object $T \in \mathrm{ob}_{\mathbf{C}}$ is a \textbf{terminal object (of $\mathbf{C}$)} if $\mathrm{id}_{T}$ is a terminal morphism, that is, for all $X$ the set $\mathrm{mor}_{\mathbf{C}}(X,T)$ contains exactly one element
+\item[(2)]
+an object $I \in \mathrm{ob}_{\mathbf{C}}$ is an \textbf{initial object (of $\mathbf{C}$)} if $\mathrm{id}_{I}$ is an initial morphism, that is, for all $X$ the set $\mathrm{mor}_{\mathbf{C}}(I,X)$ contains exactly one element
+\item[(3)]
+an object $U$ is a \textbf{universal object (of $\mathbf{C}$)} if it is a terminal or initial object of $\mathbf{C}$
+\end{enumerate}
+Now, for a functor $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\omega}$ consider an $F$-universal morphism $(X,u)$ for $X^{\omega}$. In the following we restrict ourselves to the terminal case $t := u$ though the results apply in the dual case as well. In an appropriate form, of course. Now take the commutative diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  F(X)
+  \arrow{rd}{t}
+  &
+  \\
+  F(X_{1})
+  \arrow{ru}{F(f_{!})}
+  \arrow{rr}{f}
+  &
+  &
+  X^{\omega}
+\end{tikzcd}
+\]
+as in (FTP) and observe that it is equivalent to
+\[
+\begin{tikzcd}[sep=large]
+  F(X_{1})
+  \arrow[swap]{d}{f}
+  \arrow{r}{F(f_{!})}
+  &
+  F(X)
+  \arrow{d}{t}
+  \\
+  X^{\omega}
+  \arrow{r}{\mathrm{id}_{X^{\omega}}}
+  &
+  X^{\omega}
+\end{tikzcd}
+\]
+which, by observing that the bottom row is the image of the constant functor $\mathrm{c}_{X^{\omega}}$ from subsection \ref{sec:func}, is in turn equivalent to
+\[
+\begin{tikzcd}[sep=huge]
+  F(X_{1})
+  \arrow{r}{F(f_{!})}
+  \arrow{d}{f}
+  &
+  F(X)
+  \arrow{d}{t}
+  \\
+  \mathrm{c}_{X^{\omega}}(X^{\omega})
+  \arrow{r}{\mathrm{c}_{X^{\omega}}(\mathrm{id}_{X^{\omega}})}
+  &
+  \mathrm{c}_{X^{\omega}}(X^{\omega})
+\end{tikzcd}
+\]
+So (FTP) is equivalent to itself with the diagrams replaced. But then, since $\mathrm{id}_{X^{\omega}}$ is the only morphism in the category $\mathbf{1}_{X^{\omega}}$, this says nothing but that $(X,X^{\omega},t)$ is a terminal object of the comma category $(F \downarrow \mathrm{c}_{X^{\omega}})$. Dualizing the argument, by the duality principle \ref{thm:dp}, proves the following theorem
+\\
+\begin{thm}
+\label{thm:unimorequivuni}
+Assume a functor $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\omega}$:
+\begin{enumerate}
+\item[(1T)]
+\begin{align*}
+  t
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}(F(X),X^{\omega})
+\end{align*}
+is an $F$-terminal morphism for $X^{\omega}$ if and only if $(X,X^{\omega},t)$ is a terminal object of the comma category
+\begin{align*}
+  \left(
+    F
+    \downarrow
+    \mathrm{c}_{X^{\omega}}
+  \right)
+\end{align*}
+\item[(1I)]
+\begin{align*}
+  i
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}(X^{\omega},F(X))
+\end{align*}
+is an $F$-initial morphism for $X^{\omega}$ if and only if $(X^{\omega},X,i)$ is an initial object of the comma category
+\begin{align*}
+  \left(
+    \mathrm{c}_{X^{\omega}}
+    \downarrow
+    F
+  \right)
+\end{align*}
+\end{enumerate}
+\end{thm}
+\begin{prf}
+The text above.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Note that universal objects are not just auxiliary concepts but are interesting in their own right. This is shown by the following example:
+\\
+\begin{exa}
+\label{exa:uniobj}
+We give terminal and initial objects in three cases.
+\begin{enumerate}
+\item[(a)]
+Firstly, let's consider the category $\mathbf{Set}$. An initial object is the empty set
+\begin{align*}
+  0_{\mathbf{Set}}
+  &:=
+  \emptyset
+\end{align*}
+since for all sets $Y$ there is exacly one function from $\emptyset$ to $Y$ namely the function with graph the empty set. On the other hand each one element set such as
+\begin{align*}
+  1_{\mathbf{Set}}
+  &:=
+  \lbrace
+    \emptyset
+  \rbrace
+\end{align*}
+is a terminal object since the only possible function from any set to a one element set is the constant function, that is, the function having the value this one element for each element of the domain. 
+\item[(b)]
+Secondly, let's consider the category $\mathbf{Grp}$. The group determined by the category $\pmb{\emptyset}$ in the special case
+\begin{align*}
+  \mathrm{mor}_{\pmb{\emptyset}}(\emptyset,\emptyset)
+  &=
+  \lbrace
+    \mathrm{id}_{\emptyset}
+  \rbrace
+\end{align*}
+often called a trivial group - is both a terminal and an initial object in $\mathbf{Grp}$. This is forced by the homomorphism property of a morphism in this category. This is a property of $\mathbf{Grp}$ and in particular the subcategory $\mathbf{Ab}$ which is not shared by all categories.
+\item[(c)]
+Thirdly, let's consider the category $\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}$. Here universal objects of $\mathbf{Set}$ provide a possibility by defining
+\begin{align*}
+  0_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}(X)
+  &:=
+  0_{\mathbf{Set}}
+\end{align*}
+and
+\begin{align*}
+  1_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}(X)
+  &:=
+  1_{\mathbf{Set}}
+\end{align*}
+respectively, on objects and on morphisms taking the only possibility which universal objects in $\mathbf{Set}$ allow.
+\end{enumerate}
+\end{exa}
+\begin{prf}
+The details are left to the reader.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+We have seen in example \ref{exa:uniobj} above that a terminal object can be an initial one at the same time but does not have to be. Further, a universal object does not have to be unique. There is certainly more than one one element set. This raises the question of how much universal objects a certain category has. Particularly, do they exist at all in any category? From a structural point of view the answer is satisfactory: although we cannot guarantee the existence of universal objects (and hence morphisms) we can at least guarantee that when they exist they are the only such objects up to a unique isomorphism. The former fact of non-existence can be seen in the category of partially ordered sets $\mathbf{PO}$ without greatest element, for instance, while the latter fact is phrased as the next theorem:
+\\
+\begin{thm}
+\label{thm:uniqueuniarr}
+Given a category $\mathbf{C}$
+\begin{enumerate}
+\item[(1T)]
+If a terminal object exists in a category $\mathbf{C}$ then for any two such objects $T_{1}$ and $T_{2}$ there is a unique isomorphism between them.
+\item[(1I)]
+If an initial object exists in a category $\mathbf{C}$ then for any two such objects $I_{1}$ and $I_{2}$ there is a unique isomorphism between them.
+\end{enumerate}
+\end{thm}
+\begin{prf}
+\begin{enumerate}
+\item[(1T)]
+Being terminal means that there is one and only one morphism
+\begin{align*}
+  \Phi_{k_{1}k_{2}}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(T_{k_{1}},T_{k_{2}})
+\end{align*}
+for $k_{1},k_{2} \in \lbrace 1,2 \rbrace$. In the case $k_{1} = k_{2}$ the morphisms $\Phi_{k_{1}k_{2}}$ must be the identity. So what we get from composition is
+\begin{align*}
+  \mathrm{id}_{T_{1}}
+  &=
+  \Phi_{21}
+  \circ
+  \Phi_{12}
+  \\
+  \mathrm{id}_{T_{2}}
+  &=
+  \Phi_{12}
+  \circ
+  \Phi_{21}
+\end{align*}
+This shows that $\Phi_{12}$ is an isomorphism and there cannot be another, finishing the proof.
+\item[(1I)]
+Duality principle \ref{thm:dp} and the proof of (1T).
+\end{enumerate}
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Note that in particular this implies the uniqueness of $F$-universal morphisms for some functor $F$ up to unique isomorphism in the correct arrow category and hence that of universal morphisms, too. See the end of subsection \ref{sec:comcat} about comma categories for this. Anyway, structurally universal objects are as unique as they structurally can sensibly be and hence we say \underline{the} universal object of some category and usually only a priori \underline{a} universal object of some category. In this context people speak of a generalized {\glqq}the{\grqq}. We have already indicated such a peculiarity. Hence we feel vindicated to denote initial objects of some category $\mathbf{C}$ always as 
+\begin{align*}
+  0
+  &\doteq
+  0_{\mathbf{C}}
+\end{align*}
+and terminal objects as 
+\begin{align*}
+  1
+  &\doteq
+  1_{\mathbf{C}}
+\end{align*}
+independent of the particular representatives.
+\\
+A major implication of this structural uniqueness fact is that in a structural mathematical universe it makes sense to define mathematical contructions (regarded as arrows) by a universal property and $F$-universal property, respectively, the latter being more common in practice. To further show that two such constructions are the same it suffices to show that they both satisfy the same universal property. In UFP-HoTT this is even formally justified by the univalence axiom. A popular example for this is that one defines {\glqq}one element set{\grqq} as terminal object of $\mathbf{Set}$ if this category arises from a structural theory. Well, also in informal practice when doing TG or so this is all a mathematician is interested in and hence this definition is often adopted as informal definition of {\glqq}one element set{\grqq}. The same is done in similar situations. But if you want to keep mathematics formal you should choose a structural theory such as UFP-HoTT. The full impact of universality cannot be seen yet. Still, we hope the rest of the section shows the reader a good part of the power of universality.
+\\\\
+Returning to universal objects we note that an object $T$ in $\mathbf{C}$ is terminal if and only if $\mathrm{hom}_{\mathbf{C}}(X,T)$ is the terminal object of $\mathbf{Set}$ for all $X$. This in turn, is equivalent to the statement that the contravariant hom-functor $\mathrm{hom}_{\mathbf{C}}(\cdot,T)$ is naturally isomorphic to the constant functor
+\begin{align*}
+  \mathrm{C}_{1_{\mathbf{Set}}}
+  \colon
+  \mathbf{C}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Set}
+\end{align*}
+with target the terminal object $1_{\mathbf{Set}}$ and there is only one such natural isomorphism. This result is explicitly phrased in its full extent as the following lemma 
+\\
+\begin{lem}
+\label{lem:repuniob}
+Assume a category $\mathbf{C}$ and the constant functors
+\begin{align*}
+  \mathrm{C}_{1_{\mathbf{Set}}}
+  \colon
+  \mathbf{C}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Set}
+  \\
+  \mathrm{C}_{1_{\mathbf{Set}}}^{\prime}
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{Set}
+\end{align*}
+with target $1_{\mathbf{Set}}$.
+\begin{enumerate}
+\item[(1T)]
+For $T \in \mathrm{ob}_{\mathbf{C}}$ the following statements are equivalent
+\begin{enumerate}
+\item[(a)]
+$T$ is the terminal object of $\mathbf{C}$
+\item[(b)]
+the (canonical) function
+\begin{align*}
+  \mathsf{Y}
+  \colon
+  \mathrm{iso}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}}(\cdot,T),
+    \mathrm{C}_{1_{\mathbf{Set}}}
+  \right)
+  &\rightarrow
+  \mathrm{C}_{1_{\mathbf{Set}}}(T)
+  \\
+  \mathsf{T}
+  &\mapsto
+  (\mathsf{T}(T))(\mathrm{id}_{T})
+\end{align*}
+is an isomorphism
+\item[(c)]
+$\mathrm{hom}_{\mathbf{C}}(\cdot,T)$ is naturally isomorphic to $\mathrm{C}_{1_{\mathbf{Set}}}$
+\end{enumerate}
+\item[(1I)]
+For $I \in \mathrm{ob}_{\mathbf{C}}$ the following statements are equivalent
+\begin{enumerate}
+\item[(a)]
+$I$ is the initial object of $\mathbf{C}$
+\item[(b)]
+the (canonical) function
+\begin{align*}
+  \mathsf{Y}^{\prime}
+  \colon
+  \mathrm{iso}_{\mathbf{Set}^{\mathbf{C}}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}}(I,\cdot),
+    \mathrm{C}_{1_{\mathbf{Set}}}^{\prime}
+  \right)
+  &\rightarrow
+  \mathrm{C}_{1_{\mathbf{Set}}}^{\prime}(I)
+  \\
+  \mathsf{T}
+  &\mapsto
+  (\mathsf{T}(I))(\mathrm{id}_{I})
+\end{align*}
+is an isomorphism
+\item[(c)]
+$\mathrm{hom}_{\mathbf{C}}(I,\cdot)$ is naturally isomorphic to $\mathrm{C}_{1_{\mathbf{Set}}}^{\prime}$
+\end{enumerate}
+\end{enumerate}
+\end{lem}
+\begin{prf}
+\item[(1T)]
+{\glqq}(a) $\Rightarrow$ (b){\grqq}
+\qquad
+If $T$ is the terminal object then for all $X$ there is exactly one morphism
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,T)
+\end{align*}
+and $\mathrm{C}_{1_{\mathbf{Set}}}(X)$ is one elemented anyhow. Thus there is exactly one function from $\mathrm{mor}_{\mathbf{C}}(X,T)$ to $\mathrm{C}_{1_{\mathbf{Set}}}(X)$ we denote $c_{X}$ which is clearly bijective. So the only candidate for a natural isomorphism (and even natural transformation) from $\mathrm{hom}_{\mathbf{C}}(\cdot,T)$ to $\mathrm{C}_{1_{\mathbf{Set}}}$ is $\mathsf{T}$ defined by
+\begin{align*}
+  \mathsf{T}(X)
+  &:=
+  c_{X}
+\end{align*}
+Naturality of $\mathsf{T}$ follows from terminality of $T$ since for all $f_{12}$ the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  \mathrm{hom}_{\mathbf{C}}(X_{2},T)
+  \arrow[swap]{d}{c_{X_{2}}}
+  \arrow{r}{\mathrm{hom}_{\mathbf{C}}(f_{12},T)}
+  &
+  \mathrm{hom}_{\mathbf{C}}(X_{1},T)
+  \arrow{d}{c_{X_{1}}}
+  \\
+  \mathrm{C}_{1_{\mathbf{Set}}}(X_{2})
+  \arrow{r}{\mathrm{C}_{1_{\mathbf{Set}}}(X)(f_{12})}
+  &
+  \mathrm{C}_{1_{\mathbf{Set}}}(X_{1})
+\end{tikzcd}
+\]
+commutes. This is because there must be a unique function from $\mathrm{hom}_{\mathbf{C}}(X_{2},T)$ to $\mathrm{C}_{1_{\mathbf{Set}}}(X_{1})$ due to the terminality of the latter in $\mathbf{Set}$. Having shown that
+\begin{align*}
+  \mathrm{iso}_{\mathbf{Set}^{\mathbf{C}}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}}(\cdot,T),
+    \mathrm{C}_{1_{\mathbf{Set}}}
+  \right)
+\end{align*}
+is a one elemented set the rest is immediate.
+\\
+{\glqq}(b) $\Rightarrow$ (c){\grqq}
+\qquad
+This is proved by $\mathsf{Y}^{-1}(\ast)$ with $\ast \in 1_{\mathbf{Set}}$
+\\
+{\glqq}(c) $\Rightarrow$ (a){\grqq}
+\qquad
+$\mathrm{hom}_{\mathbf{C}}(\cdot,T)$ being naturally isomorphic to $\mathrm{C}_{1_{\mathbf{Set}}}$ means that for all $X \in \mathrm{ob}_{\mathbf{C}}$ we have that $\mathrm{hom}_{\mathbf{C}}(X,T)$ is bijective to $\mathrm{C}_{1_{\mathbf{Set}}}(X)$ which is to say bijective to a one elemented set which in turn means that $\mathrm{hom}_{\mathbf{C}}(X,T)$ contains exactly one element. Hence $T$ is the terminal object.
+\item[(1I)]
+Like always, the duality principle \ref{thm:dp}.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+We now apply a general mathematical research principle of how to generalize an idea: find statements equivalent to the formalized idea, look if one or more still make sense in a more general setting, then use it as new definition and should the occasion arise examine their relation.
+\\
+Let's apply this to the above lemma \ref{lem:repuniob} in the terminal case
+\begin{enumerate}
+\item[(a)]
+Being a terminal object of $\mathbf{C}$ is a special case of being an $\mathrm{id}_{\mathbf{C}}$-terminal morphism. So at best we can extend our interest to $F$-terminal morphisms which we have already done.
+\item[(b)]
+For some object $X$ of $\mathbf{C}$ and $\mathrm{C}_{1_{\mathbf{Set}}}$ as in lemma \ref{lem:repuniob} the canonical function $\mathsf{Y}$ from lemma \ref{lem:repuniob} still makes sense if we weaken the condition on $\mathrm{C}_{1_{\mathbf{Set}}}$ to just being a presheaf $P$. We then obtain a function
+\begin{align*}
+  \mathsf{Y}
+  \colon
+  \mathrm{iso}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}}(\cdot,X),
+    P
+  \right)
+  &\rightarrow
+  P(X)
+  \\
+  \mathsf{T}
+  &\mapsto
+  (\mathsf{T}(X))(\mathrm{id}_{X})
+\end{align*}
+But this is not necessarily an isomorphism anymore. Unfortunately, we are not aware of any easy example fitting here though there definitely are some. So believe it or do some research on your own. Actually, it would be a little odd if there were no counter-examples since it would imply that all presheaves are structurally just hom-functors. However, there is a further possible generalization if we weaken $\mathrm{iso}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}$ to $\mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}$. This does not cause problems because
+\begin{align*}
+  \mathsf{T}
+  \mapsto
+  (\mathsf{T}(T))(\mathrm{id}_{T})
+\end{align*}
+does not depend on $\mathsf{T}$ being an isomorphism. There are no obvious counter-examples to this new $\mathsf{Y}$ being an isomorphism then. So it's worth a try to prove
+\begin{align*}
+  \mathsf{Y}
+  \colon
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}}(\cdot,X),
+    P
+  \right)
+  &\rightarrow
+  P(X)
+  \\
+  \mathsf{T}
+  &\mapsto
+  (\mathsf{T}(X))(\mathrm{id}_{X})
+\end{align*}
+being a bijection for all presheaves $P$ and objects $X$.
+\item[(c)]
+For some object $X$ of $\mathbf{C}$, $\mathrm{hom}_{\mathbf{C}}(\cdot,X)$ naturally isomorphic to $\mathrm{C}_{1_{\mathbf{Set}}}$ as in lemma \ref{lem:repuniob} can be extended by dropping the condition that $\mathrm{C}_{1_{\mathbf{Set}}}$ is constant and instead considering an arbitrary presheaf. It should be clear that this extended idea is of interest. For the hom-functor is a structure-rich functor which is well understood. And isomorphic functors should have the same properties.
+\end{enumerate}
+Before immersing deeper into the investigation let us build some useful terminology.
+\\
+Given a functor $P$ from $\mathbf{C}^{\mathrm{op}}$ to $\mathbf{Set}$, an object $U_{P}$ of $\mathbf{C}$ together with a natural isomorphism $\mathsf{T}_{P}$ from the contravariant hom-functor $\mathrm{hom}_{\mathbf{C}}(\cdot,U_{P})$ to $P$ is called\footnote{don't mix this up with the earlier defined notion of representation of a group in a category from the end of subsection \ref{sec:func} because the terminology seems to be an unfortunate historical coincidence} \textbf{representation (of $P$)}. $U_{P}$ is then called \textbf{representing object (of $P$)}. And if there is a representation of $P$ we also say that $P$ is \textbf{representable}. Note that if $P$ in the above definition was a functor $P \colon \mathbf{C} \rightarrow \mathbf{Set}$ we could consider it a presheaf on $\mathbf{C}_{\alpha} := \mathbf{C}^{\mathrm{op}}$. Representability of $P \colon \mathbf{C}_{\alpha}^{\mathrm{op}} \rightarrow \mathbf{Set}$ then means that there is a natural isomorphism from
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}(\cdot,U_{P})
+  &=
+  \mathrm{hom}_{\mathbf{C}^{\mathrm{op}}}(\cdot,U_{P})
+  =
+  \mathrm{hom}_{\mathbf{C}}(U_{P},\cdot)
+\end{align*}
+to $P$ for some
+\begin{align*}
+  U_{P}
+  &\in
+  \mathrm{ob}_{\mathbf{C}_{\alpha}}
+  =
+  \mathrm{ob}_{\mathbf{C}^{\mathrm{op}}}
+  =
+  \mathrm{ob}_{\mathbf{C}}
+\end{align*}
+as is apparent from the end of section \ref{sec:duality}. The reason why we take the seemingly more cumbersome presheaf perspective here will become clear not until later. Some authors opt for the terminology {\glqq}corepresentability{\grqq} for
+\begin{align*}
+  P
+  &\cong
+  \mathrm{hom}_{\mathbf{C}}(U_{P},\cdot)
+\end{align*}
+But as already mentioned we do not need case analysis for co- and contravariant functors. It is just a matter of perspective.
+\\
+At the moment, we often deal with the co- and contravariant hom-functors. The notation can become a bit annoying and a new notation will be convenient. Define a functor
+\begin{align*}
+  \mathrm{y}_{\mathbf{C}}
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}
+  \\
+  X
+  &\mapsto
+  \mathrm{hom}_{\mathbf{C}}(\cdot,X)
+  \\
+  f_{12}
+  &\mapsto
+  \mathrm{hom}_{\mathbf{C}}(\cdot,f_{12})
+\end{align*}
+$\mathrm{y}_{\mathbf{C}}$ is called \textbf{Yoneda functor (for $\mathbf{C}$)}. Further, we need a name for the generalization of $\mathsf{Y}$ from lemma \ref{lem:repuniob}. So given a presheaf $P \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Set}$ on $\mathbf{C}$ and $X \in \mathrm{ob}_{\mathbf{C}}$ the function
+\begin{align*}
+  \mathsf{Y}_{(P,X)}
+  \colon
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X),P)
+  &\rightarrow
+  P(X)
+  \\
+  \mathsf{T}
+  &\mapsto
+  (\mathsf{T}(X))(\mathrm{id}_{X})
+\end{align*}
+is called \textbf{Yoneda morphism (w.r.t. $P$ and $X$)}. With the new terminology we tackle the question from above if the Yoneda morphism w.r.t. some presheaf $P$ and object $X$ is in fact a bijection. And astonishingly this is not too hard to prove.
+\\
+\begin{lem}[Yoneda]
+\label{lem:yoneda}
+For all $P \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Set}$ and all $X_{0} \in \mathrm{ob}_{\mathbf{C}}$ the Yoneda morphism $\mathsf{Y}_{(P,X_{0})}$ is an isomorphism.
+\end{lem}
+\begin{prf}
+Naturality of a
+\begin{align*}
+  \mathsf{T}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{0}),P)
+\end{align*}
+implies a commutative diagram
+\[
+\begin{tikzcd}[sep=huge]
+  \mathrm{hom}_{\mathbf{C}}(X_{0},X_{0})
+  \arrow{r}{\mathrm{y}_{\mathbf{C}}(X_{0})(f)}
+  \arrow[swap]{d}{\mathsf{T}(X_{0})}
+  &
+  \mathrm{hom}_{\mathbf{C}}(X,X_{0})
+  \arrow{d}{\mathsf{T}(X)}
+  \\
+  P(X_{0})
+  \arrow{r}{P(f)}
+  &
+  P(X)
+\end{tikzcd}
+\]
+for all $X$ and all
+\begin{align*}
+  f
+  \in
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}(X_{0},X)
+  &=
+  \mathrm{mor}_{\mathbf{C}}(X,X_{0})
+  =
+  \mathrm{y}_{\mathbf{C}}(X_{0})(X)
+\end{align*}  
+In particular, this yields for all $X$ and all
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}(X_{0},X)
+\end{align*}
+the formula
+\begin{align*}
+  (\mathsf{T}(X))(f)
+  &=
+  (\mathsf{T}(X))
+  \left(
+    f
+    \circ_{\mathbf{C}^{\mathrm{op}}}
+    \mathrm{id}_{X_{0}}^{\mathrm{op}}
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{T}(X)
+    \circ
+    \mathrm{y}_{\mathbf{C}}(X_{0})(f)
+  \right)
+  (\mathrm{id}_{X_{0}})
+  \\
+  &=
+  \left(
+    P(f)
+    \circ
+    \mathsf{T}(X_{0})
+  \right)
+  (\mathrm{id}_{X_{0}})
+  \tag{NT}
+  \\
+  &=
+  P(f)(\mathsf{Y}_{(P,X_{0})}(\mathsf{T}))
+\end{align*}
+stating an equivalent condition for the naturality of $\mathsf{T}$ in this case. This is because from this condition we can derive
+\begin{align*}
+  \left(
+    P(f_{12}^{\textrm{op}})
+    \circ
+    \mathsf{T}(X_{1})
+  \right)
+  (f)
+  &=
+  P(f_{12}^{\textrm{op}})
+  \left(
+    P(f)(\mathsf{Y}_{(P,X_{0})}(\mathsf{T}))
+  \right)
+  \\
+  &=
+  P
+  \left(
+    f_{12}^{\textrm{op}}
+    \circ_{\mathbf{C}^{\textrm{op}}}
+    f
+  \right)
+  (\mathsf{Y}_{(P,X_{0})}(\mathsf{T}))
+  \\
+  &=
+  (\mathsf{T}(X_{2}))
+  \left(
+    f_{12}^{\textrm{op}}
+    \circ_{\mathbf{C}^{\textrm{op}}}
+    f
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{T}(X_{2})
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f_{12}^{\textrm{op}})
+  \right)
+  (f)
+\end{align*}
+We have to show surjectivity and injectivity of $\mathsf{Y}_{(P,X_{0})}$ and we proceed in this order.
+\begin{enumerate}
+\item[(1)]
+For each $x_{0} \in P(X_{0})$
+\begin{align*}
+  (\mathsf{T}_{x_{0}}(X))(f)
+  &:=
+  P(f)(x_{0})
+\end{align*}
+for all $X$ and all
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}
+  (X_{0},X)
+\end{align*}
+defines $\mathsf{T}_{x_{0}}$ as an element of
+\begin{align*}
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{0}),P)
+\end{align*}
+showing surjectivity of $\mathsf{Y}_{(P,X_{0})}$.
+\item[(2)]
+On the other hand, given
+\begin{align*}
+  \mathsf{T}_{1},\mathsf{T}_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{0}),P)
+\end{align*}
+assume
+\begin{align*}
+  \mathsf{Y}_{(P,X_{0})}(\mathsf{T}_{1})
+  &=
+  \mathsf{Y}_{(P,X_{0})}(\mathsf{T}_{2})
+\end{align*}
+Naturality then implies
+\begin{align*}
+  (\mathsf{T}_{1}(X))(f)
+  &=
+  P(f)(\mathsf{Y}_{(P,X_{0})}(\mathsf{T}_{1}))
+  \tag{NT}
+  \\
+  &=
+  P(f)(\mathsf{Y}_{(P,X_{0})}(\mathsf{T}_{2}))
+  \\
+  &=
+  (\mathsf{T}_{2}(X))(f)
+  \tag{NT}
+\end{align*}
+for all $X$ and all
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}(X_{0},X)
+\end{align*}
+Or in other words,
+\begin{align*}
+  \mathsf{T}_{1}
+  &=
+  \mathsf{T}_{2}
+\end{align*}
+and thus injectivity of $\mathsf{Y}(F,X_{0})$.
+\end{enumerate}
+Hence we are done.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+And even more is true. The Yoneda isomorphism is natural - at least up to universe size. For this purpose it will be convenient to temporarily fix some notation: take the variables $P_{1},P_{2}$ and $P$ as notation for presheaves on $\mathbf{C}$ and $\mathsf{P}_{12}$ as a variable for a natural transformation from $P_{1}$ to $P_{2}$. Also
+\begin{align*}
+  \mathsf{T}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{1}),P_{1})
+\end{align*}
+turns out to be sensible. Moreover it will be convenient to introduce some further terminology. Let the category $\mathbf{C}$ be $\mathcal{U}$-small for some universe $\mathcal{U}$ and define
+\begin{enumerate}
+\item[(a)]
+a functor
+\begin{align*}
+  \mathrm{prob}_{\mathrm{y}}
+  \colon
+  \mathbf{Set}_{\mathcal{U}}^{\mathbf{C}^{\mathrm{op}}}
+  \times
+  \mathbf{C}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Set}_{\mathcal{U}}
+  \\
+  (P,X)
+  &\mapsto
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X),P)
+  \\
+  \left(
+    \mathsf{P}_{12},
+    f_{12}^{\mathrm{op}}
+  \right)
+  &\mapsto
+  \left(
+    \mathsf{T}
+    \mapsto
+    \mathsf{P}_{12}
+    \circ
+    \mathsf{T}
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f_{12}^{\mathrm{op}})
+  \right)
+\end{align*}
+and call $\mathrm{prob}_{\mathrm{y}}$ the \textbf{Yoneda probing (for $\mathbf{C}$)}. The {\glqq}probing{\grqq} terminology will become clear later. 
+\item[(b)]
+a functor
+\begin{align*}
+  \mathrm{ev}_{\mathrm{y}}
+  \colon
+  \mathbf{Set}_{\mathcal{U}}^{\mathbf{C}^{\mathrm{op}}}
+  \times
+  \mathbf{C}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Set}_{\mathcal{U}}
+  \\
+  (P,X)
+  &\mapsto
+  P(X)
+  \\
+  \left(
+    \mathsf{P}_{12},
+    f_{12}^{\mathrm{op}}
+  \right)
+  &\mapsto
+  \mathsf{P}_{12}(X_{2})
+  \circ
+  P_{1}(f_{12}^{\mathrm{op}})
+\end{align*}
+and call $\mathrm{ev}_{\mathrm{y}}$ the \textbf{Yoneda evaluation (for $\mathbf{C}$)}. {\glqq}Evaluation{\grqq} since the presheaf $P$ is evaluated at $X$ resulting in the set $P(X)$.
+\end{enumerate}
+These definitions make sense, yet not in the universe $\mathcal{U}$ but in another universe $\tilde{\mathcal{U}}$ containing the former as an element. This is because
+\begin{align*}
+  \mathbf{Set}_{\mathcal{U}}^{\mathbf{C}^{\mathrm{op}}}
+\end{align*}
+is not $\mathcal{U}$-small anymore. However the functor category still is $\tilde{\mathcal{U}}$-small. We can now show
+\\
+\begin{lem}[Yoneda addendum]
+\label{lem:yonedaadd}
+Let the category $\mathbf{C}$ be $\mathcal{U}$-small with respect to a universe $\mathcal{U}$ contained in a universe $\tilde{\mathcal{U}}$ as an element. For
+\begin{align*}
+  (P,X)
+  &\in
+  \mathbf{Set}_{\mathcal{U}}^{\mathbf{C}^{\mathrm{op}}}
+  \times
+  \mathbf{C}^{\mathrm{op}}
+\end{align*}
+the Yoneda isomorphism $\mathsf{Y}_{(P,X)}$ w.r.t. to $P$ and $X$ defines a natural isomorphism $\mathsf{Y}$ from the Yoneda probing to the Yoneda evaluation by
+\begin{align*}
+  \mathsf{Y}(P,X)
+  &:=
+  \mathsf{Y}_{(P,X)}
+\end{align*}
+in the universe $\tilde{\mathcal{U}}$.
+\end{lem}
+\begin{prf}
+Note that in the Yoneda lemma \ref{lem:yoneda} we found naturality of $\mathsf{T}$ is equivalent to
+\begin{align*}
+  (\mathsf{T}(X_{2}))(f_{12}^{\mathrm{op}})
+  &=
+  P_{1}(f_{12}^{\mathrm{op}})
+  \left(
+    \mathsf{Y}(P_{1},X_{1})
+    (\mathsf{T})
+  \right)
+\end{align*}
+Hence it follows that
+\begin{align*}
+  \mathsf{Y}(P_{1},X_{2})
+  \left(
+    \mathsf{T}
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f_{12}^{\mathrm{op}})
+  \right)
+  &=
+  \left(
+    \mathsf{T}(X_{2})
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f_{12}^{\mathrm{op}})(X_{2})
+  \right)
+  (\mathrm{id}_{X_{2}})
+  \\
+  &=
+  \mathsf{T}(X_{2})
+  \left(
+    f_{12}^{\mathrm{op}}
+    \circ_{\mathbf{C}^{\mathrm{op}}}
+    \mathrm{id}_{X_{2}}^{\mathrm{op}}
+  \right)
+  \\
+  &{=}
+  \left(
+    P_{1}(f_{12}^{\mathrm{op}})
+    \circ
+    \mathsf{Y}(P_{1},X_{1})
+  \right)
+  (\mathsf{T})
+  \tag{NT}
+\end{align*}
+for all $\mathsf{T}$. Altogether this implies, using the explicit formula for the Yoneda isomorphism in the second step, that for all $\mathsf{T}$
+\begin{align*}
+  &\phantom{=}
+  \mathsf{Y}(P_{2},X_{2})
+  \left(
+    \left(
+      \mathrm{prob}_{\mathrm{y}}
+      (\mathsf{P}_{12},f_{12}^{\mathrm{op}})
+    \right)
+    (\mathsf{T})
+  \right)
+  \\
+  &=
+  \mathsf{Y}(P_{2},X_{2})
+  \left(
+    \mathsf{P}_{12}
+    \circ
+    \mathsf{T}
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f_{12}^{\mathrm{op}})
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{Y}(P_{2},X_{2})
+    \circ
+    \mathsf{Y}(P_{2},X_{2})^{-1}
+    \circ
+    \mathsf{P}_{12}(X_{2})
+    \circ
+    \mathsf{Y}(P_{1},X_{2})
+  \right)
+  \left(
+    \mathsf{T}
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f_{12}^{\mathrm{op}})
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{P}_{12}(X_{2})
+    \circ
+    \mathsf{Y}(P_{1},X_{2})
+  \right)
+  \left(
+    \mathsf{T}
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f_{12}^{\mathrm{op}})
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{P}_{12}(X_{2})
+    \circ
+    P_{1}(f_{12}^{\mathrm{op}})
+    \circ
+    \mathsf{Y}(P_{1},X_{1})
+  \right)
+  (\mathsf{T})
+  \\
+  &=
+  \left(
+    \mathrm{ev}_{\mathrm{y}}
+    (\mathsf{P}_{12},f_{12}^{\mathrm{op}})
+    \circ
+    \mathsf{Y}(P_{1},X_{1})
+  \right)
+  (\mathsf{T})
+\end{align*}
+showing naturality of $\mathsf{Y}$.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+A surprising Yoneda application is the following example.
+\\
+\begin{exa}
+\label{exa:cayley}
+It is not hard to see from example \ref{exa:algstruct3} and the explicit definition of hom-functors in section \ref{sec:duality} that for a group $G \in \mathrm{ob}_{\mathbf{Grp}}$ the functor $\mathrm{hom}_{\mathbf{B}G}(\cdot,\emptyset)$ is the functor $l$ for left multiplications as is clear from
+\begin{align*}
+  \mathrm{hom}_{\mathbf{B}G}(g,\emptyset)
+  &=
+  l_{g}
+\end{align*}
+for $g \in G$. The Yoneda lemma \ref{lem:yoneda} then implies
+\begin{align*}
+  G
+  =
+  \mathrm{iso}_{\mathbf{B}G}(\emptyset,\emptyset)
+  &\cong
+  \mathrm{iso}_{\mathbf{Set}^{\mathbf{B}G^{\mathrm{op}}}}
+  \left(
+    \mathrm{hom}_{\mathbf{B}G}(\cdot,\emptyset),
+    \mathrm{hom}_{\mathbf{B}G}(\cdot,\emptyset)
+  \right)
+\end{align*}
+But
+\begin{align*}
+  \phi
+  \colon
+  \mathrm{iso}_{\mathbf{Set}^{\mathbf{B}G^{\mathrm{op}}}}
+  \left(
+    \mathrm{hom}_{\mathbf{B}G}(\cdot,\emptyset),
+    \mathrm{hom}_{\mathbf{B}G}(\cdot,\emptyset)
+  \right)
+  &\rightarrow
+  \mathrm{aut}_{\mathbf{Grp}}(\emptyset,\emptyset)
+  \\
+  \mathsf{T}
+  &\mapsto
+  \mathsf{T}(\emptyset)
+\end{align*}
+is a group homomorphism. Hence we have proved Cayley's theorem by the Yoneda lemma \ref{lem:yoneda}.
+\end{exa}
+\begin{prf}
+Details are left ro the reader.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+However, though this is certainly nice, it is not yet clear from example \ref{exa:cayley} how significant the Yoneda lemma \ref{lem:yoneda} really is. But let us highlight:
+\begin{center}
+\boxed{\text{The Yoneda lemma is THE theorem in category theory.}}
+\end{center}
+This is because it is the background theorem of universality. The following up to subsection \ref{sec:limit} is essentially an extensive discussion emphasizing this.
+\\
+Let us first rephrase the Yoneda lemma \ref{lem:yoneda} in a semi-formal english. It says that a morphism from a contravariant hom-functor $\mathrm{hom}_{\mathbf{C}}(\cdot,X)$ to a presheaf $P$ corresponds to an element of $P(X)$ which is the same as an object $(X,x)$ in the category of coelements $\int_{\mathbf{C}}^{\prime}P$. In particular, if
+\begin{align*}
+  \mathsf{t}
+  \in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X),P)
+\end{align*}
+is a $\mathrm{y}_{\mathbf{C}}$-terminal morphism for $P$ then $\mathsf{t}$ corresponds to a terminal object of $\int_{\mathbf{C}}^{\prime}P$ since the terminality of $\mathsf{t}$ means that for all $X_{1}$ and all
+\begin{align*}
+  \mathsf{f}
+  \in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{1}),P)
+\end{align*}
+there is a unique $\mathsf{f}_{!} \in \mathrm{mor}_{\mathbf{C}}(X_{1},X)$ such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  \mathrm{y}_{\mathbf{C}}(X)
+  \arrow{rd}{\mathsf{t}}
+  &
+  \\
+  \mathrm{y}_{\mathbf{C}}(X_{1})
+  \arrow{ru}{\mathrm{y}_{\mathbf{C}}(\mathsf{f}_{!})}
+  \arrow{rr}{\mathsf{f}}
+  &
+  &
+  P
+\end{tikzcd}
+\]
+commutes and hence the Yoneda lemma \ref{lem:yoneda} says that
+\begin{align*}
+  \mathsf{f}_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+  =
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}(X,X_{1})
+\end{align*}
+is the only morphism such that\footnote{note that $\mathrm{prob}_{\mathrm{y}}(P,\cdot) = \mathrm{prob}_{\mathrm{y}}(\mathrm{id}_{P},\cdot)$ as usual for functors on product categories (see theorem \ref{thm:bifuncconstr})}
+\begin{align*}
+  P(\mathsf{f}_{!})(x)
+  &=
+  \left(
+    \mathsf{Y}(P,X_{1})
+    \circ
+    \mathrm{prob}_{\mathrm{y}}(P,\mathsf{f}_{!})
+    \circ
+    \mathsf{Y}(P,X)^{-1}
+  \right)
+  (x)
+  \\
+  &=
+  \mathsf{Y}(P,X_{1})
+  \left(
+    \mathsf{t}
+    \circ
+    \mathrm{y}_{\mathbf{C}}(\mathsf{f}_{!})
+  \right)
+  \\
+  &=
+  \mathsf{Y}(P,X_{1})
+  \left(
+    \mathsf{f}
+  \right)
+  \\
+  &=
+  x_{1}
+\end{align*}
+if $(X_{1},x_{1})$ denotes the object in $\int_{\mathbf{C}}^{\prime}P$ corresponding to $\mathsf{f}$. Thus it is the only morphism of $\int_{\mathbf{C}}^{\prime}P$ from $(X_{1},x_{1})$ to $(X,x)$ and $(X,x)$ is terminal in $\int_{\mathbf{C}}^{\prime}P$. Meanwhile, one might have gradually realized that in category theory it is common to introduce new terminology for things which look interesting and so we do here. For a preasheaf $P$ on $\mathbf{C}$ an element $t \in P(T)$ is called \textbf{universal element (of $P$)} if $(T,t)$ is a terminal object of
+\begin{align*}
+  \int_{\mathbf{C}}^{\prime}
+  P
+\end{align*}
+Note that if $P$ in this definition was a functor $P \colon \mathbf{C} \rightarrow \mathbf{Set}$, we could consider it a presheaf on $\mathbf{C}_{\alpha} := \mathbf{C}^{\mathrm{op}}$. A universal element $t \in P(T)$ of $P \colon \mathbf{C}_{\alpha}^{\mathrm{op}} \rightarrow \mathbf{Set}$ then means that $(T,t)$ is a terminal object of
+\begin{align*}
+  \int_{\mathbf{C}_{\alpha}}^{\prime}
+  P
+  &=
+  \int_{\mathbf{C}^{\mathrm{op}}}^{\prime}
+  P
+\end{align*}
+That is, for all objects $(X,x)$ in
+\begin{align*}
+  \int_{\mathbf{C}_{\alpha}}^{\prime}
+  P
+  &=
+  \int_{\mathbf{C}^{\mathrm{op}}}^{\prime}
+  P
+\end{align*}
+there is exactly one element in
+\begin{align*}
+  \mathrm{mor}_{\int_{\mathbf{C}^{\mathrm{op}}}^{\prime}P}
+  \left(
+    (X,x),
+    (T,t)
+  \right)
+  &:=
+  \left\lbrace
+      f
+      \in
+      \mathrm{mor}_{\mathbf{C}}(T,X)
+    \,
+    \vert
+    \,
+      P(f)(t)
+      =
+      x
+  \right\rbrace
+  \\
+  &=
+  \mathrm{mor}_{\int_{\mathbf{C}}P}
+  \left(
+    (T,t),
+    (X,x)
+  \right)
+\end{align*}
+This is to say that $(T,t)$ is the initial object of
+\begin{align*}
+  \int_{\mathbf{C}}
+  P
+\end{align*}
+Some authors opt for the terminology {\glqq}couniversal element{\grqq} in case of the initial object of
+\begin{align*}
+  \int_{\mathbf{C}}
+  P
+\end{align*}
+But as for representability terminality and initiality are a matter of persepective on the considered functor $P$ here. This justifies the terminology of universal element without differing the cases of terminal and initial like for representable functors we do not differ corepresentable functors. So rephrasing the Yoneda lemma \ref{lem:yoneda} in a semi-formal english suggests the next corollary.
+\\
+\begin{cor}
+\label{cor:unielemequivuni1}
+Assume a presheaf $P \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Set}$.
+\begin{align*}
+  \mathsf{t}
+  \in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X),P)
+\end{align*}
+is a $\mathrm{y}_{\mathbf{C}}$-terminal morphism for $P$ if and only if
+\begin{align*}
+  \mathsf{Y}(P,X)(\mathsf{t})
+\end{align*}
+is a universal element of $P$.
+\end{cor}
+\begin{prf}
+The text above.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+So universal elements are special cases of (yoneda functor-)terminal morphisms. But $F$-universal morphisms for some functor can also be viewed as special cases of universal elements as the next theorem shows.
+\\
+\begin{thm}
+\label{thm:unielemequivuni2}
+Given a functor $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\omega}$ and an object $X^{\omega}$. Then
+\begin{enumerate}
+\item[(1T)]
+$(X,X^{\omega},t)$ with
+\begin{align*}
+  t
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}(F(X),X^{\omega})
+\end{align*}
+is an $F$-terminal morphism for $X^{\omega}$ if and only if $(X,t)$ is a universal element of
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}_{\omega}}(F^{\mathrm{op}}(\cdot),X^{\omega})
+  \colon
+  \mathbf{C}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Set}
+\end{align*}
+\item[(1I)]
+$(X^{\omega},X,i)$ with
+\begin{align*}
+  i
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}(X^{\omega},F(X))
+\end{align*}
+is an $F$-initial morphism for $X^{\omega}$ if and only if $(X,i)$ is a universal element of
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}_{\omega}}(X^{\omega},F(\cdot))
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{Set}
+\end{align*}
+\end{enumerate}
+\end{thm}
+\begin{prf}
+\begin{enumerate}
+\item[(1T)]
+The duality principle \ref{thm:dp}.
+\iffalse
+That
+\begin{align*}
+  t
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}(F(X),X^{\omega})
+\end{align*}
+is an $F$-terminal morphism for $X^{\omega}$ means that for any
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}(F(X_{1}),X^{\omega})
+\end{align*}
+there is exactly one
+\begin{align*}
+  f_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+  =
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}(X,X_{1})
+\end{align*}
+such that
+\begin{align*}
+  f
+  &=
+  t
+  \circ
+  F(f_{!})
+  =
+  \mathrm{hom}_{\mathbf{C}_{\omega}}(F(f_{!}),X^{\omega})(t)
+\end{align*}
+Hence this is to say that $f_{!}$ is the only morphism in
+\begin{align*}
+  \mathrm{mor}_{\int_{\mathbf{C}}^{\prime}\mathrm{hom}_{\mathbf{C}_{\omega}}(F^{\mathrm{op}}(\cdot),X^{\omega})}((X_{1},f),(X,t))
+\end{align*}
+which is nothing but that $(X,t)$ is a terminal object of
+\begin{align*}
+  \int_{\mathbf{C}}^{\prime}
+  \mathrm{hom}_{\mathbf{C}_{\omega}}(F^{\mathrm{op}}(\cdot),X^{\omega})
+\end{align*}
+\fi
+\item[(1I)]
+That
+\begin{align*}
+  i
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}(X^{\omega},F(X))
+\end{align*}
+is an $F$-initial morphism for $X^{\omega}$ means that for any
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}(X^{\omega},F(X_{1}))
+\end{align*}
+there is exactly one
+\begin{align*}
+  f_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,X_{1})
+\end{align*}
+such that
+\begin{align*}
+  f
+  &=
+  F(f_{!})
+  \circ
+  i
+  =
+  \mathrm{hom}_{\mathbf{C}_{\omega}}(X^{\omega},F(f_{!}))(i)
+\end{align*}
+Hence this is to say that $f_{!}$ is the only morphism in
+\begin{align*}
+  \mathrm{mor}_{\int_{\mathbf{C}}\mathrm{hom}_{\mathbf{C}_{\omega}}(X^{\omega},F(\cdot))}((X,i),(X_{1},f))
+\end{align*}
+which is nothing but that $(X,i)$ is an initial object of
+\begin{align*}
+  \int_{\mathbf{C}}
+  \mathrm{hom}_{\mathbf{C}_{\omega}}(X^{\omega},F(\cdot))
+\end{align*}
+\end{enumerate}
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+So universal elements of functors is universality as well as universal arrows. In particular, universal elements are unique up to unique isomorphism and we can hence use a generalized {\glqq}the{\grqq}.
+\\
+But the Yoneda lemma \ref{lem:yoneda} also builds a bridge between universal morphisms and representability in the end, proving the latter as just being a phenomenon of universality as universal arrows and universal elements are. But the theorem also allows a theory of {\glqq}generalized spaces{\grqq} as we will soon learn. All this is essentially phrased in three corollaries of major significance.
+\\
+\begin{cor}
+\label{cor:yoneda1}
+The Yoneda functor is an embedding.
+\end{cor}
+\begin{prf}
+We have to show the Yoneda functor is fully faithful. This is to say that for all $X_{1},X_{2}$ and natural transformations $\mathsf{T}$ from
+\begin{align*}
+  \mathrm{y}_{\mathbf{C}}(X_{1})
+  &=
+  \mathrm{hom}_{\mathbf{C}}(\cdot,X_{1})
+\end{align*}
+to
+\begin{align*}
+  \mathrm{y}_{\mathbf{C}}(X_{2})
+  &=
+  \mathrm{hom}_{\mathbf{C}}(\cdot,X_{2})
+\end{align*}
+there is a unique morphism $f_{12}$ from $X_{1}$ to $X_{2}$ such that
+\begin{align*}
+  \mathsf{T}
+  &=
+  \mathrm{y}_{\mathbf{C}}(f_{12})
+  =
+  \mathrm{hom}_{\mathbf{C}}(\cdot,f_{12})
+\end{align*}
+But this is just the Yoneda isomorphism
+\begin{align*}
+  \mathsf{Y}(\mathrm{y}_{\mathbf{C}}(X_{2}),X_{1})
+\end{align*}
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+\begin{cor}
+\label{cor:yoneda2}
+$\mathrm{y}_{\mathbf{C}}(X_{1})$ is (naturally) isomophic to $\mathrm{y}_{\mathbf{C}}(X_{2})$ if and only if $X_{1}$ is isomorphic to $X_{2}$.
+\end{cor}
+\begin{prf}
+Since the Yoneda functor is an embedding this is just theorem \ref{thm:catiso}.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+\begin{cor}
+\label{cor:yoneda3}
+The presheaf $P$ is representable if and only if there is a $\mathrm{y}_{\mathbf{C}}$-terminal morphism for $P$.
+\end{cor}
+\begin{prf}
+A $\mathrm{y}_{\mathbf{C}}$-terminal morphism for $P$ is a morphism
+\begin{align*}
+  \mathsf{t}
+  \in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X),P)
+\end{align*}
+such that for all $X_{1}$ and all
+\begin{align*}
+  \mathsf{f}
+  \in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{1}),P)
+\end{align*}
+there is a unique
+\begin{align*}
+  \mathsf{f}_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  \mathrm{y}_{\mathbf{C}}(X)
+  \arrow{rd}{\mathsf{t}}
+  &
+  \\
+  \mathrm{y}_{\mathbf{C}}(X_{1})
+  \arrow{ru}{\mathrm{y}_{\mathbf{C}}(\mathsf{f}_{!})}
+  \arrow{rr}{\mathsf{f}}
+  &
+  &
+  P
+\end{tikzcd}
+\]
+commutes. This is to say that for all $X_{1}$ there is a bijection
+\begin{align*}
+  \Phi_{X_{1}}
+  \colon
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{1}),P)
+  &\rightarrow
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+  \\
+  \mathsf{f}
+  &\mapsto
+  \mathsf{f}_{!}
+\end{align*}
+such that for all
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+\end{align*}
+the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  \mathrm{y}_{\mathbf{C}}(X)
+  \arrow{rd}{\mathsf{t}}
+  &
+  \\
+  \mathrm{y}_{\mathbf{C}}(X_{1})
+  \arrow{ru}{\mathrm{y}_{\mathbf{C}}(f)}
+  \arrow{rr}{\Phi_{X_{1}}^{-1}(f)}
+  &
+  &
+  P
+\end{tikzcd}
+\]
+commutes. In particular we must have a commutative diagram
+\[
+\begin{tikzcd}[sep=huge]
+  \mathrm{hom}_{\mathbf{C}}(X_{1},X)
+  \arrow{r}{\mathrm{hom}_{\mathbf{C}}(f_{12}^{\mathrm{op}},X)}
+  \arrow[swap]{d}{\Phi_{X_{1}}^{-1}}
+  &
+  \mathrm{hom}_{\mathbf{C}}(X_{2},X)
+  \arrow{d}{\Phi_{X_{2}}^{-1}}
+  \\
+  \mathrm{hom}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{1}),P)
+  \arrow{r}{\mathrm{prob}_{\mathrm{y}}(P,f_{12}^{\mathrm{op}})}
+  &
+  \mathrm{hom}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  (\mathrm{y}_{\mathbf{C}}(X_{2}),P)
+\end{tikzcd}
+\]
+for all $f_{12}^{\mathrm{op}}$ since for all
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+\end{align*}
+we have
+\begin{align*}
+  \left(
+    \mathrm{prob}_{\mathrm{y}}(P,f_{12}^{\mathrm{op}})
+    \circ
+    \Phi_{X_{1}}^{-1}
+  \right)
+  (f)
+  &=
+  \mathrm{prob}_{\mathrm{y}}(P,f_{12}^{\mathrm{op}})
+  \left(
+    \mathsf{t}
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f)
+  \right)
+  \\
+  &=
+  \mathsf{t}
+  \circ
+  \mathrm{y}_{\mathbf{C}}(f)
+  \circ
+  \mathrm{y}_{\mathbf{C}}(f_{12}^{\mathrm{op}})
+  \\
+  &=
+  \mathsf{t}
+  \circ
+  \mathrm{y}_{\mathbf{C}}(f \circ f_{21})
+  \\
+  &=
+  \Phi_{X_{2}}^{-1}(f \circ f_{21})
+  \\
+  &=
+  \left(
+    \Phi_{X_{2}}^{-1}
+    \circ
+    \mathrm{hom}_{\mathbf{C}}(f_{12}^{\mathrm{op}},X)
+  \right)
+  (f)
+\end{align*}
+Hence $\mathsf{t}$ is a $\mathrm{y}_{\mathbf{C}}$-terminal morphism for $P$ if and only if
+\begin{align*}
+  \mathrm{y}_{\mathbf{C}}(X)
+  \cong
+  \mathrm{prob}_{\mathrm{y}}(P,\cdot)
+\end{align*}
+since if given such a natural isomorphism $\Phi$ we can choose $\mathsf{t} := \Phi_{X}^{-1}(\mathrm{id}_{X})$. But by the Yoneda lemma \ref{lem:yoneda} we have
+\begin{align*}
+  \mathrm{prob}_{\mathrm{y}}(P,\cdot)
+  &\cong
+  \mathrm{ev}_{\mathrm{y}}(P,\cdot)
+  =
+  P
+\end{align*}
+And the claim becomes true.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Combining corollary \ref{cor:unielemequivuni1} with corollary \ref{cor:yoneda3} shows that a presheaf $P$ is representable if and only if there is a universal element of $P$. In particular, this shows that $F$-universal morphisms of some functor $F$ are special cases of representability and that representing objects are unique up to unique isomorphism suggesting to use a generalized {\glqq}the{\grqq}. This follows from theorem \ref{thm:unielemequivuni2}. The equivalence between representability and universal elements is best understood in terms of bundles. It sometimes happens that one can define a presheaf on some category of {\glqq}spaces{\grqq} $\mathbf{C}$ mapping an object to the isomorphism class of a certain kind of bundles over this object and that this functor is representable. The universal element is then sometimes referred to as \textit{universal bundle} while the representing object is called \textit{classyfying space}. The latter terminology is often adopted in general especially in topological contexts. But it is also common to say \textit{moduli space} instead of \textit{classifying space} especially in algebraic geometry. However, we pass on using \textit{moduli space} and \textit{classifying space} in a formal way for {\glqq}representing object{\grqq} because of the following reasons:
+\begin{enumerate}
+\item[$\bullet$]
+with {\glqq}representing object{\grqq} we apparently already have terminology
+\item[$\bullet$]
+the phrases are not consistently synonymous in literature
+\item[$\bullet$]
+a classifying space should classify something and it is not always so clear which - or even if there are - sensible mathematical constructions a given bunch of morphisms with the same codomain classify
+\item[$\bullet$]
+for the problem with moduli space as synonym for representing object see the \cite{wiki-nlab0000} article: moduli space.
+\end{enumerate}
+Now, unfortunately, we lack the terminology to be more precise about bundles and their universality but let us emphasize that the observation of universality is very central to us and that it is also an important aspect of classical homotopy theory. However, we will only discuss a certain special case of a classifying space in these notes - namely that of \textit{principle bundles} - which, nevertheless, in the end motivates a generalization to higher categories. Therefore we even now want to refer to a classical discussion on classifying spaces \cite{4dc38f27} covering a quite general important case if you are not already familiar with this anyhow.
+\\
+Corollaries \ref{cor:yoneda1}, \ref{cor:yoneda2} and \ref{cor:yoneda3} are so important that we take some time to revisit them in a more informal manner. So let us proceed with the interpretation loosely in this order. But first note that the yoneda functor maps a given object $X$ to the presheaf $\mathrm{hom}_{\mathbf{C}}(\cdot,X)$ and one might wonder if one can consider $\mathrm{hom}_{\mathbf{C}}(\cdot,X)$ instead of $X$ since this would kind of mean that
+\begin{align*}
+  \mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}
+\end{align*}
+is a generalization of $\mathbf{C}$ as one would expect from an embedding. This would lead to the idea that presheaves are a kind of {\glqq}generalized objects of $\mathbf{C}${\grqq}. And this interpretation makes in fact sense as the lemmas of discourse show.
+\begin{enumerate}
+\item[(1)]
+Corollary \ref{cor:yoneda1} just says that morphisms $f$ between {\glqq}ordinary objects of $\mathbf{C}${\grqq} correspond exactly to morphisms between the {\glqq}generalized objects of $\mathbf{C}${\grqq} belonging to the according domain and codomain of $f$ imposing a necessary consistency condition on our idea of presheaves as {\glqq}generalized objects of $\mathbf{C}${\grqq}.
+\item[(2)]
+Corollary \ref{cor:yoneda2} is an expression of the fact that embeddings (compare theorem \ref{thm:catiso}) are injective on objects up to isomorphism (which is structurally enough)\footnote{note that the yoneda functor in our strict category theory interpretation is actually injective}. That is, it is justified to identify $X$ with $\mathrm{y}_{\mathbf{C}}(X)$. Moreover we can take the stance that $X_{1}$ is (structurally) equal to $X_{2}$ if and only if the arrows into $X_{1}$ correspond to the arrows into $X_{2}$.
+\item[(3)]
+Corollary \ref{cor:yoneda3} says quite explicitly that representability is a special case of (yoneda-functor-)universal arrows.\footnote{even an expression of universality in general in the same sense as e.g. universal elements are as we have seen above} This allows the interpretation that arrows with domain $X_{0}$ into an object $X$ can be regarded as probing $X$ to get as result the corresponding element of $P(X_{0})$ where $P$ denotes a representable functor with representing object $X$. With this interpretation corollary \ref{cor:yoneda2} means that $X_{1}$ is (structurally) equal to $X_{2}$ if and only if probing $X_{1}$ and probing $X_{2}$ give the (structurally) same result. Hence instead of considering an object we can equally well probe it in any possible way. This is strikingly reminiscent of experimental particle physics with a target particle being an object and arrows being test particles we shoot at the target particle. Doing this in enough different ways suffices to get the full picture of the target particle. Put another way, an object is completely determined by the way it relates to the others. The slogan is: tell us who your friends are and we tell you who you are.
+\end{enumerate}
+On the whole this interpretation suggests that given an object $X$ of some catgory $\mathbf{C}$ the arrows into $X$ are the things which make up the object $X$. That is, they are the basic things we can build the object of. But this is nothing but the intuition of the word {\glqq}element{\grqq} as known from set theory or the observation/assumption that the physical universe is built from elementary particles. So an arrow into $X$ can be considered an element of $X$. To differ it terminologically from set theory we will call such an arrow generalized element in accordance with our terminology of generalized objects. Therefore, given a category $\mathbf{C}$ we call $f \in \mathrm{Mor}_{\mathbf{C}}$ a \textbf{generalized element (of $\mathrm{cod}_{\mathbf{C}}(f)$)}. Of course, this terminology is redundant since it coincides with morphism and arrow but it can make things more comprehensible when one takes the point of view of the interpretation above.
+\\
+This interpretation entails an interesting new notion of {\glqq}space{\grqq} which is the beginning of an interesting mathematical concept of the physical space. We begin this example here but will develop it further as the text goes on.
+\\
+\begin{exa}[Generalized Spaces I]
+\label{exa:gs1}
+The Yoneda lemma \ref{lem:yoneda} allows to interpret presheaves on some category as generalized object of this category. If this category is a category of spaces one is tempted to call the generalized objects rather generalized spaces. But does this make sense? First we have to clarify what we mean by a category of spaces. The word {\glqq}space{\grqq} is one that is borrowed from physics. More concisely, we think of a space as a mathematical model of the space we live in as humans. In general relativity, this is usually a {\glqq}(semi-Riemannian) manifold{\grqq} or more general - but weaker - a topological space. Both of these concepts can be considered objects of a category with {\glqq}structure-preserving{\grqq} functions between such objects. Having an idea of space now let us fix some space $S$. Then we could probe a generalized object by arrows with $S$ as domain (by using the Yoneda embedding of course). But we could also take subspaces of $S$ and probe with respect to these. And what if $S$ is covered by such subspaces? Intuitively it should be possible to reconstruct probing results for $S$ by the probing results for the respective subspaces from the cover - at least if for the overlap of any two subspaces the probing results match with restricted probing results for the two respective subspaces. This imposes a further consistency condition besides the yoneda lemma \ref{lem:yoneda}. Yet to formulate this precisely we need more machinery provided in subsection \ref{sec:limit}. So we have to defer the formal definition of what will be called a {\glqq}sheaf{\grqq} or generalized space.
+\end{exa}
+\begin{prf}
+Just prose here. So nothing to prove.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}

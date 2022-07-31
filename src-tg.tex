@@ -1,0 +1,431 @@
+In this appendix chapter we want to explain what we mean by Tarski-Grothendieck set theory (abbr. TG). TG is actually very much like Zermelo-Fraenkel set theory with choice (abbr. ZFC) - that is, just ordinary mathematics as you know it - with the difference that one demands sets which behave a bit like ZFC. The sets we are talking about are \textit{Grothendieck universes} and each Grothendieck universe can be considered a place to do mathematics. The main purpose of universes is to conveniently avoid size issues (Russel's paradox): usually one works within a Grothendieck universe and if things inside this universe become to large then, no problem, we just go to a larger universe. Or something like that. We proceed in the following way. First we formally write down the axioms of ZFC but with an informal explanation. Then we define Grothendieck universes in a semi-formal way and then we will say what one has to demand in addition to ZFC to get TG. A full formalization of TG can be found on \href{http://us.metamath.org/mpeuni/mmset.html}{Metamath}. But also look at the according \cite{wiki-pedia0en} articles for more.
+\\\\
+ZFC is a formal system with the following axioms\footnote{statements assumed to be true} describing a mathematical universe of sets to some extent. Each point splits into
+\begin{enumerate}
+\item[$\bullet$]
+an idea of what we want to describe in ordinary english
+\item[$\bullet$]
+a description of the idea in semi-formal english (using common mathematical symbols we should actually define in a formal way before using them)
+\item[$\bullet$]
+an actual (first-order) formula formalizing the idea
+\end{enumerate}
+Note that we use the symbols $x,x_{1},x_{2},\ldots$ plus $a,b,c,\ldots,x,y,z$ for variables for sets and that we write $x_{1} \in x_{2}$ for the {\glqq}is element of{\grqq} relation $\in(x_{1},x_{2})$. Moreover we tacitly applied some conventional precedence rules to get an easier to read version of the formula with less parentheses.
+\begin{enumerate}
+\item[(1)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is that one should be able to compare sets for equality. Since one thinks of a set as being a collection of its elements it seems natural to consider two sets as the same if they have the same elements.
+\item[$\bullet$]
+Two sets $a,b$ are equal if $x \in a$ if and only if $x \in b$.
+\item[$\bullet$]
+Let $\mathcal{X}_{1}$ denote the formula
+\begin{align*}
+  \forall
+  x
+  .
+  \left(
+    x
+    \in
+    a
+    \Leftrightarrow
+    x
+    \in
+    b
+  \right)
+  \Rightarrow
+  a
+  =
+  b
+\end{align*}
+In our setting $\mathcal{X}_{1}$ is called \textbf{axiom of extensionality}.
+\end{enumerate}
+\item[(2)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is about how to specify certain elements of a set to build a new set containing exactly these specified elements. In other words, we want to be able to build subsets. So we want to assert that there is a set such that all elements of this set are all in some fixed set and all satisfy the same property.
+\item[$\bullet$]
+Given some suited formula $\mathcal{A}$ and a set $b$ then there is a set $a$ which precisely contains the members $x$ of $b$ for which $\mathcal{A}$ (we should perhaps write $\mathcal{A}(x)$) is true. One then usually uses so-called set-builder notation:
+\begin{align*}
+  a
+  =
+  \lbrace
+      x
+      \in
+      b
+    \vert
+      \mathcal{A}(x)
+  \rbrace
+\end{align*}
+\item[$\bullet$]
+Let $\mathcal{A}$ denote a (well-formed) formula\footnote{a gramatically sensible expression (not necessarily true)} such that $a$ does not occur free\footnote{a variable occurs free in a formula if it is not quantified over it with either $\forall$ or $\exists$} in $\mathcal{A}$. Further let $\mathcal{X}_{2}$ denote the formula
+\begin{align*}
+  \exists
+  a
+  .
+  \forall
+  x
+  .
+  x
+  \in
+  a
+  \Leftrightarrow
+  x
+  \in
+  b
+  \land
+  \mathcal{A}
+\end{align*}
+In our setting $\mathcal{X}_{2}$ is called \textbf{axiom schema of specification}.
+\end{enumerate}
+\item[(3)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is that given two sets we should have a set which contains these two sets as elements.
+\item[$\bullet$]
+For sets $x_{1},x_{2}$ we have a set $\lbrace x_{1},x_{2} \rbrace$.
+\item[$\bullet$]
+Let $\mathcal{X}_{3}$ denote the formula
+\begin{align*}
+  \exists
+  p
+  .
+  x_{1}
+  \in
+  p
+  \land
+  x_{2}
+  \in
+  p
+\end{align*}
+In our setting $\mathcal{X}_{3}$ is called \textbf{axiom of pairing}.
+\end{enumerate}
+\item[(4)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is that given a set we should have a set which contains all the elements of the elements in the given set as elements.
+\item[$\bullet$]
+Assume a set $l$ then there is a set
+\begin{align*}
+  u
+  =:
+  \bigcup_{s \in l}
+  \lbrace
+    x
+    \in
+    s
+  \rbrace
+\end{align*}
+such that if $x$ is element of a member $s \in l$ then it is also element of $u$.
+\item[$\bullet$]
+Let $\mathcal{X}_{4}$ denote the formula
+\begin{align*}
+  \exists
+  u
+  .
+  \forall
+  x
+  .
+  \left(
+    \exists
+    s
+    .
+    x
+    \in
+    s
+    \land
+    s
+    \in
+    l
+  \right)
+  \Rightarrow
+  x
+  \in
+  u
+\end{align*}
+In our setting $\mathcal{X}_{4}$ is called \textbf{axiom of union}.
+\end{enumerate}
+\item[(5)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is that given a set we should have a set which contains all the subsets of the given one as elements.
+\item[$\bullet$]
+For a set $s$ there is a set $p =: \mathfrak{P}(s)$ such that if $a$ is a subset of $s$ then it is element of $p$.
+\item[$\bullet$]
+  Let $\mathcal{X}_{5}$ denote the formula
+\begin{align*}
+  \exists
+  p
+  .
+  \forall
+  a
+  .
+  \left(
+    \forall
+    x
+    .
+    x
+    \in
+    a
+    \Rightarrow
+    x
+    \in
+    s
+  \right)
+  \Rightarrow
+  a
+  \in
+  p
+\end{align*}
+In our setting $\mathcal{X}_{5}$ is called \textbf{axiom of power set}.
+\end{enumerate}
+\item[(6)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is to {\glqq}localize{\grqq} an induction principle into the set theory. This will implant a set of all natural numbers an hence in particular an infinite set. So we want to assert the existence of a set containing an element where the induction can start which is chosen to be the empty set - that is, the set such that any other set is not an element of it - and, by the induction principle: if given any element of this set there shall exist an element of this set containing exactly the given element and the elements of the given element. The so formed set does particularly contain a subset which behaves like the natural numbers. Namely the set with elements the empty set, the set with elements only the empty set, the set with elements only the empty set and the set with elements only the empty set, ... and so on. This can be understood as an encoding of 0,1,2,... and so on.
+\item[$\bullet$]
+There is a set $o$ which contains the emptyset $\emptyset$ and for each $i \in o$ we also have $i \cup \lbrace i \rbrace \in o$.
+\item[$\bullet$]
+Let $\mathcal{X}_{6}^{\textrm{a}}$ denote the formula
+\begin{align*}
+  \exists
+  i
+  .
+  i
+  \in
+  o
+  \land
+  \forall
+  x
+  .
+  \neg
+  x
+  \in
+  i
+\end{align*}
+and let $\mathcal{X}_{6}^{\textrm{b}}$ denote the formula
+\begin{align*}
+  \forall
+  i
+  .
+  i
+  \in
+  o
+  \Rightarrow
+  \exists
+  u
+  .
+  u
+  \in
+  o
+  \land
+  \forall
+  x
+  .
+  x
+  \in
+  u
+  \Leftrightarrow
+  x
+  \in
+  i
+  \lor
+  x
+  =
+  i
+\end{align*}
+Let further $\mathcal{X}_{6}$ denote the formula
+\begin{align*}
+  \exists
+  o
+  .
+  (\mathcal{X}_{6}^{\textrm{a}})
+  \land
+  (\mathcal{X}_{6}^{\textrm{b}})
+\end{align*}
+In our setting $\mathcal{X}_{6}$ is called \textbf{axiom of infinity}.
+\end{enumerate}
+\item[(7)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is that if some given set contains an element then it contains an element whose elements are all not elements of the given set. This ensures that sets are essentially well-founded trees and do in particular not contain themselves as element. In this context, note that $c \in p$ can be read as $c$ is a child of $p$.
+\item[$\bullet$]
+$a \neq \emptyset$ implies an $x$ in $a$ such that $x \cap a = \emptyset$.
+\item[$\bullet$]
+Let $\mathcal{X}_{7}$ denote the formula
+\begin{align*}
+  \left(
+    \exists
+    x
+    .
+    x
+    \in
+    a
+  \right)
+  \Rightarrow
+  \exists
+  x
+  .
+  x
+  \in
+  a
+  \land
+  \forall
+  y
+  .
+  y
+  \in
+  x
+  \Rightarrow
+  \neg
+  y
+  \in
+  a
+\end{align*}
+In our setting $\mathcal{X}_{7}$ is called \textbf{axiom of regularity}.
+\end{enumerate}
+\item[(8)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is that a formula can serve as a mapping with domain a ll the sets under certain conditions and that, at least, when the mapping is restricted to a set its image must be so, too.
+\item[$\bullet$]
+Assume a formula $\mathcal{A}$. If for each element $x$ of a set $d$ there is precisely one set $p$ for which $\mathcal{A}$ is true then there is a set $i$ such that any element of $d$ implies an element of $i$ for which $\mathcal{A}$ is true.
+\item[$\bullet$]
+Let $\mathcal{A}$ be a formula such that $i$ is not free in $\mathcal{A}$. Then let $\mathcal{X}_{8}$ denote the formula
+\begin{align*}
+  \left(
+    \forall
+    x
+    .
+    x
+    \in
+    d
+    \Rightarrow
+    \exists!
+    p
+    .
+    \mathcal{A}
+  \right)
+  \Rightarrow
+  \exists
+  i
+  .
+  \forall
+  x
+  .
+  x
+  \in
+  d
+  \Rightarrow
+  \exists
+  p
+  .
+  p
+  \in
+  i
+  \land
+  \mathcal{A}
+\end{align*}
+In our setting $\mathcal{X}_{8}$ is called \textbf{axiom schema of replacement}.
+\end{enumerate}
+\item[(9)]
+\begin{enumerate}
+\item[$\bullet$]
+The idea is that if given a set of non-empty sets we should be able to choose precisely one element of each non-empty set in this collection to build a new set. While this seems intuitive at first glance since it holds in the finite case it is a bit magic: we can choose things but we do in general not know what we chose. Some consider this a bit unsatisfying on the philosophical level.
+\item[$\bullet$]
+Assume a set $l$. There is a set $c$ with the property that if we have a non-empty element $s$ of $l$ then there exist sets\footnote{we do not know which in general} $p \in s$ and $t = \lbrace s,p \rbrace$ such that $c$ is made up by all these $t$.
+\item[$\bullet$]
+Let $\tilde{\mathcal{X}}_{9}$ denote the formula
+\begin{align*}
+  \exists
+  p
+  .
+  \forall
+  x
+  .
+  \left(
+    \exists
+    t
+    .
+    \left(
+      x
+      \in
+      s
+      \land
+      s
+      \in
+      t
+    \right)
+    \land
+    \left(
+      x
+      \in
+      t
+      \land
+      t
+      \in
+      c
+    \right)
+  \right)
+  \Leftrightarrow
+  x
+  =
+  p
+\end{align*}
+Let further $\mathcal{X}_{9}$ denote the formula
+\begin{align*}
+  \exists
+  c
+  .
+  \forall
+  e
+  .
+  \forall
+  s
+  .
+  e
+  \in
+  s
+  \land
+  s
+  \in
+  l
+  \Rightarrow
+  \tilde{\mathcal{X}}_{9}
+\end{align*}
+In our setting $\mathcal{X}_{9}$ is called \textbf{axiom of choice}.
+\end{enumerate}
+\end{enumerate}
+After having established ZFC let us turn to Grothendieck universes. For a Grothendieck universe to be sufficient to do some mathemathics it should as a set have the following features:
+\begin{enumerate}
+\item[(1)]
+for an element of the universe each element of this element should be member of the universe
+\item[(2)]
+we should have an axiom of pairing inside the universe
+\item[(3)]
+we should have an axiom of union inside the universe
+\item[(4)]
+we should have an axiom of power set inside the universe
+\end{enumerate}
+So in semi-formal english: a set $\mathcal{U}$ is called \textbf{(Grothendieck) universe} if
+\begin{enumerate}
+\item[(GU1)]
+$s \in \mathcal{U}$ and $x \in s$ implies $x \in \mathcal{U}$
+\item[(GU2)]
+$x_{1} \in \mathcal{U}$ and $x_{2} \in \mathcal{U}$ implies $\lbrace x_{1},x_{2} \rbrace \in \mathcal{U}$
+\item[(GU3)]
+Assume an element $K \in \mathcal{U}$ and for all $k \in K$ an element $x_{k} \in \mathcal{U}$. Then
+\begin{align*}
+  \bigcup_{k \in K}
+  x_{k}
+  &\in
+  \mathcal{U}
+\end{align*}
+\item[(GU4)]
+$x \in \mathcal{U}$ implies that the power set $\mathfrak{P}(x)$ of $x$ is in $\mathcal{U}$
+\end{enumerate}
+Note that a set $x$ which is member of the Grothendieck universe $\mathcal{U}$ is called \textbf{($\mathcal{U}$-)small}. In ZFC the only Grothendieck universe is $\emptyset$. But one could demand
+\begin{enumerate}
+\item[(TG)]
+For every set $x$ there exists a Grothendieck universe $\mathcal{U}$ such that $x \in \mathcal{U}$
+\end{enumerate}
+The (first order) formula expressing (TG) is referred to as \textbf{Tarski's axiom}. ZFC together with Tarski's axiom is TG.

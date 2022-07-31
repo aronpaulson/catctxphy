@@ -1,0 +1,802 @@
+%\nocite{273ba834}
+%\nocite{797789bc}
+In this section we are first and foremost concerned with relating two given categories in some way. Of course, this should mean that we map objects to objects and morphisms to morphisms in a structure preserving way. Since the only structure a category has is an identity and composition the latter is to say that identities are mapped to identities and mapping morphisms to morphisms preserves composition in the sense that it should not matter if we first compose and then map or the other way around. With this in mind we define functors: a set $F$ is \textbf{functor} or \textbf{functorial} if it is a $4$-tuple consisting of a category $\mathbf{C}$, a category $\mathbf{C_{\alpha}}$, a function $F_{\mathrm{ob}} \colon \mathrm{ob}_{\mathbf{C}} \rightarrow \mathrm{ob}_{\mathbf{C}_{\alpha}}$ and a function
+\begin{align*}
+  F_{\mathrm{mor}}
+  &\colon
+  \mathrm{ob}_{\mathbf{C}}
+  \times
+  \mathrm{ob}_{\mathbf{C}}
+  \rightarrow
+  \bigcup_{X_{1},X_{2} \in \mathrm{ob}_{\mathbf{C}}}
+  \left\lbrace
+    f
+    \colon
+    \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+    \rightarrow
+    \mathrm{mor}_{\mathbf{C}_{\alpha}}
+    (F_{\mathrm{ob}}(X_{1}),F_{\mathrm{ob}}(X_{2}))
+  \right\rbrace
+\end{align*}
+which maps $(X_{1},X_{2})$ to a function
+\begin{align*}
+  F_{\mathrm{mor}}(X_{1},X_{2})
+  \colon
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+  \rightarrow
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  (F_{\mathrm{ob}}(X_{1}),F_{\mathrm{ob}}(X_{2}))
+\end{align*}
+such that
+\begin{enumerate}
+\item[(F1)]
+the formula
+\begin{align*}
+  F_{\mathrm{mor}}(X,X)(\mathrm{id}_{X})
+  &=
+  \mathrm{id}_{F_{\mathrm{ob}}(X)}
+\end{align*}
+holds
+\item[(F2)]
+the formula
+\begin{align*}
+  F_{\mathrm{mor}}(X_{1},X_{3})(f_{23} \circ f_{12})
+  &=
+  F_{\mathrm{mor}}(X_{2},X_{3})(f_{23})
+  \circ
+  F_{\mathrm{mor}}(X_{1},X_{2})(f_{12})
+\end{align*}  
+holds
+\end{enumerate}
+Instead of {\glqq}a functor $F := (\mathbf{C},\mathbf{C}_{\alpha},F_{\mathrm{ob}},F_{\mathrm{mor}})${\grqq} we also write {\glqq}a functor $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\alpha}${\grqq}. For a functor $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\alpha}$ we call $\mathbf{C}$ the \textbf{domain (of $F$)} and $\mathbf{C}_{\alpha}$ the \textbf{codomain (of $F$)}. This defines assignments $\mathrm{dom_{F}}$ and $\mathrm{cod_{F}}$ assigning to a functor its domain and codoamin, respectively. $\mathrm{dom_{F}}$ is called \textbf{(functor) domain (assignment)} and $\mathrm{cod_{F}}$ is called \textbf{(functor) codomain (assignment)}. A functor with domain $\mathrm{dom_{F}}(F)$ and codomain $\mathrm{cod_{F}}(F)$ is referred to as functor from $\mathrm{dom_{F}}(F)$ to $\mathrm{cod_{F}}(F)$. In a not so slight abuse of notation we will usually write $F$ for both $F_{\mathrm{ob}}$ and $F_{\mathrm{mor}}(X_{1},X_{2})$, a bit in analogy to the the (C3) trick from remark \ref{rem:c3trick}. However, experience shows that this actually improves both comprehensibility and readabilty. Thus it seems reasonable to adapt this notation in spite of it all. The functor properties then read
+\begin{enumerate}
+\item[(F1)]
+$F(\mathrm{id}_{X}) = \mathrm{id}_{F(X)}$
+\item[(F2)]
+$F(f_{23} \circ f_{12}) = F(f_{23}) \circ F(f_{12})$
+\end{enumerate}
+Essentially, to define a functor one has to say what is assigned to objects and what is assigned to morphisms. So to define a functor $F$ we use a schema similar to functions
+\begin{align*}
+  F
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{C}_{\alpha}
+  \\
+  X
+  &\mapsto
+  F_{\mathrm{ob}}(X)
+  \\
+  f_{12}
+  &\mapsto
+  F_{\mathrm{mor}}(X_{1},X_{2})(f_{12})
+\end{align*}
+or more sketchy
+\begin{align*}
+  X
+  &\mapsto
+  F_{\mathrm{ob}}(X)
+  \\
+  f_{12}
+  &\mapsto
+  F_{\mathrm{mor}}(X_{1},X_{2})(f_{12})
+\end{align*}
+if the domain and codomain are clear. A rather important functor is the functor $\mathrm{id}_{\mathbf{C}} \colon \mathbf{C} \rightarrow \mathbf{C}$ that assigns to any object and morphism the same again. $\mathrm{id}_{\mathbf{C}}$ is called \textbf{identity (of $\mathbf{C}$)}. In general, functors have the nice property that they can be composed in a sensible way. Sensible in the sense that the composition is induced by function composition $\circ^{1} := \circ$. So in accordance to functions let us define an assignment $\circ^{2}$ by assigning to a pair of functors $(F_{\alpha\beta},F_{\beta\gamma})$ such that
+\begin{align*}
+  \mathrm{cod}(F_{\alpha\beta})
+  &=
+  \mathrm{dom}(F_{\beta\gamma})
+\end{align*}
+a functor
+\begin{align*}
+  \circ^{2}(F_{\alpha\beta},F_{\beta\gamma})
+  \colon
+  \mathbf{C}_{\alpha}
+  &\rightarrow
+  \mathbf{C}_{\gamma}
+  \\
+  X^{\alpha}
+  &\mapsto
+  F_{\beta\gamma}(F_{\alpha\beta}(X^{\alpha}))
+  \\
+  f_{12}^{\alpha}
+  &\mapsto
+  F_{\beta\gamma}(F_{\alpha\beta}(f_{12}^{\alpha}))
+\end{align*}
+It is easy to see that this is a functor by going through the definition of a functor. The assignment $\circ^{2}$ is called \textbf{(functor) composition} while $\circ^{2}(F_{\alpha\beta},F_{\beta\gamma})$ is called the \textbf{composition of $F_{\alpha\beta}$ and $F_{\beta\gamma}$} or \textbf{$F_{\beta\gamma}$ composed with $F_{\alpha\beta}$}. The latter terminology suggests to write $F_{\beta\gamma} \circ^{2} F_{\alpha\beta}$ for $\circ^{2}(F_{\alpha\beta},F_{\beta\gamma})$. Experience shows that it is safe to denote $\circ^{2}$ just as $\circ$ as in the case of functions. Functor composition clearly satisfies
+\begin{align*}
+  \left(
+    F_{\gamma\delta}
+    \circ
+    F_{\beta\gamma}
+  \right)
+  \circ
+  F_{\alpha\beta}
+  &=
+  F_{\gamma\delta}
+  \circ
+  \left(
+    F_{\beta\gamma}
+    \circ
+    F_{\alpha\beta}
+  \right)
+\end{align*}
+as a consequence of the associativity of function composition. Further, composing an arbitrary functor $F_{\alpha\beta}$ with the identity of $\mathbf{C}_{\alpha}$ and $\mathbf{C}_{\beta}$, respectively, trivially satisfies
+\begin{align*}
+  F_{\alpha\beta}
+  \circ
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+  &=
+  F_{\alpha\beta}
+  =
+  \mathrm{id}_{\mathbf{C}_{\beta}}
+  \circ
+  F_{\alpha\beta}
+\end{align*}
+as one would expect from an identity. After these properties one might wonder if there is a category with objects categories and morphisms functors between them? Before answering this question let's slide in a quick example. Since functors resemble\footnote{we seize that idea again in subsection \ref{sec:hls}} functions there are some apparent candidates for functors.
+\\
+\begin{exa}
+\label{exa:basicsfuncs1}
+Similar to functions, the most basic kinds of functors besides the identity should be the constant one, the inclusion and the restriction functor
+\begin{enumerate}
+\item[(a)]
+We start with constant functors. A functor $\mathrm{C}_{X^{\alpha}} \colon \mathbf{C} \rightarrow \mathbf{C}_{\alpha}$ is \textbf{constant (on $\mathbf{C}$ with target $X^{\alpha}$)} if for all $X$ the equation $X^{\alpha} = \mathrm{C}_{X^{\alpha}}(X)$ holds and if for all $X_{1},X_{2}$ and all $f_{12}$ the equation $\mathrm{id}_{X^{\alpha}} = \mathrm{C}_{X^{\alpha}}(f_{12})$ holds. $\mathrm{c}_{X^{\alpha}}$ will denote the special case of the constant functor on $\mathbf{1}_{X^{\alpha}}$ with target $X^{\alpha}$.
+\item[(b)]
+A subcategory $\mathbf{S}$ of $\mathbf{C}$ can be included in a functorial way. Formally, the functor is just
+\begin{align*}
+  \mathrm{I}
+  &:=
+  \left(
+    \mathcal{S},
+    \mathcal{C},
+    \mathrm{i}_{\mathrm{ob}},
+    \mathrm{i}_{\mathrm{mor}},
+  \right)
+\end{align*}
+with
+\begin{align*}
+  \mathrm{i}_{\mathrm{ob}}
+  &\colon
+  \mathrm{ob}_{\mathbf{S}}
+  \rightarrow
+  \mathrm{ob}_{\mathbf{C}}
+  \\
+  \mathrm{i}_{\mathrm{mor}}(X_{1},X_{2})
+  &\colon
+  \mathrm{mor}_{\mathbf{S}}(X_{1},X_{2})
+  \rightarrow
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+\end{align*}
+each the appropriate inclusion function. $\mathrm{I}$ is called the \textbf{inclusion (of $\mathbf{S}$ in $\mathbf{C}$)}.
+\item[(c)]
+A functor $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\alpha}$ can be restricted to a subcategory $\mathbf{S}$ of $\mathbf{C}$ by restricting $F_{\mathrm{ob}}$ to $\mathrm{ob}_{\mathbf{S}}$ while restricting $F_{\mathrm{mor}}$ to $\mathrm{ob}_{\mathbf{S}} \times \mathrm{ob}_{\mathbf{S}}$ and $F_{\mathrm{mor}}(X_{1},X_{2})$ to $\mathrm{mor}_{\mathbf{S}}(X_{1},X_{2})$. Of course, the domain has to be adjusted to $\mathbf{S}$. The resulting functor is denoted $F \vert \mathbf{S}$ and is called the \textbf{restriction of $F$ (to $\mathbf{S}$)}.
+\end{enumerate}
+\end{exa}
+\begin{prf}
+This is a straightforward exercise to learn how to deal with the notion of functors.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Now is there a category of categories? In TG, this is paradox due to size issues and as usual is solved by restriction to a Grothendieck universe. The result is the (locally small) category $\mathbf{Cat}$ with objects the set of all small categories and morphism function defined by $\mathrm{mor}_{\mathbf{Cat}}(\mathbf{C}_{\alpha},\mathbf{C}_{\beta})$ as all the functors from $\mathbf{C}_{\alpha}$ to $\mathbf{C}_{\beta}$ where these categories are assumed small, of course. Composition is given by
+\begin{align*}
+  \circ_{\mathbf{Cat}}
+  (\mathbf{C}_{\alpha},\mathbf{C}_{\beta},\mathbf{C}_{\gamma})
+  (F_{\alpha\beta},F_{\beta\gamma})
+  &:=
+  F_{\beta\gamma}
+  \circ
+  F_{\alpha\beta}
+\end{align*}
+for $\mathbf{C}_{\alpha},\mathbf{C}_{\beta},\mathbf{C}_{\gamma}$ small. What needs a little proof is that $\mathrm{mor}_{\mathbf{Cat}}(\mathbf{C}_{\alpha},\mathbf{C}_{\beta})$ is a small set. This becomes clear from the observation that for a functor $F \colon \mathbf{C}_{\alpha} \rightarrow \mathbf{C}_{\beta}$ we have
+\begin{align*}
+  F_{\mathrm{ob}}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}
+  (\mathrm{ob}_{\mathbf{C}_{\alpha}},\mathrm{ob}_{\mathbf{C}_{\beta}})
+  \\
+  F_{\mathrm{mor}}(X_{1}^{\alpha},X_{2}^{\alpha})
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}
+  \left(
+    \mathrm{mor}_{\mathbf{C}_{\alpha}}(X_{1}^{\alpha},X_{2}^{\alpha}),
+    \mathrm{mor}_{\mathbf{C}_{\beta}}
+    (F_{\mathrm{ob}}(X_{1}^{\alpha}),F_{\mathrm{ob}}(X_{2}^{\alpha}))
+  \right)
+\end{align*}
+$\mathbf{Cat}$ is called the \textbf{category of (small) categories}. In $\mathbf{Cat}$ it is clear what the inverse of a functor is. And the idea can be extended to arbitrary functors between not necessarily small categories. So going back to the general case, a functor $F_{\alpha\beta}$ is said to have an \textbf{inverse $F_{\beta\alpha}$} if
+\begin{align*}
+  F_{\beta\alpha}
+  \circ
+  F_{\alpha\beta}
+  &=
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+  \\
+  F_{\alpha\beta}
+  \circ
+  F_{\beta\alpha}
+  &=
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+\end{align*}
+And for an inverse $F_{\beta\alpha}$ of $F_{\alpha\beta}$ we write $F_{\alpha\beta}^{-1}$ following the morphism case. Further, $F_{\alpha\beta}$ is then called an \textbf{isomorphism (of categories from $\mathbf{C}_{\alpha}$ to $\mathbf{C}_{\beta}$)} and the two categories $\mathbf{C}_{\alpha}$, $\mathbf{C}_{\beta}$ are said to be \textbf{isomorphic} and we may write
+\begin{align*}
+  \mathbf{C}_{\alpha}
+  &\cong
+  \mathbf{C}_{\beta}
+\end{align*}
+In TG for all pairs of categories $(\mathbf{C}_{\alpha},\mathbf{C}_{\beta})$ one can find a Grothendieck universe in which they are small and consider $\mathbf{Cat}$ w.r.t. this Grothendieck universe to define equivalently what isomorphism shall mean. Here is a good point to continue example \ref{exa:algstruct1} about algebraic structures
+\\
+\begin{exa}
+\label{exa:algstruct2}
+Given monoids $M_{1},M_{2} \in \mathrm{ob}_{\mathbf{Mon}}$, a morphism $(M_{1},M_{2},\phi) \in \mathrm{mor}_{\mathbf{Mon}}(M_{1},M_{2})$ is in its essence nothing but a functor $F \colon \mathbf{B}M_{1} \rightarrow \mathbf{B}M_{2}$ and vice versa via
+\begin{align*}
+  \phi
+  &=
+  F_{\mathrm{mor}}
+\end{align*}
+Since we have only one object categories there is only one possibility for functors on objects. The rest of the proof is a technicality. The same reasoning applies to groups by noting that for a morphism $\phi$ in $\mathbf{Grp}$ one actually does not have to demand
+\begin{align*}
+  \phi
+  \circ
+  \mathrm{inv}
+  &=
+  \mathrm{inv}
+  \circ
+  \phi
+\end{align*}
+This is automatic from the other properties of groups. As a full subcategory of $\mathbf{Cat}$ we can define a category $\mathbf{Mon}_{\mathrm{F}}$ with objects all $\mathbf{B}M$ for $M \in \mathrm{ob}_{\mathbf{Mon}}$ and morphisms all functors $F \colon \mathbf{B}M_{1} \rightarrow \mathbf{B}M_{2}$ for $M_{1},M_{2} \in \mathrm{ob}_{\mathbf{Mon}}$. We further get a full subcategory of $\mathbf{Mon}_{\mathrm{F}}$ by shrinking the object set to consist of categories which correspond to groups. Let us denote this category $\mathbf{Grp}_{\mathrm{F}}$. What is missing to make the example complete is the understanding in how far $\mathbf{Mon}$ is sufficiently the same as $\mathbf{Mon}_{\mathrm{F}}$ and accordingly for $\mathbf{Grp}$. And it is not hard to see that these categories are isomorphic (w.r.t. to some larger universe). This is rather a technicality since we have already seen that we have a bijection on objects and a bijection on morphisms.
+\\
+Also note that given types $\mathfrak{t}_{1} \colon Y_{1} \rightarrow \mathbb{N}$ and $\mathfrak{t}_{2} \colon Y_{2} \rightarrow \mathbb{N}$ and a bijection $b \colon Y_{1} \rightarrow Y_{2}$ such that
+\begin{align*}
+  \mathfrak{t}_{1}
+  &=
+  \mathfrak{t}_{2}
+  \circ
+  b
+\end{align*}
+then
+\begin{align*}
+  \mathbf{AS}_{\mathfrak{t}_{1}}
+  &\cong
+  \mathbf{AS}_{\mathfrak{t}_{2}}
+\end{align*}
+This means that the type of an algebraic structure is structurally only interesting up to isomorphims.
+\end{exa}
+\begin{prf}
+The idea must suffice. The technicalities can be seen as an exercise.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Another example we shall have a use for is about topology.
+\\
+\begin{exa}
+\label{exa:topology}
+The idea of a topology is to define a notion of which elements of a set are near each other. This is nicely outlined in the first chapter of \cite{797789bc}. But we also want to emphasize at this point that we think this fails a bit. We will later in this example explain why. On the other hand we do not dig very deep but rather write down the parts of point-set topology we need. So given a set $Y$ a subset $\mathfrak{T}_{Y} \subset \mathfrak{P}(Y)$ is a \textbf{topology (on $Y$)} if
+\begin{enumerate}
+\item[(T1)]
+the empty set $\emptyset$ and $Y$ itself are element of $\mathfrak{T}_{Y}$
+\item[(T2)]
+each union of elements of $\mathfrak{T}_{Y}$ is element of $\mathfrak{T}_{Y}$
+\item[(T3)]
+each finite intersection of elements of $\mathfrak{T}_{Y}$ is element of $\mathfrak{T}_{Y}$
+\end{enumerate}
+A set $Y$ together with a topology $\mathfrak{T}_{Y}$ on $Y$ is called \textbf{(topological) space} and given a topological space
+\begin{align*}
+  Y
+  &\doteq
+  (Y,\mathfrak{T}_{Y})
+\end{align*}
+elements of $Y$ are called \textbf{points (of $Y$)} while elements of $\mathfrak{T}_{Y}$ are called \textbf{open (sets of $Y$)}. The topology of a topological space is often let implicit and one only writes the set on which the topology is defined. We will do so, too. After the definition let us discuss why we think that topological spaces in general fail to fully describe nearness:
+\begin{enumerate}
+\item[$\bullet$]
+In a general space $Y$ it can happen that for distinct points $y_{1},y_{2} \in Y$ - that is, $y_{1} \neq y_{2}$ - there is no $U_{1} \in \mathfrak{T}_{Y}$ such that $y_{1} \in U_{1}$ and $y_{2} \notin U_{1}$ but there is $U_{2} \in \mathfrak{T}_{Y}$ such that $y_{2} \in U_{2}$ and $y_{1} \notin U_{2}$. This asymmetry suggests that $y_{2}$ is arbitrarily near to $y_{1}$ but $y_{1}$ is not arbitrarily near to $y_{2}$. This is odd for a good notion of nearness.
+\end{enumerate}
+In applications such oddities are often excluded. For example, in classical homotopy theory one rarely works with with non Fr\'e{ch}et spaces (separation axiom $\textrm{T}_{1}$) since some things just don't work for these. And this is perhaps due to the oddities of this notion of nearness
+\\
+Topological spaces seem to be excellent as objects of a category. But what shall we take as morphism? It seems reasonable to take a function which preserves the topology somehow. There are two possibilities for such functions when given topological spaces $(Y_{1},\mathfrak{T}_{Y_{1}})$, $(Y_{2},\mathfrak{T}_{Y_{2}})$:
+\begin{enumerate}
+\item[(1)]
+geometric way: a function $f \colon Y_{1} \rightarrow Y_{2}$ is \textbf{continuous (function from $(Y_{1},\mathfrak{T}_{Y_{1}})$ to $(Y_{2},\mathfrak{T}_{Y_{2}})$)} if for all $y_{1} \in Y_{1}$ and all $V_{2} \in \mathfrak{T}(Y_{2})$ with $f(y_{1}) \in V_{2}$ there is $V_{1} \in \mathfrak{T}(Y_{1})$ with $y_{1} \in V_{1}$ such that $f(V_{1}) \subset V_{2}$. This generalizes the idea that a function is continuous if we can draw it in one stroke. While this seems the correct notion of continuity it can only be as good as the notion of nearness we use. And as we have argued, the topological spaces are not perfect for that purpose and we expect a broken continuity notion in some cases.
+\item[(2)]
+algebraic way: a function $f \colon Y_{1} \rightarrow Y_{2}$ is \textbf{continuous (function from $(Y_{1},\mathfrak{T}_{Y_{1}})$ to $(Y_{2},\mathfrak{T}_{Y_{2}})$)} if $f^{-1}$ maps $\mathfrak{T}_{Y_{2}}$ into $\mathfrak{T}_{Y_{1}}$, that is, the preimage under $f$ of an open set is always open. The definition is motivated by lattices\footnote{a lattice is a certain poset category that shall not concern us here} since topologies are lattices and continuous functions defined so are precisely the lattice preserving functions. This is the idea picked up in \cite{797789bc}.
+\end{enumerate}
+Both definitions of continuous function can be shown to be equivalent. Now we have all in place to define a new category: the category $\mathbf{Top}$ with objects topological spaces (up to size issues) and morphisms all continuous functions composed by composition (using the (C3) trick). This works since composing continuous functions yields a continuous function. $\mathbf{Top}$ is called the \textbf{category of (small) topological spaces}. In the following we list some notions around topological spaces we will need.
+\begin{enumerate}
+\item[$\bullet$]
+Now for a space $(Y,\mathfrak{T}_{Y})$ and a subset $S \subset Y$ the topological space $(S,\mathfrak{T}_{Y} \vert S)$ with
+\begin{align*}
+  \mathfrak{T}_{Y} \vert S
+  :=
+  \lbrace
+      V
+      \in
+      \mathfrak{P}(S)
+    \,
+    \vert
+    \,
+      V
+      =
+      S
+      \cap
+      U
+      \text{ for }
+      U
+      \in
+      \mathfrak{T}_{Y}
+  \rbrace
+\end{align*}
+is called a \textbf{subspace (of $(Y,\mathfrak{T}_{Y})$)}.
+\item[$\bullet$]
+There is a bunch of subcategories of $\mathbf{Top}$ that concerns us later. Namely there is a category
+\begin{align*}
+  \mathbf{Open}_{Y}
+  &\doteq
+  \mathbf{Open}_{(Y,\mathfrak{T}_{Y})}
+\end{align*}
+with object set just the topology $\mathfrak{T}_{Y}$ and morphisms only the continuous inclusions. $\mathbf{Open}_{(Y,\mathfrak{T}_{Y})}$ is called the \textbf{category of open sets (of $(Y,\mathfrak{T}_{Y})$)}. It will be convenient make some notational agreements on the morphisms of this category. For objects
+\begin{align*}
+  U,
+  U_{1},
+  U_{2}
+  &\in
+  \mathrm{ob}_{\mathbf{Open}_{Y}}
+\end{align*}
+with $U_{1} \subset U_{2}$ the unique morphism of
+\begin{align*}
+  \mathrm{mor}_{\mathbf{Open}_{Y}}(U_{1},U_{2})
+\end{align*}
+will be denoted
+\begin{align*}
+  \mathrm{i}(U_{1},U_{2})
+  &\doteq
+  \mathrm{i}^{Y}(U_{1},U_{2})
+\end{align*}
+or more specifically
+\begin{align*}
+  \mathrm{i}_{U}
+  &\doteq
+  \mathrm{i}_{U}^{Y}
+  \doteq
+  \mathrm{i}^{Y}(U,Y)
+\end{align*}
+Most often when needed we will even more simplify this notation context dependently.
+\item[$\bullet$]
+We need the notion of a cover of a space and this is what one would guess: a bunch of subsets of a space whose union contains the space. Formally, given a topological space $Y$, a subset $\mathfrak{D}$ of $\mathfrak{P}(Y)$ is a \textbf{cover (of $Y$)} if
+\begin{align*}
+  Y
+  \subset
+  \bigcup
+  \mathcal{D}
+\end{align*}
+while a cover $\mathfrak{D}$ of $(Y,\mathfrak{T}_{Y})$ is called \textbf{open} if $\mathfrak{D} \subset \mathfrak{T}_{Y}$. Open covers are useful to treat a space locally. This is often necessary in topology and algebraic topology. Therefore it will be convenient to have some more terminology around this conception. An injective function
+\begin{align*}
+  \mathrm{cov}_{Y}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}
+  \left(
+    K,
+    \mathrm{ob}_{\mathbf{Open}_{Y}}
+  \right)
+\end{align*}
+is called \textbf{open cover generator (of $Y$)} if
+\begin{align*}
+  Y
+  \subset
+  \bigcup_{k \in K}
+  \mathrm{cov}_{Y}(k)
+\end{align*}
+On the other hand an open cover $\mathfrak{D}$ of $Y$ gives rise to an open cover generator in a canonical way by self-indexing
+\begin{align*}
+  \mathrm{cov}_{\mathfrak{D}}
+  \doteq
+  \mathrm{cov}_{Y}[\mathfrak{D}]
+  \colon
+  \mathfrak{D}
+  &\rightarrow
+  \mathrm{ob}_{\mathbf{Open}_{Y}}
+  \\
+  U
+  &\mapsto
+  U
+\end{align*}
+We usually abbreviate notation according to
+\begin{align*}
+  U_{k}
+  \doteq
+  U_{k}^{Y}
+  &\doteq
+  \mathrm{cov}_{Y}(k)
+\end{align*}
+for all $k \in K$ for an open cover generator $\mathrm{cov}_{Y}$. Moreover let us agree that for $a \in \mathbb{G}$ and a space $Y$ the function
+\begin{align*}
+  \mathrm{cov}_{Y}^{a}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}
+  \left(
+    K_{a},
+    \mathrm{ob}_{\mathbf{Open}_{Y}}
+  \right)
+\end{align*}
+shall denote an open cover generator of $Y$ while
+\begin{align*}
+  U_{k^{a}}
+  \doteq
+  U_{k^{a}}^{Y}
+  &\doteq
+  \mathrm{cov}_{Y}^{a}(k^{a})
+\end{align*}
+for all $k^{a} \in K_{a}$. Now $\mathrm{cov}_{Y}$ gives rise to a full subcategory $\mathbf{Open}_{Y}^{\mathrm{cov}_{Y}}$ of $\mathbf{Open}_{Y}$ by restricting the object set to
+\begin{align*}
+  \mathrm{ob}_{\mathbf{Open}_{Y}^{\mathrm{cov}_{Y}}}
+  &:=
+  \left\lbrace
+      U
+      \in
+      \mathrm{ob}_{\mathbf{Open}_{Y}}
+    \,
+    \vert
+    \,
+      \exists
+      k
+      \in
+      K
+      \text{ such that }
+      U
+      =
+      \mathrm{cov}_{Y}(k)
+  \right\rbrace
+\end{align*}
+Open covers can be ordered. To this end we call $\mathrm{cov}_{Y}^{\alpha}$ \textbf{refinement of $\mathrm{cov}_{Y}$} if for all $k^{\alpha} \in K_{\alpha}$ there is $k \in K$ such that
+\begin{align*}
+  \mathrm{cov}_{Y}^{\alpha}
+  \left(
+    k^{\alpha}
+  \right)
+  \subset
+  \mathrm{cov}_{Y}(k)
+\end{align*}
+Refinement preorders the set
+\begin{align*}
+  \mathrm{Cov}_{Y}
+  &:=
+  \left\lbrace
+      \mathbf{Open}_{Y}^{\mathrm{cov}_{Y}}
+    \,
+    \vert
+    \,
+      \mathrm{cov}_{Y}
+      \text{ is an open cover generator of }
+      Y
+  \right\rbrace
+\end{align*}
+by
+\begin{align*}
+  \mathrm{cov}_{Y}^{\alpha}
+  \leq_{\mathrm{Cov}_{Y}}
+  \mathrm{cov}_{Y}
+  \qquad
+  &:\Leftrightarrow
+  \qquad
+  \mathrm{cov}_{Y}^{\alpha}
+  \text{ is a refinement of }
+  \mathrm{cov}_{Y}
+\end{align*}
+One can even show that
+\begin{align*}
+  \left(
+    \mathrm{Cov}_{Y},
+    \leq_{\mathrm{Cov}_{Y}}
+  \right)
+\end{align*}
+is a directed set. See \cite{273ba834} for these particular facts.
+\item[$\bullet$]
+Note that for a set $Y$ any subset $\mathfrak{S}_{Y} \subset \mathfrak{P}(Y)$ gives rise to a topology. To this end let us briefly say what we understand by basis and subbasis of a topology. For a space $(Y,\mathfrak{T}_{Y})$ a subset $\mathfrak{B}_{Y} \subset \mathfrak{T}_{Y}$ is called \textbf{basis (for $\mathfrak{T}_{Y}$)} if any $U \in \mathfrak{T}_{Y}$ is the union of elements of $\mathfrak{B}_{Y}$ while a subset $\mathfrak{S}_{Y} \subset \mathfrak{T}_{Y}$ is called \textbf{subbasis (for $\mathfrak{T}_{Y}$)} if all the finite intersections of elements of $\mathfrak{S}_{Y}$ is a basis for $\mathfrak{T}_{Y}$. Note the convention we obey that the empty intersection is by definition the whole space while the empty union is the emptyset. So any subset $\mathfrak{S}_{Y} \subset \mathfrak{P}(Y)$ yields a unique topology on $Y$ by essentially taking finite intersections and then arbitrary unions. For more information around this see \cite{273ba834}. Note that taking the preimage of a function $f \colon Y_{1} \rightarrow Y_{2}$ preserves finite intersections and arbitrary unions in the sense
+\begin{align*}
+  f^{-1}
+  \left(
+    \bigcap_{k \in \mathbb{N}_{n}}
+    U_{k}
+  \right)
+  &=
+  \bigcap_{k \in \mathbb{N}_{n}}
+  f^{-1}(U_{k})
+  \\
+  f^{-1}
+  \left(
+    \bigcup_{k \in K}
+    U_{k}
+  \right)
+  &=
+  \bigcup_{k \in K}
+  f^{-1}(U_{k})
+\end{align*}
+Hence it suffices to check continuity of $f$ on a subbasis of $Y_{2}$.
+\item[$\bullet$]
+Assume topologies $\mathfrak{T}_{1},\mathfrak{T}_{2}$ on $Y$. We call $\mathfrak{T}_{1}$ \textbf{coarser} than $\mathfrak{T}_{2}$ or equivalently $\mathfrak{T}_{2}$ \textbf{finer} than $\mathfrak{T}_{1}$ if 
+\begin{align*}
+  \mathfrak{T}_{1}
+  &\subset
+  \mathfrak{T}_{2}
+\end{align*}
+In particular,
+\begin{align*}
+  \mathrm{id}_{Y}
+  &\in
+  \mathrm{mor}_{\mathbf{Top}}
+  \left(
+    (Y,\mathfrak{T}_{1}),
+    (Y,\mathfrak{T}_{2})
+  \right)
+\end{align*}
+is continuous if and only if $\mathfrak{T}_{2}$ is coarser than $\mathfrak{T}_{1}$.
+\item[$\bullet$]
+Let us look at two common sorts of topology on a set $Y$ which frequently occur. The initial and terminal topology. To this end fix a set $Y$ and a family of spaces
+\begin{align*}
+  s
+  \colon
+  K
+  &\rightarrow
+  \mathrm{ob}_{\mathbf{Top}}
+\end{align*}
+of spaces.
+\\
+Given functions
+\begin{align*}
+  f_{k}
+  \colon
+  Y
+  &\rightarrow
+  s(k)
+\end{align*}
+for all $k \in K$ we call the topology on $Y$ with subbasis the set made up by all the $f_{k}^{-1}(U)$ with $U$ open in $s(k)$ the \textbf{initial topology (on $Y$ w.r.t. $k \mapsto f_{k}$)}. This is the coarsest topology on $Y$ such that all $f_{k}$ are continuous.
+\\
+On the other hand, given functions
+\begin{align*}
+  f_{k}
+  \colon
+  s(k)
+  &\rightarrow
+  Y
+\end{align*}
+for all $k \in K$ we call the topology on $Y$ such that $U \subset Y$ is open if and only if $f_{k}^{-1}(U)$ is open in $s(k)$ for all $k \in K$ the \textbf{terimnal topology (on $Y$ w.r.t. $k \mapsto f_{k}$)}. This is the finest topology on $Y$ such that all $f_{k}$ are continuous.
+\item[$\bullet$]
+What is also of interest in algebraic topology is to equip a space with a specified fixed base point. This means a space $Y$ together with an element of that space $Y$. So let us call a $3$-tuple
+\begin{align*}
+  (Y,y)
+  &\doteq
+  (Y,\mathfrak{T}_{Y},y)
+\end{align*}
+\textbf{pointed (topological) space} if $(Y,\mathfrak{T}_{Y})$ is a topological space and if further $y \in Y$. If $(Y,y)$ is a pointed space then $y$ is called the \textbf{base-point}. Given pointed spaces $(Y_{1},y_{1})$, $(Y_{2},y_{2})$ a function $f \colon Y_{1} \rightarrow Y_{2}$ is called \textbf{base-point preserving} if $f(y_{1}) = y_{2}$. The corresponding category of $\mathbf{Top}$ is denoted $\mathbf{Top}_{\ast}$ and has objects the pointed spaces and morphisms are the ones from $\mathbf{Top}$ which are base-point preserving. $\mathbf{Top}_{\ast}$ is called the \textbf{category of pointed (small) topological spaces}.
+\end{enumerate}
+By the way, algebraic topology is broadly spoken about functors with domain $\mathbf{Top}$ or $\mathbf{Top}_{\ast}$ and codomain a category derived from an algebraic structure such as $\mathbf{Grp}$ or $\mathbf{Ab}$ being the standard.
+\\
+As a last point, what we give here are only the bare neccesities of topology (let alone algebraic topology) without much intuition. As a warning, do not underestimate that.
+\end{exa}
+\begin{prf}
+Do it yourself. But if you are not familiar with topology then do not hesitate to consult some literature like \cite{273ba834} in the near future to get some familiarity with the subject.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Note that just as $\mathbf{Top}$ is a category of spaces there is also a category of {\glqq}smooth spaces{\grqq}. Namely we could define a category $\mathbf{Diff}_{\infty}$ with objects (small) smooth manifolds and morphisms smooth functions between smooth manifolds. We do not define here what this means but rather refer to \cite{797789bc} for the unsavvy reader. However we will sometimes use $\mathbf{Diff}_{\infty}$ and hence we should give it a name. $\mathbf{Diff}_{\infty}$ is called the \textbf{category of smooth manifolds}.
+\\\\
+Now back to the general theory. Beyond isomorphisms of categories let us describe a weaker notion of being quantitatively the same by defining full and faithful functors. A functor $F_{\alpha\beta}$ is \textbf{full} if for all $X_{1}^{\alpha},X_{2}^{\alpha}$ and all
+\begin{align*}
+  f^{\beta}
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  (F_{\alpha\beta}(X_{1}^{\alpha}),F_{\alpha\beta}(X_{2}^{\alpha}))
+\end{align*}
+there is $f_{12}^{\alpha}$ such that
+\begin{align*}
+  f^{\beta}
+  &=
+  F_{\alpha\beta}(f_{12}^{\alpha})
+\end{align*}
+The composition of full functors is evidently full. A functor $F_{\alpha\beta}$ is \textbf{faithful} if for all $X_{1}^{\alpha},X_{2}^{\alpha}$ and all
+\begin{align*}
+  f^{\alpha},g^{\alpha}
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}(X_{1}^{\alpha},X_{2}^{\alpha})
+\end{align*}
+the implication
+\begin{align*}
+  F_{\alpha\beta}(f^{\alpha})
+  =
+  F_{\alpha\beta}(g^{\alpha})
+  \qquad
+  &\Rightarrow
+  \qquad
+  f^{\alpha}
+  =
+  g^{\alpha}
+\end{align*}
+is true. Again, the composition of faithful functors is evidently faithful. A functor is called \textbf{fully faithful} or equivalently \textbf{embedding} if it is full and faithful. The property full expresses the functor's surjectivity on the morphism sets whereas faithful expresses injectivity on those. Fully faithful then obviously means bijectivity. All this is clear from the definition of the according property. The terminology embedding is particularly interesting. In our context this is just another word for fully faithful functor. Before spoiling too much let us defer the explanation to the end of this subsection where the necessary statement is eventually available. In fact, only then we will be in a position to really explain why fully faithful is a weaker - but in some sense for category theory sufficient - notion of being quantitatively the same. Another particularly interesting case related in spirit to embeddings, at least, are faithful functors $P$ from $\mathbf{C}$ to $\mathbf{Set}$ in which case we speak of a concrete category. So a set is a \textbf{concrete category} if it is a tuple consiting of a category $\mathbf{C}$ and a faithful functor $P \colon \mathbf{C} \rightarrow \mathbf{Set}$. So whenever $(\mathbf{C},P)$ is a concrete category we can interpret the morphisms in $\mathbf{C}$ as functions between sets associated to objects in $\mathbf{C}$. Composition is the standard composition of functions. You should absolutely compare this to the (C3) trick of remark \ref{rem:c3trick}. In the end we have a concrete idea of a potentially quite abstract category. This suggests the notational convention to write for a morphism $f_{12} \colon X_{1} \rightarrow X_{2}$. Further we could informally draw a picture
+\begin{align*}
+  X_{1}
+  \xrightarrow{f_{12}}
+  X_{2}
+\end{align*}
+And consequently for a composition $f_{23} \circ f_{12}$
+\begin{align*}
+  X_{1}
+  \xrightarrow{f_{23} \circ f_{12}}
+  X_{3}
+  \qquad
+  &\text{or equivalently}
+  \qquad
+  X_{1}
+  \xrightarrow{f_{12}}
+  X_{2}
+  \xrightarrow{f_{23}}
+  X_{3}
+\end{align*}
+Hence we can extend the notion of commutative diagrams of functions to morphisms. In category theory, a commutative diagram is understood as a certain functor and visualized in generalization of the above. A functor\footnote{note that some authors say diagram instead of functor} from the poset category of a partially ordered set to an arbitrary category is called \textbf{commutative diagram}. Visualization of a commutative diagram $D \colon \pmb{\leq}_{Y} \rightarrow \mathbf{C}$ is possible if $Y$ contains only, let's say, manageably - particularly finitely - many elements. In fact, most often one is concerned with less then a dozen elements. To visualize a formal commutative diagram $D \colon \pmb{\leq}_{Y} \rightarrow \mathbf{C}$ we provide the following meta-algorithm\footnote{an instruction understandable to a human} to draw a commutative diagram
+\begin{description}
+\item[Step 1]
+Draw a unique symbol for the object $D(y)$ for all $y \in Y$.
+\item[Step 2]
+Let $y_{1},y_{2} \in Y$ such that there is no $y \in Y$ satisfying $y_{1} \leq_{Y} y$ and $y \leq_{Y} y_{2}$. Then draw an arrow labeled by a unique symbol for $D(y_{1},y_{2})$ starting at the symbol drawn for $D(y_{1})$ and ending at the symbol drawn for $D(y_{2})$ if $y_{1} \neq y_{2}$ and $y_{1} \leq_{Y} y_{2}$.
+\end{description}
+By saying that {\glqq}a diagram commutes{\grqq} w.r.t. to the drawing from the steps one and two we mean that two compositions of arrows with the same starting and ending point must be the same. The algorithm is reversible in the sense that a visualization of a commutative diagram is sufficient to reconstruct the commutative diagram formally as a functor on a poset category. As an example we take the set $\mathbb{N}_{4}^{\times} = \lbrace 1,2,3,4 \rbrace$ with the partial order
+\begin{align*}
+  \leq_{\mathbb{N}_{4}^{\times}}
+  &:=
+  \lbrace
+    (1,1),
+    (2,2),
+    (3,3),
+    (4,4),
+    (1,2),
+    (1,3),
+    (2,4),
+    (3,4),
+    (1,4)
+  \rbrace
+\end{align*}
+and the commutative diagram $D \colon \pmb{\leq}_{\mathbb{N}_{4}^{\times}} \rightarrow \mathbf{C}$ to draw
+\[
+\begin{tikzcd}[sep=huge]
+  D(1)
+  &
+  D(2)
+  \\
+  D(3)
+  &
+  D(4)
+\end{tikzcd}
+\qquad
+\rightsquigarrow
+\qquad
+\begin{tikzcd}[sep=huge]
+  D(1)
+  \arrow{r}{D(1,2)}
+  \arrow[swap]{d}{D(1,3)}
+  &
+  D(2)
+  \arrow{d}{D(2,4)}
+  \\
+  D(3)
+  \arrow{r}{D(3,4)}
+  &
+  D(4)
+\end{tikzcd}
+\]
+To say that this drawing commutes means that
+\begin{align*}
+  D(3,4)
+  \circ
+  D(1,3)
+  &=
+  D(2,4)
+  \circ
+  D(1,2)
+\end{align*}
+After this graphical excursion we come back to functors in general. What we have said so far about functors suggests that one can view them as a kind of structure preserving function between categories. For small categories we were able to make this perfectly precise in TG by the category $\mathbf{Cat}$. Anyway, a nice property of functors illustrating this further is given by the pretty important statement
+\\
+\begin{thm}
+\label{thm:catiso}
+Let $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\alpha}$ be a functor.
+\begin{enumerate}
+\item[(a)]
+If $f_{12} \in \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})$ is an isomophism, so is $F(f_{12})$.
+\item[(b)]
+If $F$ is an embedding then $f_{12} \in \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})$ is an isomophism if and only if $F(f_{12})$ is.
+\end{enumerate}
+\end{thm}
+\begin{prf}
+\begin{enumerate}
+\item[(a)]
+We have the equalities
+\begin{align*}
+  F(f_{12})
+  \circ
+  F(f_{12}^{-1})
+  &=
+  F(f_{12} \circ f_{12}^{-1})
+  =
+  F(\mathrm{id}_{X_{2}})
+  =
+  \mathrm{id}_{F(X_{2})}
+  \\
+  F(f_{12}^{-1})
+  \circ
+  F(f_{12})
+  &=
+  F(f_{12}^{-1} \circ f_{12})
+  =
+  F(\mathrm{id}_{X_{1}})
+  =
+  \mathrm{id}_{F(X_{1})}
+\end{align*}
+which prove the proposition.
+\item[(b)]
+Let $F(f_{12})$ be an isomorphism. Since $F$ is full there must be $f_{21}$ such that the equalities
+\begin{align*}
+  \mathrm{id}_{F(X_{2})}
+  &=
+  F(f_{12})
+  \circ
+  F(f_{21})
+  =
+  F(f_{12} \circ f_{21})
+  \\
+  \mathrm{id}_{F(X_{1})}
+  &=
+  F(f_{21})
+  \circ
+  F(f_{12})
+  =
+  F(f_{21} \circ f_{12})
+\end{align*}
+hold. Since $F$ is faithful, $\mathrm{id}_{X_{i}}$ is the only morphism which is mapped to $\mathrm{id}_{F(X_{i})}$ where $i = 1,2$. Thus we must have the equalities
+\begin{align*}
+  \mathrm{id}_{X_{2}}
+  &=
+  f_{12}
+  \circ
+  f_{21}
+  \\
+  \mathrm{id}_{X_{1}}
+  &=
+  f_{21}
+  \circ
+  f_{12}
+\end{align*}
+This together with (a) proves the claim.
+\end{enumerate}
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+The purpose of theorem \ref{thm:catiso} is classification on the one hand (part (a)). Roughly speaking, a category represents a mathematical idea and a functor relates two ideas. Hence a classification achieved in one of the subjects provides a way to classify in the other. We want to emphasize here that part (a) of the theorem is in one case used in its negated version, that is, in the notation from theorem \ref{thm:catiso} non-isomorphic objects $F(X_{1})$ and $F(X_{2})$ imply non-isomorphic objects $X_{1}$ and $X_{2}$. Particularly, in algebraic topology this version is typically dominating. On the other hand from (part (b)) one can derive that if $F$ is an embedding then $F$ is injective on objects up to isomorphism, that is,
+\begin{align*}
+  F(X_{1})
+  \cong
+  F(X_{2})
+  \qquad
+  &\Rightarrow
+  \qquad
+  X_{1}
+  \cong
+  X_{2}
+\end{align*}
+If we considered isomorphism as good enough to replace equality then embedding would be a good name. In other words in a structural set theory or ultimately in UFP-HoTT. We seize this topic again and again to finally convince the reader that fully faithful is the most sensible concept for embedding. The keywords are: principle of equivalence, yoneda functor and topos embedding.
+\\
+Last, let us have a brief look at a certain kind of functors utilizing theorem \ref{thm:catiso}. As we know from this subsection and the previous subsection \ref{sec:cat} we can consider a group $(G,\cdot,\mathrm{id},\mathrm{inv})$ as a category $\mathbf{B}G$ with exactly one object and every morphism an isomorphism. Then for an arbitrary category $\mathbf{C}$ we call a functor $F_{G}$ from $\mathbf{B}G$ to $\mathbf{C}$ a \textbf{representation (of $G$ in $\mathbf{C}$)}. In other words a representation determines an object
+\begin{align*}
+  X
+  &=
+  F_{G}(\emptyset)
+\end{align*}
+where $\emptyset$ is the single object in $\mathbf{B}G$, and a function from
+\begin{align*}
+  G
+  &=
+  \mathrm{mor}_{\mathbf{B}G}(\emptyset,\emptyset)
+\end{align*}
+to $\mathrm{aut}_{\mathbf{C}}(X,X)$ due to theorem \ref{thm:catiso}. This function is clearly a homomorphism. Representations allow to study group theory in a category $\mathbf{C}$, that is, in terms of a concept which might be better understood. Most often $\mathbf{C}$ is chosen as some category of vector spaces.

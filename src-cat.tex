@@ -1,0 +1,1072 @@
+\nocite{53fd7d7e}
+To interpret category theory in TG we first need a set which models the mathematical universe inhabited by arrows. We write $\mathrm{Mor}$ for it. Next we need two unary functions for the domain and codomain of a morphism plus a $3$-ary relation for composition checking. This is to say we have functions
+\begin{align*}
+  \mathrm{dom}
+  \colon
+  \mathrm{Mor}
+  &\rightarrow
+  \mathrm{Mor}
+  \\
+  \mathrm{cod}
+  \colon
+  \mathrm{Mor}
+  &\rightarrow
+  \mathrm{Mor}
+\end{align*}
+and a $3$-ary relation $\mathrm{c}$ with graph
+\begin{align*}
+  \Gamma_{\mathrm{c}}
+  &\subset
+  \mathrm{Mor}
+  \times
+  \mathrm{Mor}
+  \times
+  \mathrm{Mor}
+\end{align*}
+And these shall satisfy the category theory axioms (CT1)-(CT5). However, it will be convenient to have an equivalent notion of this set model of category theory expressed as a $4$-tuple $(\mathrm{Mor},\mathrm{dom},\mathrm{cod},\mathrm{c})$ subjected to the axioms (CT1)-(CT5). To this end note that we can define the set of identity arrows as
+\begin{align*}
+  \mathrm{ob}
+  &:=
+  \left\lbrace
+      \mathrm{id}
+      \in
+      \mathrm{Mor}
+    \,
+    \vert
+    \,
+      \exists
+      f
+      \in
+      \mathrm{Mor}
+      \text{ such that }
+      \left(
+        \mathrm{id}
+        =
+        \mathrm{dom}(f)
+        \quad
+        \lor
+        \quad
+        \mathrm{id}
+        =
+        \mathrm{cod}(f)
+      \right)
+  \right\rbrace
+\end{align*}
+Moreover for all
+\begin{align*}
+  (X_{1},X_{2})
+  &\in
+  \mathrm{ob}
+  \times
+  \mathrm{ob}
+\end{align*}
+we can define
+\begin{align*}
+  \mathrm{mor}(X_{1},X_{2})
+  &:=
+  \left\lbrace
+      f
+      \in
+      \mathrm{Mor}
+    \,
+    \vert
+    \,
+      X_{1}
+      =
+      \mathrm{dom}(f)
+      \quad
+      \land
+      \quad
+      X_{2}
+      =
+      \mathrm{cod}(f)
+  \right\rbrace
+\end{align*}
+and from the axioms (CT1) and (CT2) we get for all
+\begin{align*}
+  (X_{1},X_{2},X_{3})
+  &\in
+  \mathrm{ob}
+  \times
+  \mathrm{ob}
+  \times
+  \mathrm{ob}
+\end{align*}
+a function
+\begin{align*}
+  \circ(X_{1},X_{2},X_{3})
+  \colon
+  \mathrm{mor}(X_{1},X_{2})
+  \times
+  \mathrm{mor}(X_{2},X_{3})
+  &\rightarrow
+  \mathrm{mor}(X_{1},X_{3})
+\end{align*}
+which maps a tuple $(f_{12},f_{23})$ to (the unique) $f  \in \mathrm{mor}(X_{1},X_{3})$ such that
+\begin{align*}
+\mathrm{c}(f_{12},f_{23},f)
+\end{align*}
+Thus let us define: a set $\mathbf{C}$ is a \textbf{category} if it is a $3$-tuple consisting of a set $\mathrm{ob}_{\mathbf{C}}$, a function $\mathrm{mor}_{\mathbf{C}}$ with domain $\mathrm{ob}_{\mathbf{C}} \times \mathrm{ob}_{\mathbf{C}}$ and a function $\circ_{\mathbf{C}}$ which maps
+\begin{align*}
+  (X_{1},X_{2},X_{3})
+  &\in
+  \mathrm{ob}_{\mathbf{C}}
+  \times
+  \mathrm{ob}_{\mathbf{C}}
+  \times
+  \mathrm{ob}_{\mathbf{C}}
+\end{align*}
+to a function
+\begin{align*}
+  \circ_{\mathbf{C}}(X_{1},X_{2},X_{3})
+  \colon
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+  \times
+  \mathrm{mor}_{\mathbf{C}}(X_{2},X_{3})
+  &\rightarrow
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{3})
+\end{align*}
+such that
+\begin{enumerate}
+\item[(C1)]
+for all
+\begin{align*}
+  X_{1},X_{2},X_{3},X_{4}
+  &\in
+  \mathrm{ob}_{\mathbf{C}}
+\end{align*}  
+and for all
+\begin{align*}
+  f_{n_{1}n_{2}}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{n_{1}},X_{n_{2}})
+\end{align*}
+with $n_{1},n_{2} \in \mathbb{N}_{4}^{\times}$ the term
+\begin{align*}
+  \circ_{\mathbf{C}}
+  (X_{1},X_{2},X_{4})
+  \left(
+    f_{12},
+    \circ_{\mathbf{C}}
+    (X_{2},X_{3},X_{4})
+    (f_{23},f_{34})
+  \right)
+\end{align*}
+equals the term
+\begin{align*}
+  \circ_{\mathbf{C}}
+  (X_{1},X_{3},X_{4})
+  \left(
+    \circ_{\mathbf{C}}
+    (X_{1},X_{2},X_{3})
+    (f_{12},f_{23}),
+    f_{34}
+  \right)
+\end{align*}
+\item[(C2)]
+for each $X_{1} \in \mathrm{ob}_{\mathbf{C}}$ there is an element
+\begin{align*}
+  \mathrm{id}_{X_{1}}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{1})
+\end{align*}
+such that for each
+\begin{align*}
+  f_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+  \\
+  f_{21}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{2},X_{1})
+\end{align*}
+with $X_{2} \in \mathrm{ob}_{\mathbf{C}}$ both
+\begin{align*}
+  \circ_{\mathbf{C}}
+  (X_{1},X_{1},X_{2})
+  (\mathrm{id}_{X_{1}},f_{12})
+  &=
+  f_{12}
+\end{align*}
+and
+\begin{align*}
+  \circ_{\mathbf{C}}
+  (X_{2},X_{1},X_{1})
+  (f_{21},\mathrm{id}_{X_{1}})
+  &=
+  f_{21}
+\end{align*}
+hold
+\item[(C3)]
+for all
+\begin{align*}
+  (X_{1},X_{2}),(X_{3},X_{4})
+  &\in
+  \mathrm{ob}_{\mathbf{C}}
+  \times
+  \mathrm{ob}_{\mathbf{C}}
+\end{align*}
+satisfying
+\begin{align*}
+  (X_{1},X_{2})
+  &\neq
+  (X_{3},X_{4})
+\end{align*}
+the the formula
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+  \cap
+  \mathrm{mor}_{\mathbf{C}}(X_{3},X_{4})
+  &=
+  \emptyset
+\end{align*}
+holds\footnote{this last property is a peculiarity of material set theories such as TG if we want the category definition to be exactly the same as the usual first order theory of category theory}.
+\end{enumerate}
+And we can get a category from an interpretation of category theory in TG by noting that (C1) follows from (CT3), (C2) follows from (CT4) plus (CT5) and (C3) follows from $\mathrm{dom}$ and $\mathrm{cod}$ being functions. The other direction that we can get an interpretation of category theory in TG from a category is also true as we will see after building some terminology.
+\\
+For a category $\mathbf{C}$
+\begin{enumerate}
+\item[$\bullet$]
+$\mathrm{ob}_{\mathbf{C}}$ is called \textbf{object set (of $\mathbf{C}$)}
+\item[$\bullet$]
+$\mathrm{mor}_{\mathbf{C}}$ is called \textbf{morphism function (of $\mathbf{C}$)}
+\item[$\bullet$]
+$\circ_{\mathbf{C}}$ is called \textbf{composition (of $\mathbf{C}$).}
+\end{enumerate}
+Further,
+\begin{enumerate}
+\item[$\bullet$]
+elements of $\mathrm{ob}_{\mathbf{C}}$ are called \textbf{objects (of $\mathbf{C}$)}
+\item[$\bullet$]
+elements of $\mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})$ are called \textbf{morphisms (from $X_{1}$ to $X_{2}$)}
+\item[$\bullet$]
+$\circ_{\mathbf{C}}(X_{1},X_{2},X_{3})(f_{12},f_{23})$ is called \textbf{composition (of $f_{12}$ and $f_{23}$)} or \textbf{$f_{23}$ composed with $f_{12}$}.
+\end{enumerate}
+For a morphism $f_{12}$ we call
+\begin{enumerate}
+\item[$\bullet$]
+$X_{1}$ the \textbf{domian (of $f_{12}$)}
+\item[$\bullet$]
+$X_{2}$ the \textbf{codomain (of $f_{12}$)}
+\end{enumerate}
+There is a convention we will usually obey. In a slight abuse of notation we often write $f_{23} \circ_{\mathbf{C}} f_{12}$ or even simpler $f_{23} \circ f_{12}$ for $\circ_{\mathbf{C}}(X_{1},X_{2},X_{3})(f_{12},f_{23})$ if no confusion has to be feared. It is usually clear when $\circ$ is morphism composition an when function composition (if it does not coincide anyway). This makes things more readable especially for people who are familiar with mathematics. Well, for virtually every reader. For pedagocial reasons let us restate the category properties (C1) and (C2) in the simplified manner:
+\begin{enumerate}
+\item[(C1)]
+for all $f_{n_{1}n_{2}}$ with $n_{1},n_{2} \in \mathbb{N}_{4}^{\times}$ the term
+\begin{align*}
+  (f_{34} \circ f_{23})
+  \circ
+  f_{12}
+\end{align*}
+equals the term
+\begin{align*}
+  f_{34}
+  \circ
+  (f_{23} \circ f_{12})
+\end{align*}
+\item[(C2)]
+for each $X_{1}$ there is an element $\mathrm{id}_{X_{1}} \in \mathrm{mor}_{\mathbf{C}}(X_{1},X_{1})$ such that for each $f_{12}$ and each $f_{21}$ both
+\begin{align*}
+  f_{12}
+  \circ
+  \mathrm{id}_{X_{1}}
+  &=
+  f_{12}
+\end{align*}
+and
+\begin{align*}
+  \mathrm{id}_{X_{1}}
+  \circ
+  f_{21}
+  &=
+  f_{21}
+\end{align*}
+hold
+\end{enumerate}
+Way better, isn't it? Note that due to property (C3) we can easily build the set of all morphisms of a category $\mathbf{C}$ as union of all morphisms
+\begin{align*}
+  \mathrm{Mor}_{\mathbf{C}}
+  &:=
+  \bigcup_{X_{1},X_{2} \in \mathrm{ob}_{\mathbf{C}}}
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+\end{align*}
+That this is a set in TG is guaranteed by the axiom of union. Hence we get
+\begin{enumerate}
+\item[(1)]
+a function $\mathrm{dom}_{\mathbf{C}} \colon \mathrm{Mor}_{\mathbf{C}} \rightarrow \mathrm{ob}_{\mathbf{C}}$ mapping a morphism to its domain
+\item[(2)]
+a function $\mathrm{cod}_{\mathbf{C}} \colon \mathrm{Mor}_{\mathbf{C}} \rightarrow \mathrm{ob}_{\mathbf{C}}$ mapping a morphism to its codomain.
+\item[(3)]
+a $3$-ary relation $\mathrm{c}_{\mathbf{C}}$ with graph defined by
+\begin{align*}
+  \Gamma_{\mathrm{c}_{\mathbf{C}}}
+  &:=
+  \left\lbrace
+      (f_{1},f_{2},f)
+      \in
+      \mathrm{Mor}_{\mathbf{C}}
+      \times
+      \mathrm{Mor}_{\mathbf{C}}
+      \times
+      \mathrm{Mor}_{\mathbf{C}}
+    \,
+    \vert
+    \,
+      f
+      =
+      f_{2}
+      \circ_{\mathbf{C}}
+      f_{1}
+  \right\rbrace
+\end{align*}
+\end{enumerate}
+It is straightforward to show that the $4$-tuple
+\begin{align*}
+  \left(
+    \mathrm{Mor}_{\mathbf{C}},
+    \mathrm{dom}_{\mathbf{C}},
+    \mathrm{cod}_{\mathbf{C}},
+    \mathrm{c}_{\mathbf{C}}
+  \right)
+\end{align*}
+satisfies (CT1)-(CT5) if $\mathbf{C}$ is a category. Hence we can consider categories the models of category theory in TG. Lastly remember our convention on terminology regarding category theory,
+\\
+\begin{rem}
+\label{rem:cattheoryterm}
+We allow ourselves to say:
+\begin{enumerate}
+\item[(1)]
+arrow instead of morphism
+\item[(2)]
+source instead of domain
+\item[(3)]
+target instead of codomain
+\end{enumerate}
+\end{rem}
+\begin{prf}
+Just prose. So nothing to prove here.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Now, for a Grothendieck universe $\mathcal{U}$, a category $\mathbf{C}$ is \textbf{locally ($\mathcal{U}$-)small} if $\mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})$ is a $\mathcal{U}$-small set for all $X_{1},X_{2}$ and \textbf{($\mathcal{U}$-)small} if in addition its object set is a $\mathcal{U}$-small set. One might wonder why we use TG and not ZFC, that is, why we need Grothendieck universes and why we do define the smallness conditions at all. The answer is recorded in the following rather important remark.
+\\
+\begin{rem}
+\label{rem:techcat}
+We will often have the problem that the possible object set is too large to be an actual set. For example, the set of all sets which cannot exist due to Russell's paradox. We refer to this problem as {\glqq}size issues{\grqq}. The solution taken in TG is to always restrict to a Grothendieck universe. That is one of the main reasons why people choose TG as foundation when doing category theory materially interpreted. We deal with this problem in that we say when it is neccessary to restrict to a Grothendieck universe and attach an index of the Grothendieck universe to the resulting category when context demands it. In other words, if we run into size issues when defining a category $\mathbf{C}$ we fix a Grothendieck universe $\mathcal{U}$ and take as objects not all sets we would like to take but only those of them which are also element of $\mathcal{U}$. We then write $\mathbf{C}_{\mathcal{U}}$ for the resulting category. But if we do not have to fear confusion we just write $\mathbf{C}$ for simplicity as well as we just say small instead of $\mathcal{U}$-small.
+\end{rem}
+\begin{prf}
+Find out about the foundation of mathematics\footnote{actually there should be a prequel to these notes} (i.p. the first-order theory TG) if you do not understand the problem.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Here is a first, yet rather important, example of the concepts so far.
+\\
+\begin{exa}
+\label{exa:basiccats1}
+In this example we define the most apparent categories from the perspective of a TG set theorist.
+\begin{enumerate}
+\item[(a)]
+Clearly $\mathbf{\varnothing} := (\emptyset,\emptyset,\emptyset)$ is a $\mathcal{U}$-small category for all Grothendieck universes $\mathcal{U}$. $\mathbf{\varnothing}$ is called \textbf{trivial category}.
+\item[(b)]
+Given a set $Y$, the presumably simplest non-trivial category is $\mathbf{1}_{Y}$ with $\mathrm{ob}_{\mathbf{1}_{Y}} := \lbrace Y \rbrace$ and
+\begin{align*}
+  \mathrm{mor}_{\mathbf{1}_{Y}}(Y,Y)
+  &:=
+  \lbrace
+    \mathrm{id}_{Y}
+  \rbrace
+\end{align*}
+Since $\mathrm{id}_{Y}$ is a function, namely the identity function, we can choose function composition as composition of $\mathbf{1}_{Y}$. This is a $\mathcal{U}$-small category if $Y$ is $\mathcal{U}$-small. $\mathbf{1}_{Y}$ is called the \textbf{terminal category (using $Y$)}
+\item[(c)]
+The set of all functions yields indeed a category - at least if we restrict to a Grothendieck universe $\mathcal{U}$ to avoid size issues. Define
+\begin{align*}
+  \mathrm{Mor}_{\mathbf{Set}_{\mathcal{U}}}
+  &:=
+  \left\lbrace
+      f
+      \in
+      \mathcal{U}
+    \,
+    \vert
+    \,
+      f
+      \text{ is a function}
+  \right\rbrace
+\end{align*}
+Then partition $\mathrm{Mor}_{\mathbf{Set}_{\mathcal{U}}}$ as follows: For $X_{1},X_{2} \in \mathcal{U}$ define\footnote{this is the same as we already did above in a more general setting}
+\begin{align*}
+  \mathrm{mor}_{\mathbf{Set}_{\mathcal{U}}}(X_{1},X_{2})
+  &:=
+  \left\lbrace
+      f
+      \in
+      \mathrm{Mor}_{\mathbf{Set}_{\mathcal{U}}}
+    \,
+    \vert
+    \,
+      \mathrm{dom}(f)
+      =
+      X_{1}
+      \,
+      \land
+      \,
+      \mathrm{cod}(f)
+      =
+      X_{2}
+  \right\rbrace
+\end{align*}
+As a subset of the $\mathcal{U}$-small set $\mathrm{Mor}_{\mathbf{Set}_{\mathcal{U}}}$ the set $\mathrm{mor}_{\mathbf{Set}_{\mathcal{U}}}(X_{1},X_{2})$ is $\mathcal{U}$-small. Now set $\mathrm{ob}_{\mathbf{Set}_{\mathcal{U}}} := \mathcal{U}$. Then $\mathrm{mor}_{\mathbf{Set}_{\mathcal{U}}}$ defines a function with domain $\mathrm{ob}_{\mathbf{Set}_{\mathcal{U}}} \times \mathrm{ob}_{\mathbf{Set}_{\mathcal{U}}}$. The usual function composition induces for all $X_{1},X_{2},X_{3} \in \mathcal{U}$ a function $\circ_{\mathbf{Set}_{\mathcal{U}}}(X_{1},X_{2},X_{3})$ defined by
+\begin{align*}
+  \circ_{\mathbf{Set}_{\mathcal{U}}}(X_{1},X_{2},X_{3})(f_{23},f_{12})
+  &:=
+  f_{23}
+  \circ
+  f_{12}
+  \in
+  \mathrm{mor}_{\mathbf{Set}_{\mathcal{U}}}(X_{1},X_{3})
+\end{align*}
+for
+\begin{align*}
+  f_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}_{\mathcal{U}}}(X_{1},X_{2})
+\end{align*}
+and
+\begin{align*}
+  f_{23}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}_{\mathcal{U}}}(X_{2},X_{3})
+\end{align*}
+as one would expect. One can then check that
+\begin{align*}
+  \mathbf{Set}_{\mathcal{U}}
+  &:=
+  \left(
+    \mathrm{ob}_{\mathbf{Set}_{\mathcal{U}}},
+    \mathrm{mor}_{\mathbf{Set}_{\mathcal{U}}},
+    \circ_{\mathbf{Set}_{\mathcal{U}}}
+  \right)
+\end{align*}
+defines a locally small category. $\mathbf{Set}_{\mathcal{U}}$ is called the \textbf{category of ($\mathcal{U}$-small) sets}. As noted in remark \ref{rem:techcat}, it is common to omit the index $\mathcal{U}$ and just write $\mathbf{Set}$. Usually one fixes a Grothendieck universe and ordinary mathematics is what happens inside this universe or - from the categorical point of view - in the category $\mathbf{Set}_{\mathcal{U}}$. In the course of these notes we will learn what is special about $\mathbf{Set}_{\mathcal{U}}$ as a category. These special properties can serve as axioms for a set theory which is only slightly weaker than ZFC. It is the ETCS we already alluded to having its perks as a structural set theory.
+\item[(d)]
+Take a preordered set $(Y,\leq_{Y})$. This gives rise to a category $\pmb{\leq}_{Y}$ in the following way: $\mathrm{ob}_{\pmb{\leq}_{Y}} := Y$ and
+\begin{align*}
+  \mathrm{mor}_{\pmb{\leq}_{Y}}(y_{1},y_{2})
+  &:=
+  \begin{cases}
+    \lbrace (y_{1},y_{2}) \rbrace
+    &
+    \text{if }
+    y_{1}
+    \leq_{Y}
+    y_{2}
+    \\
+    \emptyset
+    &
+    \text{else}
+  \end{cases}
+\end{align*}
+for all $y_{1},y_{2} \in Y$. Composition is trivial since there is always only one function between the involved morphism sets. Namely, for all $y_{1},y_{2},y_{3} \in Y$ let $\circ_{\pmb{\leq}_{Y}}(y_{1},y_{2},y_{3})$ be defined by
+\begin{align*}
+  \circ_{\pmb{\leq}_{Y}}(y_{1},y_{2},y_{3})
+  \left(
+    (y_{1},y_{2}),
+    (y_{2},y_{3})
+  \right)
+  &:=
+  \begin{cases}
+    (y_{1},y_{3})
+    &
+    \text{if }
+    y_{1}
+    \leq_{Y}
+    y_{2}
+    \,
+    \land
+    \,
+    y_{2}
+    \leq_{Y}
+    y_{3}
+    \\
+    \emptyset
+    &
+    \text{else}
+  \end{cases}
+\end{align*}
+It is not hard to check that
+\begin{align*}
+  \pmb{\leq}_{Y}
+  &=
+  \left(
+    \mathrm{ob}_{\pmb{\leq}_{Y}},
+    \mathrm{mor}_{\pmb{\leq}_{Y}},
+    \circ_{\pmb{\leq}_{Y}}
+  \right)
+\end{align*}
+is a category. $\pmb{\leq}_{Y}$ is called the \textbf{preorder category (of $(Y,\leq_{Y})$)}. Of course, if $Y$ is $\mathcal{U}$-small so is $\pmb{\leq}_{Y}$.
+\item[(e)]
+If $(Y,\leq_{Y})$ is a partially ordered set the preorder category of $(Y,\leq_{Y})$ is also called the \textbf{poset category (of $(Y,\leq_{Y})$)}. The special property of poset categories stem from the antisymmetry property of a partially ordered set in that compositions for which the domain equals the codomain are necessarily compositions of only $\mathrm{id}_{y}$ of the domain object $y \in Y$.
+\item[(f)]
+For a Grothendieck universe we can build the category $\mathbf{PrO}$ with objects consisting of the preordered sets within the Grothendieck universe. As morphisms we would like to take the order-preserving functions composed in the usual manner. Note that an order-preserving function from a preordered set $(Y,\leq_{Y})$ to a preordered set $(Y^{\backprime},\leq_{Y^{\backprime}})$ is a function $f \colon Y \rightarrow Y^{\backprime}$ such that if $y_{1} \leq_{Y} y_{2}$ then $f(y_{1}) \leq_{Y^{\backprime}} f(y_{2})$. But to fulfill category property (C3) we cannot simply take just the order-preserving functions as well as we cannot just take the graphs of functions for $\mathbf{Set}$. So we take as morphisms from $(Y,\leq_{Y})$ to  $(Y^{\backprime},\leq_{Y^{\backprime}})$ the $3$-tuples consisting of $(Y,\leq_{Y})$, $(Y^{\backprime},\leq_{Y^{\backprime}})$ and order-preserving functions. The composition is the induced one from function composition since composing two order-preserving functions yields an order-preserving function. By induced one we mean that one has to take care of the first two coordinates of a morphism an arrange things to fit. $\mathbf{PrO}$ is called the \textbf{category of (small) preordered sets}.
+\end{enumerate}
+\end{exa}
+\begin{prf}
+Beyond the knowledge about basic set theory the proofs are simply checking the category properties. We leave that as a reader's exercise.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+We already pointed out that orginally a category was often viewed as a set of structure preserving functions but this does usually contradict category property (C3) a bit as seen for $\mathbf{PrO}$ in example \ref{exa:basiccats1}. Fortunately, we can circumnavigate the problem by a general method abstracted from the case $\mathbf{PrO}$. We express this by the following remark, of course up to size issues remarked in remark \ref{rem:techcat}.
+\\
+\begin{rem}[(C3) Trick]
+\label{rem:c3trick}
+In mathematics one is usually concerned with an underlying set $Y$ and some kind of structure $\mathfrak{S}_{Y}$ on it.\footnote{Bourbaki tried to define what that means precisely} Let us temporarily call $(Y,\mathfrak{S}_{Y})$ strutured set. For example, for preordered sets $(Y,\leq_{Y})$ we have $\leq_{Y}$ as structure on a set $Y$. There are plenty of other examples from all mathematical disciplines. Anyways, given structured sets with structure of the same kind $(Y_{1},\mathfrak{S}_{Y_{1}})$ and $(Y_{2},\mathfrak{S}_{Y_{2}})$ we usually have a notion of what it means for a function $f \colon Y_{1} \rightarrow Y_{2}$ to preserve that structure. In the preorder case these are the order-preserving functions. The problem of taking these as morphisms of a category with objects the preordered sets  is that on a given set $Y_{1}$ there might be two preorders $\leq_{Y_{1}}$ and $\leq_{Y_{1}}^{\backprime}$ such that a function $f \colon Y_{1} \rightarrow Y_{2}$ is order-preserving w.r.t. both $\leq_{Y_{1}}$ and $\leq_{Y_{1}}^{\backprime}$ for a preordered set $(Y_{2},\leq_{Y_{2}})$. Thus $f$ as a morphism of $\mathbf{PrO}$ would have two different domains contradicting (C3). The same usually happens in the more general case of structured sets and the issue there can be solved in the same way as in the preordered set case. For a category with objects structured sets for some kind of structure, instead of taking structure preserving functions as morphisms composed by the usual function composition (usually the composition is again structure preserving), we use $3$-tuples of the desired domain structured set, the desired codomain structured set and a structure-preserving function w.r.t. to the desired domain and codoamin. This is to say to define a category for some kind of structure, given structured sets of this kind $(Y_{1},\mathfrak{S}_{Y_{1}})$ and $(Y_{2},\mathfrak{S}_{Y_{2}})$ we would take as morphisms from $(Y_{1},\mathfrak{S}_{Y_{1}})$ to $(Y_{2},\mathfrak{S}_{Y_{2}})$ the $3$-tuples
+\begin{align*}
+  \left(
+    (Y_{1},\mathfrak{S}_{Y_{1}}),
+    (Y_{2},\mathfrak{S}_{Y_{2}}),
+    f
+  \right)
+\end{align*}
+with $f \colon Y_{1} \rightarrow Y_{2}$ a structure preserving function. Composition of morphisms
+\begin{align*}
+  \left(
+    (Y_{1},\mathfrak{S}_{Y_{1}}),
+    (Y_{2},\mathfrak{S}_{Y_{2}}),
+    f_{12}
+  \right)
+\end{align*}
+and
+\begin{align*}
+  \left(
+    (Y_{2},\mathfrak{S}_{Y_{2}}),
+    (Y_{3},\mathfrak{S}_{Y_{3}}),
+    f_{23}
+  \right)
+\end{align*}
+is induced by function composition as
+\begin{align*}
+  \left(
+    (Y_{1},\mathfrak{S}_{Y_{1}}),
+    (Y_{3},\mathfrak{S}_{Y_{3}}),
+    f_{23}
+    \circ
+    f_{12}
+  \right)
+\end{align*}
+Of course, all this is very clumsy and an echo of material set theories. In a structural one we would not have the issue. Mathematicians, informal as they are, say they use a material theory but actually work structural and so do we. This means whenever we define a category of structure preserving functions we define morphisms as the structure preserving functions composed by the usual function composition though we actually mean the $3$-tuple with composition induced by function composition as above. And whenever we talk about a morphism of such a category we only write the function part.
+\end{rem}
+\begin{prf}
+This is an informal meta-idea we cannot prove formally.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+In this section we continue to refer to this remark \ref{rem:c3trick} but in later sections we often silently use it. Speaking of meta-ideas simplifying our lives, another thing that helps us making life easier is a notation for {\glqq}abusing notation{\grqq} by the symbol $\doteq$. This means if we have an unambiguous expresssion $\Phi$ and another perhaps even inconsistent notation for $\Phi$ denoted $f_{\Phi}$ here, then we can write
+\begin{align*}
+  f_{\Phi}
+  &\doteq
+  \Phi
+\end{align*}
+to signal that we allow to use $f_{\Phi}$ for $\Phi$ if we do not have to fear confusion. An example of that would be
+\begin{align*}
+  f_{23}
+  &\circ
+  f_{12}
+  \doteq
+  f_{23}
+  \circ_{\mathbf{C}}
+  f_{12}
+  \doteq
+  \circ_{\mathbf{C}}(X_{1},X_{2},X_{3})(f_{12},f_{23})
+\end{align*}
+or
+\begin{align*}
+  f
+  &\doteq
+  \left(
+    (Y_{1},\mathfrak{S}_{Y_{1}}),
+    (Y_{2},\mathfrak{S}_{Y_{2}}),
+    f
+  \right)
+\end{align*}
+from remark \ref{rem:c3trick}.
+\\\\
+Having seen the first examples of categories we carry on with the definition of
+subcategories. This is what one would expect as a mathematician. A category $\mathbf{S}$ is a \textbf{subcategory (of $\mathbf{C}$)} if $\mathrm{ob}_{\mathbf{S}} \subset \mathrm{ob}_{\mathbf{C}}$ and if for all $X_{1},X_{2} \in \mathrm{ob}_{\mathbf{S}}$ the set $\mathrm{mor}_{\mathbf{S}}(X_{1},X_{2})$ is a subset of $\mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})$ and if for all $X_{1},X_{2},X_{3} \in \mathrm{ob}_{\mathbf{S}}$ the function $\circ_{\mathbf{S}}(X_{1},X_{2},X_{3})$ equals the restriction
+\begin{align*}
+  \circ_{\mathbf{C}}(X_{1},X_{2},X_{3})
+  \vert
+  \mathrm{mor}_{\mathbf{S}}(X_{1},X_{2})
+  \times
+  \mathrm{mor}_{\mathbf{S}}(X_{2},X_{3})
+\end{align*}
+A subcategory $\mathbf{S}$ of $\mathbf{C}$ is
+\begin{enumerate}
+\item[$\bullet$]
+\textbf{full} if $\mathrm{mor}_{\mathbf{S}}$ equals $\mathrm{mor}_{\mathbf{C}}$
+\item[$\bullet$]
+\textbf{lluf} if $\mathrm{ob}_{\mathbf{S}}$ equals $\mathrm{ob}_{\mathbf{C}}$
+\end{enumerate}
+And another example.
+\\
+\begin{exa}
+\label{exa:basiccats2}
+This example can be seen as a sequel to example \ref{exa:basiccats1} taking into account the subcategory concept.
+\begin{enumerate}
+\item[(a)]
+If we restrict the objects set of $\mathbf{Set}_{\mathcal{U}}$ to only contain finite sets of $\mathcal{U}$ but leave the morphisms untouched we get a full subcategory denoted $\mathbf{Finset}$.
+\item[(b)]
+We get a full subcatgory
+\begin{enumerate}
+\item[$\bullet$]
+$\mathbf{PO}$ of $\mathbf{PrO}$ by restricting the objects to partially ordered sets. $\mathbf{PO}$ is called the \textbf{category of (small) partially ordered sets}
+\item[$\bullet$]
+$\mathbf{TO}$ of $\mathbf{PO}$ by restricting the objects to totally ordered sets. $\mathbf{TO}$ is called the \textbf{category of (small) totally ordered sets}
+\item[$\bullet$]
+$\mathbf{WO}$ of $\mathbf{TO}$ by restricting the objects to well-ordered sets. $\mathbf{WO}$ is called the \textbf{category of (small) well-ordered sets}
+\item[$\bullet$]
+$\mathbf{DO}$ of $\mathbf{PrO}$ by restricting the objects to directed sets. $\mathbf{DO}$ is called the \textbf{category of (small) directed sets}. The unsavvy reader should note here that a preordered set $(A,\leq_{A})$ is a \textbf{directed set} if\footnote{(UB) stands for upper bound}
+\begin{enumerate}
+\item[(UB)]
+for all $a_{1},a_{2} \in A$ there is $\alpha \in A$ such that
+\begin{align*}
+  a_{1}
+  \leq_{A}
+  \alpha
+  \qquad
+  &\land
+  \qquad
+  a_{2}
+  \leq_{A}
+  \alpha
+\end{align*}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{exa}
+\begin{prf}
+More or less obvious and therefore omitted.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Now the elements $\mathrm{id}_{X_{1}}$ in category property (C2) are called \textbf{identity (of $X_{1}$)} and are unique since if there was another such morphism $\mathrm{id}_{X_{1}}^{\backprime}$ we would get
+\begin{align*}
+  \mathrm{id}_{X_{1}}
+  &=
+  \mathrm{id}_{X_{1}}
+  \circ
+  \mathrm{id}_{X_{1}}^{\backprime}
+  =
+  \mathrm{id}_{X_{1}}^{\backprime}
+\end{align*}
+according to (C2). Looking at (C2) makes clear that identity is a sensible terminology and a set theorist knows that this is all that it needs to ask for an inverse function. Motivated\footnote{we will come back to this kind of motivation from $\mathbf{Set}$ in section \ref{sec:metaidea} recognizing it as fruitful meta-idea} by $\mathbf{Set}$ a morphism $f_{12}$ has an \textbf{inverse} $f_{21}$ if
+\begin{align*}
+  f_{21}
+  \circ
+  f_{12}
+  &=
+  \mathrm{id}_{X_{1}}
+  \\
+  f_{12}
+  \circ
+  f_{21}
+  &=
+  \mathrm{id}_{X_{2}}
+\end{align*}
+This element is unique again since if there was another such element $f_{21}^{\backprime}$ we would get
+\begin{align*}
+  f_{21}
+  &=
+  f_{21}
+  \circ
+  \left(
+    f_{12}
+    \circ
+    f_{21}^{\backprime}
+  \right)
+  =
+  (f_{21} \circ f_{12})
+  \circ
+  f_{21}^{\backprime}
+  =
+  f_{21}^{\backprime}
+\end{align*}
+In case of an existing inverse $f_{21}$ of $f_{12}$ we usually write $f_{12}^{-1}$ for $f_{21}$ and $f_{12}$ is then called an \textbf{isomorphism (in $\mathbf{C}$ from $X_{1}$ to $X_{2}$)} or we say $X_{1},X_{2}$ are \textbf{isomorphic (via $f_{12}$)}. If objects $X_{1},X_{2}$ are isomorphic via some morphism which is not too important or clear from context then we occasionally write
+\begin{align*}
+  X_{1}
+  &\cong
+  X_{2}
+\end{align*}
+An example for ismorphisms are quite obviously identities and compositions of isomorphisms $f_{23}$ and $f_{12}$ are clearly again isomorphisms, $f_{12}^{-1} \circ f_{23}^{-1}$ being the inverse. For a category $\mathbf{C}$ we define a function $\mathrm{iso}_{\mathbf{C}}$ by
+\begin{align*}
+  \mathrm{iso}_{\mathbf{C}}(X_{1},X_{2})
+  &:=
+  \lbrace
+      f_{12}
+      \in
+      \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+    \,
+    \vert
+    \,
+      f_{12}
+      \text{ is an isomorphism}
+  \rbrace
+\end{align*}
+and further, a function $\mathrm{aut}_{\mathbf{C}}$
+\begin{align*}
+  \mathrm{aut}_{\mathbf{C}}(X_{1},X_{2})
+  &:=
+  \begin{cases}
+    \mathrm{iso}_{\mathbf{C}}(X_{1},X_{2})
+    &
+    \text{if }
+    X_{1}
+    =
+    X_{2}
+    \\
+    \emptyset
+    &
+    \text{ else}
+  \end{cases}
+\end{align*}
+Note that $\mathrm{aut}_{\mathbf{C}}(X,X)$ is never empty containing at least the identity. Hence we get lluf subcatgories $\mathbf{C}^{\mathrm{iso}}$ and $\mathbf{C}^{\mathrm{aut}}$ of $\mathbf{C}$ by setting
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{iso}}}
+  &:=
+  \mathrm{iso}_{\mathbf{C}}
+\end{align*}
+and
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{aut}}}
+  &:=
+  \mathrm{aut}_{\mathbf{C}}
+\end{align*}
+respectively plus restricting composition accordingly. A category $\mathbf{C}$ is called \textbf{discrete} if for all $X_{1},X_{2}$
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+  &=
+  \begin{cases}
+    \lbrace
+      \mathrm{id}_{X_{1}}
+    \rbrace
+    &
+    \text{if }
+    X_{1}
+    =
+    X_{2}
+    \\
+    \emptyset
+    &
+    \text{else}
+  \end{cases}
+\end{align*}
+This is to say a category with only identity morphisms. Discrete categories are structurally nothing but sets and any set $Y$ gives trivially rise to a discrete category with object set $Y$. We usually denote this category by $\mathbf{C}_{Y}$ for a set $Y$.
+\\\\
+Before we go ahead let us pause and look at the terminology so far. {\glqq}Morph{\grqq} is ancient greek and means {\glqq}form{\grqq} or {\glqq}shape{\grqq}. Further {\glqq}homo-{\grqq} and {\glqq}iso-{\grqq} are ancient greek prefixes the former meaning {\glqq}qualitatively the same{\grqq} while the latter means {\glqq}quantitatively the same{\grqq}. Morphisms shall abstract functions to some point. But functions are the kind of things which qualitatively preserve the structure of sets since they intuitively relate elements of a set to that of another set while bijective functions preserve them quantitatively since they intuitively also preserve the {\glqq}number{\grqq} of elements. So functions can be considererd homomoprhisms while bijective functions can be considered isomorphisms for sets. However, we shall better restrict to small sets here to avoid size issues. After all, one can take the stance that morphisms should actually be called homomorphisms since morphisms are most commonly structure preserving functions. Some people do that but the standard is still morphism. One reason might be the use of homomorphism in abstract algebra that we define in the next example \ref{exa:algstruct1}. Homomorphisms there were historically prior to category theory and the word is used in a much narrower sense there than morphism in category theory, though they are the structure preserving functions of algebraic strutures, of course.
+\\
+\begin{exa}
+\label{exa:algstruct1}
+This example is about abstract algebra and its relation to category theory. To this end let us first review what abstract algebra is about. Essentially it is about a set equipped with some functions on the product of it to itself called algebraic structure and functions between such such sets preserving the algebraic structure. So let us precisely define what that means. We fix aribitrary sets $A,A_{1},A_{2}$ in this example. Also note that while $A^{n}$ with $n \in \mathbb{N}^{\times}$ denotes the $n$-fold cartesian product
+\begin{align*}
+  A
+  \times
+  \cdots
+  \times
+  A
+\end{align*}
+we also consider the zero-fold cartesian product of $A$ denoted $A^{0}$ as $A^{0} := \lbrace \emptyset \rbrace$ here. This zero case seems a bit arbitrary and, in fact, it is. It is sort of a peculiarity of a material set theory. Structurally, the essential part here is that it is a set with exactly one element or categorically better say terminal object as we will learn in section \ref{sec:uni}. Now, for a function $\mathfrak{t}$ with codomain $\mathbb{N}$, $A$ together with a family of functions
+\begin{align*}
+  f_{A}^{\mathfrak{t}}
+  &:=
+  \left\lbrace
+      f_{A}^{n}
+    \,
+    \vert
+    \,
+      n
+      \in
+      \mathrm{dom}(\mathfrak{t})
+  \right\rbrace
+\end{align*}
+is an \textbf{algebraic structure (on $A$ of type $\mathfrak{t}$)} if for all $n \in \mathrm{dom}(\mathfrak{t})$ the function $f_{A}^{n}$ has domain $A^{\mathfrak{t}(n)}$ and codomain $A$. Further, given two algebraic structures $(A_{1},f_{A_{1}}^{\mathfrak{t}})$ and $(A_{2},f_{A_{2}}^{\mathfrak{t}})$ each of type $\mathfrak{t}$, then $\phi$ is a \textbf{homomorphism (of type $\mathfrak{t} \colon Y \rightarrow \mathbb{N}$ from $(A_{1},f_{A_{1}}^{\mathfrak{t}})$ to $(A_{2},f_{A_{2}}^{\mathfrak{t}})$)} if $\phi \colon A_{1} \rightarrow A_{2}$ is a function and such that for all $n \in \mathrm{dom}(\mathfrak{t})$
+\begin{align*}
+  \phi
+  \left(
+    f_{A_{1}}^{n}(a_{1},\ldots,a_{\mathfrak{t}(n)})
+  \right)
+  &=
+  f_{A_{2}}^{n}
+  \left(
+    \phi(a_{1}),
+    \ldots,
+    \phi(a_{\mathfrak{t}(n)})
+  \right)
+\end{align*}
+if $\mathfrak{t}(n) > 0$ and
+\begin{align*}
+  \phi
+  \left(
+    f_{A_{1}}^{n}(\emptyset)
+  \right)
+  &=
+  f_{A_{2}}^{n}
+  \left(
+    \phi(\emptyset)
+  \right)
+\end{align*}
+if $\mathfrak{t}(n) = 0$. Any function $\mathfrak{t}$ with codomain $\mathbb{N}$ and small domain gives rise to a (locally small) category $\mathbf{AS}_{\mathfrak{t}}$ in analogy to $\mathbf{Set}$. Again we have to restrict to a Grothendieck universe to avoid size issues. We define the objects of $\mathbf{AS}_{\mathfrak{t}}$ to be the set of all algebraic structures
+\begin{align*}
+  A
+  &\doteq
+  (A,f_{A}^{\mathfrak{t}})
+\end{align*}
+on $A$ of type $\mathfrak{t}$ with $A$ a small set. Since the function composition of two homomorphisms is a homomorphism, the morphisms with domain $(A_{1},f_{A_{1}}^{\mathfrak{t}})$ and codomain $(A_{2},f_{A_{2}}^{\mathfrak{t}})$ are the homomorphisms from $A_{1}$ to $A_{2}$ defined above, composed by the usual function composition. But note the (C3) trick from remark \ref{rem:c3trick}.
+\\
+In practice not all algebraic structures have an equal relevance. Most often one is concerned with types $\mathfrak{t} \colon Y \rightarrow \mathbb{N}$ such that the cardinality\footnote{in our definition the type of an algebraic structure does not only depend on the cardinality of the domain of the type being once more a peculiarity of material set theories that is often ignored in practice} of $Y$ is somewhere say in between $1$ and $10$ while
+\begin{align*}
+  \mathrm{im}(\mathfrak{t})
+  &\subset
+  \lbrace
+    0,1,2
+  \rbrace
+\end{align*}
+Moreover, $f_{A}^{n} \in f_{A}^{\mathfrak{t}}$ are subjected to certain conditions some of which we discuss now. First consider functions with domain $A^{2}$ and codomain $A$. We say that a function $\cdot \colon A^{2} \rightarrow A$ is \textbf{associative} if
+\begin{enumerate}
+\item[(A)]
+for all $a_{1},a_{2},a_{3} \in A$ the term
+\begin{align*}
+  \cdot
+  \left(
+    a_{1},
+    \cdot(a_{2},a_{3})
+  \right)
+\end{align*}
+equals the term
+\begin{align*}
+  \cdot
+  \left(
+    \cdot(a_{1},a_{2}),
+    a_{3}
+  \right)
+\end{align*}
+\end{enumerate}
+and \textbf{commutative} if
+\begin{enumerate}
+\item[(C)]
+for all $a_{1},a_{2} \in A$ the term
+\begin{align*}
+  \cdot(a_{1},a_{2})
+\end{align*}
+equals the term
+\begin{align*}
+  \cdot(a_{2},a_{1})
+\end{align*}
+\end{enumerate}
+Following the standard convention we write $a_{1} \cdot a_{2}$ instead of $\cdot(a_{1},a_{2})$. But be careful. This deviates from our convention on morphism composition and i. p. function composition. Next, add functions with domain $A^{0}$ and codomain $A$ to the considerations. $\mathrm{id} \colon A^{0} \rightarrow A$ is an \textbf{identity (of $A$)} or \textbf{unit (in $A$)} if
+\begin{enumerate}
+\item[(U)]
+for all $a \in A$ both
+\begin{align*}
+  \mathrm{id}(\emptyset)
+  \cdot
+  a
+  &=
+  a
+\end{align*}
+and
+\begin{align*}
+  a
+  \cdot
+  \mathrm{id}(\emptyset)
+  &=
+  a
+\end{align*}
+hold
+\end{enumerate}
+Again we agree to the convention of writing $\mathrm{id}_{A}$ for $\mathrm{id}(\emptyset)$. Last, let us add functions with domain and codomain both $A$. Given an identity of $A$ a function, $\mathrm{inv} \colon A \rightarrow A$ is an \textbf{inversion (of $A$)} if
+\begin{enumerate}
+\item[(I)]
+for all $a \in A$  both
+\begin{align*}
+  a
+  \cdot
+  \mathrm{inv}(a)
+  &=
+  \mathrm{id}_{A}
+\end{align*}
+and
+\begin{align*}
+  \mathrm{inv}(a)
+  \cdot
+  a
+  &=
+  \mathrm{id}_{A}
+\end{align*}
+hold
+\end{enumerate}
+One then often writes $a^{-1}$ for $\mathrm{inv}(a)$. Many of the well-studied algebraic structures have the addressed comparably simple type and satisfy certain combinations of the properties (A),(C),(U) and (I) discussed above. We will now define the ones which matter most to us in these notes. The first type we want to deal with is
+\begin{align*}
+  \mathfrak{t}_{\textrm{Mon}}
+  &:=
+  \left(
+    \lbrace
+      1,
+      2
+    \rbrace,
+    \mathbb{N},
+    \lbrace
+      (1,2),
+      (2,0)
+    \rbrace
+  \right)
+\end{align*}
+Note that the first coordinate in $\mathfrak{t}_{\textrm{Mon}}$ is rather arbitrary. The important fact is that graph of $\mathfrak{t}_{\textrm{Mon}}$ has exactly two elements with the specified second coordinates. But in material set theories like TG it is a priori not clear that it doesn't make a difference  what the first coordinates are. Formally, this is tedious and pretty annoying. In pratice, no one cares about this fact. Mathematics is rarely done formally by mathematicians, though mathematicians do actually compel themselves to do so to a certain degree. This is again a good point why we should care about other foundations such as ETCS or UFP-HoTT which do not have this drawback as structural theories. After this plea for structural theories let's go back to algebraic structures. An algebraic structure
+\begin{align*}
+  M
+  &\doteq
+  (M,\cdot)
+  \doteq
+  (M,\cdot,\mathrm{id})
+\end{align*}
+of type $\mathfrak{t}_{\textrm{Mon}}$ is a \textbf{monoid} if
+\begin{enumerate}
+\item[(M1)]
+$\cdot$ is associative
+\item[(M2)]
+$\mathrm{id}$ is an identity of $M$
+\end{enumerate}
+and a \textbf{commutative monoid} if further
+\begin{enumerate}
+\item[(CM)]
+$\cdot$ is commutative
+\end{enumerate}
+In very much the same way one defines groups and their commutative companions. Take
+\begin{align*}
+  \mathfrak{t}_{\textrm{Grp}}
+  &:=
+  \left(
+    \lbrace
+      1,
+      2,
+      3
+    \rbrace,
+    \mathbb{N},
+    \lbrace
+      (1,2),
+      (2,0),
+      (3,1)
+    \rbrace
+  \right)
+\end{align*}
+An algebraic structure
+\begin{align*}
+  G
+  &\doteq
+  (G,\cdot)
+  \doteq
+  (G,\cdot,\mathrm{id},\mathrm{inv})
+\end{align*}
+of type $\mathfrak{t}_{\textrm{Grp}}$ is a \textbf{group} if
+\begin{enumerate}
+\item[(G1)]
+$\cdot$ is associative
+\item[(G2)]
+$\mathrm{id}$ is an identity of $G$
+\item[(G3)]
+$\mathrm{inv}$ is an inversion of $G$
+\end{enumerate}
+and an \textbf{abelian group} if further
+\begin{enumerate}
+\item[(Ab)]
+$\cdot$ is commutative
+\end{enumerate}
+Hence if we restrict to a universe we get categories:
+\begin{enumerate}
+\item[$\bullet$]
+The category $\mathbf{Mon}$ with objects the monoids in the chosen universe and morphisms the appropriate homomorphisms composed in the usual manner.\footnote{note the (C3) trick from remark \ref{rem:c3trick}} $\mathbf{Mon}$ is called the \textbf{category of (small) monoids}
+\item[$\bullet$]
+The category $\mathbf{CMon}$ with objects the commutative monoids in the chosen universe and morphisms the morphisms in $\mathbf{Mon}$, making $\mathbf{CMon}$ a full subcategory. $\mathbf{CMon}$ is called the \textbf{category of (small) commutative monoids}
+\item[$\bullet$]
+The category $\mathbf{Grp}$ with objects the groups in the chosen universe and morphisms the appropriate homomorphisms composed in the usual manner.\footnote{note the (C3) trick from remark \ref{rem:c3trick}} $\mathbf{Grp}$ is called the \textbf{category of (small) groups}
+\item[$\bullet$]
+The category $\mathbf{Ab}$ with objects the abelian groups in the chosen universe and morphisms the morphisms in $\mathbf{Grp}$, making $\mathbf{Ab}$ a full subcategory. $\mathbf{Ab}$ is called the \textbf{category of (small) abelian groups}
+\end{enumerate}
+The careful reader might have recognized a resemblence of categories and monoids and thus of categories with all morphisms isomorphisms and groups. And this is one reason why we presented exactly these algebraic structues. Namely, the coincidence occurs for categories with precisely one object. Let $\pmb{\emptyset}$ be a category with\footnote{here, too, only the structure that the set has only one element is important and hence any other set with only one element would work} $\mathrm{ob}_{\pmb{\emptyset}} := \lbrace \emptyset \rbrace$. Then, by definition, we have a set
+\begin{align*}
+  M
+  &:=
+  \mathrm{mor}_{\pmb{\emptyset}}(\emptyset,\emptyset)
+\end{align*}
+and a function
+\begin{align*}
+  \circ
+  \colon
+  M
+  \times
+  M
+  \rightarrow
+  M
+\end{align*}
+namely the composition of morphisms, that make up a tuple $(M,\circ)$ which, together with the function defined by mapping $\emptyset$ to $\mathrm{id}_{\emptyset}$, is a monoid. The same reasoning applies to groups by setting
+\begin{align*}
+  G
+  &:=
+  \mathrm{iso}_{\pmb{\emptyset}}(\emptyset,\emptyset)
+\end{align*}
+Care must only be taken on the different conventions for $\circ$ and $\cdot$, respectively. Note that it doesn't matter if, for example, $\mathrm{id}$ is part of the structure as for monoids or part of the properties as for categories in category property (C2).\footnote{keyword is extension by definition in mathematical logic and it does also become very clear in UFP-HoTT} It is now not hard to see that any monoid gives rise to a category with precisely one object and that there is a one-to-one correspondence between such categories and monoids. Analogously, there is a one-to-one correspondence between one object categories with all morphisms isomorphisms - these are a special case of certain categories called groupoids defined in subsection \ref{sec:nt} - and groups. So for a monoid $(M,\cdot,\mathrm{id}) \in \mathrm{ob}_{\mathbf{Mon}}$ define a category
+\begin{align*}
+  \mathbf{B}M
+  &\doteq
+  \mathbf{B}(M,\cdot,\mathrm{id})
+\end{align*}
+by
+\begin{enumerate}
+\item[$\bullet$]
+the object set $\mathrm{ob}_{\mathbf{B}M} := \lbrace \emptyset \rbrace$
+\item[$\bullet$]
+composing morphisms
+\begin{align*}
+  \mathrm{mor}_{\mathbf{B}M}(\emptyset,\emptyset)
+  &:=
+  M
+\end{align*}
+by $\cdot$ with identity arrow $\mathrm{id}(\emptyset)$
+\end{enumerate}
+In very much the same way for a group $(G,\cdot,\mathrm{id},\mathrm{inv}) \in \mathrm{ob}_{\mathbf{Grp}}$ define a category (even a groupoid)
+\begin{align*}
+  \mathbf{B}G
+  &\doteq
+  \mathbf{B}(G,\cdot,\mathrm{id},\mathrm{inv})
+\end{align*}
+by
+\begin{enumerate}
+\item[$\bullet$]
+the object set $\mathrm{ob}_{\mathbf{B}G} := \lbrace \emptyset \rbrace$
+\item[$\bullet$]
+composing morphisms
+\begin{align*}
+  \mathrm{mor}_{\mathbf{B}G}(\emptyset,\emptyset)
+  &:=
+  G
+\end{align*}
+by $\cdot$ with identity arrow $\mathrm{id}(\emptyset)$
+\end{enumerate}
+We call $\mathbf{B}M$ the \textbf{delooping category (of $(M,\cdot,\mathrm{id})$)} while we call $\mathbf{B}G$ the \textbf{delooping groupoid (of $(G,\cdot,\mathrm{id},\mathrm{inv})$)}. This is just the beginning of a bigger idea we encounter in subsubsection \ref{sec:hlm} whereas the terminology will only become fully clear in subsection \ref{sec:sset}.
+\end{exa}
+\begin{prf}
+Easy (but a bit boring) exercise.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+In the next subsection \ref{sec:func} we continue example \ref{exa:algstruct1} by giving an alternative characterization of $\mathbf{Mon}$ and $\mathbf{Grp}$. We have actually already begun to do that here. When restricted to a universe one can wrap up all the $\pmb{\emptyset}$ in a category and then compare it to $\mathbf{Mon}$. What we miss is a morphism concept for categories and this will be the subject of the next subsection \ref{sec:func}.

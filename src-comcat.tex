@@ -1,0 +1,296 @@
+There is a generic but somewhat technical category which often appears throughout mathematics. This category is called comma category for historical reason and recognizing this category when it emerges usually allows a neater presentation. After defining this category precisely we consider a few special cases at the end of this subsection. These special cases will give a taste of what neater presentation means.
+\\
+Given functors $F_{\alpha\omega},F_{\beta\omega}$ a category $\mathbf{C}$ is called the \textbf{comma category (of $F_{\alpha\omega}$ and $F_{\beta\omega}$)} if elements of $\mathrm{ob}_{\mathbf{C}}$ are exactly the $3$-tuples $(X^{\alpha},X^{\beta},w)$ where
+\begin{align*}
+  w
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\omega}}
+  \left(
+    F_{\alpha\omega}(X^{\alpha}),
+    F_{\beta\omega}(X^{\beta})
+  \right)
+\end{align*}
+and if the elements of
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    (X_{1}^{\alpha},X_{1}^{\beta},w_{1}),
+    (X_{2}^{\alpha},X_{2}^{\beta},w_{2})
+  \right)
+\end{align*}
+are exactly the tuples $(f_{12}^{\alpha},f_{12}^{\beta})$ such that the diagram 
+\[
+\begin{tikzcd}[sep=large]
+  F_{\alpha\omega}(X_{1}^{\alpha})
+  \arrow{r}{F_{\alpha\omega}(f_{12}^{\alpha})}
+  \arrow[swap]{d}{w_{1}}
+  &
+  F_{\alpha\omega}(X_{2}^{\alpha})
+  \arrow{d}{w_{2}}
+  \\
+  F_{\beta\omega}(X_{1}^{\beta})
+  \arrow{r}{F_{\beta\omega}(f_{12}^{\beta})}
+  &
+  F_{\beta\omega}(X_{2}^{\beta})
+\end{tikzcd}
+\]
+commutes while composition is defined by
+\begin{align*}
+  (f_{23}^{\alpha},f_{23}^{\beta})
+  \circ_{\mathbf{C}}
+  (f_{12}^{\alpha},f_{12}^{\beta})
+  &:=
+  (f_{23}^{\alpha} \circ f_{12}^{\alpha},f_{23}^{\beta} \circ f_{12}^{\beta})
+\end{align*}
+The comma category of $F_{\alpha\omega}$ and $F_{\beta\omega}$ is usually denoted $(F_{\alpha\omega} \downarrow F_{\beta\omega})$. That $(F_{\alpha\omega} \downarrow F_{\beta\omega})$ is really a category becomes apparent if one identifies $(\mathrm{id}_{X^{\alpha}},\mathrm{id}_{X^{\beta}})$ as the identity. From the construction one sees that $(F_{\alpha\omega} \downarrow F_{\beta\omega})$ is not just a mere category which is why the dual formula of the formula represented by $(F_{\alpha\omega} \downarrow F_{\beta\omega})$ is not $(F_{\alpha\omega} \downarrow F_{\beta\omega})^{\mathrm{op}}$ but rather
+\begin{align*}
+  \left(
+    F_{\alpha\omega}^{\mathrm{op}}
+    \downarrow
+    F_{\beta\omega}^{\mathrm{op}}
+  \right)^{\mathrm{op}}
+\end{align*}
+Consequently,
+\begin{align*}
+  \left(
+    F_{\alpha\omega}^{\mathrm{op}}
+    \downarrow
+    F_{\beta\omega}^{\mathrm{op}}
+  \right)^{\mathrm{op}}
+\end{align*}
+is called \textbf{cocomma category (of $F_{\alpha\omega}$ and $F_{\beta\omega}$)}. It is clear that
+\begin{align*}
+  \left(
+    F_{\alpha\omega}^{\mathrm{op}}
+    \downarrow
+    F_{\beta\omega}^{\mathrm{op}}
+  \right)^{\mathrm{op}}
+  &\cong
+  (F_{\beta\omega} \downarrow F_{\alpha\omega})
+\end{align*}
+as a category. This isomorphism is often used tacitly in practice in the sense that $(F_{\beta\omega} \downarrow F_{\alpha\omega})$ represents a formula which holds if and only if the formula represented by
+\begin{align*}
+  \left(
+    F_{\alpha\omega}^{\mathrm{op}}
+    \downarrow
+    F_{\beta\omega}^{\mathrm{op}}
+  \right)^{\mathrm{op}}
+\end{align*}
+holds. Thus we can equivalently define:
+\begin{align*}
+  (F_{\beta\omega} \downarrow F_{\alpha\omega})
+\end{align*}
+is called the \textbf{cocomma category (of $F_{\alpha\omega}$ and $F_{\beta\omega}$)}. And for the sake of notational simplicity we shall use the latter definition of cocomma category hereafter.
+\\
+We now turn to the promised special cases from practice which are all isomorphic to comma categories:
+\begin{enumerate}
+\item[(1)]
+The comma category $(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{id}_{\mathbf{C}})$ is called the \textbf{category of bundles (of $\mathbf{C}$)}. The objects here are $3$-tuples $(X_{1},X_{2},p_{12})$ with
+\begin{align*}
+  p_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+\end{align*}
+while a morphism from $(X_{1},X_{2},p_{12})$ to $(X_{3},X_{4},p_{34})$ is a pair of morphisms
+\begin{align*}
+  (f_{13},f_{24})
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{3})
+  \times
+  \mathrm{mor}_{\mathbf{C}}(X_{2},X_{4})
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  X_{1}
+  \arrow{r}{f_{13}}
+  \arrow[swap]{d}{p_{12}}
+  &
+  X_{3}
+  \arrow{d}{p_{34}}
+  \\
+  X_{2}
+  \arrow{r}{f_{24}}
+  &
+  X_{4}
+\end{tikzcd}
+\]
+commutes. The terminology is due to the classical case when $\mathbf{C} = \mathbf{Top}$ since then an object of
+\begin{align*}
+  (\mathrm{id}_{\mathbf{Top}} \downarrow \mathrm{id}_{\mathbf{Top}})
+\end{align*}
+is simply a bundle as traditionally defined in topology while a morphism is bundle map. Hence we call an object $(X_{1},X_{2},p_{12})$ of the category of bundles of $\mathbf{C}$ a \textbf{bundle (of $\mathbf{C}$)} while we call a morphism $(f_{13},f_{24})$ from $(X_{1},X_{2},p_{12})$ to $(X_{3},X_{4},p_{34})$ a \textbf{bundle map (from $(X_{1},X_{2},p_{12})$ to $(X_{3},X_{4},p_{34})$ of $\mathbf{C}$)}. Moreover for a bundle $(X_{1},X_{2},p_{12})$ we call $X_{1}$ the \textbf{total space (of $p_{12}$)} and $X_{2}$ the \textbf{base space (of $p_{12}$)}. Next we define an obviously isomorphic category but nevertheless keep the bundle bundle terminology: $\mathbf{C}_{\rightarrow}$ is called \textbf{arrow category (of $\mathbf{C}$)} if
+\begin{align*}
+  \mathrm{ob}_{\mathbf{C}_{\rightarrow}}
+  &=
+  \mathrm{Mor}_{\mathbf{C}}
+\end{align*}
+and
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C}_{\rightarrow}}(p_{12},p_{34})
+  &=
+  \mathrm{mor}_{(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{id}_{\mathbf{C}})}
+  \left(
+    (X_{1},X_{2},p_{12}),
+    (X_{3},X_{4},p_{34})
+  \right)
+\end{align*}
+for all $X_{1},X_{2},X_{3},X_{4}$ and all
+\begin{align*}
+  p_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+  \\
+  p_{34}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{3},X_{4})
+\end{align*}
+It is clear that $(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{id}_{\mathbf{C}})$ is isomorphic to $\mathbf{C}_{\rightarrow}$ and so we can consider it structurally as the same. That is, we will often prefer $\mathbf{C}_{\rightarrow}$ over $(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{id}_{\mathbf{C}})$.
+\item[(2)]
+The comma category $(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{c}_{X})$ is called the \textbf{category of bundles (over $X$ of $\mathbf{C}$)}. The objects here are $3$-tuples $(X_{1},X,p_{1})$ with
+\begin{align*}
+  p_{1}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+\end{align*}
+while a morphism from $(X_{1},X,p_{1})$ to $(X_{2},X,p_{2})$ is a pair of morphisms
+\begin{align*}
+  (f_{12},\mathrm{id}_{X})
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+  \times
+  \mathrm{mor}_{\mathbf{C}}(X,X)
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  X_{1}
+  \arrow{rr}{f_{12}}
+  \arrow[swap]{dr}{p_{1}}
+  &
+  &
+  X_{2}
+  \arrow{dl}{p_{2}}
+  \\
+  &
+  X
+  &
+\end{tikzcd}
+\]
+commutes, the object $X$ being fixed all the time. It is clear that $(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{c}_{X})$ is a subcategory of $(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{id}_{\mathbf{C}})$. The terminology is again due to the classical case when $\mathbf{C} = \mathbf{Top}$ since then an object of
+\begin{align*}
+  (\mathrm{id}_{\mathbf{Top}} \downarrow \mathrm{c}_{X})
+\end{align*}
+is simply a bundle over $X$ as traditionally defined in topology while a morphism is a bundle map of bundles over the same base space. Hence we call an object $(X_{1},X,p_{1})$ of the category of bundles over $X$ of $\mathbf{C}$ a \textbf{bundle (over $X$ of $\mathbf{C}$)} while we call a morphism $(f_{12},\mathrm{id}_{X})$ from $(X_{1},X,p_{1})$ to $(X_{2},X,p_{2})$ a \textbf{bundle map (from $(X_{1},X,p_{1})$ to $(X_{2},X,p_{2})$ over $X$ of $\mathbf{C}$)}. We in turn define an obviously isomorphic category but nevertheless keep the bundle bundle terminology: $\mathbf{C} \slash X$ is called\footnote{the slice notated as $\slash$ can in fact be understood as a division as can be seen after some more category theory and understanding \cite{c55c71e8} (the point is that $\mathrm{id}_{X}$ is a so called terminal object)} \textbf{slice category (over $X$ of $\mathbf{C}$)} if
+\begin{align*}
+  \mathrm{ob}_{\mathbf{C} \slash X}
+  =
+  \bigcup_{X_{1} \in \mathrm{ob}_{\mathbf{C}}}
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+\end{align*}
+and
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C} \slash X}(p_{1},p_{2})
+  &=
+  \left\lbrace
+      f_{12}
+      \in
+      \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+    \,
+    \vert
+    \,
+      p_{1}
+      =
+      p_{2}
+      \circ
+      f_{12}
+  \right\rbrace
+\end{align*}
+It is clear that $(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{c}_{X})$ is isomorphic to $\mathbf{C} \slash X$ and so we can consider it structurally as the same. That is, we will mostly prefer $\mathbf{C} \slash X$ over $(\mathrm{id}_{\mathbf{C}} \downarrow \mathrm{c}_{X})$.
+\item[(3)]
+Let $F \colon \mathbf{C} \rightarrow \mathbf{Set}$ be a functor. The comma category $(\mathrm{c}_{\lbrace \emptyset \rbrace} \downarrow F)$ has objects $(\lbrace \emptyset \rbrace,X,w)$ with
+\begin{align*}
+  w
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(\lbrace \emptyset \rbrace,F(X))
+\end{align*}
+while a morphism from $(\lbrace \emptyset \rbrace,X_{1},w_{1})$ to $(\lbrace \emptyset \rbrace,X_{2},w_{2})$ is a pair of morphisms
+\begin{align*}
+  (\mathrm{id}_{\lbrace \emptyset \rbrace},f_{12})
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(\lbrace \emptyset \rbrace,\lbrace \emptyset \rbrace)
+  \times
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  \lbrace
+    \emptyset
+  \rbrace
+  \arrow[swap]{dl}{w_{1}}
+  \arrow{dr}{w_{2}}
+  &
+  \\
+  F(X_{1})
+  \arrow{rr}{F(f_{12})}
+  &
+  &
+  F(X_{2})
+\end{tikzcd}
+\]
+commutes. It is clear that if we take any one element set instead of $\lbrace \emptyset \rbrace$ we get an isomorphic category. Only the structure of a one element set matters here since its only purpose is to choose an element from $F(X)$ via $w$ - namely $w(\emptyset)$. This idea is a very important one in category theory an particularly in topos theory. We will come back to it as the text goes on. Anyways, it is clear that $(\lbrace \emptyset \rbrace,X,w)$ and $(X,w(\emptyset))$ correspond to each other while a morphism from $(\lbrace \emptyset \rbrace,X_{1},w_{1})$ to $(\lbrace \emptyset \rbrace,X_{2},w_{2})$ in the sense above is nothing but a morphism $f_{12} \in \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})$ such that
+\begin{align*}
+  F(f_{12})(w_{1}(\emptyset))
+  &=
+  w_{2}(\emptyset)
+\end{align*}
+Hence the category $\int_{\mathbf{C}}F$ called \textbf{category of elements (of $F$)} with objects the tuples $(X,x)$ where $X \in \mathrm{ob}_{\mathbf{C}}$ and $x \in F(X)$ and morphisms
+\begin{align*}
+  \mathrm{mor}_{\int_{\mathbf{C}}F}
+  \left(
+    (X_{1},x_{1}),
+    (X_{2},x_{2})
+  \right)
+  &:=
+  \left\lbrace
+      f_{12}
+      \in
+      \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+    \,
+    \vert
+    \,
+      F(f_{12})(x_{1})
+      =
+      x_{2}
+  \right\rbrace
+\end{align*}
+is isomorphic to $(\mathrm{c}_{\lbrace \emptyset \rbrace} \downarrow F)$. That is, we will actually always prefer $\int_{\mathbf{C}}F$ over $(\mathrm{c}_{\lbrace \emptyset \rbrace} \downarrow F)$. $\int_{\mathbf{C}}F$ seems notationally just way simpler.
+\\
+There is a dual notion of the above better suited to the needs of a presheaf $F \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Set}$ by using the cocomma category of $\mathrm{c}_{\lbrace \emptyset \rbrace}$ and $F$
+\begin{align*}
+  (F \downarrow \mathrm{c}_{\lbrace \emptyset \rbrace})
+\end{align*}
+By the dual reasoning this category is isomorphic to the the category $\int_{\mathbf{C}}^{\prime}F$ called \textbf{category of coelements (of $F$)} with objects the tuples $(X,x)$ where $X \in \mathrm{ob}_{\mathbf{C}}$ and $x \in F(X)$ and morphisms
+\begin{align*}
+  \mathrm{mor}_{\int_{\mathbf{C}}^{\prime}F}
+  \left(
+    (X_{1},x_{1}),
+    (X_{2},x_{2})
+  \right)
+  &:=
+  \left\lbrace
+      f_{21}^{\mathrm{op}}
+      \in
+      \mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}(X_{2},X_{1})
+    \,
+    \vert
+    \,
+      F(f_{21}^{\mathrm{op}})(x_{2})
+      =
+      x_{1}
+  \right\rbrace
+\end{align*}
+Of course, we actually always prefer $\int_{\mathbf{C}}^{\prime}F$ over $(F \downarrow \mathrm{c}_{\lbrace \emptyset \rbrace})$.
+\end{enumerate}

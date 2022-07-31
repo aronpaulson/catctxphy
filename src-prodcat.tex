@@ -1,0 +1,343 @@
+Given categories $\mathbf{C}_{\alpha}$ and $\mathbf{C}_{\beta}$ we can form a category denoted $\mathbf{C}_{\alpha} \times \mathbf{C}_{\beta}$ with objects the ordered pairs $(X^{\alpha},X^{\beta})$ and morphisms the ordered pairs $(f_{12}^{\alpha},f_{12}^{\beta})$ where composition is defined by
+\begin{align*}
+  \circ_{\mathbf{C}_{\alpha} \times \mathbf{C}_{\beta}}
+  \left(
+    (X_{1}^{\alpha},X_{1}^{\beta}),
+    (X_{2}^{\alpha},X_{2}^{\beta}),
+    (X_{3}^{\alpha},X_{3}^{\beta})
+  \right)
+  \left(
+    (f_{12}^{\alpha},f_{12}^{\beta}),
+    (f_{23}^{\alpha},f_{23}^{\beta})
+  \right)
+  :=
+  \left(
+    f_{23}^{\alpha}
+    \circ
+    f_{12}^{\alpha},
+    f_{23}^{\beta}
+    \circ
+    f_{12}^{\beta}
+  \right)
+\end{align*}
+Further the identity in
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C}_{\alpha}
+  \times
+  \mathbf{C}_{\beta}}
+  \left(
+    (X^{\alpha},X^{\beta}),
+    (X^{\alpha},X^{\beta})
+  \right)
+\end{align*}
+is given by $(\mathrm{id}_{X^{\alpha}},\mathrm{id}_{X^{\beta}})$. It is easy to check that this makes sense and is therefore left to the reader. $\mathbf{C}_{\alpha} \times \mathbf{C}_{\beta}$ is called the \textbf{product category (of $\mathbf{C}_{\alpha}$ and $\mathbf{C}_{\beta}$)}. From the above it is clear how the product category $\mathbf{C}_{\alpha} \times \mathbf{C}_{\beta} \times\mathbf{C}_{\gamma}$ of three categories is defined. In fact, even the case of finitely many categories is clear now. To introduce the behavior of functors regarding the construction of product categories we begin with an example. Given functors $F_{\alpha\gamma}$ and $F_{\beta\delta}$ one can define a functor
+\begin{align*}
+  F_{\alpha\gamma}
+  \times
+  F_{\beta\delta}
+  \colon
+  \mathbf{C}_{\alpha}
+  \times
+  \mathbf{C}_{\beta}
+  &\rightarrow
+  \mathbf{C}_{\gamma}
+  \times
+  \mathbf{C}_{\delta}
+  \\
+  (X^{\alpha},X^{\beta})
+  &\mapsto
+  (F_{\alpha\gamma}(X^{\alpha}),F_{\beta\delta}(X^{\beta}))
+  \\
+  (f_{12}^{\alpha},f_{12}^{\beta})
+  &\mapsto
+  \left(
+    F_{\alpha\gamma}(f_{12}^{\alpha}),
+    F_{\beta\delta}(f_{12}^{\beta})
+  \right)
+\end{align*}
+That this is a functor is quite clear from the assumption that $F_{\alpha\gamma}$ and $F_{\beta\delta}$ are functors. In a more general setting, too, functors behave almost as nicely as one would wish on product categories $\mathbf{C}_{\alpha} \times \mathbf{C}_{\beta}$. If
+\begin{align*}
+  F
+  \colon
+  \mathbf{C}_{\alpha}
+  \times
+  \mathbf{C}_{\beta}
+  &\rightarrow
+  \mathbf{C}
+\end{align*}
+is a functor so evidently is
+\begin{align*}
+  F(\cdot,X^{\beta})
+  \colon
+  \mathbf{C}_{\alpha}
+  &\rightarrow
+  \mathbf{C}
+  \\
+  X^{\alpha}
+  &\mapsto
+  F(X^{\alpha},X^{\beta})
+  \\
+  f_{12}^{\alpha}
+  &\mapsto
+  F(f_{12}^{\alpha},\mathrm{id}_{X^{\beta}})
+\end{align*}
+for arbitrary but fixed $X^{\beta}$ and
+\begin{align*}
+  F(X^{\alpha},\cdot)
+  \colon
+  \mathbf{C}_{\beta}
+  &\rightarrow
+  \mathbf{C}
+  \\
+  X^{\beta}
+  &\mapsto
+  F(X^{\alpha},X^{\beta})
+  \\
+  f_{12}^{\beta}
+  &\mapsto
+  F(\mathrm{id}_{X^{\alpha}},f_{12}^{\beta})
+\end{align*}
+for arbitrary but fixed $X^{\alpha}$. Even the reverse is true under some conditions as stated in the following theorem.
+\\
+\begin{thm}
+\label{thm:bifuncconstr}
+Let $F_{X^{\beta}} \colon \mathbf{C}_{\alpha} \rightarrow \mathbf{C}$ and $F_{X^{\alpha}} \colon \mathbf{C}_{\beta} \rightarrow \mathbf{C}$ be functors such that
+\begin{align*}
+  F_{X^{\beta}}(X^{\alpha})
+  &=
+  F_{X^{\alpha}}(X^{\beta})
+\end{align*}
+for all objects $X^{\alpha},X^{\beta}$. Then there exists a functor
+\begin{align*}
+  F
+  \colon
+  \mathbf{C}_{\alpha}
+  \times
+  \mathbf{C}_{\beta}
+  &\rightarrow
+  \mathbf{C}
+\end{align*}
+satisfying
+\begin{align*}
+  F_{X^{\beta}}(X^{\alpha})
+  &=
+  F(X^{\alpha},X^{\beta})
+  =
+  F_{X^{\alpha}}(X^{\beta})
+\end{align*}
+and
+\begin{align*}
+  F
+  \left(
+    f_{12}^{\alpha},\mathrm{id}_{X^{\beta}}
+  \right)
+  &=
+  F_{X^{\beta}}(f_{12}^{\alpha})
+  \\
+  F
+  \left(
+    \mathrm{id}_{X^{\alpha}},f_{12}^{\beta}
+  \right)
+  &=
+  F_{X^{\alpha}}(f_{12}^{\beta})
+\end{align*}
+if and only if
+\begin{align*}
+  F_{X_{2}^{\alpha}}(f_{12}^{\beta})
+  \circ
+  F_{X_{1}^{\beta}}(f_{12}^{\alpha})
+  &=
+  F_{X_{2}^{\beta}}(f_{12}^{\alpha})
+  \circ
+  F_{X_{1}^{\alpha}}(f_{12}^{\beta})
+\end{align*}
+holds.
+\end{thm}
+\begin{prf}
+{\glqq}$\Rightarrow${\grqq}
+\qquad
+Composition in the product category yields
+\begin{align*}
+  \left(
+    \mathrm{id}_{X_{2}^{\alpha}},
+    f_{12}^{\beta}
+  \right)
+  \circ
+  \left(
+    f_{12}^{\alpha},
+    \mathrm{id}_{X_{1}^{\beta}}
+  \right)
+  &=
+  (f_{12}^{\alpha},f_{12}^{\beta})
+  =
+  \left(
+    f_{12}^{\alpha},
+    \mathrm{id}_{X_{2}^{\beta}}
+  \right)
+  \circ
+  \left(
+    \mathrm{id}_{X_{1}^{\alpha}},
+    f_{12}^{\beta}
+  \right)
+\end{align*}
+Functoriality of $F$ gives
+\begin{align*}
+  F_{X_{2}^{\alpha}}(f_{12}^{\beta})
+  \circ
+  F_{X_{1}^{\beta}}(f_{12}^{\alpha})
+  &=
+  F
+  \left(
+    \mathrm{id}_{X_{2}^{\alpha}},
+    f_{12}^{\beta}
+  \right)
+  \circ
+  F
+  \left(
+    f_{12}^{\alpha},
+    \mathrm{id}_{X_{1}^{\beta}}
+  \right)
+  \\
+  &=
+  F
+  \left(
+    \left(
+      \mathrm{id}_{X_{2}^{\alpha}},
+      f_{12}^{\beta}
+    \right)
+    \circ
+    \left(
+      f_{12}^{\alpha},
+      \mathrm{id}_{X_{1}^{\beta}}
+    \right)
+  \right)
+  \\
+  &=
+  F
+  \left(
+    \left(
+      f_{12}^{\alpha},
+      \mathrm{id}_{X_{2}^{\beta}}
+    \right)
+    \circ
+    \left(
+      \mathrm{id}_{X_{1}^{\alpha}},
+      f_{12}^{\beta}
+    \right)
+  \right)
+  \\
+  &=
+  F
+  \left(
+    f_{12}^{\alpha},
+    \mathrm{id}_{X_{2}^{\beta}}
+  \right)
+  \circ
+  F
+  \left(
+    \mathrm{id}_{X_{1}^{\alpha}},
+    f_{12}^{\beta}
+  \right)
+  =
+  F_{X_{2}^{\beta}}(f_{12}^{\alpha})
+  \circ
+  F_{X_{1}^{\alpha}}(f_{12}^{\beta})
+\end{align*}
+And we are done with this direction.
+\\
+{\glqq}$\Leftarrow${\grqq}
+\qquad
+We can define a functor $F$ by
+\begin{align*}
+  (X^{\alpha},X^{\beta})
+  &\mapsto
+  F_{X^{\beta}}(X^{\alpha})
+  \\
+  (f_{12}^{\alpha},f_{12}^{\beta})
+  &\mapsto
+  F_{X_{2}^{\alpha}}(f_{12}^{\beta})
+  \circ
+  F_{X_{1}^{\beta}}(f_{12}^{\alpha})
+\end{align*}
+Well-definedness and functoriality of $F$ comes from the well-definedness and functoriality of $F_{X^{\alpha}}$ and $F_{X^{\beta}}$. Further,
+\begin{align*}
+  F_{X_{2}^{\alpha}}(f_{12}^{\beta})
+  \circ
+  F_{X_{1}^{\beta}}(f_{12}^{\alpha})
+  &=
+  F_{X_{2}^{\beta}}(f_{12}^{\alpha})
+  \circ
+  F_{X_{1}^{\alpha}}(f_{12}^{\beta})
+\end{align*}
+implies
+\begin{align*}
+  F(f_{12}^{\alpha},\mathrm{id}_{X^{\beta}})
+  &=
+  F_{X_{2}^{\alpha}}(\mathrm{id}_{X^{\beta}})
+  \circ
+  F_{X^{\beta}}(f_{12}^{\alpha})
+  \\
+  &=
+  \mathrm{id}_{F_{X_{2}^{\alpha}}(X^{\beta})}
+  \circ
+  F_{X^{\beta}}(f_{12}^{\alpha})
+  \\
+  &=
+  \mathrm{id}_{F_{X^{\beta}}(X_{2}^{\alpha})}
+  \circ
+  F_{X^{\beta}}(f_{12}^{\alpha})
+  =
+  F_{X^{\beta}}(f_{12}^{\alpha})
+\end{align*}
+and
+\begin{align*}
+  F(\mathrm{id}_{X^{\alpha}},f_{12}^{\beta})
+  &=
+  F_{X^{\alpha}}(f_{12}^{\beta})
+  \circ
+  F_{X_{1}^{\beta}}(\mathrm{id}_{X^{\alpha}})
+  \\
+  &=
+  F_{X_{2}^{\beta}}(\mathrm{id}_{X^{\alpha}})
+  \circ
+  F_{X^{\alpha}}(f_{12}^{\beta})
+  \\
+  &=
+  \mathrm{id}_{F_{X_{2}^{\beta}}(X^{\alpha})}
+  \circ
+  F_{X^{\alpha}}(f_{12}^{\beta})
+  \\
+  &=
+  \mathrm{id}_{F_{X^{\alpha}}(X_{2}^{\beta})}
+  \circ
+  F_{X^{\alpha}}(f_{12}^{\beta})
+  =
+  F_{X^{\alpha}}(f_{12}^{\beta})
+\end{align*}
+finishing the proof.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+The same results hold for functors on any product of categories with finite number of factors after all. Now, the above theorem \ref{thm:bifuncconstr} can be applied to the co- and contravariant hom-functors for $\mathbf{C}$ by observing that
+\begin{align*}
+  F_{X_{2}^{\alpha}}(f_{12}^{\beta})
+  \circ
+  F_{X_{1}^{\beta}}(f_{12}^{\alpha})
+  &=
+  F_{X_{2}^{\beta}}(f_{12}^{\alpha})
+  \circ
+  F_{X_{1}^{\alpha}}(f_{12}^{\beta})
+\end{align*}
+in this case is precisely the compatibilty of hom. The functor we get is called \textbf{hom-functor (for $\mathbf{C}$)} and is denoted
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}
+  \colon
+  \mathbf{C}^{\mathrm{op}}
+  \times
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{Set}
+\end{align*}
+vindicated by theorem \ref{thm:bifuncconstr}.

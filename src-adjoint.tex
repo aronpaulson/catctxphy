@@ -1,0 +1,3376 @@
+%\nocite{2148248a}
+%\nocite{00000011}
+%TODO
+%  mention that diagonal functor is adjoint to limit functor hence limit as adjoint
+In mathematics one often considers a set and equips it with some structure. We already alluded to that here and there but quite explicitly in remark \ref{rem:c3trick}. Such a structured set can be some algebraic structure but also a topological space, for example. Anyways, whatever structure the set is equipped with it can be forgotten to get back the set. We have explicitly given $F_{\mathrm{Mon}}$ and $F_{\mathrm{Top}}$ in this section already. The inverse process is different since, in general, there may be many qualitatively equal (or say homomorphic) structures on a set. That is, given a set, there can exist many different topologies on it, for example. So our problem is that we have forgotten something and if one forgets something one wants to recover it, at least qualitatively, in a most efficient way. It seems to be an accepted meta-principle that this is always possible in the sense that the authors are not aware of a counterexample or any guy assuming there is one. The process of forgetting and recovering qualitatively in a most efficient way can be formalized in category theory by two functors satisfying a condition familiar to almost any mathematician. One of the functors is called right adjoint and represents the problem. The other is called left adjoint and stands for the most efficient solution. Before stating the actual definition let us analyze the above situation in greater detail using the influential example of the Grothendieck group which is the starting point of K-theory and abstracted from the process of constructing the group of integers from the monoid of natural numbers. It is certainly helpful to recall example \ref{exa:freemon} about the free monoid which we could have taken as motivating example here as well. Since this example was also about forgetting. The problem we pose here is that we have forgotten the part of the abelian group structure concerning inverses and are thus left with a commutative monoid.
+\\
+\begin{exa}[Grothendieck Group]
+\label{exa:grothengr}
+Noting that $\mathbf{Ab}$ is a subcategory of $\mathbf{CMon}$ we have the inclusion functor
+\begin{align*}
+  I
+  \colon
+  \mathbf{Ab}
+  \rightarrow
+  \mathbf{CMon}
+\end{align*}
+which, roughly speaking, forgets about the inverses of an abelian group. Now let
+\begin{align*}
+  (M,+,e)
+  \doteq
+  (M,+_{M},e_{M})
+  &\in
+  \mathrm{ob}_{\mathbf{CMon}}
+\end{align*}
+Then define an equivalence relation $\sim$ on $M \times M$ by
+\begin{align*}
+  (m_{1},m_{2})
+  \sim
+  (m_{1}^{\backprime},m_{2}^{\backprime})
+\end{align*}
+if and only if there is an $m \in M$ such that
+\begin{align*}
+  m_{1}
+  +
+  m_{2}^{\backprime}
+  +
+  m
+  =
+  m_{1}^{\backprime}
+  +
+  m_{2}
+  +
+  m
+\end{align*}
+With that define a function $K_{\mathrm{ob}}$ by
+\begin{align*}
+  K_{\mathrm{ob}}(M) 
+  &:=
+  (M \times M)
+  \slash
+  \sim
+\end{align*}
+and a function $+_{K}$ by
+\begin{align*}
+  [(m_{1},m_{2})]
+  +_{K}
+  \left[
+    (m_{1}^{\backprime},m_{2}^{\backprime})
+  \right]
+  &:=
+  \left[
+    \left(
+      m_{1}
+      +
+      m_{1}^{\backprime}
+    \right),
+    \left(
+      m_{2}
+      +
+      m_{2}^{\backprime}
+    \right)
+  \right]
+\end{align*}
+for
+\begin{align*}
+  [(m_{1},m_{2})],
+  \left[
+    (m_{1}^{\backprime},m_{2}^{\backprime})
+  \right]
+  &\in
+  K_{\mathrm{ob}}(M)
+\end{align*}
+$+_{K}$ is well-defined. $[(e_{M},e_{M})]$ as identity and
+\begin{align*}
+  [(m_{1},m_{2})]^{-1}
+  :=
+  [(m_{2},m_{1})]
+\end{align*}
+as inversion implies
+\begin{align*}
+  \left(
+    K_{\mathrm{ob}}(M),
+    +_{K}
+  \right)
+  &\in
+  \mathrm{ob}_{\mathbf{Ab}}
+\end{align*}
+For $M \in \mathrm{ob}_{\mathbf{CMon}}$ let us further define
+\begin{align*}
+  \mathrm{i}_{M}
+  &\in
+  \mathrm{mor}_{\mathbf{CMon}}
+  \left(
+    M,
+    I(K_{\textrm{ob}}(M))
+  \right)
+\end{align*}
+by
+\begin{align*}
+  m
+  &\mapsto
+  [(m,e_{M})]
+\end{align*}
+Then for all
+\begin{align*}
+  (A,+,e)
+  \doteq
+  (A,+_{A},e_{A})
+  &\in
+  \mathrm{ob}_{\mathbf{Ab}}
+\end{align*}
+and
+\begin{align*}
+  g
+  &\in
+  \mathrm{mor}_{\mathbf{CMon}}(M,I(A))
+\end{align*}
+there is exactly one
+\begin{align*}
+  g_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{Ab}}(K_{\textrm{ob}}(M),A)
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  I(K_{\textrm{ob}}(M))
+  \arrow[swap]{dl}{I(g_{!})}
+  &
+  \\
+  I(A)
+  &
+  &
+  M
+  \arrow[swap]{ll}{g}
+  \arrow[swap]{ul}{\mathrm{i}_{M}}
+\end{tikzcd}
+\]
+commutes. In other words, for any $M \in \mathrm{ob}_{\mathbf{CMon}}$ the morphism $\mathrm{i}_{M}$ is an $I$-initial morphism for $M$. In particular, for any
+\begin{align*}
+  h
+  &\in
+  \mathrm{mor}_{\mathbf{CMon}}(M_{1},M_{2})
+\end{align*}
+we get a unique
+\begin{align*}
+  h_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{Ab}}
+  \left(
+    K_{\textrm{ob}}(M_{1}),
+    K_{\textrm{ob}}(M_{2})
+  \right)
+\end{align*}
+making the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  I(K_{\textrm{ob}}(M_{2}))
+  \arrow[swap]{dl}{I(h_{!})}  
+  &
+  \\
+  I(K_{\textrm{ob}}(M_{2}))
+  &
+  M_{2}
+  \arrow[swap]{l}{i_{M_{2}}}
+  &
+  M_{1}
+  \arrow[swap]{l}{h}
+  \arrow[swap]{ul}{i_{M_{1}}}
+\end{tikzcd}
+\]
+commute and defining
+\begin{align*}
+  K_{\mathrm{mor}}(M_{1},M_{2})
+  \colon
+  \mathrm{mor}_{\mathbf{CMon}}(M_{1},M_{2})
+  &\rightarrow
+  \mathrm{mor}_{\mathbf{Ab}}(K_{\mathrm{ob}}(M_{1}),K_{\mathrm{ob}}(M_{2}))
+  \\
+  h
+  &\mapsto
+  h_{!}
+\end{align*}
+yields a functor
+\begin{align*}
+  K
+  &:=
+  (K_{\mathrm{ob}},K_{\mathrm{mor}})
+\end{align*}
+More concretely, it must hold that $h_{!}$ is the morphism defined by
+\begin{align*}
+  [(m_{1},m_{2})]
+  \mapsto
+  [(h(m_{1}),h(m_{2}))]
+\end{align*}
+There is a certain symmetry or better say duality in the process described above. One could have started with the functor $K$ and the function $I_{\mathrm{ob}}$ to show that for all $A \in \mathrm{ob}_{\mathbf{Ab}}$ there exists a $K$-terminal morphism for $A$. Then, dually, one can conclude that $I_{\mathrm{ob}}$ extends to a functor which is $I$.
+\end{exa}
+\begin{prf}
+We just show the existence of the coterminal morphisms and leave the other technical details to the reader. The symmetry statement at the end of the example will be an application of the abstracted statement given a few lines further. Define
+\begin{align*}
+  g_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{Ab}}
+  \left(
+    K_{\textrm{ob}}(M),
+    A
+  \right)
+\end{align*}
+by
+\begin{align*}
+  [(m_{1},m_{2})]
+  &\mapsto
+  g(m_{1})
+  +
+  g(m_{2})^{-1}
+\end{align*}
+This is well-defined since
+\begin{align*}
+  g_{!}
+  \left(
+    [(m_{1},m_{2})]
+    +_{K}
+    \left[
+      (m_{1}^{\backprime},m_{2}^{\backprime})
+    \right]
+  \right)
+  &=
+  g_{!}
+  \left(
+    \left[
+      \left(
+        m_{1}
+        +
+        m_{1}^{\backprime}
+      \right),
+      \left(
+        m_{2}
+        +
+        m_{2}^{\backprime}
+      \right)
+    \right]
+  \right)
+  \\
+  &=
+  g
+  \left(
+    m_{1}
+    +
+    m_{1}^{\backprime}
+  \right)
+  +
+  g
+  \left(
+    m_{2}
+    +
+    m_{2}^{\backprime}
+  \right)^{-1}
+  \\
+  &=
+  g(m_{1})
+  +
+  g
+  \left(
+    m_{1}^{\backprime}
+  \right)
+  +
+  g(m_{2})^{-1}
+  +
+  g
+  \left(
+    m_{2}^{\backprime}
+  \right)^{-1}
+  \\
+  &=
+  g_{!}([(m_{1},m_{2})])
+  +
+  g_{!}
+  \left(
+    \left[
+      (m_{1}^{\backprime},m_{2}^{\backprime})
+    \right]
+  \right)
+\end{align*}
+and
+\begin{align*}
+  g_{!}([(e_{M},e_{M})])
+  &=
+  g(e_{M})
+  +
+  g(e_{M})^{-1}
+  =
+  e_{A}
+  +
+  e_{A}^{-1}
+  =
+  e_{A}
+\end{align*}
+It is obvious that $g_{!}$ makes the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  I(K_{\textrm{ob}}(M))
+  \arrow[swap]{dl}{I(g_{!})}
+  &
+  \\
+  I(A)
+  &
+  &
+  M
+  \arrow[swap]{ll}{g}
+  \arrow[swap]{ul}{\mathrm{i}_{M}}
+\end{tikzcd}
+\]
+commute. Let
+\begin{align*}
+  g_{!}^{\backprime}
+  &\in
+  \mathrm{mor}_{\mathbf{Ab}}
+  \left(
+    K_{\textrm{ob}}(M),
+    A
+  \right)
+\end{align*}
+be any morphism such that
+\[
+\begin{tikzcd}[sep=large]
+  &
+  I(K_{\textrm{ob}}(M))
+  \arrow[swap]{dl}{I(g_{!}^{\backprime})}
+  &
+  \\
+  I(A)
+  &
+  &
+  M
+  \arrow[swap]{ll}{g}
+  \arrow[swap]{ul}{\mathrm{i}_{M}}
+\end{tikzcd}
+\]
+commutes. Then
+\begin{align*}
+  g(m)
+  &=
+  g_{!}([(m,e)])
+  =
+  g_{!}^{\backprime}([(m,e)]
+\end{align*}
+and hence
+\begin{align*}
+  g_{!}^{\backprime}([(m_{1},m_{2})])
+  &=
+  g_{!}^{\backprime}([(m_{1},e)] +_{K} [(e,m_{2})])
+  \\
+  &=
+  g_{!}^{\backprime}([(m_{1},e)])
+  +
+  g_{!}^{\backprime}([(m_{2},e)])^{-1}
+  =
+  g(m_{1})
+  +
+  g(m_{2})^{-1}
+  =
+  g_{!}([(m_{1},m_{2})])
+\end{align*}
+since morphisms of abelian groups map inverses to inverses. Thus $g$ is unique.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+The above example \ref{exa:grothengr} provides a detailed instruction of how one is supposed to define left and right adjoint noting that a universal morphism is an optimal {\glqq}solution{\grqq} since any {\glqq}solution{\grqq} factors through it. For the record, $K$ will be a left adjoint to $I$ and $I$ will be a right adjoint to $K$. Now the definitions:
+\begin{enumerate}
+\item[(1T)]
+A functor $F_{\alpha\beta}$ is called \textbf{left adjoint} if there exists an $F_{\alpha\beta}$-terminal morphism for all $X^{\beta}$.
+\item[(1I)]
+A functor $F_{\beta\alpha}$ is called \textbf{right adjoint} if there exists an $F_{\beta\alpha}$-initial morphism for all $X^{\alpha}$.
+\end{enumerate}
+$F \colon \mathbf{C} \rightarrow \mathbf{C}_{\omega}$ being left/right adjoint means that there exists an $F$-terminal/initial morphism for all $X^{\omega}$. This is to say that for all $X^{\omega}$ there is a terminal/initial object in $(F \downarrow \mathrm{c}_{X^{\omega}})$ and $(\mathrm{c}_{X^{\omega}} \downarrow F)$, respectively. Since universal objects are only unique up to unique isomorphism we would like to choose one for each $X^{\omega}$. But since we only demand mere existence here and have not necessarily constructed one we could choose canonically we need someone who makes the choice for us. This is essentially the same issue as we had for limit/colimit functors and remark \ref{rem:ordinaltrick} also applies here. Hence in TG we formally have to invoke the axiom of choice. To this end let $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\omega}$ be a functor and define the sets
+\begin{align*}
+  \mathrm{Term}_{F}(X^{\omega})
+  &:=
+  \left\lbrace
+      (X,X^{\omega},t)
+      \in
+      \mathrm{ob}_{(F \downarrow \mathrm{c}_{X^{\omega}})}
+    \vert
+      (X,X^{\omega},t)
+      \text{ is terminal}
+  \right\rbrace
+\end{align*}
+if $F$ is left adjoint and
+\begin{align*}
+  \mathrm{Init}_{F}(X^{\omega})
+  &:=
+  \left\lbrace
+      (X^{\omega},X,i)
+      \in
+      \mathrm{ob}_{(\mathrm{c}_{X^{\omega} \downarrow F})}
+    \vert
+      (X^{\omega},X,i)
+      \text{ is initial}
+  \right\rbrace
+\end{align*}
+if $F$ is right adjoint. Then the axiom of coice of TG asserts that dependent functions
+\begin{align*}
+  c_{\mathrm{Term}}
+  &\in
+  \prod_{X^{\omega} \in \mathrm{ob}_{\mathbf{C}_{\omega}}}
+  \mathrm{Term}_{F}(X^{\omega})
+  \\
+  c_{\mathrm{Init}}
+  &\in
+  \prod_{X^{\omega} \in \mathrm{ob}_{\mathbf{C}_{\omega}}}
+  \mathrm{Init}_{F}(X^{\omega})
+\end{align*}
+exist if we did not construct the initial and terminal objects anyways as is common in category theory. The following lemma even asserts that given a left/right adjoint the choice is functorial in a unique way.
+\\
+\begin{lem}
+\label{lem:adjointto}
+\begin{enumerate}
+\item[(1T)]
+If $F_{\alpha\beta}$ is left adjoint and 
+\begin{align*}
+  c
+  &\in
+  \prod_{X^{\beta}}
+  \mathrm{Term}_{F_{\alpha\beta}}(X^{\beta})
+\end{align*}
+a dependent function then there is a unique functor $F^{c} \colon \mathbf{C}_{\beta} \rightarrow \mathbf{C}_{\alpha}$ such that
+\begin{align*}
+  F_{\mathrm{ob}}^{c}
+  &=
+  \mathrm{pr}_{1}
+  \circ
+  c
+\end{align*}
+and
+\begin{align*}
+  \varepsilon
+  \colon
+  F_{\alpha\beta}
+  \circ
+  F^{c}
+  &\Rightarrow
+  \mathrm{id}_{\mathbf{C}_{\beta}}
+  \\
+  X^{\beta}
+  &\mapsto
+  \mathrm{pr}_{3}
+  \circ
+  c
+\end{align*}
+is natural.
+\item[(1I)]
+If $F_{\beta\alpha}$ is right adjoint and 
+\begin{align*}
+  c
+  &\in
+  \prod_{X^{\alpha}}
+  \mathrm{Init}_{F_{\beta\alpha}}(X^{\alpha})
+\end{align*}
+a dependent function then there is a unique functor $F^{c} \colon \mathbf{C}_{\alpha} \rightarrow \mathbf{C}_{\beta}$ such that
+\begin{align*}
+  F_{\mathrm{ob}}^{c}
+  &=
+  \mathrm{pr}_{2}
+  \circ
+  c
+\end{align*}
+and
+\begin{align*}
+  \eta
+  \colon
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+  &\Rightarrow
+  F_{\beta\alpha}
+  \circ
+  F^{c}
+  \\
+  X^{\alpha}
+  &\mapsto
+  \mathrm{pr}_{3}
+  \circ
+  c
+\end{align*}
+is natural.
+\end{enumerate}
+\end{lem}
+\begin{prf}
+\begin{enumerate}
+\item[(1T)]
+We only show (1I) and use the duality principle \ref{thm:dp} for this.
+\item[(1I)]
+The proof can be abstracted from example \ref{exa:grothengr}. $F_{\beta\alpha}$ being right adjoint means that for all $X^{\alpha}$ there is an initial object of
+\begin{align*}
+  \left(
+    \mathrm{c}_{X^{\alpha}}
+    \downarrow
+    F_{\beta\alpha}
+  \right)
+\end{align*}
+Our assumption provides an explicit choice
+\begin{align*}
+  (X^{\alpha},c^{\alpha},i)
+  &:=
+  c(X^{\alpha})
+\end{align*}
+This has the property that
+\begin{align*}
+  i
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(c^{\alpha})
+  \right)
+\end{align*}
+and for all
+\begin{align*}
+  f
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+\end{align*}
+there is a unique
+\begin{align*}
+  f_{!}
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    c^{\alpha},
+    X^{\beta}
+  \right)
+\end{align*}
+making the diagram
+\[
+\begin{tikzcd}[sep=normal]
+  &
+  F_{\beta\alpha}(c^{\alpha})
+  \arrow[swap]{dl}{F_{\beta\alpha}(f_{!})}
+  &
+  \\
+  F_{\beta\alpha}(X^{\beta})
+  &
+  &
+  X^{\alpha}
+  \arrow[swap]{ll}{f}
+  \arrow[swap]{ul}{i}
+\end{tikzcd}
+\]
+commute. In particular if we denote
+\begin{align*}
+  c_{n}^{\alpha}
+  &:=
+  \mathrm{pr}_{2}
+  \left(
+    c(X_{n}^{\alpha})
+  \right)
+\end{align*}
+for all $n \in \mathbb{N}^{\times}$ then for any $f_{12}^{\alpha}$ we get a unique
+\begin{align*}
+  F_{f_{12}^{\alpha}}
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\beta\alpha}(c_{1}^{\alpha}),
+    F_{\beta\alpha}(c_{2}^{\alpha})
+  \right)
+\end{align*}
+making the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  F_{\beta\alpha}(c_{1}^{\alpha})
+  \arrow[swap]{dl}{F_{\beta\alpha}\left( F_{f_{12}^{\alpha}} \right)}  
+  &
+  \\
+  F_{\beta\alpha}(c_{2}^{\alpha})
+  &
+  X_{2}^{\alpha}
+  \arrow[swap]{l}{\eta(X_{2}^{\alpha})}
+  &
+  X_{1}^{\alpha}
+  \arrow[swap]{l}{f_{12}^{\alpha}}
+  \arrow[swap]{ul}{\eta(X_{1}^{\alpha})}
+\end{tikzcd}
+\]
+commute. So defining
+\begin{align*}
+  F^{c}
+  \colon
+  \mathbf{C}_{\alpha}
+  &\rightarrow
+  \mathbf{C}_{\beta}
+  \\
+  X^{\alpha}
+  &\mapsto
+  \mathrm{pr}_{2}
+  \left(
+    c(X^{\alpha})
+  \right)
+  \\
+  f_{12}^{\alpha}
+  &\mapsto
+  F_{f_{12}^{\alpha}}
+\end{align*}
+yields a functor. Verifying functor property (F1) is apparent while functor property (F2) is easily derived from the {\glqq}pasted{\grqq} commutative diagram
+\[
+\begin{tikzcd}[sep=normal]
+  &
+  &
+  F_{\beta\alpha}(c_{1}^{\alpha})
+  \arrow[swap]{dl}{F_{\beta\alpha}(F^{c}(f_{12}^{\alpha}))}
+  &
+  &
+  &
+  &
+  \\
+  &
+  F_{\beta\alpha}(c_{2}^{\alpha})
+  \arrow[swap]{dl}{F_{\beta\alpha}(F^{c}(f_{23}^{\alpha}))}
+  &
+  &
+  &
+  &
+  &
+  \\
+  F_{\beta\alpha}(c_{3}^{\alpha})
+  &
+  X_{3}^{\alpha}
+  \arrow[swap]{l}{\eta(X_{3}^{\alpha})}
+  &
+  X_{2}^{\alpha}
+  \arrow[swap]{l}{f_{23}^{\alpha}}
+  \arrow[swap]{ul}{\eta(X_{2}^{\alpha})}
+  &
+  &
+  &
+  &
+  X_{1}^{\alpha}
+  \arrow[swap]{llll}{f_{12}^{\alpha}}
+  \arrow[swap]{uullll}{\eta(X_{1}^{\alpha})}
+\end{tikzcd}
+\]
+Naturality is the second triangle of the proof and uniqueness is clear by construction.
+\end{enumerate}
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+This lemma gives rise to the following definitions.
+\begin{enumerate}
+\item[(1T)]
+A functor $F_{\alpha\beta}$ is called \textbf{left adjoint to $F_{\beta\alpha}$} if $F_{\alpha\beta}$ is left adjoint and if there is a function $c$ as in lemma \ref{lem:adjointto} such that
+\begin{align*}
+  F_{\beta\alpha}
+  &=
+  F^{c}
+\end{align*}
+\item[(1I)]
+A functor $F_{\beta\alpha}$ is called \textbf{right adjoint to $F_{\alpha\beta}$} if $F_{\beta\alpha}$ is right adjoint and if there is a function $c$ as in lemma \ref{lem:adjointto} such that
+\begin{align*}
+  F_{\alpha\beta}
+  &=
+  F^{c}
+\end{align*}
+\end{enumerate}
+In particular any left/right adjoint can be regarded as left/right adjoint to $F^{c_{\mathrm{Term}}}$ and $F^{c_{\mathrm{Init}}}$, respectively. Thus {\glqq}adjoint{\grqq} and {\glqq}adjoint to{\grqq} are in some sense the same.
+\\
+Now to settle the rest of the terminological questions we establish some other characterizations of left and right adjoint which in particular explain the symmetry addressed above as well as the motivation for the terminology. Note that adjoints are a special case of universal morphisms. Thus by the yoneda lemma \ref{lem:yoneda} we can change the perspective to representability. On the other hand we already hinted at a counit $\varepsilon$ and a unit $\eta$ in lemma \ref{lem:adjointto} as in abstract algebra\footnote{there, a counit is e.g. the dual pairing for tensor products of vector spaces which also makes clear why some authors use evaluation for counit and coevaluation for unit (see subsubsection \ref{sec:hlm})} and one might guess that also in this case the two possible compositions of these are both identities. All this is wrapped in the next theorem. The proof looks more intimidating than it really is. Actually, all the proofs in this subsection look so. But essentially one only uses expanding/collapsing definitions, naturality, universality and that the hom-functors are pre- and post-composition on morphisms (depending on their variance). Feel free to skip the proofs if you are short of time.
+\\
+\begin{thm}
+\label{thm:adjoints}
+Given functors $F_{\alpha\beta}$, $F_{\beta\alpha}$ the following statements are equivalent:
+\begin{enumerate}
+\item[(a)]
+$F_{\alpha\beta}$ is left adjoint to $F_{\beta\alpha}$.
+\item[(b)]
+$F_{\beta\alpha}$ is right adjoint to $F_{\alpha\beta}$.
+\item[(c)]
+There is a natural isomorphism from
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}_{\beta}}(F_{\alpha\beta}(\cdot),\cdot)
+  &:=
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \circ
+  \left(
+    F_{\alpha\beta}^{\mathrm{op}}
+    \times
+    \mathrm{id}_{\mathbf{C}_{\beta}}
+  \right)
+\end{align*}
+to
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}(\cdot,F_{\beta\alpha}(\cdot))
+  &:=
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \circ
+  \left(
+    \mathrm{id}_{\mathbf{C}_{\alpha}}^{\mathrm{op}}
+    \times
+    F_{\beta\alpha}
+  \right)
+\end{align*}
+\item[(d)]
+There are natural transformations
+\begin{align*}
+  \varepsilon
+  \colon
+  F_{\alpha\beta}
+  \circ
+  F_{\beta\alpha}
+  &\Rightarrow
+  \mathrm{id}_{\mathbf{C}_{\beta}}
+\end{align*}
+and
+\begin{align*}
+  \eta
+  \colon
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+  &\Rightarrow
+  F_{\beta\alpha}
+  \circ
+  F_{\alpha\beta}
+\end{align*}
+such that
+\begin{align*}
+  \left(
+    \varepsilon
+    \circ^{\textrm{h}}
+    \mathrm{id}_{F_{\alpha\beta}}
+  \right)
+  \circ
+  \left(
+    \mathrm{id}_{F_{\alpha\beta}}
+    \circ^{\textrm{h}}
+    \eta
+  \right)
+  &=
+  \varepsilon^{\textrm{lw}}[F_{\alpha\beta}]
+  \circ
+  \eta^{\textrm{rw}}[F_{\alpha\beta}]
+  =
+  \mathrm{id}_{F_{\alpha\beta}}
+  \\
+  \left(
+    \mathrm{id}_{F_{\beta\alpha}}
+    \circ^{\textrm{h}}
+    \varepsilon
+  \right)
+  \circ
+  \left(
+    \eta
+    \circ^{\textrm{h}}
+    \mathrm{id}_{F_{\beta\alpha}}
+  \right)
+  &=
+  \varepsilon^{\textrm{rw}}[F_{\beta\alpha}]
+  \circ
+  \eta^{\textrm{lw}}[F_{\beta\alpha}]
+  =
+  \mathrm{id}_{F_{\beta\alpha}}
+\end{align*}
+\end{enumerate}
+\end{thm}
+\begin{prf}
+{\glqq}(a) $\Rightarrow$ (c){\grqq}
+\qquad
+By premise and lemma \ref{lem:adjointto}, for all $X^{\beta}$ there exists a unique $F_{\alpha\beta}$-terminal morphism
+\begin{align*}
+  \varepsilon(X^{\beta})
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      F_{\beta\alpha}(X^{\beta})
+    \right),
+    X^{\beta}
+  \right)
+\end{align*}
+Define
+\begin{align*}
+  \mathsf{H}(X^{\alpha},X^{\beta})
+  \colon
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  &\rightarrow
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(X^{\alpha}),
+    X^{\beta}
+  \right)
+  \\
+  f^{\alpha}
+  &\mapsto
+  \varepsilon(X^{\beta})
+  \circ
+  F_{\alpha\beta}(f^{\alpha})
+\end{align*}
+First of all $\mathsf{H}(X^{\alpha},X^{\beta})$ is an isomorphism since $\varepsilon(X^{\beta})$ is $F_{\alpha\beta}$-terminal and this means that for all
+\begin{align*}
+  f
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(X^{\alpha}),
+    X^{\beta}
+  \right)
+\end{align*}
+there is one and only one
+\begin{align*}
+  f_{!}
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+\end{align*}
+such that
+\begin{align*}
+  \left(
+    \mathsf{H}(X^{\alpha},X^{\beta})
+  \right)
+  (f_{!})
+  &=
+  \varepsilon(X^{\beta})
+  \left(
+    F_{\alpha\beta}(f_{!})
+  \right)
+  =
+  f
+\end{align*}
+implying injectivity and surjectivity all at once. To prove naturality of $\mathsf{H}$ let
+\begin{align*}
+  (f_{21}^{\alpha},f_{12}^{\beta})
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}^{\mathrm{op}} \times \mathbf{C}_{\beta}}
+  \left(
+    (X_{1}^{\alpha},X_{1}^{\beta}),
+    (X_{2}^{\alpha},X_{2}^{\beta})
+  \right)
+\end{align*}
+Then
+\begin{align*}
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\beta}}
+    \left(
+      F_{\alpha\beta}(f_{21}^{\alpha}),
+      f_{12}^{\beta}
+    \right)
+    \circ
+    \mathsf{H}(X_{1}^{\alpha},X_{1}^{\beta})
+  \right)
+  (f^{\alpha})
+  &=
+  f_{12}^{\beta}
+  \circ
+  \varepsilon(X_{1}^{\beta})
+  \circ
+  F_{\alpha\beta}(f^{\alpha})
+  \circ
+  F_{\alpha\beta}(f_{21}^{\alpha})
+  \\
+  &=
+  \varepsilon(X_{2}^{\beta})
+  \circ
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}(f_{12}^{\beta})
+  \right)
+  \circ
+  F_{\alpha\beta}(f^{\alpha} \circ f_{21}^{\alpha})
+  \tag{NT}
+  \\
+  &=
+  \varepsilon(X_{2}^{\beta})
+  \circ
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}(f_{12}^{\beta})
+    \circ
+    f^{\alpha}
+    \circ
+    f_{21}^{\alpha}
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{H}(X_{2}^{\alpha},X_{2}^{\beta})
+    \circ
+    \mathrm{hom}_{\mathbf{C}_{\alpha}}
+    \left(
+      f_{21}^{\alpha},
+      F_{\beta\alpha}(f_{12}^{\beta})
+    \right)
+  \right)
+  (f^{\alpha})
+\end{align*}
+This shows naturality and we are done with this direction by choosing $\mathsf{H}^{\prime} := \mathsf{H}^{-1}$ as natural isomorphism.
+\\
+{\glqq}(b) $\Rightarrow$ (c){\grqq}
+\qquad
+This is the duality principle \ref{thm:dp} applied to {\glqq}(a) $\Rightarrow$ (c){\grqq}.
+\\
+{\glqq}(d) $\Rightarrow$ (c){\grqq}
+\qquad
+Let
+\begin{align*}
+  f^{\alpha}
+  \in
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  \qquad
+  &\text{and}
+  \qquad
+  f^{\beta}
+  \in
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(X^{\alpha}),
+    X^{\beta}
+  \right)
+\end{align*}
+and define
+\begin{align*}
+  \mathsf{H}(X^{\alpha},X^{\beta})(f^{\alpha})
+  &:=
+  \varepsilon(X^{\beta})
+  \circ
+  F_{\alpha\beta}(f^{\alpha})
+  \in
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(X^{\alpha}),
+    X^{\beta}
+  \right)
+  \\
+  \mathsf{H}^{\prime}(X^{\alpha},X^{\beta})(f^{\beta})
+  &:=
+  F_{\beta\alpha}(f^{\beta})
+  \circ
+  \eta(X^{\alpha})
+  \in
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+\end{align*}
+Naturality of $\mathsf{H}^{\prime}$ and $\mathsf{H}$ is apparent from the naturality of $\varepsilon$ and $\eta$, respectively. Namely, it is formally the same as the naturality proof in {\glqq}(a) $\Rightarrow$ (c){\grqq} and {\glqq}(b) $\Rightarrow$ (c){\grqq}. So it remains to show here that $\mathsf{H}^{\prime}$ and $\mathsf{H}$ are inverse to each other. This follows immediatly from the equalities
+\begin{align*}
+  \left(
+    \mathsf{H}(X^{\alpha},X^{\beta})
+    \circ
+    \mathsf{H}^{\prime}(X^{\alpha},X^{\beta})
+  \right)
+  (f^{\beta})
+  &=
+  \varepsilon(X^{\beta})
+  \circ
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}(f^{\beta})
+    \circ
+    \eta(X^{\alpha})
+  \right)
+  \\
+  &=
+  \varepsilon(X^{\beta})
+  \circ
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}(f^{\beta})
+  \right)
+  \circ
+  F_{\alpha\beta}
+  \left(
+    \eta(X^{\alpha})
+  \right)
+  \\
+  &=
+  f^{\beta}
+  \circ
+  \varepsilon
+  \left(
+    F_{\alpha\beta}(X^{\alpha})
+  \right)
+  \circ
+  F_{\alpha\beta}
+  \left(
+    \eta(X^{\alpha})
+  \right)
+  \tag{NT}
+  \\
+  &=
+  f^{\beta}
+  \circ
+  \left(
+    \varepsilon^{\textrm{lw}}[F_{\alpha\beta}]
+    \circ
+    \eta^{\textrm{rw}}[F_{\alpha\beta}]
+  \right)
+  (X^{\alpha})
+  \\
+  &=
+  f^{\beta}
+\end{align*}
+and
+\begin{align*}
+  \left(
+    \mathsf{H}^{\prime}(X^{\alpha},X^{\beta})
+    \circ
+    \mathsf{H}(X^{\alpha},X^{\beta})
+  \right)
+  (f^{\alpha})
+  &=
+  F_{\beta\alpha}
+  \left(
+    \varepsilon(X^{\beta})
+    \circ
+    F_{\alpha\beta}(f^{\alpha})
+  \right)
+  \circ
+  \eta(X^{\alpha})
+  \\
+  &=
+  F_{\beta\alpha}
+  \left(
+    \varepsilon(X^{\beta})
+  \right)
+  \circ
+  F_{\beta\alpha}
+  \left(
+    F_{\alpha\beta}(f^{\alpha})
+  \right)
+  \circ
+  \eta(X^{\alpha})
+  \\
+  &=
+  F_{\beta\alpha}
+  \left(
+    \varepsilon(X^{\beta})
+  \right)
+  \circ
+  \eta
+  \left(
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  \circ
+  f^{\alpha}
+  \tag{NT}
+  \\
+  &=
+  \left(
+    \varepsilon^{\textrm{rw}}[F_{\beta\alpha}]
+    \circ
+    \eta^{\textrm{lw}}[F_{\beta\alpha}]
+  \right)
+  (X^{\beta})
+  \circ
+  f^{\alpha}
+  \\
+  &=
+  f^{\alpha}
+\end{align*}
+using the premise in the last equalities in either case.
+\\
+{\glqq}(c) $\Rightarrow$ (a) $\land$ (b) $\land$ (d){\grqq}
+\qquad
+Let
+\begin{align*}
+  \mathsf{H}
+  \colon
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}(\cdot,F_{\beta\alpha}(\cdot))
+  &\Rightarrow
+  \mathrm{hom}_{\mathbf{C}_{\beta}}(F_{\alpha\beta}(\cdot),\cdot)
+\end{align*}
+be a natural isomorphism. Then define for all $X^{\alpha}$ and $X^{\beta}$
+\begin{align*}
+  \varepsilon(X^{\beta})
+  &:=
+  \mathsf{H}
+  \left(
+    F_{\beta\alpha}(X^{\beta}),
+    X^{\beta}
+  \right)
+  \left(
+    \mathrm{id}_{F_{\beta\alpha}(X^{\beta})}
+  \right)
+  \in
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      F_{\beta\alpha}(X^{\beta})
+    \right),
+    X^{\beta}
+  \right)
+  \\
+  \eta(X^{\alpha})
+  &:=
+  \mathsf{H}^{-1}
+  \left(
+    X^{\alpha},
+    F_{\alpha\beta}(X^{\alpha})
+  \right)
+  \left(
+    \mathrm{id}_{F_{\alpha\beta}(X^{\alpha})}
+  \right)
+  \in
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}
+    \left(
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+  \right)
+\end{align*}
+For
+\begin{align*}
+  f^{\alpha}
+  \in
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  \qquad
+  &\text{and}
+  \qquad
+  f^{\beta}
+  \in
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(X^{\alpha}),
+    X^{\beta}
+  \right)
+\end{align*}
+naturality of $\mathsf{H}$ implies
+\begin{align*}
+  \varepsilon(X^{\beta})
+  \circ
+  F_{\alpha\beta}(f^{\alpha})
+  &=
+  \mathsf{H}
+  \left(
+    F_{\beta\alpha}(X^{\beta}),
+    X^{\beta}
+  \right)
+  \left(
+    \mathrm{id}_{F_{\beta\alpha}(X^{\beta})}
+  \right)
+  \circ
+  F_{\alpha\beta}(f^{\alpha})
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(f^{\alpha}),
+    X^{\beta}
+  \right)
+  \left(
+    \mathsf{H}
+    \left(
+      F_{\beta\alpha}(X^{\beta}),
+      X^{\beta}
+    \right)
+    \left(
+      \mathrm{id}_{F_{\beta\alpha}(X^{\beta})}
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{H}(X^{\alpha},X^{\beta})
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\alpha}}
+    \left(
+      f^{\alpha},
+      F_{\beta\alpha}(X^{\beta})
+    \right)
+    \left(
+      \mathrm{id}_{F_{\beta\alpha}(X^{\beta})}
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{H}(X^{\alpha},X^{\beta})
+  \left(
+    \mathrm{id}_{F_{\beta\alpha}(X^{\beta})}
+    \circ
+    f^{\alpha}
+  \right)
+  \\
+  &=
+  \mathsf{H}(X^{\alpha},X^{\beta})(f^{\alpha})
+\end{align*}
+and
+\begin{align*}
+  F_{\beta\alpha}(f^{\beta})
+  \circ
+  \eta(X^{\alpha})
+  &=
+  F_{\beta\alpha}(f^{\beta})
+  \circ
+  \mathsf{H}^{-1}
+  \left(
+    X^{\alpha},
+    F_{\alpha\beta}(X^{\alpha})
+  \right)
+  \left(
+    \mathrm{id}_{F_{\alpha\beta}(X^{\alpha})}
+  \right)
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(f^{\beta})
+  \right)
+  \left(
+    \mathsf{H}^{-1}
+    \left(
+      X^{\alpha},
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+    \left(
+      \mathrm{id}_{F_{\alpha\beta}(X^{\alpha})}
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{H}^{-1}
+  \left(
+    X^{\alpha},
+    X^{\beta}
+  \right)
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\beta}}
+    \left(
+      F_{\alpha\beta}(X^{\alpha}),
+      f^{\beta}
+    \right)
+    \left(
+      \mathrm{id}_{F_{\alpha\beta}(X^{\alpha})}
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{H}^{-1}
+  \left(
+    X^{\alpha},
+    X^{\beta}
+  \right)
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\beta}}
+    \left(
+      f^{\beta}
+      \circ
+      \mathrm{id}_{F_{\alpha\beta}(X^{\alpha})}
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{H}^{-1}
+  \left(
+    X^{\alpha},
+    X^{\beta}
+  \right)
+  (f^{\beta})
+\end{align*}
+With these preparations the proof splits into two steps:
+\begin{description}
+\item[Step 1]
+To show {\glqq}(c) $\Rightarrow$ (a){\grqq} we need to show that for all $X^{\beta}$ the morphism
+\begin{align*}
+  \varepsilon(X^{\beta})
+  &\in
+  \left(
+    F_{\alpha\beta}(F_{\beta\alpha}(X^{\beta})),
+    X^{\beta}
+  \right)
+\end{align*}
+is an $F_{\alpha\beta}$-terminal morphism for $X^{\beta}$. So take an arbitrary 
+\begin{align*}
+  f
+  &\in
+  \left(
+    F_{\alpha\beta}
+    \left(
+      X^{\alpha}
+    \right),
+    X^{\beta}
+  \right)
+\end{align*}
+Then to make the diagram
+\[
+\begin{tikzcd}[sep=normal]
+  &
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  \arrow{dr}{\varepsilon(X^{\beta})}
+  &
+  \\
+  F_{\alpha\beta}
+  \left(
+    X^{\alpha}
+  \right)
+  \arrow{ur}{F_{\alpha\beta}(f_{!})}
+  \arrow{rr}{f}
+  &
+  &
+  X^{\beta}
+\end{tikzcd}
+\]
+commute for a unique
+\begin{align*}
+  f_{!}
+  &\in
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}
+    \left(
+      X^{\beta}
+    \right)
+  \right)
+\end{align*}
+we must have
+\begin{align*}
+  \mathsf{H}(X^{\alpha},X^{\beta})(f_{!})
+  &=
+  f
+\end{align*}
+and since $\mathsf{H}(X^{\alpha},X^{\beta})$ is an isomorphism
+\begin{align*}
+  f_{!}
+  &:=
+  \mathsf{H}(X^{\alpha},X^{\beta})^{-1}(f)
+\end{align*}
+is the only possible choice. By the duality principle \ref{thm:dp} we can now deduce {\glqq}(c) $\Rightarrow$ (b){\grqq}, too.
+\item[Step 2]
+To show {\glqq}(c) $\Rightarrow$ (d){\grqq} we first show that $\varepsilon$ and $\eta$ are both natural. This is an implication of the naturality of $\mathsf{H}$. For all $f_{12}^{\beta}$ we get
+\begin{align*}
+  f_{12}^{\beta}
+  \circ
+  \varepsilon(X_{1}^{\beta})
+  &=
+  f_{12}^{\beta}
+  \circ
+  \mathsf{H}
+  \left(
+    F_{\beta\alpha}(X_{1}^{\beta}),
+    X_{1}^{\beta}
+  \right)
+  \left(
+    \mathrm{id}_{F_{\beta\alpha}(X_{1}^{\beta})}
+  \right)
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      F_{\beta\alpha}(X_{1}^{\beta})
+    \right),
+    f_{12}^{\beta}
+  \right)
+  \left(
+    \mathsf{H}
+    \left(
+      F_{\beta\alpha}(X_{1}^{\beta}),
+      X_{1}^{\beta}
+    \right)
+    \left(
+      \mathrm{id}_{F_{\beta\alpha}(X_{1}^{\beta})}
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{H}
+  \left(
+    F_{\beta\alpha}(X_{1}^{\beta}),
+    X_{2}^{\beta}
+  \right)
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\alpha}}
+    \left(
+      F_{\beta\alpha}(X_{1}^{\beta}),
+      F_{\beta\alpha}(f_{12}^{\beta})
+    \right)
+    \left(
+      \mathrm{id}_{F_{\beta\alpha}(X_{1}^{\beta})}
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{H}
+  \left(
+    F_{\beta\alpha}(X_{1}^{\beta}),
+    X_{2}^{\beta}
+  \right)
+  \left(
+    F_{\beta\alpha}(f_{12}^{\beta})
+  \right)
+  \\
+  &=
+  \varepsilon(X_{2}^{\beta})
+  \circ
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}(f_{12}^{\beta})
+  \right)
+\end{align*}
+and for all $f_{12}^{\alpha}$ we get
+\begin{align*}
+  \eta(X_{2}^{\alpha})
+  \circ
+  f_{12}^{\alpha}
+  &=
+  \mathsf{H}^{-1}
+  \left(
+    X_{2}^{\alpha},
+    F_{\alpha\beta}(X_{2}^{\alpha})
+  \right)
+  \left(
+    \mathrm{id}_{F_{\alpha\beta}(X_{2}^{\alpha})}
+  \right)
+  \circ
+  f_{12}^{\alpha}
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+    f_{12}^{\alpha},
+    F_{\beta\alpha}
+    \left(
+      F_{\alpha\beta}(X_{2}^{\beta})
+    \right)
+  \right)
+  \left(
+    \mathsf{H}^{-1}
+    \left(
+      X_{2}^{\alpha},
+      F_{\alpha\beta}(X_{2}^{\alpha})
+    \right)
+    \left(
+      \mathrm{id}_{F_{\alpha\beta}(X_{2}^{\alpha})}
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{H}^{-1}
+    \left(
+      X_{1}^{\alpha},
+      F_{\alpha\beta}(X_{2}^{\alpha})
+    \right)
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\alpha}}
+    \left(
+      F_{\alpha\beta}(f_{12}^{\alpha}),
+      F_{\alpha\beta}(X_{2}^{\beta})
+    \right)
+    \left(
+      \mathrm{id}_{F_{\alpha\beta}(X_{2}^{\alpha})}
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{H}^{-1}
+    \left(
+      X_{1}^{\alpha},
+      F_{\alpha\beta}(X_{2}^{\alpha})
+    \right)
+  \left(
+    F_{\alpha\beta}(f_{12}^{\alpha})
+  \right)
+  \\
+  &=
+  F_{\beta\alpha}
+  \left(
+    F_{\alpha\beta}(f_{12}^{\alpha})
+  \right)
+  \circ
+  \eta(X_{1}^{\alpha})
+\end{align*}
+Further setting $X^{\beta} := F_{\alpha\beta}(X^{\alpha})$ and $f^{\alpha} := \eta(X^{\alpha})$ yields
+\begin{align*}
+  &\phantom{=}
+  \varepsilon
+  \left(
+    F_{\alpha\beta}(X^{\alpha})
+  \right)
+  \circ
+  F_{\alpha\beta}
+  \left(
+    \eta(X^{\alpha})
+  \right)
+  \\
+  &=
+  \varepsilon(X^{\beta})
+  \circ
+  F_{\alpha\beta}(f^{\alpha})
+  \\
+  &=
+  \mathsf{H}(X^{\alpha},X^{\beta})(f^{\alpha})
+  \\
+  &=
+  \mathsf{H}
+  \left(
+    X^{\alpha},
+    F_{\alpha\beta}(X^{\alpha})
+  \right)
+  \left(
+    \eta(X^{\alpha})
+  \right)
+  \\
+  &=
+  \mathsf{H}
+  \left(
+    X^{\alpha},
+    F_{\alpha\beta}(X^{\alpha})
+  \right)
+  \left(
+    \mathsf{H}^{-1}
+    \left(
+      X^{\alpha},
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+    \left(
+      \mathrm{id}_{F_{\alpha\beta}(X^{\alpha})}
+    \right)
+  \right)
+  \\
+  &=
+  \mathrm{id}_{F_{\alpha\beta}(X^{\alpha})}
+\end{align*}
+and setting $X^{\alpha} := F_{\beta\alpha}(X^{\beta})$ and $f^{\beta} := \varepsilon(X^{\beta})$ yields
+\begin{align*}
+  &\phantom{=}
+  F_{\beta\alpha}
+  \left(
+    \varepsilon(X^{\beta})
+  \right)
+  \circ
+  \eta
+  \left(
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  \\
+  &=
+  F_{\beta\alpha}(f^{\beta})
+  \circ
+  \eta(X^{\alpha})
+  \\
+  &=
+  \mathsf{H}^{-1}(X^{\alpha},X^{\beta})(f^{\beta})
+  \\
+  &=
+  \mathsf{H}^{-1}
+  \left(
+    F_{\beta\alpha}(X^{\beta}),
+    X^{\beta}
+  \right)
+  \left(
+    \varepsilon(X^{\beta})
+  \right)
+  \\
+  &=
+  \mathsf{H}^{-1}
+  \left(
+    F_{\beta\alpha}(X^{\beta}),
+    X^{\beta}
+  \right)
+  \left(
+    \mathsf{H}
+    \left(
+      F_{\beta\alpha}(X^{\beta}),
+      X^{\beta}
+    \right)
+    \left(
+      \mathrm{id}_{F_{\beta\alpha}(X^{\beta})}
+    \right)
+  \right)
+  \\
+  &=
+  \mathrm{id}_{F_{\beta\alpha}(X^{\beta})}
+\end{align*}
+Hence this step shows {\glqq}(c) $\Rightarrow$ (d){\grqq}.
+\end{description}
+All in all we get {\glqq}(c) $\Rightarrow$ (a) $\land$ (b) $\land$ (d){\grqq}.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Note that a left adjoint stands in the left argument of the hom-functor while the right adjoint stands in the right one. Moreover there is a common notation to express that $F_{\alpha\beta}$ is left adjoint to $F_{\beta\alpha}$ - namely
+\begin{align*}
+  F_{\alpha\beta}
+  &\dashv
+  F_{\beta\alpha}
+\end{align*}
+Having these other characterizations of adjoint functors at hand we are able to see a little more behind the idea. The careful reader familiar with Hilbert spaces and linear operators might have recognized that statement (c) in theorem \ref{thm:adjoints} is formally the same statement as the definition of the Hilbert space adjoint if one interprets the categories as Hilbert spaces, the objects as its points, the functors as linear operators and the hom-functors as scalar products. And this is in fact where the terminology {\glqq}adjoint{\grqq} stems from. In \cite{2148248a} this proves helpful in an attempt to construct a category version of a Hilbert space.\footnote{we will encounter the same process in general in section \ref{sec:metaidea} and in particular in subsubsection \ref{sec:hlm} albeit in the simpler case of a monoid} In our notes we introduced adjoints by universality (as one should always do to avoid reference to sets following the philosophy that categories are more basic) motivated by example \ref{exa:grothengr}. But, historically, statement (c) in theorem \ref{thm:adjoints} was presumably prior to our definition. This was because $\mathbf{Set}$ has the eye-catching feature that for a set $Y$ we get a natural isomorphism $\mathsf{H}$ defined by
+\begin{align*}
+  \mathsf{H}(Y_{1},Y_{2})
+  \colon
+  \mathrm{hom}_{\mathbf{Set}}(Y \times Y_{1},Y_{2})
+  &\rightarrow
+  \mathrm{hom}_{\mathbf{Set}}
+  \left(
+    Y_{1},
+    \mathrm{hom}_{\mathbf{Set}}(Y,Y_{2})
+  \right)
+  \\
+  f
+  &\mapsto
+  \left(
+    y_{1}
+    \mapsto
+    f(\cdot,y_{1})
+  \right)
+\end{align*}
+That is, taking the product with $Y$ is a left adjoint functor to the contravariant hom-functor for $Y$ and $\mathbf{Set}$. This process of making a function of two arguments into a function of one argument is known as Currying\footnote{named after the logician Haskell Curry} and we already made use of this in these notes when formulating the sheaf condition, for example. Currying is apparently reversible. As adjunction we can express Currying by universality, that is, without any reference to a set theory and therefore it is common to demand this property as axiom for a theory with functions as basic mathematical object. In particular, ETCS and UFP-HoTT make use of this. Note that this kind of adjunction does not only make sense in $\mathbf{Set}$ but actually in any category with binary products. The property is formalized as cartesian closed and it is in fact interesting for other categories, too. For the purpose of homotopy theory with topological spaces, for instance, it can be convenient to restrict to a subcategory of $\mathbf{Top}$ with this feature to properly handle the theory of fiber and cofiber sequences. One can achieve this by restricting to \textit{compactly generated spaces} which form a convenient\footnote{often defined as: contain all CW complexes, bicomplete, cartesian closed} category of topological spaces. Now to define cartesian closed take a category $\mathbf{C}$ with all binary products and define for each object $X_{0}$ a functor
+\begin{align*}
+  \times_{\mathbf{C}}^{X_{0}}
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{C}
+  \\
+  X
+  &\mapsto
+  X
+  \times_{\mathbf{C}}
+  X_{0}
+  \\
+  f_{12}
+  &\mapsto
+  f_{12}
+  \times_{\mathbf{C}}
+  \mathrm{id}_{X_{0}}
+\end{align*}
+where $f_{12} \times_{\mathbf{C}} \mathrm{id}_{X_{0}}$ is the unique morphism such that
+\begin{align*}
+  f_{12}
+  &=
+  \mathrm{pr}_{1}
+  \circ
+  \left(
+    f_{12}
+    \times_{\mathbf{C}}
+    \mathrm{id}_{X_{0}}
+  \right)
+  \\
+  \mathrm{id}_{X_{0}}
+  &=
+  \mathrm{pr}_{2}
+  \circ
+  \left(
+    f_{12}
+    \times_{\mathbf{C}}
+    \mathrm{id}_{X_{0}}
+  \right)
+\end{align*}
+Of course, we also have a functor
+\begin{align*}
+  {}^{X_{0}}\times_{\mathbf{C}}
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{C}
+  \\
+  X
+  &\mapsto
+  X_{0}
+  \times_{\mathbf{C}}
+  X
+  \\
+  f_{12}
+  &\mapsto
+  \mathrm{id}_{X_{0}}
+  \times_{\mathbf{C}}
+  f_{12}
+\end{align*}
+defined in a similar vein. Now a category $\mathbf{C}$ with binary products and terminal object is called \textbf{cartesian closed} if
+\begin{enumerate}
+\item[(CC)]
+the functor $\times_{\mathbf{C}}^{X_{0}}$ is left adjoint for all $X_{0}$.
+\end{enumerate}
+While we are on topology anyways let us slide in an important example from homotopy theory.
+\\
+\begin{exa}
+\label{exa:loopradjoint}
+The loop space $\Omega_{Y}$ of some space $Y$ is the space of $1$-loops topologized by the \textit{compact-open topology}. $\Omega$ is actually a functor
+\begin{align*}
+  \Omega
+  \colon
+  \mathbf{HTop}_{\ast}
+  &\rightarrow
+  \mathbf{HTop}_{\ast}
+  \\
+  Y
+  &\mapsto
+  \Omega_{Y}
+  \\
+  [f_{12}]
+  &\mapsto
+  \left[
+    l
+    \mapsto
+    f_{12}
+    \circ
+    l
+  \right]
+\end{align*}
+We call $\Omega$ \textbf{loop space functor}. One can show that $\Omega$ is right adjoint. The according left adjoint is the so called reduced suspension. This is important in the course of showing that \textit{axiomatic cohomology}\footnote{for more on this see e.g. \cite{00000011}} is a special case of homotopy theory. To this end note that a sequence
+\begin{align*}
+  A
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}
+  \left(
+    \mathbb{Z},
+    \mathrm{ob}_{\mathbf{HTop}_{\ast}^{\textrm{CW}}}
+  \right)
+\end{align*}
+is called \textbf{$\Omega$-spectrum} if there are weak homotopy equivalences
+\begin{align*}
+  w_{n}
+  \colon
+  A(n)
+  \rightarrow
+  \Omega(A(n+1))
+\end{align*}
+for all $n \in \mathbb{Z}$. One can then show that \textit{reduced cohomology theories}\footnote{and reduced ones suffice according to \cite{8b5861fc}}
+\begin{align*}
+  h
+  &\in
+  \mathrm{mor}_{\mathbf{Set}}
+  \left(
+    \mathbb{Z},
+    \mathrm{mor}_{\mathbf{Cat}}
+    \left(
+      \mathbf{HTop}_{\ast}^{\textrm{CW}},
+      \mathbf{Ab}^{\textrm{op}}
+    \right)
+  \right)
+\end{align*}
+are exactly of the form
+\begin{align*}
+  h(n)
+  &=
+  \mathrm{hom}_{\mathbf{HTop}_{\ast}^{\textrm{CW}}}(\cdot,A(n))
+\end{align*}
+for $n \in \mathbb{Z}$. That any reduced cohomology theory is obtained so is a consequence of the \textit{Brown representability theorem}. The Brown representability theorem is about the representability of a functor as the name suggests but we do not want to say more about this important theorem here. Last note that with a more general definition for spectrum we could do the same with unreduced cohomology theories.
+\end{exa}
+\begin{prf}
+See e.g. \cite{8b5861fc} chapter 4 for more details. Particularly for a version of the Brown representability theorem.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Now there is a handy corollary.
+\\
+\begin{cor}
+\label{cor:adjointequiv}
+Let $F_{\alpha\beta}$ be left adjoint to $F_{\beta\alpha}$. Then there are full subcategories $\mathbf{S}_{\alpha}$ of $\mathbf{C}_{\alpha}$ and $\mathbf{S}_{\beta}$ of $\mathbf{C}_{\beta}$ such that
+\begin{align*}
+  \mathbf{S}_{\alpha}
+  &\simeq
+  \mathbf{S}_{\beta}
+\end{align*}
+\end{cor}
+\begin{prf}
+Consider statement (d) in theorem \ref{thm:adjoints}. Define
+\begin{align*}
+  \mathrm{ob}_{\mathbf{S}_{\alpha}}
+  &:=
+  \left\lbrace
+      X^{\alpha}
+      \in
+      \mathrm{ob}_{\mathbf{C}_{\alpha}}
+    \,
+    \vert
+    \,
+      \eta(X^{\alpha})
+      \in
+      \mathrm{iso}_{\mathbf{C}_{\alpha}}
+      \left(
+        X^{\alpha},
+        F_{\beta\alpha}
+        \left(
+          F_{\alpha\beta}(X^{\alpha})
+        \right)
+      \right)
+  \right\rbrace
+  \\
+  \mathrm{ob}_{\mathbf{S}_{\beta}}
+  &:=
+  \left\lbrace
+      X^{\beta}
+      \in
+      \mathrm{ob}_{\mathbf{C}_{\beta}}
+    \,
+    \left\vert
+    \,
+      \varepsilon(X^{\beta})
+      \in
+      \mathrm{iso}_{\mathbf{C}_{\beta}}
+      \left(
+        F_{\alpha\beta}
+        \left(
+          F_{\beta\alpha}(X^{\beta})
+        \right),
+        X^{\beta}
+      \right)
+    \right.
+  \right\rbrace
+\end{align*}
+Hence $F_{\alpha\beta} \vert \mathbf{S}_{\alpha}$ can be redefined as {\glqq}the same{\grqq} functor with codomain $\mathbf{S}_{\beta}$ while $F_{\beta\alpha} \vert \mathbf{S}_{\beta}$ can be redefined as {\glqq}the same{\grqq} functor with codomain $\mathbf{S}_{\alpha}$. And the functors defined so are weakly inverse to each other by $\eta \vert \mathrm{ob}_{\mathbf{S}_{\alpha}}$ and $\varepsilon \vert \mathrm{ob}_{\mathbf{S}_{\beta}}$, respectively.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+As usual in mathematics at some point in developing a new conception existence and uniqeness questions arise. Since not all functors are left or right adjoint to some other functor one wonders under what conditions they are. We defer the existence question for the moment because we will presently see that there are neccessary conditions on the categories. So let's turn to the uniqueness question.
+\\
+\begin{thm}
+\label{thm:adjointuniq}
+Let $F_{\alpha\beta}$ be left adjoint to $F_{\beta\alpha}$. Then
+\begin{enumerate}
+\item[(a)]
+if a functor $F_{\beta\alpha}^{\backprime} \colon \mathbf{C}_{\beta} \rightarrow \mathbf{C}_{\alpha}$ is right adjoint to $F_{\alpha\beta}$ the functor $F_{\beta\alpha}$ is naturally isomorphic to $F_{\beta\alpha}^{\backprime}$.
+\item[(b)]
+if a functor $F_{\alpha\beta}^{\backprime} \colon \mathbf{C}_{\alpha} \rightarrow \mathbf{C}_{\beta}$ is left adjoint to $F_{\beta\alpha}$ the functor $F_{\alpha\beta}$ is naturally isomorphic to $F_{\alpha\beta}^{\backprime}$.
+\item[(c)]
+if a functor $F_{\alpha\beta}^{\backprime} \colon \mathbf{C}_{\alpha} \rightarrow \mathbf{C}_{\beta}$ is naturally isomorphic to $F_{\alpha\beta}$ and a functor $F_{\beta\alpha}^{\backprime} \colon \mathbf{C}_{\beta} \rightarrow \mathbf{C}_{\alpha}$ is naturally isomorphic to $F_{\beta\alpha}$ the functor $F_{\alpha\beta}^{\backprime}$ is left adjoint to $F_{\beta\alpha}^{\backprime}$
+\end{enumerate}
+\end{thm}
+\begin{prf}
+\begin{enumerate}
+\item[(a)]
+Let
+\begin{align*}
+  \varepsilon(X^{\beta})
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(F_{\beta\alpha}(X^{\beta})),
+    X^{\beta}
+  \right)
+  \\
+  \varepsilon^{\backprime}(X^{\beta})
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(F_{\beta\alpha}^{\backprime}(X^{\beta})),
+    X^{\beta}
+  \right)
+\end{align*}
+be $F_{\alpha\beta}$-terminal morphisms for all $X^{\beta}$. Then terminality implies unique isomorphisms
+\begin{align*}
+  \mathsf{T}(X^{\beta})
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    F_{\beta\alpha}(X^{\beta}),
+    F_{\beta\alpha}^{\backprime}(X^{\beta})
+  \right)
+  \\
+  \mathsf{T}^{-1}(X^{\beta})
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    F_{\beta\alpha}^{\backprime}(X^{\beta}),
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+\end{align*}
+for all $X^{\beta}$ such that the diagram
+\[
+\begin{tikzcd}[row sep=large, column sep=5.8em]
+  X_{1}^{\beta}
+  \arrow{rrr}{f_{12}^{\beta}}
+  &
+  &
+  &
+  X_{2}^{\beta}
+  \\
+  &
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}(X_{1}^{\beta})
+  \right)
+  \arrow{r}{F_{\alpha\beta}(F_{\beta\alpha}(f_{12}^{\beta}))}
+  \arrow[swap,shift right=0.5ex]{dd}[yshift=9mm]{F_{\alpha\beta}(\mathsf{T}(X_{1}^{\beta}))}
+  \arrow[swap]{ul}{\varepsilon(X_{1}^{\beta})}
+  &
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}(X_{2}^{\beta})
+  \right)
+  \arrow{ur}{\varepsilon(X_{2}^{\beta})}
+  \arrow[shift left=0.5ex]{dd}[yshift=9mm]{F_{\alpha\beta}(\mathsf{T}(X_{2}^{\beta}))}
+  &
+  \\
+  &
+  &
+  &
+  \\
+  &
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}^{\backprime}(X_{1}^{\beta})
+  \right)
+  \arrow[swap,shift right=0.5ex]{uu}{F_{\alpha\beta}(\mathsf{T}^{-1}(X_{1}^{\beta}))}
+  \arrow{r}{F_{\alpha\beta}(F_{\beta\alpha}^{\backprime}(f_{12}^{\beta}))}
+  \arrow{uuul}{\varepsilon^{\backprime}(X_{1}^{\beta})}
+  &
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}^{\backprime}(X_{2}^{\beta})
+  \right)
+  \arrow[shift left=0.5ex]{uu}{F_{\alpha\beta}(\mathsf{T}^{-1}(X_{2}^{\beta}))}
+  \arrow[swap]{uuur}{\varepsilon^{\backprime}(X_{2}^{\beta})}
+  &
+\end{tikzcd}
+\]
+commutes for all $f_{12}^{\beta}$. Once again terminality of $\varepsilon(X^{\beta})$ and $\varepsilon^{\backprime}(X^{\beta})$ implies for all $X^{\beta}$
+\begin{align*}
+  \mathsf{T}(X^{\beta})
+  \circ
+  \mathsf{T}^{-1}(X^{\beta})
+  &=
+  \mathrm{id}_{F_{\alpha\beta}(F_{\beta\alpha}(X^{\beta}))}
+  \\
+  \mathsf{T}^{-1}(X^{\beta})
+  \circ
+  \mathsf{T}(X^{\beta})
+  &=
+  \mathrm{id}_{F_{\alpha\beta}(F_{\beta\alpha}^{\backprime}(X^{\beta}))}
+\end{align*}
+Hence $\mathsf{T}$ defines a natural isomorphism from $F_{\beta\alpha}$ to $F_{\beta\alpha}^{\backprime}$.
+\item[(b)]
+Use the duality principle \ref{thm:dp} and part (a) of this theorem.
+\item[(c)]
+Let
+\begin{align*}
+  \mathsf{T}_{\alpha}
+  \colon
+  F_{\alpha\beta}
+  &\Rightarrow
+  F_{\alpha\beta}^{\backprime}
+  \\
+  \mathsf{T}_{\beta}
+  \colon
+  F_{\beta\alpha}
+  &\Rightarrow
+  F_{\beta\alpha}^{\backprime}
+\end{align*}
+be natural isomorphisms. By premise and theorem \ref{thm:adjoints} there are natural transformations
+\begin{align*}
+  \varepsilon
+  \colon
+  F_{\alpha\beta}
+  \circ
+  F_{\beta\alpha}
+  &\Rightarrow
+  \mathrm{id}_{\mathbf{C}_{\beta}}
+  \\
+  \eta
+  \colon
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+  &\Rightarrow
+  F_{\beta\alpha}
+  \circ
+  F_{\alpha\beta}
+\end{align*}
+such that
+\begin{align*}
+  \varepsilon^{\textrm{lw}}[F_{\alpha\beta}]
+  \circ
+  \eta^{\textrm{rw}}[F_{\alpha\beta}]
+  &=
+  \mathrm{id}_{F_{\alpha\beta}}
+  \\
+  \varepsilon^{\textrm{rw}}[F_{\beta\alpha}]
+  \circ
+  \eta^{\textrm{lw}}[F_{\beta\alpha}]
+  &=
+  \mathrm{id}_{F_{\beta\alpha}}
+\end{align*}
+Define natural transformations by
+\begin{align*}
+  \varepsilon^{\backprime}
+  \colon
+  F_{\alpha\beta}^{\backprime}
+  \circ
+  F_{\beta\alpha}^{\backprime}
+  &\Rightarrow
+  \mathrm{id}_{\mathbf{C}_{\beta}}
+  \\
+  X^{\beta}
+  &\mapsto
+  \varepsilon(X^{\beta})
+  \circ
+  \mathsf{T}_{\alpha}^{-1}
+  \left(
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \left(
+    \mathsf{T}_{\beta}^{-1}(X^{\beta})
+  \right)
+  \\\\
+  \eta^{\backprime}
+  \colon
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+  &\Rightarrow
+  F_{\beta\alpha}^{\backprime}
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \\
+  X^{\alpha}
+  &\mapsto
+  \mathsf{T}_{\beta}
+  \left(
+    F_{\alpha\beta}^{\backprime}(X^{\alpha})
+  \right)
+  \circ
+  F_{\beta\alpha}
+  \left(
+    \mathsf{T}_{\alpha}(X^{\alpha})
+  \right)
+  \circ
+  \eta(X^{\alpha})
+\end{align*}
+We check by using various naturalities
+\begin{align*}
+  \left(
+    (\varepsilon^{\backprime})^{\textrm{lw}}[F_{\alpha\beta}^{\backprime}]
+    \circ
+    (\eta^{\backprime})^{\textrm{rw}}[F_{\alpha\beta}^{\backprime}]
+  \right)
+  (X^{\alpha})
+  &=
+  \varepsilon^{\backprime}
+  \left(
+    F_{\alpha\beta}^{\backprime}(X^{\alpha})
+  \right)
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \left(
+    \eta^{\backprime}(X^{\alpha})
+  \right)
+  \\
+  &=
+  \varepsilon
+  \left(
+    F_{\alpha\beta}^{\backprime}(X^{\alpha})
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \mathsf{T}_{\alpha}^{-1}
+  \left(
+    F_{\beta\alpha}
+    \left(
+      F_{\alpha\beta}^{\backprime}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \left(
+    \mathsf{T}_{\beta}^{-1}
+    \left(
+      F_{\alpha\beta}^{\backprime}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \left(
+    \mathsf{T}_{\beta}
+    \left(
+      F_{\alpha\beta}^{\backprime}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \left(
+    F_{\beta\alpha}
+    \left(
+      \mathsf{T}_{\alpha}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \left(
+    \eta(X^{\alpha})
+  \right)
+  \\
+  &=
+  \varepsilon
+  \left(
+    F_{\alpha\beta}^{\backprime}(X^{\alpha})
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \mathsf{T}_{\alpha}^{-1}
+  \left(
+    F_{\beta\alpha}
+    \left(
+      F_{\alpha\beta}^{\backprime}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \left(
+    F_{\beta\alpha}
+    \left(
+      \mathsf{T}_{\alpha}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\alpha\beta}^{\backprime}
+  \left(
+    \eta(X^{\alpha})
+  \right)
+  \\
+  &=
+  \varepsilon
+  \left(
+    F_{\alpha\beta}^{\backprime}(X^{\alpha})
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\alpha\beta}
+  \left(
+    F_{\beta\alpha}
+    \left(
+      \mathsf{T}_{\alpha}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\alpha\beta}
+  \left(
+    \eta(X^{\alpha})
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \mathsf{T}_{\alpha}^{-1}(X^{\alpha})
+  \tag{NT}
+  \\
+  &=
+  \mathsf{T}_{\alpha}(X^{\alpha})
+  \circ
+  \varepsilon
+  \left(
+    F_{\alpha\beta}(X^{\alpha})
+  \right)
+  \circ
+  F_{\alpha\beta}
+  \left(
+    \eta(X^{\alpha})
+  \right)
+  \circ
+  \mathsf{T}_{\alpha}^{-1}(X^{\alpha})
+  \tag{NT}
+  \\
+  &=
+  \mathrm{id}_{F_{\alpha\beta}^{\backprime}}(X^{\alpha})
+\end{align*}
+and
+\begin{align*}
+  \left(
+    (\varepsilon^{\backprime})^{\textrm{rw}}[F_{\beta\alpha}^{\backprime}]
+    \circ
+    (\eta^{\backprime})^{\textrm{lw}}[F_{\beta\alpha}^{\backprime}]
+  \right)
+  (X^{\beta})
+  &=
+  F_{\beta\alpha}^{\backprime}
+  \left(
+    \varepsilon^{\backprime}(X^{\beta})
+  \right)
+  \circ
+  \eta^{\backprime}
+  \left(
+    F_{\beta\alpha}^{\backprime}(X^{\beta})
+  \right)
+  \\
+  &=
+  F_{\beta\alpha}^{\backprime}
+  \left(
+    \varepsilon(X^{\beta})
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}^{\backprime}
+  \left(
+    \mathsf{T}_{\alpha}^{-1}
+    \left(
+      F_{\beta\alpha}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}^{\backprime}
+  \left(
+    F_{\alpha\beta}^{\backprime}
+    \left(
+      \mathsf{T}_{\beta}^{-1}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \mathsf{T}_{\beta}
+  \left(
+    F_{\alpha\beta}^{\backprime}
+    \left(
+      F_{\beta\alpha}^{\backprime}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    \mathsf{T}_{\alpha}
+    \left(
+      F_{\beta\alpha}^{\backprime}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \eta
+  \left(
+    F_{\beta\alpha}^{\backprime}(X^{\beta})
+  \right)
+  \\
+  &=
+  F_{\beta\alpha}^{\backprime}
+  \left(
+    \varepsilon(X^{\beta})
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \mathsf{T}_{\beta}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      F_{\beta\alpha}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    \mathsf{T}_{\alpha}^{-1}
+    \left(
+      F_{\beta\alpha}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    F_{\alpha\beta}^{\backprime}
+    \left(
+      \mathsf{T}_{\beta}^{-1}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    \mathsf{T}_{\alpha}
+    \left(
+      F_{\beta\alpha}^{\backprime}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \eta
+  \left(
+    F_{\beta\alpha}^{\backprime}(X^{\beta})
+  \right)
+  \tag{NT}
+  \\
+  &=
+  F_{\beta\alpha}^{\backprime}
+  \left(
+    \varepsilon(X^{\beta})
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \mathsf{T}_{\beta}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      F_{\beta\alpha}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      \mathsf{T}_{\beta}^{-1}(X^{\beta})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \eta
+  \left(
+    F_{\beta\alpha}^{\backprime}(X^{\beta})
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{T}_{\beta}(X^{\beta})
+  \circ
+  F_{\beta\alpha}
+  \left(
+    \varepsilon(X^{\beta})
+  \right)
+  \circ
+  \eta
+  \left(
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  \circ
+  \mathsf{T}_{\beta}^{-1}(X^{\beta})
+  \tag{NT}
+  \\
+  &=
+  \mathrm{id}_{F_{\beta\alpha}^{\backprime}}(X^{\beta})
+\end{align*}
+to finish the proof.
+\end{enumerate}
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+This kind of uniqueness is the best one can expect from a structural perspective and absolutely sufficient.
+\\
+As always in category theory one is interested if a property is preserved under composition since then one can usually build a category. Indeed, the next theorem is about the composition of adjoints being an adjoint.
+\\
+\begin{thm}
+\label{thm:adjointcomp}
+Let $F_{\alpha\beta}$ be left adjoint to $F_{\beta\alpha}$ and let $F_{\beta\gamma}$ be left adjoint to $F_{\gamma\beta}$. Then $F_{\beta\gamma} \circ F_{\alpha\beta}$ is left adjoint to $F_{\beta\alpha} \circ F_{\gamma\beta}$.
+\end{thm}
+\begin{prf}
+We prove the theorem by the adjoints characterization (d) of theorem \ref{thm:adjoints}. So assume there are natural transformations
+\begin{align*}
+  \varepsilon_{1}
+  &\colon
+  F_{\alpha\beta}
+  \circ
+  F_{\beta\alpha}
+  \Rightarrow
+  \mathrm{id}_{\mathbf{C}_{\beta}}
+  \\
+  \eta_{1}
+  &\colon
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+  \Rightarrow
+  F_{\beta\alpha}
+  \circ
+  F_{\alpha\beta}
+  \\\\
+  \varepsilon_{2}
+  &\colon
+  F_{\beta\gamma}
+  \circ
+  F_{\gamma\beta}
+  \Rightarrow
+  \mathrm{id}_{\mathbf{C}_{\gamma}}
+  \\
+  \eta_{2}
+  &\colon
+  \mathrm{id}_{\mathbf{C}_{\beta}}
+  \Rightarrow
+  F_{\gamma\beta}
+  \circ
+  F_{\beta\gamma}
+\end{align*}
+such that the respective whiskered compositions are identities as demanded in theorem \ref{thm:adjoints} (d). Then define natural transformations
+\begin{align*}
+  \varepsilon^{\circ}
+  \colon
+  F_{\beta\gamma}
+  \circ
+  F_{\alpha\beta}
+  \circ
+  F_{\beta\alpha}
+  \circ
+  F_{\gamma\beta}
+  &\Rightarrow
+  \mathrm{id}_{\mathbf{C}_{\gamma}}
+  \\
+  X^{\gamma}
+  &\mapsto
+  \varepsilon_{2}(X^{\gamma})
+  \circ
+  F_{\beta\gamma}
+  \left(
+    \varepsilon_{1}
+    \left(
+      F_{\gamma\beta}(X^{\gamma})
+    \right)
+  \right)
+  \\\\
+  \eta^{\circ}
+  \colon
+  \mathrm{id}_{\mathbf{C}_{\alpha}}
+  &\Rightarrow
+  F_{\beta\alpha}
+  \circ
+  F_{\gamma\beta}
+  \circ
+  F_{\beta\gamma}
+  \circ
+  F_{\alpha\beta}
+  \\
+  X^{\alpha}
+  &\mapsto
+  F_{\beta\alpha}
+  \left(
+    \eta_{2}
+    \left(
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+  \right)
+  \circ
+  \eta_{1}(X^{\alpha})
+\end{align*}
+Utilizing naturality lets us conclude 
+\begin{align*}
+  \left(
+    (\varepsilon^{\circ})^{\textrm{lw}}[F_{\beta\gamma} \circ F_{\alpha\beta}]
+    \circ
+    (\eta^{\circ})^{\textrm{rw}}[F_{\beta\gamma} \circ F_{\alpha\beta}]
+  \right)
+  (X^{\alpha})
+  &=
+  \varepsilon^{\circ}
+  \left(
+    F_{\beta\gamma}
+    \left(
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+  \right)
+  \circ
+  F_{\beta\gamma}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      \eta^{\circ}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &=
+  \varepsilon_{2}
+  \left(
+    F_{\beta\gamma}
+    \left(
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\gamma}
+  \left(
+    \varepsilon_{1}
+    \left(
+      F_{\gamma\beta}
+      \left(
+        F_{\beta\gamma}
+        \left(
+          F_{\alpha\beta}(X^{\alpha})
+        \right)
+      \right)
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\gamma}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      F_{\beta\alpha}
+      \left(
+        \eta_{2}
+        \left(
+          F_{\alpha\beta}(X^{\alpha})
+        \right)
+      \right)
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\gamma}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      \eta_{1}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &=
+  \varepsilon_{2}
+  \left(
+    F_{\beta\gamma}
+    \left(
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\gamma}
+  \left(
+    \eta_{2}
+    \left(
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\gamma}
+  \left(
+    \varepsilon_{1}
+    \left(
+      F_{\alpha\beta}(X^{\alpha})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\gamma}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      \eta_{1}(X^{\alpha})
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathrm{id}_{F_{\beta\gamma}}
+  \left(
+    F_{\alpha\beta}(X^{\alpha})
+  \right)
+  \circ
+  F_{\beta\gamma}
+  \left(
+    \mathrm{id}_{F_{\alpha\beta}}(X^{\alpha})
+  \right)
+  \\
+  &=
+  \mathrm{id}_{F_{\beta\gamma} \circ F_{\alpha\beta}}(X^{\alpha})
+\end{align*}
+and
+\begin{align*}
+  \left(
+    (\varepsilon^{\circ})^{\textrm{rw}}[F_{\beta\alpha} \circ F_{\gamma\beta}]
+    \circ
+    (\eta^{\circ})^{\textrm{lw}}[F_{\beta\alpha} \circ F_{\gamma\beta}]
+  \right)
+  (X^{\gamma})
+  &=
+  F_{\beta\alpha}
+  \left(
+    F_{\gamma\beta}
+    \left(
+      \varepsilon^{\circ}(X^{\gamma})
+    \right)
+  \right)
+  \circ
+  \eta^{\circ}
+  \left(
+    F_{\beta\alpha}
+    \left(
+      F_{\gamma\beta}(X^{\gamma})
+    \right)
+  \right)
+  \\
+  &=
+  F_{\beta\alpha}
+  \left(
+    F_{\gamma\beta}
+    \left(
+      \varepsilon_{2}(X^{\gamma})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    F_{\gamma\beta}
+    \left(
+      F_{\beta\gamma}
+      \left(
+        \varepsilon_{1}
+        \left(
+          F_{\gamma\beta}(X^{\gamma})
+        \right)
+      \right)
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    \eta_{2}
+    \left(
+      F_{\alpha\beta}
+      \left(
+        F_{\beta\alpha}
+        \left(
+          F_{\gamma\beta}(X^{\gamma})
+        \right)
+      \right)
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \eta_{1}
+  \left(
+    F_{\beta\alpha}
+    \left(
+      F_{\gamma\beta}(X^{\gamma})
+    \right)
+  \right)
+  \\
+  &=
+  F_{\beta\alpha}
+  \left(
+    F_{\gamma\beta}
+    \left(
+      \varepsilon_{2}(X^{\gamma})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    \eta_{2}
+    \left(
+      F_{\gamma\beta}(X^{\gamma})
+    \right)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  F_{\beta\alpha}
+  \left(
+    \varepsilon_{1}
+    \left(
+      F_{\gamma\beta}(X^{\gamma})
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &\phantom{=}
+  \circ
+  \eta_{1}
+  \left(
+    F_{\beta\alpha}
+    \left(
+      F_{\gamma\beta}(X^{\gamma})
+    \right)
+  \right)
+  \\
+  &=
+  F_{\beta\alpha}
+  \left(
+    \mathrm{id}_{F_{\gamma\beta}}(X^{\gamma})
+  \right)
+  \circ
+  \mathrm{id}_{F_{\beta\alpha}}
+  \left(
+      F_{\gamma\beta}(X^{\gamma})
+  \right)
+  \\
+  &=
+  \mathrm{id}_{F_{\beta\alpha} \circ F_{\gamma\beta}}(X^{\gamma})
+\end{align*}
+And the theorem is proven.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+It is now not hard to see that we can build a category with objects small categories and morphisms pairs of functors adjoint to each other.
+\\
+Now note that if $F_{\beta\alpha}$ is right adjoint then the functor $\mathrm{hom}_{\mathbf{C}_{\alpha}}(X^{\alpha},F_{\beta\alpha}(\cdot))$ is representable (for all $X^{\alpha}$) by theorem \ref{thm:adjoints}. But by theorem \ref{thm:cohomiscont} covariant hom-functors preserve limits and we might guess that by duality left adjoints preserve colimits while right adjoints preserve limits. And, in fact, this is a striking property of adjoints.
+\\
+\begin{thm}
+\label{thm:adjointlimit}
+Let $\mathbf{C}_{\alpha},\mathbf{C}_{\beta}$ be locally small. Moreover let $F_{\alpha\beta}$ be left adjoint to $F_{\beta\alpha}$. Then $F_{\alpha\beta}$ is cocontinuous while $F_{\beta\alpha}$ is continuous.
+\end{thm}
+\begin{prf}
+Let $\mathbf{J}$ be small and $F \colon \mathbf{J} \rightarrow \mathbf{C}_{\alpha}$ be a functor. Furthermore let
+\begin{align*}
+  \left(
+    F,
+    X_{I}^{\alpha},
+    \mathsf{C}_{I}^{\prime}
+  \right)
+\end{align*}
+be a colimit of $F$. We have to show that then\footnote{in the notation of subsection \ref{sec:limit} where we defined cocontinuous}
+\begin{align*}
+  \left(
+    F_{\alpha\beta} \circ F,
+    F_{\alpha\beta}(X_{I}^{\alpha}),
+    F_{\alpha\beta}[\mathsf{C}_{I}^{\prime}]
+  \right)
+\end{align*}
+is a colimit $F_{\alpha\beta} \circ F$. That is, we have to show that for any cocone $\mathsf{C}^{\prime}$ to $F_{\alpha\beta} \circ F$ with apex $X^{\beta}$ there is a unique
+\begin{align*}
+  f^{\beta}
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(X_{I}^{\alpha}),
+    X^{\beta}
+  \right)
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  F_{\alpha\beta}
+  \left(
+    F(J_{1})
+  \right)
+  \arrow{rr}{F_{\alpha\beta}(F(j_{12}))}
+  \arrow{dr}{F_{\alpha\beta}[\mathsf{C}_{I}^{\prime}](J_{1})}
+  \arrow[swap]{dddr}{\mathsf{C}^{\prime}(J_{1})}
+  &
+  &
+  F_{\alpha\beta}
+  \left(
+    F(J_{2})
+  \right)
+  \arrow{dddl}{\mathsf{C}^{\prime}(J_{2})}
+  \arrow[swap]{dl}{F_{\alpha\beta}[\mathsf{C}_{I}^{\prime}](J_{2})}
+  \\
+  &
+  F_{\alpha\beta}(X_{I}^{\alpha})
+  \arrow{dd}{f^{\beta}}
+  \arrow[swap]{dd}{f^{\beta}}
+  &
+  \\
+  \\
+  &
+  X^{\beta}
+  &
+\end{tikzcd}
+\]
+commutes for all $J_{1},J_{2},j_{12}$. Our requirements guarantee the existence of a natural isomorphism
+\begin{align*}
+  \mathsf{H}^{\prime}
+  \colon
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(\cdot),
+    \cdot
+  \right)
+  &\rightarrow
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+    \cdot,
+    F_{\beta\alpha}(\cdot)
+  \right)
+\end{align*}
+with inverse $\mathsf{H} := (\mathsf{H}^{\prime})^{-1}$. Applying $\mathsf{H}^{\prime}$ to the cocone $\mathsf{C}^{\prime}$ yields the cocone mapping $J$ to
+\begin{align*}
+  \mathsf{C}_{\mathsf{H}^{\prime}}^{\prime}(J)
+  &:=
+  \mathsf{H}^{\prime}(F(J),X^{\beta})
+  \left(
+    \mathsf{C}^{\prime}(J)
+  \right)
+\end{align*}
+to $F$ with apex $F_{\beta\alpha}(X^{\beta})$. Namely with the temporary agreement for this proof that for all $J$
+\begin{align*}
+  \mathsf{H}_{J}^{\prime}
+  &\doteq
+  \mathsf{H}^{\prime}(F(J),X^{\beta})
+  \\
+  \mathsf{H}_{J}
+  &\doteq
+  \mathsf{H}(F(J),X^{\beta})
+\end{align*}
+by naturality
+\begin{align*}
+  \mathsf{C}_{\mathsf{H}^{\prime}}^{\prime}(J_{2})
+  \circ
+  F(j_{12})
+  &=
+  \mathsf{H}_{J_{2}}^{\prime}
+  \left(
+    \mathsf{C}^{\prime}(J_{2})
+  \right)
+  \circ
+  F(j_{12})
+  \\
+  &=
+  \mathsf{H}_{J_{1}}^{\prime}
+  \left(
+    \mathsf{H}_{J_{1}}
+    \left(
+      \mathrm{hom}_{\mathbf{C}_{\alpha}}
+      \left(
+        F(j_{12}),
+        F_{\beta\alpha}(X^{\beta})
+      \right)
+      \left(
+        \mathsf{H}_{J_{2}}^{\prime}
+        \left(
+        \mathsf{C}^{\prime}(J_{2})
+        \right)
+      \right)
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{H}_{J_{1}}^{\prime}
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\beta}}
+    \left(
+      F_{\alpha\beta}
+      \left(
+        F(j_{12})
+      \right),
+      X^{\beta}
+    \right)
+    \left(
+      \mathsf{H}_{J_{2}}
+      \left(
+        \mathsf{H}_{J_{2}}^{\prime}
+        \left(
+        \mathsf{C}^{\prime}(J_{2})
+        \right)
+      \right)
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{H}_{J_{1}}^{\prime}
+  \left(
+    \mathsf{C}^{\prime}(J_{2})
+    \circ
+    F_{\alpha\beta}
+    \left(
+      F(j_{12})
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{H}_{J_{1}}^{\prime}
+  \left(
+    \mathsf{C}^{\prime}(J_{1})
+  \right)
+  \\
+  &=
+  \mathsf{C}_{\mathsf{H}^{\prime}}^{\prime}(J_{1})
+\end{align*}
+This proves $\mathsf{C}_{\mathsf{H}^{\prime}}$ to be a cocone.
+\\
+Since $(F,X_{I}^{\alpha},\mathsf{C}_{I}^{\prime})$ is assumed to be a colimit we get a unique
+\begin{align*}
+  f
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    X_{I}^{\alpha},
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+\end{align*}
+such that
+\[
+\begin{tikzcd}[sep=huge]
+  F(J_{1})
+  \arrow{rr}{F(j_{12})}
+  \arrow{dr}{\mathsf{C}_{I}^{\prime}(J_{1})}
+  \arrow[swap]{dddr}{\mathsf{C}_{\mathsf{H}^{\prime}}^{\prime}(J_{1})}
+  &
+  &
+  F(J_{2})
+  \arrow{dddl}{\mathsf{C}_{\mathsf{H}^{\prime}}^{\prime}(J_{2})}
+  \arrow[swap]{dl}{\mathsf{C}_{I}^{\prime}(J_{2})}
+  \\
+  &
+  X_{I}^{\alpha}
+  \arrow{dd}{f}
+  \arrow[swap]{dd}{f}
+  &
+  \\
+  \\
+  &
+  F_{\beta\alpha}(X^{\beta})
+  &
+\end{tikzcd}
+\]
+commutes for all $J_{1},J_{2},j_{12}$. Then applying $\mathsf{H}$ to this diagram yields the commutativity of
+\[
+\begin{tikzcd}[sep=huge]
+  F_{\alpha\beta}
+  \left(
+    F(J_{1})
+  \right)
+  \arrow{rr}{F_{\alpha\beta}(F(j_{12}))}
+  \arrow{dr}{F_{\alpha\beta}[\mathsf{C}_{I}^{\prime}](J_{1})}
+  \arrow[swap]{dddr}{\mathsf{C}^{\prime}(J_{1})}
+  &
+  &
+  F_{\alpha\beta}
+  \left(
+    F(J_{2})
+  \right)
+  \arrow{dddl}{\mathsf{C}^{\prime}(J_{2})}
+  \arrow[swap]{dl}{F_{\alpha\beta}[\mathsf{C}_{I}^{\prime}](J_{2})}
+  \\
+  &
+  F_{\alpha\beta}(X_{I}^{\alpha})
+  \arrow{dd}{f_{!}}
+  \arrow[swap]{dd}{f_{!}}
+  &
+  \\
+  \\
+  &
+  X^{\beta}
+  &
+\end{tikzcd}
+\]
+for all $J_{1},J_{2},j_{12}$ where
+\begin{align*}
+  f_{!}
+  &:=
+  \mathsf{H}
+  \left(
+    X_{I}^{\alpha},
+    X^{\beta}
+  \right)
+  (f)
+\end{align*}
+in very much the same way as above. Namely under the premise
+\begin{align*}
+  f
+  \circ
+  \mathsf{C}_{I}^{\prime}(J)
+  =
+  \mathsf{C}_{\mathsf{H}^{\prime}}^{\prime}(J)
+\end{align*}
+we get from naturality
+\begin{align*}
+  f_{!}
+  \circ
+  F_{\alpha\beta}[\mathsf{C}_{I}^{\prime}](J)
+  &=
+  \mathsf{H}
+  \left(
+    X_{I}^{\alpha},
+    X^{\beta}
+  \right)
+  (f)
+  \circ
+  F_{\alpha\beta}
+  \left(
+    \mathsf{C}_{I}^{\prime}(J)
+  \right)
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}
+    \left(
+      \mathsf{C}_{I}^{\prime}(J)
+    \right),
+    X^{\beta}
+  \right)
+  \left(
+    \mathsf{H}
+    \left(
+      X_{I}^{\alpha},
+      X^{\beta}
+    \right)(f)
+  \right)
+  \\
+  &=
+  \mathsf{H}_{J}
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\alpha}}
+    \left(
+      \mathsf{C}_{I}^{\prime}(J),
+      F_{\beta\alpha}(X^{\beta})
+    \right)
+    (f)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{H}_{J}
+  \left(
+    f
+    \circ
+    \mathsf{C}_{I}^{\prime}(J)
+  \right)
+  \\
+  &=
+  \mathsf{H}_{J}
+  \left(
+    \mathsf{C}_{\mathsf{H}^{\prime}}^{\prime}(J)
+  \right)
+  \\
+  &=
+  \mathsf{H}_{J}
+  \left(
+    \mathsf{H}_{J}^{\prime}(\mathsf{C}^{\prime}(J))
+  \right)
+  \\
+  &=
+  \mathsf{C}^{\prime}(J)
+\end{align*}
+If further $f^{\beta}$ is any fitting morphism such that
+\begin{align*}
+  f^{\beta}
+  \circ
+  F_{\alpha\beta}[\mathsf{C}_{I}^{\prime}](J)
+  &=
+  \mathsf{C}^{\prime}(J)
+\end{align*}
+then due to the uniqueness of $f$ we must have
+\begin{align*}
+  f
+  &=
+  \mathsf{H}^{\prime}
+  \left(
+    X_{I}^{\alpha},
+    X^{\beta}
+  \right)
+  (f^{\beta})
+\end{align*}
+since
+\begin{align*}
+  \mathsf{H}^{\prime}
+  \left(
+    X_{I}^{\alpha},
+    X^{\beta}
+  \right)
+  (f^{\beta})
+  \circ
+  \mathsf{C}_{I}^{\prime}(J)
+  &=
+  \mathrm{hom}_{\mathbf{C}_{\alpha}}
+  \left(
+  \mathsf{C}_{I}^{\prime}(J),
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+  \left(
+    \mathsf{H}^{\prime}
+    \left(
+      X_{I}^{\alpha},
+      X^{\beta}
+    \right)
+  (f^{\beta})
+  \right)
+  \\
+  &=
+  \mathsf{H}_{J}^{\prime}
+  \left(
+  \mathrm{hom}_{\mathbf{C}_{\beta}}
+    \left(
+      F_{\alpha\beta}
+      \left(
+        \mathsf{C}_{I}^{\prime}(J)
+      \right),
+      X^{\beta}
+    \right)
+    (f^{\beta})
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{H}_{J}^{\prime}
+  \left(
+    f^{\beta}
+    \circ
+    F_{\alpha\beta}
+    \left(
+      \mathsf{C}_{I}^{\prime}(J)
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{H}_{J}^{\prime}
+  \left(
+    \mathsf{C}^{\prime}(J)
+  \right)
+  \\
+  &=
+  \mathsf{C}_{\mathsf{H}^{\prime}}^{\prime}(J)
+\end{align*}
+But this implies
+\begin{align*}
+  f_{!}
+  &=
+  \mathsf{H}
+  \left
+    (X_{I}^{\alpha},
+    X^{\beta}
+  \right)
+  (f)
+  =
+  \mathsf{H}
+  \left
+    (X_{I}^{\alpha},
+    X^{\beta}
+  \right)
+  \left(
+    \mathsf{H}^{\prime}(X_{I}^{\alpha},X^{\beta})(f^{\beta})
+  \right)
+  =
+  f^{\beta}
+\end{align*}
+proving the uniqueness of $f_{!}$ since $\mathsf{H}^{\prime}$ is an isomorphism. The rest of the proof is recognizing that $F_{\beta\alpha}$ is continuous. This is just the dual statement of $F_{\alpha\beta}$ is cocontinuous which we have just proven. So the duality principle \ref{thm:dp} implies the rest.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+At this point, since $F_{\mathrm{Top}}$ forgets structure we can be pretty sure that it is a right adjoint and hence continuous. But we already know that from subsection \ref{sec:limit}. What we don't know yet is if $F_{\mathrm{Top}}$ is cocontinuous. And we promised to prove that here. By theorem \ref{thm:adjointlimit} it would suffice to prove that $F_{\mathrm{Top}}$ is also left adjoint. We provide a left and a right adjoint in the following example.
+\\
+\begin{exa}
+\label{exa:ftopadjoints}
+If $F_{\mathrm{Top}}$ is right adjoint there must be a functor $L_{\mathrm{Top}} \colon \mathbf{Set} \rightarrow \mathbf{Top}$ to which it is right adjoint. This means that we must have
+\begin{align*}
+  \mathrm{hom}_{\mathbf{Top}}(L_{\mathrm{Top}}(\cdot),\cdot)
+  \cong
+  \mathrm{hom}_{\mathbf{Set}}(\cdot,F_{\mathrm{Top}}(\cdot))
+\end{align*}
+But if we have a function
+\begin{align*}
+  f
+  &\in
+  \mathrm{hom}_{\mathbf{Set}}(X,F_{\mathrm{Top}}(Y,\mathfrak{T}_{Y}))
+\end{align*}
+we could always make it continuous by topologizing $X$ as discrete space with the topology $\mathfrak{P}(X)$ and
+\begin{align*}
+  L_{\mathrm{Top}}
+  \colon
+  \mathbf{Set}
+  &\rightarrow
+  \mathbf{Top}
+  \\
+  X
+  &\mapsto
+  (X,\mathfrak{P}(X))
+  \\
+  f
+  &\mapsto
+  f
+\end{align*}
+is left adjoint to $F_{\mathrm{Top}}$.
+\\
+If $F_{\mathrm{Top}}$ is left adjoint there must be a functor $R_{\mathrm{Top}} \colon \mathbf{Set} \rightarrow \mathbf{Top}$ to which it is right adjoint. This means that we must have
+\begin{align*}
+  \mathrm{hom}_{\mathbf{Set}}(F_{\mathrm{Top}}(\cdot),\cdot)
+  \cong
+  \mathrm{hom}_{\mathbf{Top}}(\cdot,R_{\mathrm{Top}}(\cdot))
+\end{align*}
+But if we have a function
+\begin{align*}
+  f
+  &\in
+  \mathrm{hom}_{\mathbf{Set}}(F_{\mathrm{Top}}(Y,\mathfrak{T}_{Y}),X)
+\end{align*}
+we could always make it continous by topologizing $X$ as indiscrete space with the topology $\lbrace \emptyset,X \rbrace$ and
+\begin{align*}
+  R_{\mathrm{Top}}
+  \colon
+  \mathbf{Set}
+  &\rightarrow
+  \mathbf{Top}
+  \\
+  X
+  &\mapsto
+  (X,\lbrace \emptyset,X \rbrace)
+  \\
+  f
+  &\mapsto
+  f
+\end{align*}
+is right adjoint to $F_{\mathrm{Top}}$.
+\end{exa}
+\begin{prf}
+Just note as already mentioned that a function $f$ is continous if $\mathrm{dom}_{\mathbf{Top}}(f)$ is discrete or if $\mathrm{cod}_{\mathbf{Top}}(f)$ is indiscrete.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Particularly, theorem \ref{thm:adjointlimit} yields necessary conditions for functors to be left or right adjoint. Therefore if we ask for the existence of adjoint functors we already have to demand continuity and cocontinuity, respectively. Theorems proving the existence under these premises (among others) are often called adjoint functor theorems. A particular famous and important one is the following due to Freyd.
+\\
+\begin{thm}[Freyd]
+\label{thm:aftfreyd}
+Let $\mathbf{C}_{\alpha},\mathbf{C}_{\beta}$ be locally small and
+\begin{enumerate}
+\item[(1T)]
+$F_{\beta\alpha}$ be a contiuous functor. If $\mathbf{C}_{\beta}$ is complete and if
+\begin{enumerate}
+\item[(SSC)]
+for all $X^{\alpha}$ there is a set $Y_{X^{\alpha}}$ and morphisms
+\begin{align*}
+  f_{y}
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(X_{y}^{\beta})
+  \right)
+\end{align*}
+for all $y \in Y_{X^{\alpha}}$ such that for
+\begin{align*}
+  f
+  \in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    F_{\beta\alpha}(X^{\beta})
+  \right)
+\end{align*}
+the equation
+\begin{align*}
+  f
+  &=
+  F_{\beta\alpha}(f_{y_{0}}^{\beta})
+  \circ
+  f_{y_{0}}
+\end{align*}
+holds for some $y_{0} \in Y_{X^{\alpha}}$ and
+\begin{align*}
+  f_{y_{0}}^{\beta}
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    X_{y_{0}}^{\beta},
+    X^{\beta}
+  \right)
+\end{align*}
+\end{enumerate}
+then there is a functor $F_{\alpha\beta}$ which is left adjoint to $F_{\beta\alpha}$.
+\item[(1I)]
+$F_{\alpha\beta}$ be a cocontiuous functor. If $\mathbf{C}_{\alpha}$ is cocomplete and if
+\begin{enumerate}
+\item[(SSC$^\prime$)]
+for all $X^{\beta}$ there is a set $Y_{X^{\beta}}$ and morphisms
+\begin{align*}
+  f_{y}
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\beta}}
+  \left(
+    F_{\alpha\beta}(X_{y}^{\alpha}),
+    X^{\beta}
+  \right)
+\end{align*}
+for all $y \in Y_{X^{\beta}}$ such that for
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    F_{\alpha\beta}(X^{\alpha}),
+    X^{\beta}
+  \right)
+\end{align*}
+the equation
+\begin{align*}
+  f
+  &=
+  f_{y_{0}}
+  \circ
+  F_{\alpha\beta}(f_{y_{0}}^{\alpha})
+\end{align*}
+holds for some $y_{0} \in Y_{X^{\beta}}$ and
+\begin{align*}
+  f_{y_{0}}^{\alpha}
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  \left(
+    X^{\alpha},
+    X_{y_{0}}^{\alpha}
+  \right)
+\end{align*}
+\end{enumerate}
+then there is a functor $F_{\beta\alpha}$ which is right adjoint to $F_{\alpha\beta}$.
+\end{enumerate}
+\end{thm}
+\begin{prf}
+The duality principle \ref{thm:dp} and presumebly any book about category theory.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Here is a good point to stop the development of the general theory about adjoints since we do not need more for the moment. That is also why we didn't prove Freyd's adjoint functor theorem. We do not actually need it in these notes. What we want to do is to look at an alternative proof of the density theorem \ref{thm:density} which provides some more insight on the yoneda functor.

@@ -1,0 +1,1829 @@
+%\nocite{240b19f3}
+%\nocite{797789bc}
+%\nocite{c1f00dad}
+%\nocite{a565d200}
+%\nocite{de9b9402}
+\nocite{eec64bc7}
+%TODO
+%  subsection topos theory
+%    elaborate on concept generalization from Y to Sh(Y) to Topos 
+%      define and motivate cohesive topos (cite nlab:motivation cohesive topos)
+%  formalize internal category and groupoid
+This subsection is about the informal\footnote{the inverse process of deinternalization is formalizable (see according \cite{wiki-nlab0000} article)} idea of internalization. It shall describe the meta-idea of taking conceptions expressed in traditional mathematics/set theory and fully rephrase them in terms of arrows to generalize the conceptions to categories with enough structure. We already know an example of this process. Namely isomorphisms. There are plenty of others and we will present some of them together with interesting stuff around them in this subsection. This should clarify the idea on an intuitive level.
+\\
+\begin{exa}
+\label{exa:ofinternaliz}
+A good way to communicate an informal idea is to provide so many examples such that there is no room left for misunderstandings. Therefore this large example. For the following choose $\mathbf{C} = \mathbf{Set}$ unless stated otherwise.
+\begin{enumerate}
+\item[$\bullet$]
+\underline{Elements:}
+An example we utilized here and there is that of elements. An element $x$ of a set $X$ clearly corresponds to the function
+\begin{align*}
+  f_{x}
+  \colon
+  1_{\mathbf{Set}}
+  &\rightarrow
+  X
+  \\
+  \ast
+  &\mapsto
+  x
+\end{align*}
+w.r.t. some terminal object $1_{\mathbf{Set}}$. This clearly works in any category $\mathbf{C}$ with terminal object. Therefore we call a morphism $f \in \mathrm{Mor}_{\mathbf{C}}$ a \textbf{global element (of $\mathrm{cod}_{\mathbf{C}}(f)$)} if
+\begin{align*}
+  \mathrm{dom}_{\mathbf{C}}(f)
+  &\cong
+  1_{\mathbf{C}}
+\end{align*}
+Why don't we just call it {\glqq}element{\grqq}? Well, all elements of some object $X$ together should fully characterize the object $X$ by the very idea of elements and as we learned in section \ref{sec:uni} we need generalized elements to achieve this in general as we discovered when discussing the Yoneda stuff. That for $\mathbf{Set}$ global elements suffice is just a coincidence. For example, the category of presheaves on $\mathbf{C}_{\alpha}$ also has a terminal object but natural transformations
+\begin{align*}
+  \mathsf{T}
+  \colon
+  1_{\mathbf{Set}^{\mathbf{C}_{\alpha}^{\mathrm{op}}}}
+  &\Rightarrow
+  P
+\end{align*}
+do not necessarily determine a presheaf $P$ on $\mathbf{C}_{\alpha}$. We rather need all the contravariant hom-functors $\mathrm{y}_{\mathbf{C}_{\alpha}}(X)$ to probe $P$ as the Yoneda lemma \ref{lem:yoneda} suggests. This is because a presheaf has more structure than a bag of points. What the example has in common with the set case is that again not all generalized elements are needed and in both cases a morphism is uniquely determined when specified on the addressed elements. In the set case this means that for functions $f_{1},f_{2} \colon X \rightarrow X_{0}$ the equivalence
+\begin{align*}
+  f_{1}
+  =
+  f_{2}
+  \qquad
+  &\Leftrightarrow
+  \qquad
+  f_{1}
+  \circ
+  f_{x}
+  =
+  f_{2}
+  \circ
+  f_{x}
+  \quad
+  \forall
+  x
+  \in
+  X
+\end{align*}
+holds. This is obviously true in $\mathbf{Set}$ and is known as function extensionality. The presheaf case is proved in \cite{c55c71e8}. Anyways, function extensionality can be stated as a kind of morphism extensionality in any category $\mathbf{C}$. An object $S \in \mathrm{ob}_{\mathbf{C}}$ is called a \textbf{separator (of $\mathbf{C}$)} if for all
+\begin{align*}
+  f_{1},
+  f_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,X_{0})
+\end{align*}
+the equivalence
+\begin{align*}
+  f_{1}
+  =
+  f_{2}
+  \qquad
+  &\Leftrightarrow
+  \qquad
+  f_{1}
+  \circ
+  e
+  =
+  f_{2}
+  \circ
+  e
+  \quad
+  \forall
+  e
+  \in
+  \mathrm{mor}_{\mathbf{C}}(S,X)
+\end{align*}
+holds. A subset $\mathrm{S}_{\mathbf{C}}$ of $\mathrm{ob}_{\mathbf{C}}$ is called a \textbf{family of separators (of $\mathbf{C}$)} if for all
+\begin{align*}
+  f_{1},
+  f_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,X_{0})
+\end{align*}
+the equivalence
+\begin{align*}
+  f_{1}
+  =
+  f_{2}
+  \qquad
+  &\Leftrightarrow
+  \qquad
+  f_{1}
+  \circ
+  e
+  =
+  f_{2}
+  \circ
+  e
+  \quad
+  \forall
+  e
+  \in
+  \bigcup_{S \in \mathrm{S}_{\mathbf{C}}}
+  \mathrm{mor}_{\mathbf{C}}(S,X)
+\end{align*}
+holds. So $1_{\mathbf{Set}}$ is a seperator for $\mathbf{Set}$ while all the contravariant hom-functors $\mathrm{y}_{\mathbf{C}}(X)$ form a family of separators of the presheaf category on $\mathbf{C}$. It is clear that the special feature of terminal object as separator is a particularly nice one since then objects are a bit like sets and morphisms even more like functions at least unless the terminal object is not the inital one at the same time. Not surprisingly, this situation has its own name. A category $\mathbf{C}$ with terminal and initial obect is \textbf{well-pointed} if every terminal object is a separator and terminal objects are never isomorphic to initial ones.
+\item[$\bullet$]
+\underline{Monomorphism/Epimorphism:}
+For a function $f \colon X \rightarrow X_{0}$ to be injective means that for $x_{1},x_{2} \in X$ the implication
+\begin{align*}
+  f(x_{1})
+  =
+  f(x_{2})
+  \qquad
+  &\Rightarrow
+  \qquad
+  x_{1}
+  =
+  x_{2}
+\end{align*}
+holds. If $f$ is injective then for all small sets $Y$ and all $f_{1},f_{2} \colon Y \rightarrow X$ we have
+\begin{align*}
+  f
+  \circ
+  f_{1}
+  =
+  f
+  \circ
+  f_{2}
+  \qquad
+  &\Rightarrow
+  \qquad
+  f_{1}
+  =
+  f_{2}
+\end{align*}
+since
+\begin{align*}
+  f
+  \left(
+    f_{1}(y)
+  \right)
+  =
+  f
+  \left(
+    f_{2}(y)
+  \right)
+  \qquad
+  &\Rightarrow
+  \qquad
+  f_{1}(y)
+  =
+  f_{2}(y)
+\end{align*}
+for all $y \in Y$. But the converse is also true since if you use the idea of seperator above then for all small sets $Y$ and all $f_{1},f_{2} \in Y \rightarrow X$ we have
+\begin{align*}
+  f
+  \circ
+  f_{1}
+  =
+  f
+  \circ
+  f_{2}
+  \qquad
+  &\Rightarrow
+  \qquad
+  f_{1}
+  =
+  f_{2}
+\end{align*}
+and choosing
+\begin{align*}
+  f_{1}
+  &:=
+  f_{x_{1}}
+  \\
+  f_{2}
+  &:=
+  f_{x_{2}}
+\end{align*}
+proves the claim. Hence for an arbitrary category $\mathbf{C}$ a morphism
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,X_{0})
+\end{align*}
+is a \textbf{monomorphism (in $\mathbf{C}$ from $X$ to $X_{0}$)} if for all $Y \in \mathrm{ob}_{\mathbf{C}}$ and all
+\begin{align*}
+  f_{1},
+  f_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(Y,X)
+\end{align*}
+the implication
+\begin{align*}
+  f
+  \circ
+  f_{1}
+  =
+  f
+  \circ
+  f_{2}
+  \qquad
+  &\Rightarrow
+  \qquad
+  f_{1}
+  =
+  f_{2}
+\end{align*}
+holds. Dually, a morphism
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{0},X)
+\end{align*}
+is an \textbf{epimorphism (in $\mathbf{C}$ from $X_{0}$ to $X$)} if for all $Y \in \mathrm{ob}_{\mathbf{C}}$ and all
+\begin{align*}
+  f_{1},
+  f_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,Y)
+\end{align*}
+the implication
+\begin{align*}
+  f_{1}
+  \circ
+  f
+  =
+  f_{2}
+  \circ
+  f
+  \qquad
+  &\Rightarrow
+  \qquad
+  f_{1}
+  =
+  f_{2}
+\end{align*}
+holds. In a similar vein as for monomorphisms one can show that epimorphisms come from surjective functions. Note that being a monomorphism and epimorphism does not imply being an isomorphism. But it does hold in certain categories.\footnote{e.g. all topoi} Furthermore epimorphisms allow to generalize {\glqq}non-empty{\grqq} to a category $\mathbf{C}$ with terminal object. To this end note that a function from a set $X$ to a terminal set is surjective if and only if $X$ is not the empty set $\emptyset$. So in a category $\mathbf{C}$ with terminal object we call an object $X$ \textbf{(internally) inhabited} if the unique arrow from $X$ to $1_{\mathbf{C}}$ is an epimorphism.
+\item[$\bullet$]
+\underline{Section/Retraction:}
+A function $f_{12} \colon X_{1} \rightarrow X_{2}$ can have a right inverse function $s \colon X_{2} \rightarrow X_{1}$ as well as a left inverse $r \colon X_{2} \rightarrow X_{1}$ which means
+\begin{align*}
+  f_{12}
+  \circ
+  s
+  &=
+  \mathrm{id}_{X_{2}}
+\end{align*}
+and
+\begin{align*}
+  r
+  \circ
+  f_{12}
+  &=
+  \mathrm{id}_{X_{1}}
+\end{align*}
+respectively. Terminologically motivated from topology and bundles we translate the conceptions to an arbitrary category $\mathbf{C}$. A morphism
+\begin{align*}
+  s
+  \in
+  \mathrm{mor}_{\mathbf{C}}(X_{2},X_{1})
+\end{align*}
+is a \textbf{section (for $f_{12}$)} if
+\begin{align*}
+  f_{12}
+  \circ
+  s
+  &=
+  \mathrm{id}_{X_{2}}
+\end{align*}
+while dually a morphism
+\begin{align*}
+  r
+  \in
+  \mathrm{mor}_{\mathbf{C}}(X_{2},X_{1})
+\end{align*}
+is a \textbf{retraction (for $f_{12}$)} if
+\begin{align*}
+  r
+  \circ
+  f_{12}
+  &=
+  \mathrm{id}_{X_{1}}
+\end{align*}
+The connection to isomorphisms is obvious. Note that sections are monomorphisms and retractions are epimorphisms. If we motivated our terminology algebraically we would call sections split monomorphisms and retractions split epimorphisms.
+\item[$\bullet$]
+\underline{Axiom of Choice:}
+Note that a family $X$ of $X_{0}$-indexed non-empty sets is equivalent to a surjection $p \colon X \rightarrow X_{0}$ with fiber $p^{-1}(x_{0})$ the elements of $X$ with index $x_{0} \in X_{0}$. So given any surjection $p \colon X \rightarrow X_{0}$ then $p^{-1}(x_{0})$ is not empty for all $x_{0} \in X_{0}$ and the axiom of choice gives a (choice) function $c \colon X_{0} \rightarrow X$ such that
+\begin{align*}
+  c(x_{0})
+  &\in
+  p^{-1}(x_{0})
+\end{align*}
+for all $x_{0} \in X_{0}$. This is to say a section $c$ for $p$. On the other hand any section gives a choice function. Hence the axiom of choice is equivalent to the statement that there is a section for every surjection. This makes sense in any category $\mathbf{C}$ and the axiom of choice for $\mathbf{C}$ is the formula: If $f_{12}$ is an epimorphism then there exists a section for $f_{12}$.
+\item[$\bullet$]
+\underline{Subobject:}
+If $A$ is a subset of $X$ then $A$ can be injectively included into $X$ by the inclusion function $\mathrm{i}_{A}$ on $A$. A subset clearly corresponds to the according inlcusion function. Structurally, instead of $\mathrm{i}_{A}$ we could equally well regard any injective function $m \colon A^{\backprime} \rightarrow X$ for some small set $A^{\backprime}$ if there is an isomorphism $\Phi$ from $A$ to $A^{\backprime}$ such that the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  A
+  \arrow{rr}{\Phi}
+  \arrow[swap]{rd}{\mathrm{i}_{A}}
+  &
+  &
+  A^{\backprime}
+  \arrow{dl}{m}
+  \\
+  &
+  X
+\end{tikzcd}
+\]
+commutes. Hence, structurally, we should see a subset as equivalence class of such injections. This can be generalized to an arbitrary category $\mathbf{C}$. Say two monomorphisms
+\begin{align*}
+  m_{1}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X)
+  \\
+  m_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{2},X)
+\end{align*}
+are equivalent if there is an isomorphism $f_{12}$ such that the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  X_{1}
+  \arrow{rr}{f_{12}}
+  \arrow[swap]{rd}{m_{1}}
+  &
+  &
+  X_{2}
+  \arrow{dl}{m_{2}}
+  \\
+  &
+  X
+\end{tikzcd}
+\]
+commutes. This is an equivalence relation $\sim$ on the set of monomorphisms of $\mathbf{C}$ denoted $\mathrm{Mono}_{\mathbf{C}}$. An element $[m]$ of $\mathrm{Mono}_{\mathbf{C}} \slash \sim$ is called \textbf{subobject (of $\mathrm{cod}_{\mathbf{C}}(m)$)}.
+\item[$\bullet$]
+\underline{Subobject Classifier:}
+With the notation
+\begin{align*}
+  \Omega
+  &:=
+  \lbrace
+    0,
+    1
+  \rbrace
+\end{align*}
+a subset of $A$ of $X$ is actually the same as its characteristic function
+\begin{align*}
+  \chi_{A}
+  \colon
+  X
+  &\rightarrow
+  \Omega
+  \\
+  x
+  &\mapsto
+  \begin{cases}
+    1
+    &
+    \text{if }
+    x
+    \in
+    A
+    \\
+    0
+    &
+    \text{else}
+  \end{cases}
+\end{align*}
+Note that $A = \chi_{A}^{-1}(1)$ and in this way any function
+\begin{align*}
+  \chi
+  \colon
+  X
+  &\rightarrow
+  \lbrace
+    0,
+    1
+  \rbrace
+\end{align*}
+defines a subset of $X$ by $\chi^{-1}(1)$. This is to say that
+\begin{align*}
+  \mathrm{true}
+  \colon
+  1_{\mathbf{Set}}
+  &\rightarrow
+  \Omega
+  \\
+  \ast
+  &\mapsto
+  1
+\end{align*}
+is an injection such that for all inclusions $\mathrm{i}_{A}$ of $A$ in $X$ there is one and only one
+\begin{align*}
+  \chi
+  \colon
+  X
+  &\rightarrow
+  \lbrace
+    0,
+    1
+  \rbrace
+\end{align*}
+such that
+\begin{align*}
+  \left(
+    \chi^{-1}(1),
+    \mathrm{i}_{A},
+    f_{!}
+  \right)
+\end{align*}
+is a pullback of $\chi$ and $\mathrm{true}$ if $f_{!}$ denotes the unique function from $A$ to $1_{\mathbf{Set}}$. But this can be stated in any category $\mathbf{C}$ (with terminal object and pullbacks). A monomorphism
+\begin{align*}
+  \mathrm{true}
+  \in
+  \mathrm{Mor}_{\mathbf{C}}
+\end{align*}
+with domain
+\begin{align*}
+  \mathrm{dom}_{\mathbf{C}}(\mathrm{true})
+  &\cong
+  1_{\mathbf{C}}
+\end{align*}
+is called a \textbf{subobject classifier (of $\mathbf{C}$)} if for all monomorphisms
+\begin{align*}
+  \mathrm{i}
+  \in
+  \mathrm{Mor}_{\mathbf{C}}
+\end{align*}
+there is one and only one
+\begin{align*}
+  \chi
+  \in
+  \mathrm{Mor}_{\mathbf{C}}
+\end{align*}
+such that
+\begin{align*}
+  \left(
+    \mathrm{dom}_{\mathbf{C}}(\mathrm{i}),
+    \mathrm{i},
+    f_{!}
+  \right)
+\end{align*}
+is a pullback of $\chi$ and $\mathrm{true}$ if $f_{!}$ denotes the unique function from $\mathrm{dom}_{\mathbf{C}}(\mathrm{i})$ to $\mathrm{dom}_{\mathbf{C}}(\mathrm{true})$. With the notation
+\begin{align*}
+  1
+  &:=
+  \mathrm{dom}_{\mathbf{C}}(\mathrm{true})
+  \\
+  \Omega
+  &:=
+  \mathrm{cod}_{\mathbf{C}}(\mathrm{true})
+  \\
+  A
+  &:=
+  \mathrm{dom}_{\mathbf{C}}(\mathrm{i})
+  \\
+  X
+  &:=
+  \mathrm{cod}_{\mathbf{C}}(\mathrm{i})
+\end{align*}
+this informally means that the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  A
+  \arrow{r}{f_{!}}
+  \arrow[swap]{d}{\mathrm{i}}
+  &
+  1
+  \arrow{d}{\mathrm{true}}
+  \\
+  X
+  \arrow{r}{\chi}
+  &
+  \Omega
+\end{tikzcd}
+\]
+is a so-called pullback square. $\Omega$ is the set of truth values. For sets it contains only true encoded as $1$ and false encoded as $0$. From a classical logic perspective one would expect that more than two different truth values do not make sense since there things are either true or false (law of excluded middle). But the notion of subobject classifier is finer. This can be seen best in the case of presheaves on $\mathbf{Open}_{Y}$ for some space $Y$. So given a presheaf $P$ on $\mathbf{Open}_{Y}$ a subobject $S$ of $P$ is essentially a consistently\footnote{keyword is subfunctor} chosen subset of $P(U)$ for all open subspaces $U$ of $Y$ such that $S$ is the preheaf on $\mathbf{Open}_{Y}$ with $S(U)$ the according subset. It may well be that a section $s \in P(U)$ is not a section over $U$ for $S$ but when restricted to some $V \subset U$ it is a section over $V \subset U$ for $S$. Thus it is not completely wrong to say that $s$ is contained in the subobject $S$ but it is not completely correct either. This is what is measured by the subobject classifier. By the way, the subobject classifier here is choosing the maximal sieve on any open subspace $U$ of $Y$ where $\Omega(U)$ is the set of all sieves on $U$. For more details see \cite{c55c71e8}.
+\item[$\bullet$]
+\underline{Natural Numbers:}
+To motivate the internalization of natural numbers we are a bit more loose since it is a little more involved\footnote{we refer explicitly to the \cite{wiki-nlab0000} and \cite{1ba1603e} on what natural numbers and their properties shall be}. The natural numbers modeled as set should be a set $N$ together with an element $0_{N} \in N$ and a (successor) function
+\begin{align*}
+  \mathrm{succ}_{N}
+  \colon
+  N
+  &\rightarrow
+  N
+\end{align*}
+such that among other things there is a recursion principle. That is, if we are given
+\begin{align*}
+  0_{X}
+  &\in
+  X
+  \\
+  \mathrm{step}_{X}
+  \colon
+  X
+  &\rightarrow
+  X
+\end{align*}
+then we want to be able to define a unique function
+\begin{align*}
+  f
+  \colon
+  N
+  &\rightarrow
+  X
+\end{align*}
+such that for all $n \in N$
+\begin{align*}
+  f(0_{N})
+  &=
+  0_{X}
+  \\
+  f(\mathrm{succ}_{N}(n))
+  &=
+  \mathrm{step}(f(n))
+\end{align*}
+This is to say that there is one and only one $f$ such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  N
+  \arrow{r}{\mathrm{succ}_{N}}
+  \arrow[swap]{dd}{f}
+  &
+  N
+  \arrow{dd}{f}
+  \\
+  1_{\mathbf{Set}}
+  \arrow{ur}{f_{0_{N}}}
+  \arrow[swap]{dr}{f_{0_{X}}}
+  &
+  &
+  \\
+  &
+  X
+  \arrow{r}{\mathrm{step}_{X}}
+  &
+  X
+\end{tikzcd}
+\]
+commutes. This somehow expresses that
+\begin{align*}
+  \left(
+    N,
+    0_{N},
+    \mathrm{succ}_{N}
+  \right)
+\end{align*}
+is an initial object of some auxiliary category with objects
+\begin{align*}
+  \left(
+    X,
+    0_{X},
+    \mathrm{step}_{X}
+  \right)
+\end{align*}
+and morphisms from
+\begin{align*}
+  \left(
+    X_{1},
+    0_{X_{1}},
+    \mathrm{step}_{X_{1}}
+  \right)
+\end{align*}
+to
+\begin{align*}
+  \left(
+    X_{2},
+    0_{X_{2}},
+    \mathrm{step}_{X_{2}}
+  \right)
+\end{align*}
+are functions $f_{12}$ such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  X_{1}
+  \arrow{r}{\mathrm{step}_{X_{1}}}
+  \arrow[swap]{dd}{f_{12}}
+  &
+  X_{1}
+  \arrow{dd}{f_{12}}
+  \\
+  1_{\mathbf{Set}}
+  \arrow{ur}{f_{0_{X_{1}}}}
+  \arrow[swap]{dr}{f_{0_{X_{2}}}}
+  &
+  &
+  \\
+  &
+  X_{2}
+  \arrow{r}{\mathrm{step}_{X_{2}}}
+  &
+  X_{2}
+\end{tikzcd}
+\]
+commutes while composition is the induced composition. Denote this category by $\mathbb{N}-\mathbf{Alg}_{\mathbf{Set}}$. Then an initial object of $\mathbb{N}-\mathbf{Alg}_{\mathbf{Set}}$ should structurally be like the set of natural numbers. It is clear how to define a category $\mathbb{N}-\mathbf{Alg}_{\mathbf{C}}$ for an arbitrary category $\mathbf{C}$ with terminal object\footnote{usually one demands at least finite products but cartesian closed is needed to get reasonable natural numbers (see \cite{wiki-nlab0000} for more)}. An initial object of $\mathbb{N}-\mathbf{Alg}_{\mathbf{C}}$ is called \textbf{natural numbers object (of $\mathbf{C}$)}. Natural numbers object is often abbreviated by NNO. Note that the free monoid $M_{\textrm{f}}$ with one generator is an NNO of $\mathbf{Mon}$ with the empty set as $0$ and the successor function as concatenating a further generator.
+\item[$\bullet$]
+\underline{Algebraic Structures:}
+This is actually quite obvious. An algebraic structure is just a bunch of functions with domain a finite product of some set $A$ and codomain just $A$. So let $\mathbf{C}$ be a category with finite products\footnote{note that the empty category is discrete which is why we have a terminal object in this case} then for a function $\mathfrak{t}$ with codomain $\mathbb{N}$ an object $A$ together with a family of morphisms
+\begin{align*}
+  \left\lbrace
+      f_{A}^{n}
+    \,
+    \vert
+    \,
+      n
+      \in
+      \mathrm{dom}(\mathfrak{t})
+  \right\rbrace
+\end{align*}
+is called \textbf{($\mathbf{C}$-internal) algebraic structure (on $A$ of type $\mathfrak{t}$)} if
+\begin{align*}
+  f_{A}^{n}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    \prod_{n=1}^{\mathfrak{t}(n)}A,
+    A
+  \right)
+\end{align*}
+for all $n \in \mathrm{dom}(\mathfrak{t})$. Let us look what this means for groups. But we first want to remind the reader of the product functors
+\begin{align*}
+  (\cdot)
+  \times
+  X_{0}
+  &\doteq
+  \times_{\mathbf{C}}^{X_{0}}
+  \\
+  X_{0}
+  \times
+  (\cdot)
+  &\doteq
+  {}^{X_{0}}\times_{\mathbf{C}}
+\end{align*}
+from subsection \ref{sec:adjoint} we defined right before defining  cartesian closed. Given an object $G$ of $\mathbf{C}$ and morphisms
+\begin{align*}
+  \mathrm{m}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    G
+    \times
+    G,
+    G
+  \right)
+  \\
+  \mathrm{id}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    1_{\mathbf{C}},
+    G
+  \right)
+  \\
+  \mathrm{inv}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    G,
+    G
+  \right)
+\end{align*}
+then $G$ is called \textbf{group object (of $\mathbf{C}$ w.r.t. $(\mathrm{m},\mathrm{id},\mathrm{inv})$)} if
+\begin{enumerate}
+\item[(GO1)]
+the equation
+\begin{align*}
+  \mathrm{m}
+  \circ
+  \left(
+    \mathrm{m}
+    \times
+    \mathrm{id}_{G}
+  \right)
+  &=
+  \mathrm{m}
+  \circ
+  \left(
+    \mathrm{id}_{G}
+    \times
+    \mathrm{m}
+  \right)
+  \circ
+  \Phi
+\end{align*}
+where $\Phi$ denotes the unique isomorphism
+\begin{align*}
+  \left(
+    G
+    \times
+    G
+  \right)
+  \times
+  G
+  &\cong
+  G
+  \times
+  \left(
+    G
+    \times
+    G
+  \right)
+\end{align*}
+holds, that is, the diagram
+\[
+\begin{tikzcd}[sep=normal]
+  (G \times G)
+  \times
+  G
+  \arrow{rr}{\Phi}
+  \arrow[swap]{d}{\mathrm{m} \times \mathrm{id}_{G}}
+  &
+  &
+  G
+  \times
+  (G \times G)
+  \arrow{d}{\mathrm{id}_{G} \times \mathrm{m}}
+  \\
+  G
+  \times
+  G
+  \arrow[swap]{dr}{\mathrm{m}}
+  &
+  &
+  G
+  \times
+  G
+  \arrow{dl}{\mathrm{m}}
+  \\
+  &
+  G
+  &
+\end{tikzcd}
+\]
+commutes.
+\item[(GO2)]
+the equalities
+\begin{align*}
+  \mathrm{m}
+  \circ
+  \left(
+    \mathrm{id}_{G}
+    \times
+    \mathrm{id}
+  \right)
+  &=
+  \mathrm{pr}_{1}
+  \\
+  \mathrm{m}
+  \circ
+  \left(
+    \mathrm{id}
+    \times
+    \mathrm{id}_{G}
+  \right)
+  &=
+  \mathrm{pr}_{2}
+\end{align*}
+hold, that is, the diagrams
+\[
+\begin{tikzcd}[sep=normal]
+  &
+  G
+  \times
+  G
+  \arrow{dr}{\mathrm{m}}
+  &
+  &
+  &
+  G
+  \times
+  G
+  \arrow{dr}{\mathrm{m}}
+  &
+  \\
+  G
+  \times
+  1_{\mathbf{C}}
+  \arrow{ur}{\mathrm{id}_{G} \times \mathrm{id}}
+  \arrow{rr}{\mathrm{pr}_{1}}
+  &
+  &
+  G
+  &
+  1_{\mathbf{C}}
+  \times
+  G
+  \arrow{ur}{\mathrm{id} \times \mathrm{id}_{G}}
+  \arrow{rr}{\mathrm{pr}_{2}}
+  &
+  &
+  G
+\end{tikzcd}
+\]
+commute.
+\item[(GO3)]
+$\mathrm{id}_{!}$ denotes the composition $\mathrm{id} \circ g_{!}$ with $g_{!}$ the unique arrow from $G$ to $1_{\mathbf{C}}$ and if
+\begin{align*}
+  \mathrm{d}
+  \colon
+  G
+  &\rightarrow
+  G
+  \times
+  G
+\end{align*}
+denotes the unique arrow corresponding to the cone with only identities arrows\footnote{$d$ is the categorical version of the diagonal function which maps an element to an ordered pair with this element in both coordinates} then
+\begin{align*}
+  \mathrm{m}
+  \circ
+  \left(
+    \mathrm{id}_{G}
+    \times
+    \mathrm{inv}
+  \right)
+  \circ
+  \mathrm{d}
+  &=
+  \mathrm{id}_{!}
+  \\
+  \mathrm{m}
+  \circ
+  \left(
+    \mathrm{inv}
+    \times
+    \mathrm{id}_{G}
+  \right)
+  \circ
+  \mathrm{d}
+  &=
+  \mathrm{id}_{!}
+\end{align*}
+holds, that is, the diagrams
+\[
+\begin{tikzcd}[sep=large]
+  G
+  \times
+  G
+  \arrow{r}{\mathrm{id}_{G} \times \mathrm{inv}}
+  &
+  G
+  \times
+  G
+  \arrow{d}{\mathrm{m}}
+  &
+  G
+  \times
+  G
+  \arrow{r}{\mathrm{inv} \times \mathrm{id}_{G}}
+  &
+  G
+  \times
+  G
+  \arrow{d}{\mathrm{m}}
+  \\
+  G
+  \arrow{u}{\mathrm{d}}
+  \arrow{r}{\mathrm{id}_{!}}
+  &
+  G
+  &
+  G
+  \arrow{u}{\mathrm{d}}
+  \arrow{r}{\mathrm{id}_{!}}
+  &
+  G
+\end{tikzcd}
+\]
+commute.
+\end{enumerate}
+Furthermore if $G$ is a group object of $\mathbf{C}$ w.r.t. some $(\mathrm{m},\mathrm{id},\mathrm{inv})$ and
+\begin{align*}
+  \mathrm{s}
+  \colon
+  G
+  \times
+  G
+  &\rightarrow
+  G
+  \times
+  G
+\end{align*}
+denotes the unique arrow obtained from 
+\[
+\begin{tikzcd}[sep=large]
+  &
+  G
+  \times
+  G
+  \arrow{dr}{\mathrm{pr}_{1}}
+  \arrow{d}{\mathrm{s}}
+  \arrow[swap]{d}{\mathrm{s}}
+  \arrow[swap]{dl}{\mathrm{pr}_{2}}
+  &
+  \\
+  G
+  &
+  G
+  \times
+  G
+  \arrow{r}{\mathrm{pr}_{2}}
+  \arrow[swap]{l}{\mathrm{pr}_{1}}
+  &
+  G
+\end{tikzcd}
+\]
+then $G$ is a group object $\mathbf{C}$ w.r.t. $(\mathrm{m} \circ \mathrm{s},\mathrm{id},\mathrm{inv})$ and we call $(\mathrm{m} \circ \mathrm{s},\mathrm{id},\mathrm{inv})$ the \textbf{opposite group structure (of $(\mathrm{m},\mathrm{id},\mathrm{inv})$)}.
+\\
+Now for instance the group objects w.r.t. something of $\mathbf{Top}$ are called \textbf{topological groups}. In the same manner Lie groups are the group objects of the catgeory $\mathbf{Diff}_{\infty}$. Moreover from the notion of group objects it is not hard to derive what a monoid object shall be or even the case for any algebraic structure with only a mix of associativity, identity law and inverses.
+\item[$\bullet$]
+\underline{Group Actions:}
+Note that a left group action
+\begin{align*}
+  F_{G}
+  &\in
+  \mathrm{ob}_{\mathbf{Set}^{\mathbf{B}G}}
+\end{align*}
+by $(G,\mathrm{m},\mathrm{id},\mathrm{inv})$ on $F_{G}(\emptyset)$ is by currying the same as a function
+\begin{align*}
+  \mathrm{a}
+  \colon
+  G
+  \times
+  F_{G}(\emptyset)
+  &\rightarrow
+  F_{G}(\emptyset)
+\end{align*}
+such that
+\begin{align*}
+  \mathrm{a}
+  \left(
+    \cdot,
+    \mathrm{a}(\cdot,\cdot)
+  \right)
+  &=
+  \mathrm{a}
+  \left(
+    \mathrm{m}(\cdot,\cdot),
+    \cdot
+  \right)
+  \\
+  \mathrm{a}(\mathrm{id}(\emptyset),\cdot)
+  &=
+  \mathrm{id}_{F_{G}(\emptyset)}
+\end{align*}
+This can be clearly internalized in a category $\mathbf{C}$ with finite products. Assume $G$ is a group object of $\mathbf{C}$ w.r.t. some $(\mathrm{m},\mathrm{id},\mathrm{inv})$. A morphism
+\begin{align*}
+  \mathrm{a}_{X}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    G
+    \times
+    X,
+    X
+  \right)
+\end{align*}
+for some object $X$ is called \textbf{(left) group action (by $G$ on $X$ internal to $\mathbf{C}$)} if
+\begin{enumerate}
+\item[(GA1)]
+$\Phi$ denotes the unique isomorphism
+\begin{align*}
+  \left(
+    G
+    \times
+    G
+  \right)
+  \times
+  X
+  &\cong
+  G
+  \times
+  \left(
+    G
+    \times
+    X
+  \right)
+\end{align*}
+and the diagram
+\[
+\begin{tikzcd}[sep=normal]
+  (G \times G)
+  \times
+  X
+  \arrow{rr}{\Phi}
+  \arrow[swap]{d}{\mathrm{m} \times \mathrm{id}_{X}}
+  &
+  &
+  G
+  \times
+  (G \times X)
+  \arrow{d}{\mathrm{id}_{X} \times \mathrm{a}_{X}}
+  \\
+  G
+  \times
+  X
+  \arrow[swap]{dr}{\mathrm{a}_{X}}
+  &
+  &
+  G
+  \times
+  X
+  \arrow{dl}{\mathrm{a}_{X}}
+  \\
+  &
+  G
+  &
+\end{tikzcd}
+\]
+commutes
+\item[(GA2)]
+\begin{align*}
+  \mathrm{i}_{\mathrm{id}_{X}}
+  \colon
+  X
+  &\rightarrow
+  G
+  \times
+  X
+\end{align*}
+denotes the unique arrow corresponding to the cone defined by $\mathrm{id} \circ f_{!}$ and $\mathrm{id}_{X}$, where $f_{!}$ is the unique morphism from $X$ to $1_{\mathbf{C}}$, and the diagram
+\[
+\begin{tikzcd}[sep=normal]
+  &
+  G
+  \times
+  X
+  \arrow{dr}{\mathrm{a}_{X}}
+  &
+  \\
+  X
+  \arrow{ur}{\mathrm{i}_{\mathrm{id}_{X}}}
+  \arrow{rr}{\mathrm{id}_{X}}
+  &
+  &
+  X
+\end{tikzcd}
+\]
+commutes
+\end{enumerate}
+Moreover for $G$ a group object of $\mathbf{C}$ w.r.t. $(\mathrm{m},\mathrm{id},\mathrm{inv})$ a morphism
+\begin{align*}
+  \mathrm{a}_{X}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    G
+    \times
+    X,
+    X
+  \right)
+\end{align*}
+for some object $X$ is called \textbf{(right) group action (by $G$ on $X$ internal to $\mathbf{C}$)} if $\mathrm{a}_{X}$ is a left group action by the group object $G$ w.r.t. the opposite group structure on $X$ internal to $\mathbf{C}$. Again it suffices to consider left group actions. Now if given a left group action $\mathrm{a}_{X}$ by $G$ on $X$ and a left group action $\mathrm{a}_{X^{\backprime}}$ by $G$ on $X^{\backprime}$ then a morphism
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    X,
+    X^{\backprime}
+  \right)
+\end{align*}
+is called a \textbf{$G$-equivariant map (from $\mathrm{a}_{X}$ to $\mathrm{a}_{X^{\backprime}}$ internal to $\mathbf{C}$)} if the diagram
+\[
+\begin{tikzcd}[sep=large]
+  G
+  \times
+  X
+  \arrow{r}{\mathrm{a_{X}}}
+  \arrow[swap]{d}{\mathrm{id}_{G} \times f}
+  &
+  X
+  \arrow{d}{f}
+  \\
+  G
+  \times
+  X^{\backprime}
+  \arrow{r}{\mathrm{a}_{X^{\backprime}}}
+  &
+  X^{\backprime}
+\end{tikzcd}
+\]
+commutes. Note that if $\mathbf{C}$ is cartesian closed then we can curry a group action $\mathrm{a}_{X}$ to get a morphism with codomain something as an {\glqq}internal morphism set{\grqq} which is also an object of $\mathbf{C}$. So in this case our internal definition corresponds to the generalized one of example \ref{exa:algstruct3}. But for arbitrary categories (with finite products) the one in this subsection is more convenient.
+\\
+One could internalize free as well as transitive easily in a well-pointed category, for example, or more general in one where the terminal object is a separator. But we do not need these notions separately but rather if they are both present at the same time. So it is way easier to internalize $\theta$ from example \ref{exa:algstruct3}. Therefore a right group action $\mathrm{a}_{X}$ by $G$ on $X$ internal to $\mathbf{C}$ is called \textbf{($G$-)torsorial} if the unique morphism
+\begin{align*}
+  \theta
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    G
+    \times
+    X,
+    X
+    \times
+    X
+  \right)
+\end{align*}
+obtained from universality according to
+\[
+\begin{tikzcd}[sep=large]
+  &
+  G
+  \times
+  X
+  \arrow{dr}{\mathrm{pr}_{2}}
+  \arrow{d}{\theta}
+  \arrow[swap]{d}{\theta}
+  \arrow[swap]{dl}{\mathrm{a}_{X}}
+  &
+  \\
+  X
+  &
+  X
+  \times
+  X
+  \arrow{r}{\mathrm{pr}_{2}}
+  \arrow[swap]{l}{\mathrm{pr}_{1}}
+  &
+  X
+\end{tikzcd}
+\]
+is an isomorphism. An object $X$ together with a right group action $\mathrm{a}_{X}$ by $G$ on $X$ internal to $\mathbf{C}$ is called a \textbf{(right $G$-)torsor (internal to $\mathbf{C}$)} if
+\begin{enumerate}
+\item[(Tor1)]
+$X$ is inhabited
+\item[(Tor2)]
+$\mathrm{a}_{X}$ is torsorial
+\end{enumerate}
+Let us look what happens with torsorial actions in slice categories $\mathbf{C} \slash X$. This is special since the product of $\mathbf{C} \slash X$ comes from the fibered product in $\mathbf{C}$ as discussed in example \ref{exa:bundles1}. So let $p \in \mathrm{ob}_{\mathbf{C} \slash X}$ and let $p_{G}$ be a group object of $\mathrm{ob}_{\mathbf{C} \slash X}$. Moreover let $\mathrm{a}_{p}$ be a right group action by $p_{G}$ on $p$ internal to $\mathbf{C} \slash X$. Then, by definition, $\mathrm{a}_{p}$ is torsorial if the unique morphism
+\begin{align*}
+  \theta
+  &\in
+  \mathrm{mor}_{\mathbf{C} \slash X}
+  \left(
+    p_{G}
+    \times
+    p,
+    p
+    \times
+    p
+  \right)
+\end{align*}
+obtained from universality according to
+\[
+\begin{tikzcd}[sep=large]
+  &
+  p_{G}
+  \times
+  p
+  \arrow{dr}{\mathrm{Pr}_{2}}
+  \arrow{d}{\theta}
+  \arrow[swap]{d}{\theta}
+  \arrow[swap]{dl}{\mathrm{a}_{p}}
+  &
+  \\
+  p
+  &
+  p
+  \times
+  p
+  \arrow{r}{\mathrm{Pr}_{2}}
+  \arrow[swap]{l}{\mathrm{Pr}_{1}}
+  &
+  p
+\end{tikzcd}
+\]
+is an isomorphism. But since all the morphisms are bundle maps this is to say that $\theta$ is the unique isomorphism such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  \mathrm{dom}_{\mathbf{C}}(p_{G})
+  \times_{X}
+  \mathrm{dom}_{\mathbf{C}}(p)
+  \arrow{dr}{\mathrm{Pr}_{2}}
+  \arrow{d}{\theta}
+  \arrow[swap]{d}{\theta}
+  \arrow[swap]{dl}{\mathrm{a}_{p}}
+  &
+  \\
+  \mathrm{dom}_{\mathbf{C}}(p)
+  \arrow{dr}{p}
+  &
+  \mathrm{dom}_{\mathbf{C}}(p)
+  \times_{X}
+  \mathrm{dom}_{\mathbf{C}}(p)
+  \arrow{r}{\mathrm{Pr}_{2}}
+  \arrow{d}{p \times p}
+  \arrow[swap]{d}{p \times p}
+  \arrow[swap]{l}{\mathrm{Pr}_{1}}
+  &
+  \mathrm{dom}_{\mathbf{C}}(p)
+  \arrow[swap]{dl}{p}
+  \\
+  &
+  X
+  &
+\end{tikzcd}
+\]
+commutes. In other words, $\mathrm{a}_{p}$ is torsorial if and only if
+\begin{align*}
+  \left(
+    \mathrm{dom}_{\mathbf{C}}(p_{G})
+    \times_{X}
+    \mathrm{dom}_{\mathbf{C}}(p),
+    \mathrm{a}_{p},
+    \mathrm{Pr}_{2}
+  \right)
+\end{align*}
+is the pullback of $p$ and $p$ which is to say that $(\mathrm{a}_{p},\mathrm{Pr}_{2})$ is the kernel pair of $p$. As already noted, {\glqq}$p$ inhabited{\grqq} means that {\glqq}$p$ is an epimorphism{\grqq}. So $(p,\mathrm{a}_{p})$ is a right $p_{G}$-torsor if and only if
+\begin{enumerate}
+\item[(1)]
+$p$ is an epimorphism
+\item[(2)]
+$(\mathrm{a}_{p},\mathrm{Pr}_{2})$ is the kernel pair of $p$
+\end{enumerate}
+Of particular interest to us here are
+\begin{align*}
+  \mathbf{C}
+  =
+  \mathbf{Top}
+  \qquad
+  &\text{and}
+  \qquad
+  \mathbf{C}
+  =
+  \mathbf{Diff}_{\infty}
+\end{align*}
+In the non-slice case a group action just means continuous group action by a topological group and smooth group action by a Lie group, respectively. Torsorial can be interpreted as free and transitive since both $\mathbf{Top}$ and $\mathbf{Diff}_{\infty}$ are concrete categories. Being concrete also means that the idea of an action yielding an equivalence relation from subsection \ref{sec:nt} works. In particular we get orbit spaces. We do not want to discuss the slice case here since arbitrary group objects in the slice categories are more general than appropriate for our purposes. We will only discuss a certain special case in example \ref{exa:bundles2}. Only a remark on inhabited objects in the slice case: $\pi$ as object of $\mathbf{Top} \slash B$ or $\mathbf{Diff}_{\infty} \slash B$ for some respective object $B$ being inhabited means that \underline{each} fiber of $\pi$ is non-empty and not just that the total space of $\pi$ is non-empty. So the inhabited bundles are the surjective ones. Therefore one can take the general stance that torsors are just the interesting torsorial actions since the non-surjective bundles are not of so much importance we daresay.
+\end{enumerate}
+\end{exa}
+\begin{prf}
+The major part should be clear. If we forgot to prove something regard it as a reader's exercise.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+We have now internalized enough conceptions to make certain categories behave more or less like the category $\mathbf{Set}$. These categories are called elementary topoi. More formally, a category $\mathbf{C}$ is an \textbf{(elementary) topos} if
+\begin{enumerate}
+\item[(ET1)]
+$\mathbf{C}$ has finite limits
+\item[(ET2)]
+$\mathbf{C}$ is cartesian closed
+\item[(ET3)]
+$\mathbf{C}$ has a subobject classifier
+\end{enumerate}
+Many constructions working for $\mathbf{Set}$ also work for any elementary topos. To make a topos fully behave like $\mathbf{Set}$ (with out the replacement axiom) one can consider well-pointed topoi with a NNO satisfying the axiom of choice. Using the Yoneda lemma \ref{lem:yoneda} one translates cartesian closed to a statement not involving the hom-functor. In general, elementary topos can be expressed as first-order theory with elementary topoi as set theoretical model just like categories are interpretations of category theory. Hence we have found topos theory. If we add the first-order axioms for well-pointedness, NNO and choice to topos theory we get ETCS. A formal description of ETCS can be found in the \cite{wiki-nlab0000} article: fully formal ETCS.\footnote{read this especially then if you think we have made too much use of TG in the involved notions} This shows that topos theory is of significant importance for the foundations of mathematics. For example a topos has finite limits and hence i.p. finite products. Thus topos theory is universal enough to do abstract algebra which already covers a major part of mathematics. In the end, one can regard an elementary topos as a mathematical universe whose basic mathematical objects are like sets, that is, a place where one can do set theory.
+\\
+The foundational aspect is only one side of topos theory. There is also a geometric one. Topoi are in some sense generalizations of (sufficiently nice)\footnote{the keyword is sober space} topological spaces. In subsection \ref{sec:limit} we introduced the category $\mathbf{Sh}(Y)$ of sheaves on $\mathbf{Open}_{Y}$ for some space $Y$. This category is a topos. Then something striking happens. A continuous map $f \colon Y_{1} \rightarrow Y_{2}$ corresponds precisely to functors
+\begin{align*}
+  f^{\ast}
+  \colon
+  \mathbf{Sh}(Y_{2})
+  &\rightarrow
+  \mathbf{Sh}(Y_{1})
+  \\
+  f_{\ast}
+  \colon
+  \mathbf{Sh}(Y_{1})
+  &\rightarrow
+  \mathbf{Sh}(Y_{2})
+\end{align*}
+such that $f^{\ast}$ is left adjoint to $f_{\ast}$ and $f^{\ast}$ preserves finite limits. This means that such pairs of functors called \textit{geometric morphisms} are the generalization of continuous functions since such pairs of functors make also sense when $\mathbf{Sh}(Y)$ is replaced by an arbitrary topos. This suggests a meta-idea: take a concept of topological spaces and find a corresponding concept on the categories of sheaves on that spaces, then take this as definition for arbitrary topoi (if possible). For example, this allows to define embedding as geometric morphism such that the right adjoint is fully faithful. This further underpins our definition of embedding as fully faithful functor. Of particular interest in physics is the generalization of some connectivity properties of topological spaces to define a \textit{cohesive topos}. The higher categorical version of this plays a role in an idea of the formalization of quantum field theory, string theory and higher gauge theory as outlined in \cite{a565d200}. But with these notes alone your are not sufficiently prepared to understand it. In particular, you should learn more about sheaves and topos theory. We recommend reading the introductory notes \cite{de9b9402} first - which, after these notes, you should be able to read rather quickly - followed by a good part of \cite{c55c71e8}. If you like the detailed proofs in these notes you will probably not like the undetailed ones in \cite{c55c71e8} but we claim that you are wiser after reading it and perhaps glad about that. If you want to become a topos master you should read \cite{c1f00dad} where one virtually finds everthing what mankind knows about topoi. But only after the other suggested texts.
+\\
+What seems also worth mentioning is that if a category $\mathbf{C}$ has pullbacks one can internalize categories and groupoids themselves! We will not do that here. But it is not too hard to do that (see e.g. \cite{wiki-nlab0000}: internal category). We only want to emphasize that a kernel pair of some morphism $f$ of $\mathbf{C}$ yields an internal groupoid when the first coordinate of the kernel pair is considered the domain function $\mathrm{dom}$ and the second the codomain function $\mathrm{cod}$. The resulting internal groupoid is denoted $\mathbf{G}_{f}[\mathbf{C}]$ and called \textbf{kernel pair groupoid (of $f$ internal to $\mathbf{C}$)} and $\mathbf{G}_{f}[\mathbf{Set}]$ yields the one we defined in subsection \ref{sec:limit}.
+\\
+Let us conclude this subsection with a sequel of the bundles 1 example \ref{exa:bundles1}.
+\\
+\begin{exa}[Bundles 2]
+\label{exa:bundles2}
+This example will be all about principal bundles. We will only deal with the $\mathbf{Top}$ case though everything should work in the $\mathbf{Diff}_{\infty}$ case as well. Assume a group object $G$ of $\mathbf{Top}$ w.r.t. some $(\mathrm{m},\mathrm{id},\mathrm{inv})$ for the purpose of this example. The idea of a $G$-principal bundle is that it is a bundle such that each fiber is a right $G$-torsor. This means:
+\begin{enumerate}
+\item[(1)]
+each fiber should be non-empty
+\item[(2)]
+we should have an action on the total space such that
+\begin{enumerate}
+\item[$\bullet$]
+the action stays in the fiber, that is, applying the action followed by an application of the bundle is the same as projection to the total space followed by an application of the bundle
+\item[$\bullet$]
+the action is free and transitive when restricted to a fiber
+\end{enumerate}
+\end{enumerate}
+Let us formalize this idea. To this end let $E,B \in \mathrm{ob}_{\mathbf{Top}}$ for this example. Further assume a bundle $\pi \in \mathrm{mor}_{\mathbf{Top}}(E,B)$ and a right group action $\mathrm{a}_{E}$ by $G$ on $E$ internal to $\mathbf{Top}$. $(\pi,\mathrm{a}_{E})$ is called \textbf{(Cartan $G$-)principal bundle (for $\mathrm{a}_{E}$ in $\mathbf{Top}$)} if
+\begin{enumerate}
+\item[(CPB1)]
+$\pi$ is inhabited
+\item[(CPB2)]
+$(\mathrm{a}_{E},\mathrm{pr}_{2})$ is the kernel pair of $\pi$
+\end{enumerate}
+Note that (CPB2) just means that we have the pullback diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  G
+  \times
+  E
+  \arrow{dr}{\mathrm{pr}_{2}}
+  \arrow{d}{\theta}
+  \arrow[swap]{d}{\theta}
+  \arrow[swap]{dl}{\mathrm{a}_{E}}
+  &
+  \\
+  E
+  \arrow{dr}{\pi}
+  &
+  E
+  \times_{B}
+  E
+  \arrow{r}{\mathrm{Pr}_{2}}
+  \arrow[swap]{l}{\mathrm{Pr}_{1}}
+  &
+  E
+  \arrow[swap]{dl}{\pi}
+  \\
+  &
+  B
+  &
+\end{tikzcd}
+\]
+in $\mathbf{Top}$ of $\pi$ and $\pi$ such that the unique $\theta$ is an isomorphism. Note that from the group object $G$ of $\mathbf{Top}$ w.r.t. $(\mathrm{m},\mathrm{id},\mathrm{inv})$ we get the bundle
+\begin{align*}
+  \mathrm{pr}_{2}^{G}
+  \colon
+  G
+  \times
+  B
+  &\rightarrow
+  B
+  \\
+  (g,b)
+  &\mapsto
+  b
+\end{align*}
+which is a group object of $\mathbf{Top} \slash B$ by the bundle maps (up to isomorphism)
+\begin{align*}
+  \mathrm{m}_{\mathrm{pr}_{2}^{G}}
+  \colon
+  \left(
+    G
+    \times
+    G
+  \right)
+  \times
+  B
+  &\rightarrow
+  G
+  \times
+  B
+  \\
+  ((g_{1},g_{2}),b)
+  &\mapsto
+  \left(
+    \mathrm{m}(g_{1},g_{2}),
+    b
+  \right)
+\end{align*}
+and so on with the details left to the reader. Then we have an isomorphism
+\begin{align*}
+  \Phi
+  \colon
+  \left(
+    G
+    \times
+    B
+  \right)
+  \times_{B}
+  E
+  &\rightarrow
+  G
+  \times
+  E
+  \\
+  ((g,b),e)
+  &\mapsto
+  (g,e)
+\end{align*}
+in $\mathbf{Top}$ and using example \ref{exa:ofinternaliz} it is not too hard to see the equivalence:
+\begin{enumerate}
+\item[($\equiv_{1}$)]
+$(\pi,\mathrm{a}_{E})$ is a Cartan $G$-principal bundle for $\mathrm{a}_{E}$ in $\mathbf{Top}$ if and only if $(\pi,\mathrm{a}_{E} \circ \Phi)$ is a right $\mathrm{pr}_{2}^{G}$-torsor internal to $\mathbf{Top} \slash B$
+\end{enumerate}
+On the other hand note that the transitivity of the action on each fiber means that the orbit space for each fiber is a one element set. This is to say that transitivity in each fiber is the same as the requirement that the base space of the bundle is the same as the orbit space of $E$ w.r.t. $\mathrm{a}_{E}$. This yields quite directly another equivalent characterization of Cartan $G$-principle bundle:
+\begin{enumerate}
+\item[($\equiv_{2}$)]
+$(\pi,\mathrm{a}_{E})$ is a Cartan $G$-principal bundle for $\mathrm{a}_{E}$ in $\mathbf{Top}$ if and only if $\mathrm{a}_{E}$ is free and $\pi$ is the coequalizer of the pair $(\mathrm{a}_{E},\mathrm{pr}_{2})$
+\end{enumerate}
+As noted, (CPB1) and (CPB2) assure that each fiber is a right $G$-torsor and hence $\pi^{-1}(b)$ is isomorphic to $G$ as objects in $\mathbf{Top}$ (but not canonically since the isormophism depends on an arbitrary choice of an element in $\pi^{-1}(b)$). In particular, this means that a Cartan $G$-principle bundle $\pi$ for $\mathrm{a}_{E}$ is a Cartan fiber bundle for $G$.
+\\
+We can now ask the question if there is also a local triviality for principal bundles as we had for fiber bundles in example \ref{exa:bundles1}. In order to formulate this we need two things:
+\begin{enumerate}
+\item[(1)]
+a notion of structure preserving maps between principal bundles
+\item[(2)]
+a notion of trivial principal bundle
+\end{enumerate}
+Let $E^{\backprime} \in \mathrm{ob}_{\mathbf{Top}}$. Further, assume a bundle $\pi^{\backprime} \in \mathrm{mor}_{\mathbf{Top}}(E^{\backprime},B)$ and a right group action $\mathrm{a}_{E^{\backprime}}$ by $G$ on $E^{\backprime}$ internal to $\mathbf{Top}$. For the rest of the example we assume:
+\begin{enumerate}
+\item[$\bullet$]
+$(\pi,\mathrm{a}_{E})$ is a Cartan $G$-principal bundle for $\mathrm{a}_{E}$ in $\mathbf{Top}$
+\item[$\bullet$]
+$(\pi^{\backprime},\mathrm{a}_{E^{\backprime}})$ is a Cartan $G$-principal bundle for $\mathrm{a}_{E^{\backprime}}$ in $\mathbf{Top}$
+\end{enumerate}
+A bundle map $f$ from $(E,B,\pi)$ to $(E^{\backprime},B,\pi^{\backprime})$ over $B$ of $\mathbf{Top}$ is called \textbf{principal} if $f$ is $G$-equivariant from $\mathrm{a}_{E}$ to $\mathrm{a}_{E^{\backprime}}$ internal to $\mathbf{Top}$. This yields a sensible notion of category of Cartan $G$-principal bundles. For $B$ arbitrary but fixed define a category $\mathbf{CPB}_{G}(B)$ with
+\begin{enumerate}
+\item[$\bullet$]
+objects all the $(\pi,\mathrm{a}_{E})$
+\item[$\bullet$]
+morphisms from $(\pi,\mathrm{a}_{E})$ to $(\pi^{\backprime},\mathrm{a}_{E^{\backprime}})$ the $G$-equivariant bundle maps from $(E,B,\pi)$ to $(E^{\backprime},B,\pi^{\backprime})$ over $B$ of $\mathbf{Top}$
+\end{enumerate}
+One can show that $\mathbf{CPB}_{G}(B)$ is actually a groupoid and $\mathbf{CPB}_{G}(B)$ is called the \textbf{groupoid of Cartan $G$-principal bundles (over $B$)}. Let us emphasize that $\mathbf{CPB}_{G}(B)$ has pullbacks which will become important in a moment. The second point we need to address is the triviality of a principal bundle. To this end note that
+\begin{align*}
+  \mathrm{pr}_{1}
+  \colon
+  B
+  \times
+  G
+  &\rightarrow
+  B
+  \\
+  (b,g)
+  &\mapsto
+  b
+\end{align*}
+together with
+\begin{align*}
+  \mathrm{a}_{B \times G}
+  \colon
+  G
+  \times
+  \left(
+    B
+    \times
+    G
+  \right)
+  &\rightarrow
+  B
+  \times
+  G
+  \\
+  (g_{0},(b,g))
+  &\mapsto
+  (b,m(g,g_{0}))
+\end{align*}
+is a Cartan $G$-principal bundle for $\mathrm{a}_{B \times G}$ in $\mathbf{Top}$. Then $(\pi,\mathrm{a}_{E})$ is \textbf{trivial (in $\mathbf{Top}$)} if there is an isomorphism (morphism would actually do here since we have a groupoid) from $(\pi,\mathrm{a}_{E})$ to $(\mathrm{pr}_{1},\mathrm{a}_{B \times G})$ in $\mathbf{CPB}_{G}(B)$. Note that $(\pi,\mathrm{a}_{E})$ is trivial if and only if there is a section for $\pi$. Now we can define what it means for a Cartan principal bundle to be locally trivial. For that purpose let $\mathrm{cov}_{B}$ be an open cover generator. Then $(\pi,\mathrm{a}_{E})$ is called \textbf{locally trivial (w.r.t. $\mathrm{cov}_{B}$ in $\mathbf{Top}$)} if the Cartan $G$-principal bundle
+\begin{align*}
+  \left(
+    \mathrm{i}_{U_{k}}^{\ast}(\pi),
+    \mathrm{a}_{E \vert U_{k}}
+  \right)
+\end{align*}
+is trivial for all $k \in K$ where
+\begin{align*}
+  \mathrm{a}_{E \vert U_{k}}
+  \colon
+  G
+  \times
+  \mathrm{dom}_{\mathbf{Top}}
+  \left(
+    \mathrm{i}_{U_{k}}^{\ast}(\pi)
+  \right)
+  &\rightarrow
+  \mathrm{dom}_{\mathbf{Top}}
+  \left(
+    \mathrm{i}_{U_{k}}^{\ast}(\pi)
+  \right)
+  \\
+  (g,(b,e))
+  &\mapsto
+  (b,\mathrm{a}_{E}(g,e))
+\end{align*}
+If $(\pi,\mathrm{a}_{E})$ is locally trivial w.r.t. to some $\mathrm{cov}_{B}$ it is called \textbf{($G$-)principal bundle (in $\mathbf{Top}$)}. Note that if the base space of a Cartan $G$-principal bundle is a manifold then it is automatically locally trivial since any $n$-dimensional manifold (smooth or not) can be covered by open subspaces homeomorphic to $\mathbb{R}^{n}$ which are contractible and \textit{paracompact}. But Cartan principal bundles over contractible and paracompact spaces are trivial.\footnote{use the pullback and note that it is only up to unique isomorphism which is why one needs paracompact or so} What is interesting now is that $G$-principal bundles in $\mathbf{Top}$ can be reconstructed from local data. The triviality of
+\begin{align*}
+  \left(
+    \mathrm{i}_{U_{k}}^{\ast}(\pi),
+    \mathrm{a}_{E \vert U_{k}}
+  \right)
+\end{align*}
+is equivalent to the existence of a section $s_{k}$ for $\mathrm{i}_{U_{k}}^{\ast}(\pi)$. If we have $U_{1},U_{2} \in \mathrm{ob}_{\mathbf{Open}_{B}}$ and sections $s_{1}$ and $s_{2}$ for $\mathrm{i}_{U_{2}}^{\ast}(\pi)$ and $\mathrm{i}_{U_{2}}^{\ast}(\pi)$, respectively, then for all $x \in U_{1} \cap U_{2}$ we get a unique $g_{x}$ such that
+\begin{align*}
+  s_{2}(x)
+  &=
+  \mathrm{a}_{E}
+  \left(
+    g_{x},
+    s_{1}(x)
+  \right)
+\end{align*}
+due to the free transitivity of the action $\mathrm{a}_{E}$ on the fiber of $\pi$. This corresponds precisely to a function
+\begin{align*}
+  \tau_{s_{1},s_{2}}
+  \colon
+  U_{1}
+  \cap
+  U_{2}
+  &\rightarrow
+  G
+  \\
+  x
+  &\mapsto
+  g_{x}
+\end{align*}
+as element of $\mathrm{Mor}_{\mathbf{Top}}$. $\tau_{s_{1},s_{2}}$ is called \textbf{transition function (from $s_{1}$ to $s_{2}$ of $(\pi,\mathrm{a}_{E})$)}. By the way, $s_{1}$ is called a \textbf{bundle chart (of $(\pi,\mathrm{a}_{E})$ for $U_{1}$)}. So also $s_{2}$ is one. For the rest of the example assume $(\pi,\mathrm{a}_{E})$ as locally trivial (w.r.t. $\mathrm{cov}_{B}$ in $\mathbf{Top}$). Moreover:
+\begin{enumerate}
+\item[$\bullet$]
+for all $k \in K$ let $s_{k}$ be a section for $\mathrm{i}_{U_{k}}^{\ast}(\pi)$ and define dependent functions
+\begin{align*}
+  \sigma
+  :=
+  \left(
+    k
+    \mapsto
+    s_{k}
+  \right)
+  &\colon
+  \prod_{k \in K}
+  \mathrm{mor}_{\mathbf{Top}}(U_{k},E)
+  \\
+  \tau_{\sigma}
+  :=
+  \left(
+    (k_{1},k_{2})
+    \mapsto
+    \tau_{s_{k_{1}},s_{k_{2}}}
+  \right)
+  &\colon
+  \prod_{(k_{1},k_{2}) \in K \times K}
+  \mathrm{mor}_{\mathbf{Top}}(U_{k_{1}} \cap U_{k_{2}},G)
+\end{align*}
+\item[$\bullet$]
+for all $k \in K$ let $s_{k}^{\backprime}$ be a section for $\mathrm{i}_{U_{k}}^{\ast}(\pi)$ and define dependent functions
+\begin{align*}
+  \sigma^{\backprime}
+  :=
+  \left(
+    k
+    \mapsto
+    s_{k}^{\backprime}
+  \right)
+  &\colon
+  \prod_{k \in K}
+  \mathrm{mor}_{\mathbf{Top}}(U_{k},E)
+  \\
+  \tau_{\sigma^{\backprime}}
+  :=
+  \left(
+    (k_{1},k_{2})
+    \mapsto
+    \tau_{s_{k_{1}}^{\backprime},s_{k_{2}}^{\backprime}}
+  \right)
+  &\colon
+  \prod_{(k_{1},k_{2}) \in K \times K}
+  \mathrm{mor}_{\mathbf{Top}}(U_{k_{1}} \cap U_{k_{2}},G)
+\end{align*}
+\item[$\bullet$]
+define a dependent function
+\begin{align*}
+  \tau_{\sigma}^{\sigma^{\backprime}}
+  :=
+  \left(
+    k
+    \mapsto
+    \tau_{s_{k},s_{k}^{\backprime}}
+  \right)
+  &\colon
+  \prod_{k \in K}
+  \mathrm{mor}_{\mathbf{Top}}(U_{k},G)
+\end{align*}
+\end{enumerate}
+$\sigma$ is called \textbf{bundle atlas (of $(\pi,\mathrm{a}_{E})$)}. So also $\sigma^{\backprime}$ is one. Now a bundle atlas $\sigma$ of $(\pi,\mathrm{a}_{E})$ satisfies:
+\begin{enumerate}
+\item[(CCC)]
+for all $k_{1},k_{2},k_{3} \in K$ and all $x \in U_{k_{1}} \cap U_{k_{2}} \cap U_{k_{3}}$ the equation
+\begin{align*}
+  \tau_{\sigma}(k_{1},k_{2})(x)
+  \cdot
+  \tau_{\sigma}(k_{2},k_{3})(x)
+  &=
+  \tau_{\sigma}(k_{1},k_{3})(x)
+\end{align*}
+holds.
+\end{enumerate}
+This follows quite easily from\footnote{note that we have a right action}
+\begin{align*}
+  \mathrm{a}_{E}
+  \left(
+    \tau_{s_{k_{1}},s_{k_{3}}}(x),
+    s_{k_{1}}(x)
+  \right)
+  &=
+  s_{k_{3}}(x)
+  \\
+  &=
+  \mathrm{a}_{E}
+  \left(
+    \tau_{s_{k_{2}},s_{k_{3}}}(x),
+    s_{k_{2}}(x)
+  \right)
+  \\
+  &=
+  \mathrm{a}_{E}
+  \left(
+    \tau_{s_{k_{2}},s_{k_{3}}}(x),
+    \mathrm{a}_{E}
+    \left(
+      \tau_{s_{k_{1}},s_{k_{2}}}(x),
+      s_{k_{1}}(x)
+    \right)
+  \right)
+  \\
+  &=
+  \mathrm{a}_{E}
+  \left(
+    \tau_{s_{k_{1}},s_{k_{2}}}(x)
+    \cdot
+    \tau_{s_{k_{2}},s_{k_{3}}}(x),
+    s_{k_{1}}(x)
+  \right)
+\end{align*}
+and the freedom of $\mathrm{a}_{E}$. We refer to property (CCC) as \textbf{cocycle condition (for $\tau_{\sigma}$)}. The group structure of $G$ then immediately implies
+\begin{align*}
+  \tau_{\sigma}(k,k)(x)
+  &=
+  \mathrm{id}(\emptyset)
+  \\
+  \tau_{\sigma}(k_{1},k_{2})(x)
+  &=
+  \tau_{\sigma}(k_{2},k_{1})^{-1}(x)
+\end{align*}
+for all $k,k_{1},k_{2} \in K$ and all suited $x$. Moreover bundle atlases $\sigma$ and $\sigma^{\backprime}$ of $(\pi,\mathrm{a}_{E})$ satisfy:
+\begin{enumerate}
+\item[(CBC)]
+for all $k_{1},k_{2} \in K$ and all $x \in U_{k_{1}} \cap U_{k_{2}}$ the equation
+\begin{align*}
+  \tau_{\sigma}^{\sigma^{\backprime}}(k_{1})(x)
+  \cdot
+  \tau_{\sigma^{\backprime}}(k_{1},k_{2})(x)
+  &=
+  \tau_{\sigma}(k_{1},k_{2})(x)
+  \cdot
+  \tau_{\sigma}^{\sigma^{\backprime}}(k_{2})(x)
+\end{align*}
+holds.
+\end{enumerate}
+This again follows quite easily from
+\begin{align*}
+  \mathrm{a}_{E}
+  \left(
+    \tau_{s_{k_{1}},s_{k_{1}}^{\backprime}}(x)
+    \cdot
+    \tau_{s_{k_{1}}^{\backprime},s_{k_{2}}^{\backprime}}(x),
+    s_{k_{1}}(x)
+  \right)
+  &=
+  \mathrm{a}_{E}
+  \left(
+    \tau_{s_{k_{1}}^{\backprime},s_{k_{2}}^{\backprime}}(x),
+    s_{k_{1}}^{\backprime}(x)
+  \right)
+  \\
+  &=
+  s_{k_{2}}^{\backprime}
+  \\
+  &=
+  \mathrm{a}_{E}
+  \left(
+    \tau_{s_{k_{2}},s_{k_{2}}^{\backprime}}(x),
+    s_{k_{2}}(x)
+  \right)
+  \\
+  &=
+  \mathrm{a}_{E}
+  \left(
+    \tau_{s_{k_{1}},s_{k_{2}}}(x)
+    \cdot
+    \tau_{s_{k_{2}},s_{k_{2}}^{\backprime}}(x),
+    s_{k_{1}}(x)
+  \right)
+\end{align*}
+as above. We refer to property (CBC) as \textbf{coboundary condition (for $\tau_{\sigma}^{\sigma^{\backprime}}$ from $\tau_{\sigma}$ to $\tau_{\sigma^{\backprime}}$)}. What is amazing now is that from a dependent function
+\begin{align*}
+  \tau
+  &\in
+  \prod_{(k_{1},k_{2}) \in K \times K}
+  \mathrm{mor}_{\mathbf{Top}}(U_{k_{1}} \cap U_{k_{2}},G)
+\end{align*}
+such that the cocycle condition for $\tau$ holds one can construct a $G$-principal bundle in the following way:
+\begin{enumerate}
+\item[(a)]
+Define an equivalence relation $\sim_{\tau}$ on
+\begin{align*}
+  \coprod_{k \in K}
+  U_{k}
+  \times
+  G
+\end{align*}
+by
+\begin{align*}
+  (x_{k_{1}},g_{k_{1}})
+  \sim_{\tau}
+  (x_{k_{2}},g_{k_{2}})
+  \qquad
+  &\Leftrightarrow
+  \qquad
+  x_{k_{1}}
+  =
+  x_{k_{2}}
+  \quad
+  \land
+  \quad
+  g_{k_{1}}
+  \cdot
+  \tau(k_{1},k_{2})
+  =
+  g_{k_{2}}
+\end{align*}
+Then set
+\begin{align*}
+  E_{\tau}
+  &:=
+  \left.
+    \coprod_{k \in K}
+    U_{k}
+    \times
+    G
+  \right\slash
+  \sim_{\tau}
+\end{align*}
+\item[(b)]
+Define the function
+\begin{align*}
+  \pi_{\tau}
+  \colon
+  E_{\tau}
+  &\rightarrow
+  B
+  \\
+  [(x,g)]_{\sim_{\tau}}
+  &\mapsto
+  x
+\end{align*}
+as element of $\mathrm{Mor}_{\mathbf{Top}}$
+\item[(c)]
+Define an action by $G$ on $E_{\tau}$ internal to $\mathbf{Top}$ by
+\begin{align*}
+  \mathrm{a}_{E_{\tau}}
+  \colon
+  G
+  \times
+  E_{\tau}
+  &\rightarrow
+  E_{\tau}
+  \\
+  (g_{0},[(x,g)]_{\sim_{\tau}})
+  &\mapsto
+  [(x,g \cdot g_{0})]_{\sim_{\tau}}
+\end{align*}
+\end{enumerate}
+Then $(\pi_{\tau},\mathrm{a}_{E_{\tau}})$ is a $G$-principal bundle in $\mathbf{Top}$. That this, in fact, works follows from the cocycle condition (CCC) for $\tau$. Given an additional dependent function
+\begin{align*}
+  \tau^{\backprime}
+  &\in
+  \prod_{(k_{1},k_{2}) \in K \times K}
+  \mathrm{mor}_{\mathbf{Top}}(U_{k_{1}} \cap U_{k_{2}},G)
+\end{align*}
+such that the cocycle condition for $\tau^{\backprime}$ holds then there is
+\begin{align*}
+  f
+  &\in
+  \prod_{k \in K}
+  \mathrm{mor}_{\mathbf{Top}}(U_{k},G)
+\end{align*}
+such that the coboundary condition for $f$ from $\tau$ to $\tau^{\backprime}$ holds if and only if $(\pi_{\tau},\mathrm{a}_{E_{\tau}})$ is isomorphic to $(\pi_{\tau^{\backprime}},\mathrm{a}_{E_{\tau^{\backprime}}})$ in $\mathbf{CPB}_{G}(B)$. In the end, pretty amazingly:
+\begin{enumerate}
+\item[$\bullet$]
+$(\pi_{\tau_{\sigma}},\mathrm{a}_{E_{\tau_{\sigma}}})$ is isomorphic to $(\pi,\mathrm{a}_{E})$ in $\mathbf{CPB}_{G}(B)$.
+\item[$\bullet$]
+$(\pi_{\tau_{\sigma}},\mathrm{a}_{E_{\tau_{\sigma}}})$ is isomorphic to $(\pi_{\tau_{\sigma^{\backprime}}},\mathrm{a}_{E_{\tau_{\sigma^{\backprime}}}})$ in $\mathbf{CPB}_{G}(B)$.
+\end{enumerate}
+So what really matters in the reconstruction from local data are families of functions on overlaps of a cover and how they relate subjected to the properties (CCC) and (CBC). This {\glqq}descent{\grqq} idea will be used in example \ref{exa:gs4} at the end of section \ref{sec:fibration} on the way to {\glqq}homotopy-theoretic{\grqq} sheaves which are also known as \textit{($\infty$-)stacks}. In simple terms: stacks formalize the idea of gluing locally defined things which agree on overlaps of a cover up to equivalence. On the other hand properties (CCC) and (CBC) suggest that principal bundles in $\mathbf{Top}$ are classified in terms if cohomology. In fact, this is described in section \ref{sec:sset}.
+\\
+Regarding the title of this subsection the obvious question is: in which categories does a theory of principal bundles make sense? We already said that what we presented works equally well in $\mathbf{Diff}_{\infty}$. But the Cartan principal bundle definition makes apparently sense in any category with finite limits and hence any topos. And the equivalence ($\equiv_{1}$) seems to hold, too, since from a group object we get one in the slice category and we can then use example \ref{exa:ofinternaliz} . However, the equivalence ($\equiv_{2}$) is more problematic since it is not so clear how to internalize {\glqq}free{\grqq}. Nevertheless, one would like the bundle to be a coequalizer of the kernel pair. Coequalizers are the categorical way to formulate quotients (induced by equivalence relations) and one wants the base space to be the orbit space. But in general categories this has to be demanded as extra condition. So what one does is to define a Cartan principle bundle in a category $\mathbf{C}$ with finite limits as a morphism $f_{12}$ together with an action $\mathrm{a}_{X_{1}}$ by some group object $G$ on $X_{1}$ internal to $\mathbf{C}$ such that
+\begin{enumerate}
+\item[(ICPB1)]
+$f_{12}$ is inhabited
+\item[(ICPB2)]
+$(\mathrm{a}_{X_{1}},\mathrm{pr}_{2})$ is the kernel pair of $f_{12}$
+\item[(ICPB3)]
+$f_{12}$ is the coequalizer of $(\mathrm{a}_{X_{1}},\mathrm{pr}_{2})$
+\end{enumerate}
+To further include local triviality one should demand that
+\begin{enumerate}
+\item[(IPB)]
+$f_{12}$ is \textit{effective descent}
+\end{enumerate}
+That properties (ICPB2) and (ICPB3) are not equivalent has its origin in the ill-suited $1$-categorical setting we constrained ourselves to. Ill-suited since if we look at $\mathbf{Top}$ we are actually interested in homotopy types (and if we look at $\mathbf{Diff}_{\infty}$ in smooth homotopy types). As already discussed $\mathbf{Top}$ is not a good category of homotopy types since it contains spaces with a broken notion of nearness. If we exclude such spaces in an appropriate sense then we get a category of homotopy types which, however, is actually an \textit{$(\infty,1)$-category} in the sense that the morphism set should be itself a homotopy type. That is, we should fix the notion of equivalence of objects to get along with the higher-dimensional paths of the objects. Then, indeed, the appropriate versions of (ICPB2) and (ICPB3) are equivalent. Since the truncated information from the involved colimits is corrected by homotopy colimits in the $(\infty,1)$-setting. Moreover one gets local triviality in a suited sense of (IPB) automatically. So one should consider principal bundles in $(\infty,1)$-categories whose objects are like homotopy types. And as topoi are places to do set theory $(\infty,1)$-topoi are places to do homotopy theory. Hence the correct setting to study principal bundles when interested in homotopy are $(\infty,1)$-topoi. We explain a bit about higher categories in the next subsection \ref{sec:hls}.
+\end{exa}
+\begin{prf}
+It should not be too hard to fill in the gaps for the bundle stuff in $\mathbf{Top}$ using \cite{240b19f3} and \cite{797789bc}. For more on the internalization see \cite{wiki-nlab0000}: principal bundle.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}

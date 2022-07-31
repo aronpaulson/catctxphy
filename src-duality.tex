@@ -1,0 +1,243 @@
+Duality in mathematics is about two different perspectives on one and the same mathematical object. One usually has an operation of how to change the viewpoint. Applying this operation yields the dual notion of the object under consideration and doing it twice does not change anything. Thus changing the viewpoint is an involutive opertion. Now how can we change the perspective on arrows? Take a transparent page and draw an arrow on it. Then turn the page. What happens? The arrow points in the opposite direction but it is still the same arrow. Turning the page again is as if nothing has happened. So dualizing an arrow is to consider its source as target and its target as source. This is what we do in this section to see what amazing but sometimes a bit confusing things happen.
+\\\\
+For a category $\mathbf{C}$ we can build the category $\mathbf{C}^{\mathrm{op}}$ with objects
+\begin{align*}
+  \mathrm{ob}_{\mathbf{C}^{\mathrm{op}}}
+  &:=
+  \mathrm{ob}_{\mathbf{C}}
+\end{align*}
+and morphisms
+\begin{align*}
+  \mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}(X_{1},X_{2})
+  &:=
+  \mathrm{mor}_{\mathbf{C}}(X_{2},X_{1})
+\end{align*}
+where composition is given by
+\begin{align*}
+  \circ_{\mathbf{C}^{\mathrm{op}}}
+  (X_{1},X_{2},X_{3})
+  (f_{21},f_{32})
+  &:=
+  \circ_{\mathbf{C}}
+  (X_{3},X_{2},X_{1})
+  (f_{32},f_{21})
+\end{align*}
+$\mathbf{C}^{\mathrm{op}}$ is then called the \textbf{opposite category (of $\mathbf{C}$)}. It is easy to verify that the opposite category is a category justifying the terminology. A category can always be seen as an opposite category. Namely as the opposite of its opposite category
+\begin{align*}
+  \left(
+    \mathbf{C}^{\mathrm{op}}
+  \right)^{\mathrm{op}}
+  &=
+  \mathbf{C}
+\end{align*}
+This reflects the duality between category and opposite category manifesting the idea of duality that both notions are two different viewpoints of the same abstract thing obtained by an involutive operation $^{\mathrm{op}}$. This is ultimately seen by the observation that a statement is true about a category if and only if it is true about the opposite category. More formally - and the following involves quite a bit of mathematical logic - let $\Sigma$ be a formula in the first-order theory of TG. A formula $\Sigma_{\mathbf{C}}^{\prime}$ is \textbf{(categorically) dual to $\Sigma$ w.r.t. $\mathbf{C}$} if $\Sigma_{\mathbf{C}}^{\prime}$ is obtained from $\Sigma$ by replacing each occurence of the formula defined by $\mathrm{mor}_{\mathbf{C}}$ by the formula defined by $\mathrm{mor}_{\mathbf{C}^{\mathrm{op}}}$ and by replacing each occurence of the formula defined by $\circ_{\mathbf{C}}$ by the formula defined by $\circ_{\mathbf{C}^{\mathrm{op}}}$. In a nutshell for the reader not that familiar with mathematical logic: simply write $\mathbf{C}^{\mathrm{op}}$ instead of $\mathbf{C}$ in the written english sentence to get the dual w.r.t. $\mathbf{C}$. Moreover since the opposite category of the opposite category of $\mathbf{C}$ is clearly $\mathbf{C}$ itself this implies that $\Sigma = (\Sigma_{\mathbf{C}}^{\prime})_{\mathbf{C}^{\mathrm{op}}}^{\prime}$. Now note that a formula is a finite sequence of first-order letters. Consequently, there can only be a finite number category variables w.r.t. which we can dualize. Hence a formula $\Sigma^{\prime}$ is said to be \textbf{(categorically) dual to $\Sigma$} if it is obtained from $\Sigma$ by dualizing w.r.t. all category variables by finite induction. In particular we get $\Sigma = (\Sigma^{\prime})^{\prime}$. As a remark for practice: dualizing is intuitively understood as reversing all arrows in the drawing of some commutative diagram but holding the sources and targets fixed. Next we should mention that definitions used here (and in general in mathematics) are english words or more general sequences of symbols standing for a certain first-order formula of TG. And so are statements. Their proofs, if existing, then are sequences of certain first-order formulas in TG. So all of them can be dualized and we speak of dual definitions, dual propositions\footnote{particularly theorems} and dual proofs respectively. The question now is if the dual proof is the proof of the dual statement. The answer is affirmative and can be stated as a meta-theorem. A meta-theorem is a statement \underline{about} the first-order theory and not in the first-order theory itself as e.g. common mathematical propositions are. To prove a meta-theorem one usually does not just use common classical logic but rather a more undisputed logic. But this meta-mathematical stuff shall not concern us here. Just note the following meta-theorem provable by an almost undisputable kind of logic.
+\\
+\begin{thm}[Duality Principle]
+\label{thm:dp}
+$\Sigma$ is a consequence in the first-order theory of TG if and only if $\Sigma_{\mathbf{C}}^{\prime}$ is a consequence in the first-order theory of TG. Hence $\Sigma$ is a consequence in the first-order theory of TG if and only if $\Sigma^{\prime}$ is a consequence in the first-order theory of TG.
+\end{thm}
+\begin{prf}[Sketch]
+Observe that category properties (C1) and (C2) from subsection \ref{sec:cat} are true if and only if the duals to them are true. Even more, they are the same up to the category variable name. Dualizing the proof of $\Sigma$ w.r.t. $\mathbf{C}$ then yields a proof of $\Sigma_{\mathbf{C}}^{\prime}$ and vice versa since the proof just needs new variable names for $\mathbf{C}$. The second statement follows by finite induction.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+So, after all, it is justifiable to call $\mathbf{C}^{\mathrm{op}}$ the \textbf{dual of $\mathbf{C}$} as some other auhtors do. Some authors also write $\mathbf{C}^{\prime}$ instead of $\mathbf{C}^{\mathrm{op}}$. Having established this fundamental duality prinicple in category theory we want to apply it with respect to functors. First of all, we will sometimes write $f_{12}^{\mathrm{op}} := f_{21}$ for morphisms in the opposite category in accordance with our notation fixed in subsection \ref{sec:notation} of chapter \ref{chap:intro}. This is to make up for our notational convention regarding the indexing of morphisms in $\mathbf{C}$ and consequently a pure matter of convenience. Then we get
+\begin{align*}
+  f_{21}^{\mathrm{op}}
+  \circ_{\mathbf{C}^{\mathrm{op}}}
+  f_{32}^{\mathrm{op}}
+  &=
+  f_{12}
+  \circ_{\mathbf{C}^{\mathrm{op}}}
+  f_{23}
+  =
+  f_{23}
+  \circ_{\mathbf{C}}
+  f_{12}
+\end{align*}
+Now, if we have a functor $F \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{C}_{\alpha}$ then application to compositions results in
+\begin{align*}
+  F(f_{23} \circ_{\mathbf{C}} f_{12})
+  =
+  F(f_{12})
+  \circ_{\mathbf{C}_{\alpha}}
+  F(f_{23})
+\end{align*}
+But this formula is the dual formula w.r.t. $\mathbf{C}^{\mathrm{op}}$ to the functor property (F2) regarding the functor $F$ since $\mathbf{C} = (\mathbf{C}^{\mathrm{op}})^{\mathrm{op}}$. Moreover $F_{\mathrm{mor}}$ maps
+\begin{align*}
+  (X_{1},X_{2})
+  \in
+  \mathrm{ob}_{\mathbf{C}}
+  \times
+  \mathrm{ob}_{\mathbf{C}}
+\end{align*}
+to a function
+\begin{align*}
+  F_{\mathrm{mor}}(X_{1},X_{2})
+  \colon
+  \mathrm{mor}_{\mathbf{C}}(X_{2},X_{1})
+  &\rightarrow
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  (F_{\mathrm{ob}}(X_{1}),F_{\mathrm{ob}}(X_{2}))
+\end{align*}
+Hence functors $F \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{C}_{\alpha}$ are in one-to-one correspondence to $4$-tuples consisting of $\mathbf{C}$, $\mathbf{C}_{\alpha}$, a function $F^{\mathrm{ob}} \colon \mathrm{ob}_{\mathbf{C}} \rightarrow \mathrm{ob}_{\mathbf{C}_{\alpha}}$ and a function $F^{\mathrm{mor}}$ which maps
+\begin{align*}
+  (X_{1},X_{2})
+  &\in
+  \mathrm{ob}_{\mathbf{C}}
+  \times
+  \mathrm{ob}_{\mathbf{C}}
+\end{align*}
+to a function
+\begin{align*}
+  F^{\mathrm{mor}}(X_{1},X_{2})
+  \colon
+  \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
+  \rightarrow
+  \mathrm{mor}_{\mathbf{C}_{\alpha}}
+  (F^{\mathrm{ob}}(X_{2}),F^{\mathrm{ob}}(X_{1}))
+\end{align*}
+such that
+\begin{enumerate}
+\item[(F1$_{\mathbf{C}}^{\prime}$)]
+the formula
+\begin{align*}
+  F^{\mathrm{mor}}(X,X)(\mathrm{id}_{X})
+  &=
+  \mathrm{id}_{F^{\mathrm{ob}}(X)}
+\end{align*}
+holds
+\item[(F2$_{\mathbf{C}}^{\prime}$)]
+the formula
+\begin{align*}
+  F^{\mathrm{mor}}(X_{1},X_{3})(f_{23} \circ f_{12})
+  &=
+  F^{\mathrm{mor}}(X_{1},X_{2})(f_{12})
+  \circ
+  F^{\mathrm{mor}}(X_{2},X_{3})(f_{23})
+\end{align*}  
+holds
+\end{enumerate}
+$(\mathbf{C},\mathbf{C}_{\alpha},F^{\mathrm{ob}},F^{\mathrm{mor}})$ is then called \textbf{contravariant functor} following the terminology of duality in (multi-)linear algebra. We shall mention that other authors call functors covariant functors. However, we will not make use of this terminology here since in place of a contrvariant functor one can equally well regard the corresponding functor on the opposite category due to the duality principle \ref{thm:dp} avoiding case analysis. But in mathematical practice it is good to have this distinction in terminology since the opposite category is sometimes not what we consider intuitive or let us better say conventional. Just look at $\mathbf{Set}$.
+\\
+Actually, one can argue that the terminology {\glqq}contravariant functor{\grqq} is a bit misleading in category theory since the obvious composition of contravariant functors is a covariant functor. Hence there is no contravariant counterpart of $\mathbf{Cat}$. Moreover, a contravariant functor is not the dual notion of a covariant functor. Just a partial dual notion if you like. The dual notion of functor will follow after a few conclusive words: {\glqq}variant{\grqq} means {\glqq}to change{\grqq} as word and consequently co- and contravariant express how the functor relates the involved categories. Thus co- and contravariant in category theory is still comparable to co- and contravariant in (multi-)linear algebra, albeit not as dual notion anymore. We now come to the promised dual notion of a functor. The opposite functor. We say $F^{\mathrm{op}} \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{C}_{\alpha}^{\mathrm{op}}$ is the \textbf{opposite functor (of $F \colon \mathbf{C} \rightarrow \mathbf{C}_{\alpha}$)} if the equalities
+\begin{align*}
+  F_{\mathrm{ob}}^{\mathrm{op}}(X)
+  &=
+  F_{\mathrm{ob}}(X)
+  \\
+  F_{\mathrm{mor}}^{\mathrm{op}}(X_{1},X_{2})(f_{12}^{\mathrm{op}})
+  &=
+  F_{\mathrm{mor}}(X_{2},X_{1})(f_{21})
+\end{align*}
+hold. In the main $F^{\mathrm{op}}$ contains the same information as $F$ because it does the same with objects and morphisms by definition. Indeed, dualizing the definition of a functor results in the definition of a functor.
+\\
+At the end of this subsection, we want to give an example making use of the conception of the opposite category. First of all, a functor $F$ from $\mathbf{C}^{\mathrm{op}}$ to $\mathbf{C}_{\alpha}$ is sometimes called \textbf{$\mathbf{C}_{\alpha}$-valued presheaf (on $\mathbf{C}$)}. Therefore the functor category
+\begin{align*}
+  \mathbf{C}_{\alpha}^{\mathbf{C}^{\mathrm{op}}}
+\end{align*}
+is sometimes called the \textbf{category of $\mathbf{C}_{\alpha}$-valued presheaves (on $\mathbf{C}$)}. In general mathematical practice one is mainly concerned with the special case $\mathbf{C}_{\alpha} = \mathbf{Set}$. Therefore we add some special terminology. A functor $F \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Set}$ is simply called a \textbf{presheaf (on $\mathbf{C}$)} and the functor category
+\begin{align*}
+  \mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}
+\end{align*}
+is simply called the \textbf{category of presheaves (on $\mathbf{C}$)}. It is also common to use the notations $\mathrm{PSh}(\mathbf{C})$ or just $\widehat{\mathbf{C}}$ for
+\begin{align*}
+  \mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}
+\end{align*}
+It is hard to explain the terminology {\grqq}presheaf{\grqq} at this point. Indeed we can not give a full explanation of terminolgy in these notes. We can just vindicate {\glqq}pre{\grqq} in section \ref{sec:uni}. For an explanation for {\glqq}sheaf{\grqq} we will later refer to some literature about sheaves in which this terminology becomes more clear. A last word on presheaves on $\mathbf{C}$ here. To define sheaf one needs a notion of covering on $\mathbf{C}$. While there are different general notions of that\footnote{keywords are Grothendieck topology and Lawvere-Tierney topology} the category $\mathbf{Open}_{Y}$ for some space $Y$ absolutely suggests itself since we know that a cover of $Y$ consists of objects in $\mathbf{Open}_{Y}$. And, in fact, presheaves on $\mathbf{Open}_{Y}$ for some space $Y$ are the most basic case one is interested in sheaf theory. We will motivate and define sheaves in section \ref{sec:uni} where this will become clearer.
+\\
+A heap of examples of presheaves are provided by hom-functors arising from the morphism function of a category. For this purpose we fix an arbitrary object $X_{0}$ of a category $\mathbf{C}$ and define a functor
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}(X_{0},\cdot)
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{Set}
+  \\
+  X
+  &\mapsto
+  \mathrm{mor}_{\mathbf{C}}(X_{0},X)
+  \\
+  f_{12}
+  &\mapsto
+  \left(
+    f_{01}
+    \mapsto
+    f_{12}
+    \circ
+    f_{01}
+  \right)
+\end{align*}
+$\mathrm{hom}_{\mathbf{C}}(X_{0},\cdot)$ is called \textbf{covariant hom-functor (for $X_{0}$ and $\mathbf{C}$)}. Note that
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}(X_{0},f_{12})
+  \in
+  \mathrm{mor}_{\mathbf{Set}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}}(X_{0},X_{1}),
+    \mathrm{hom}_{\mathbf{C}}(X_{0},X_{2})
+  \right)
+\end{align*}
+and that $\mathrm{hom}_{\mathbf{C}}(X_{0},f_{12})$ is so called post-composition with $f_{12}$. Likewise we define a functor
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}(\cdot,X_{0})
+  \colon
+  \mathbf{C}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Set}
+  \\
+  X
+  &\mapsto
+  \mathrm{mor}_{\mathbf{C}}(X,X_{0})
+  \\
+  f_{12}^{\mathrm{op}}
+  &\mapsto
+  \left(
+    f_{01}^{\mathrm{op}}
+    \mapsto
+    f_{01}^{\mathrm{op}}
+    \circ_{\mathbf{C}}
+    f_{12}^{\mathrm{op}}
+  \right)
+\end{align*}
+$\mathrm{hom}_{\mathbf{C}}(\cdot,X_{0})$ is called \textbf{contravariant hom-functor (for $X_{0}$ and $\mathbf{C}$)}. Note that
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}(f_{12}^{\mathrm{op}},X_{0})
+  \in
+  \mathrm{mor}_{\mathbf{Set}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}}(X_{1},X_{0}),
+    \mathrm{hom}_{\mathbf{C}}(X_{2},X_{0})
+  \right)
+\end{align*}
+and that $\mathrm{hom}_{\mathbf{C}}(f_{12}^{\mathrm{op}},X_{0})$ is so called pre-composition with $f_{12}^{\mathrm{op}}$. Since it is straightforward to show that the two hom-functors are functors we don't prove it here but rather consider the diagram
+\[
+\begin{tikzcd}[row sep=large,column sep=8em]
+  \mathrm{hom}_{\mathbf{C}}(X_{3},X_{2})
+  \arrow{r}{\mathrm{hom}_{\mathbf{C}}(f_{31}^{\mathrm{op}},X_{2})}
+  \arrow[swap]{d}{\mathrm{hom}_{\mathbf{C}}(X_{3},f_{24})}
+  &
+  \mathrm{hom}_{\mathbf{C}}(X_{1},X_{2})
+  \arrow{d}{\mathrm{hom}_{\mathbf{C}}(X_{1},f_{24})}
+  \\
+  \mathrm{hom}_{\mathbf{C}}(X_{3},X_{4})
+  \arrow{r}{\mathrm{hom}_{\mathbf{C}}(f_{31}^{\mathrm{op}},X_{4})}
+  &
+  \mathrm{hom}_{\mathbf{C}}(X_{1},X_{4})
+\end{tikzcd}
+\]
+This diagram commutes since $f_{32}$ is in both cases mapped to $f_{24} \circ f_{32} \circ f_{13}$ and we call this property \textbf{compatibility of hom} for the sake of easy reference. Last but not least, we shall mention that $\mathrm{hom}_{\mathbf{C}^{\mathrm{op}}}(\cdot,X_{0})$ is actually the same as $\mathrm{hom}_{\mathbf{C}}(X_{0},\cdot)$, that is,
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}^{\mathrm{op}}}(\cdot,X_{0})
+  &=
+  \mathrm{hom}_{\mathbf{C}}(X_{0},\cdot)
+\end{align*}
+since the opposite category of the opposite category of $\mathbf{C}$ is $\mathbf{C}$ itself. Of course,
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}(\cdot,X_{0})
+  &=
+  \mathrm{hom}_{\mathbf{C}^{\mathrm{op}}}(X_{0},\cdot)
+\end{align*}
+is true as well due to the same argument. What we want to say is that in statements about hom-functors it always suffices to treat either the co- or contravariant case again reflecting the duality of $\mathbf{C}$ and $\mathbf{C}^{\mathrm{op}}$. So make a choice in accordance to your needs.

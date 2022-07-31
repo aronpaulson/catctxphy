@@ -1,0 +1,335 @@
+This subsubsection is about a consequence of the so-called Co-Yoneda lemma that owes its name to being some kind of dual to the actual yoneda lemma \ref{lem:yoneda}. The Co-Yoneda lemma is discussed and formulated in subsubsection \ref{sec:coyoneda2} after we have developed some more machinery. The consequence we discuss in this subsubsection with more elementary means is the so-called density theorem.  What it actually says is that any presheaf $P$ on $\mathbf{C}$ is the colimit of contravariant hom-functors indexed by the category of colements of $P$. That is, the representable presheaves on $\mathbf{C}$ as generalized objects are enough to build any generalized object in the presheaf category by gluing the representable generalized objects together. Gluing objects together is the very idea of a colimit as should have become clear from this subsection \ref{sec:limit}. This will become even clearer when the objects have a geometric meaning as in section \ref{sec:sset} where they are considered as triangles. One can also interpret colimit a bit as a kind of limiting process similar to limits in analysis. By that we mean that presheaves are {\glqq}approximated{\grqq} well enough by representable presheaves which is why people consider density theorem a suitable name for the following theorem.
+\\
+\begin{thm}[Density]
+\label{thm:density}
+Let $P \colon \mathbf{C}^{\mathrm{op}} \rightarrow \mathbf{Set}_{\mathcal{U}}$ be a presheaf on a $\mathcal{U}$-small $\mathbf{C}$ and define a projection functor on the category of coelements of $P$ by
+\begin{align*}
+  \pi_{P}
+  \colon
+  \int_{\mathbf{C}}^{\prime}
+  P
+  &\rightarrow
+  \mathbf{C}
+  \\
+  (X,x)
+  &\mapsto
+  X
+  \\
+  f_{21}^{\mathrm{op}}
+  &\mapsto
+  f_{12}
+\end{align*}
+Further compose this functor with the Yoneda functor as
+\begin{align*}
+  \mathrm{y}_{P}
+  &:=
+  \mathrm{y}_{\mathbf{C}}
+  \circ
+  \pi_{P}
+\end{align*}
+and define a function
+\begin{align*}
+  \mathsf{C}_{P}^{\prime}
+  \colon
+  \mathrm{ob}_{\int_{\mathbf{C}}^{\prime}P}
+  &\rightarrow
+  \bigcup_{X \in \mathrm{ob}_{\mathbf{C}^{\mathrm{op}}}}
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}}
+  \left(
+    \mathrm{y}_{\mathbf{C}}(X),
+    P
+  \right)
+  \\
+  (X,x)
+  &\mapsto
+  \mathsf{Y}(P,X)^{-1}(x)
+\end{align*}
+where $\mathsf{Y}(P,X)$ denotes the Yoneda isomorphism. Then $\mathsf{C}_{P}^{\prime}$ is a colimiting cocone for $\mathrm{y}_{P}$ with apex $P$. Hence
+\begin{align*}
+  P
+  &\cong
+  \varinjlim_{\int_{\mathbf{C}}^{\prime}P}(\mathrm{y}_{P})
+\end{align*}
+\end{thm}
+\begin{prf}
+As always in such situations we proceed in two steps. We first show that $\mathsf{C}_{P}^{\prime}$ is a cocone and then that it is colimiting.
+\begin{description}
+\item[Step 1]
+We will incorporate the Yoneda lemma \ref{lem:yoneda} to show that $\mathsf{C}_{P}^{\prime}$ is a cocone. Consider
+\begin{align*}
+  (X_{1},x_{1}),
+  (X_{2},x_{2})
+  \in
+  \mathrm{ob}_{\int_{\mathbf{C}}^{\prime}P}
+\end{align*}
+Then
+\begin{align*}
+  x_{1}
+  &=
+  P(f_{21}^{\mathrm{op}})(x_{2})
+\end{align*}
+holds for all
+\begin{align*}
+  f_{21}^{\mathrm{op}}
+  \in
+  \mathrm{mor}_{\int_{\mathbf{C}}^{\prime}P}
+  \left(
+    (X_{1},x_{1}),
+    (X_{2},x_{2})
+  \right)
+\end{align*}
+Applying the Yoneda isomorphism and using its naturality then yields the equivalent equation
+\begin{align*}
+  \mathsf{Y}(P,X_{1})^{-1}(x_{1})
+  &=
+  \left(
+    \mathsf{Y}(P,X_{1})^{-1}
+    \circ
+    P(f_{21}^{\mathrm{op}})
+    \circ
+    \mathsf{Y}(P,X_{2})
+    \circ
+    \mathsf{Y}(P,X_{2})^{-1}
+  \right)
+  (x_{2})
+  \\
+  &=
+  \mathrm{prob}_{\mathrm{y}}(\mathrm{id}_{P},f_{21}^{\mathrm{op}})
+  \left(
+    \mathsf{Y}(P,X_{2})^{-1}(x_{2})
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{Y}(P,X_{2})^{-1}(x_{2})
+  \circ
+  \mathrm{y}_{\mathbf{C}}(f_{21}^{\mathrm{op}})
+\end{align*}
+Hence by definition of $\mathsf{C}_{P}^{\prime}$ this implies a commutative diagram
+\[
+\begin{tikzcd}[sep=huge]
+  \mathrm{y}_{\mathbf{C}}(X_{1})
+  \arrow{rr}{\mathrm{y}_{\mathbf{C}}(f_{21}^{\mathrm{op}})}
+  \arrow[swap]{dr}{\mathsf{C}_{P}^{\prime}(X_{1},x_{1})}
+  &
+  &
+  \mathrm{y}_{\mathbf{C}}(X_{2})
+  \arrow{dl}{\mathsf{C}_{P}^{\prime}(X_{2},x_{2})}
+  \\
+  &
+  P
+  &
+\end{tikzcd}
+\]
+finally showing that $\mathsf{C}_{P}^{\prime}$ is a cocone. 
+\\
+\item[Step 2]
+Let $\mathsf{C}^{\prime}$ denote any cocone to $\mathrm{y}_{P}$ with apex $P^{\backprime}$. We can then apply the Yoneda isomorphism $\mathsf{Y}(P^{\backprime},X)$ to $\mathsf{C}^{\prime}(X,x)$ to get the corresponding element in $P^{\backprime}(X)$ for each
+\begin{align*}
+  (X,x)
+  \in
+  \mathrm{ob}_{\int_{\mathbf{C}}^{\prime}P}
+\end{align*}
+Let us denote this by
+\begin{align*}
+  \mathrm{y}_{(X,x)}^{\backprime}
+  &:=
+  \mathsf{Y}(P^{\backprime},X)
+  \left(
+    \mathsf{C}^{\prime}(X,x)
+  \right)
+\end{align*}
+We have to find a unique natural transformation $\mathsf{T}$ from $P$ to $P^{\backprime}$ such that
+\begin{align*}
+  \mathsf{C}^{\prime}(X,x)
+  &=
+  \mathsf{T}
+  \circ
+  \mathsf{C}_{P}^{\prime}(X,x)
+\end{align*}
+for all
+\begin{align*}
+  (X,x)
+  \in
+  \mathrm{ob}_{\int_{\mathbf{C}}^{\prime}P}
+\end{align*}
+We propose defining $\mathsf{T}$ by mapping an object $X$ to
+\begin{align*}
+  \mathsf{T}(X)
+  \colon
+  P(X)
+  &\rightarrow
+  P^{\backprime}(X)
+  \\
+  x
+  &\mapsto
+  \mathrm{y}_{(X,x)}^{\backprime}
+\end{align*}
+Since $\mathsf{Y}$ is natural, for arbitrary $f_{21}^{\mathrm{op}}$ and $x_{1} \in P(X_{1})$
+the equations
+\begin{align*}
+  \left(
+    P^{\backprime}(f_{21}^{\mathrm{op}})
+    \circ
+    \mathsf{T}(X_{2})
+  \right)
+  (x_{2})
+  &=
+  P^{\backprime}(f_{21}^{\mathrm{op}})
+  \left(
+    \mathrm{y}_{(X_{2},x_{2})}^{\backprime}
+  \right)
+  \\
+  &=
+  P^{\backprime}(f_{21}^{\mathrm{op}})
+  \left(
+    \mathsf{Y}(P^{\backprime},X_{2})
+    \left(
+      \mathsf{C}^{\prime}(X_{2},x_{2})
+    \right)
+  \right)
+  \\
+  &=
+  \mathsf{Y}(P^{\backprime},X_{1})
+  \left(
+    \mathrm{prob}_{\mathrm{y}}
+    \left(
+      \mathrm{id}_{P^{\backprime}},
+      f_{21}^{\mathrm{op}}
+    \right)
+    \left(
+      \mathsf{C}^{\prime}(X_{2},x_{2})
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  \mathsf{Y}(P^{\backprime},X_{1})
+  \left(
+    \mathsf{C}^{\prime}(X_{2},x_{2})
+    \circ
+    \mathrm{y}_{\mathbf{C}}(f_{21}^{\mathrm{op}})
+  \right)
+  \\
+  &=
+  \mathsf{Y}(P^{\backprime},X_{1})
+  \left(
+    \mathsf{C}^{\prime}
+    \left(
+      X_{1},
+      \left(
+        P(f_{21}^{\mathrm{op}})
+      \right)
+      (x_{2})
+    \right)
+  \right)
+  \\
+  &=
+  \mathrm{y}_{(X_{1},(P(f_{21}^{\mathrm{op}}))(x_{2}))}^{\backprime}
+  \\
+  &=
+  \left(
+    \mathsf{T}(X_{1})
+    \circ
+    P(f_{21}^{\mathrm{op}})
+  \right)
+  (x_{2})
+\end{align*}
+prove naturality of $\mathsf{T}$. Moreover the equation
+\begin{align*}
+  \mathsf{T}
+  \circ
+  \mathsf{C}_{P}^{\prime}(X,x)
+  &=
+  \mathsf{C}^{\prime}(X,x)
+\end{align*}
+holds for all
+\begin{align*}
+  (X,x)
+  \in
+  \mathrm{ob}_{\int_{\mathbf{C}}^{\prime}P}
+\end{align*}
+since
+\begin{align*}
+  \mathsf{Y}(P^{\backprime},X)
+  \left(
+    \mathsf{T}
+    \circ
+    \mathsf{C}_{P}^{\prime}(X,x)
+  \right)
+  &=
+  \mathsf{Y}(P^{\backprime},X)
+  \left(
+    \mathsf{T}
+    \circ
+    \mathsf{Y}(P,X)^{-1}(x)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  (\mathsf{T}(X))(x)
+  \\
+  &=
+  \mathrm{y}_{(X,x)}^{\backprime}
+  \\
+  &=
+  \mathsf{Y}(P^{\backprime},X)
+  \left(
+    \mathsf{C}^{\prime}(X,x)
+  \right)
+\end{align*}
+is valid again due to the naturality of $\mathsf{Y}$.
+\\
+What is left to prove is that $\mathsf{T}$ constructed so is unique. For this purpose let $\mathsf{O} \colon P \Rightarrow P^{\backprime}$ such that
+\begin{align*}
+  \mathsf{C}^{\prime}(X,x)
+  &=
+  \mathsf{O}
+  \circ
+  \mathsf{C}_{P}^{\prime}(X,x)
+\end{align*}
+for all
+\begin{align*}
+  (X,x)
+  \in
+  \mathrm{ob}_{\int_{\mathbf{C}}^{\prime}P}
+\end{align*}
+We then get for all such $(X,x)$
+\begin{align*}
+  (\mathsf{T}(X))(x)
+  &=
+  \mathsf{Y}(P^{\backprime},X)
+  \left(
+    \mathsf{C}^{\prime}(X,x)
+  \right)
+  \\
+  &=
+  \mathsf{Y}(P^{\backprime},X)
+  \left(
+    \mathsf{O}
+    \circ
+    \mathsf{C}_{P}^{\prime}(X,x)
+  \right)
+  \\
+  &=
+  \mathsf{Y}(P^{\backprime},X)
+  \left(
+    \mathsf{O}
+    \left(
+      \mathsf{Y}(P,X)^{-1}(x)
+    \right)
+  \right)
+  \tag{NT}
+  \\
+  &=
+  (\mathsf{O}(X))(x)
+\end{align*}
+showing that $\mathsf{T} = \mathsf{O}$.
+\end{description}
+Now we are done.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+This was a direct prove of the density theorem. But in subsubsection \ref{sec:coyoneda2} we will infer it in a more general context.

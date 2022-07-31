@@ -1,0 +1,2102 @@
+%\nocite{c82f5e22}
+%\nocite{78202e13}
+%\nocite{ab8cfa22}
+%TODO
+%  the whole grothendieck construction
+This section is dedicated to fibrations. Fibrations (and their duals - cofibrations) originally come from classical homotopy theory. They can be thought of a bit as homotopy-theoretic fiber bundles there with the fiber only up to homotopy. In this section we use categorical means to say what a fibration is really characterized by in our context of homotopy theory. In this context it makes also sense to discuss Grothendieck fibrations as we will see and hence the Grothendieck construction establishing an equivalence of the Grothendieck fibrations to a certain variant of functors. This is a really important part of category theory we will not fully discuss here. Important to us here is that in the end we get in some sense a $(2,1)$-categorical version of sheaves called stacks which qualify as generalized spaces. One consistency condition for stacks is formally the ($1$-)cocycle condition we know from the bundles 2 example \ref{exa:bundles2} and from the discussion of \v{C}ech cohomology in the last section \ref{sec:sset} .
+\\\\
+In subsubsection \ref{sec:coyoneda2} we made extensive use of the category of coelements and the projection functor $\pi_{P}$ for some presheaf $P$ on $\mathbf{J}$. This is presumably the first known Grothendieck fibration and it makes didactically sense to abstract the notion from this example. To this end note that
+\begin{align*}
+  \pi_{P}
+  \colon
+  \int_{\mathbf{J}}^{\prime}
+  P
+  &\rightarrow
+  \mathbf{J}
+  \\
+  (J,z)
+  &\mapsto
+  J
+  \\
+  j_{21}^{\mathrm{op}}
+  &\mapsto
+  j_{12}
+\end{align*}
+is a functor such that for all $j_{12}$ and all $z_{2} \in P(J_{2})$ there is $P(j_{12})(z_{2}) \in P(J_{1})$ and
+\begin{align*}
+  j_{12}
+  &\in
+  \mathrm{mor}_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    \left(
+      J_{1},
+      P(j_{12})(z_{2})
+    \right),
+    (J_{2},z_{2})
+  \right)
+\end{align*}
+satisfying
+\begin{enumerate}
+\item[$\bullet$]
+$\pi_{P}(j_{12}) = j_{12}$
+\item[$\bullet$]
+for any
+\begin{align*}
+  j_{02}
+  &\in
+  \mathrm{mor}_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    (J_{0},z_{0}),
+    (J_{2},z_{2})
+  \right)
+\end{align*}
+and any
+\begin{align*}
+  j_{01}
+  &\in
+  \mathrm{mor}_{\mathbf{J}}
+  \left(
+    \pi_{P}(J_{0},z_{0}),
+    J_{1}
+  \right)
+\end{align*}
+for which
+\begin{align*}
+  j_{12}
+  \circ
+  j_{01}
+  &=
+  \pi_{P}(j_{02})
+\end{align*}
+then
+\begin{align*}
+  j_{01}
+  &\in
+  \mathrm{mor}_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    (J_{0},z_{0}),
+    (J_{1},P(j_{12})(z_{2}))
+  \right)
+\end{align*}
+makes the equations
+\begin{align*}
+  \pi_{P}(j_{01})
+  &=
+  j_{01}
+  \\
+  j_{12}
+  \circ
+  j_{01}
+  &=
+  j_{02}
+\end{align*}
+true because
+\begin{align*}
+  \pi_{P}(j_{02})
+  &=
+  j_{02}
+\end{align*}
+and since $\pi_{P}$ is the inclusion on morphisms, $j_{01}$ is the unique arrow doing so
+\end{enumerate}
+If we take $\mathbf{J}$ to be a groupoid then also
+\begin{align*}
+  \int_{\mathbf{J}}^{\prime}
+  P
+\end{align*}
+is a groupoid and hence it makes sense to consider the morphisms in these categories as paths. In topological language, $\pi_{P}$ then allows lifting of paths since any path $j_{12}$ is {\glqq}lifted{\grqq} for $z_{2} \in P(J_{2})$ to
+\begin{align*}
+  j_{12}
+  &\in
+  \mathrm{mor}_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    \left(
+      J_{1},
+      P(j_{12})(z_{2})
+    \right),
+    (J_{2},z_{2})
+  \right)
+\end{align*}
+such that
+\begin{align*}
+  \pi_{P}(j_{12})
+  &=
+  j_{12}
+\end{align*}
+And these lifted paths are universal in the sense that any other path to $(J_{2},z_{2})$ factors through them uniquely. Hence the lifts should be unique up to homotopy.
+\\
+Lifting can be defined categorically. Given a category $\mathbf{C}$ and objects $E,B$ as well as a morphism
+\begin{align*}
+  p
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(E,B)
+\end{align*}
+then for a morphism
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{0},B)
+\end{align*}
+a \textbf{lift (of $f$ by $p$)} is a morphism
+\begin{align*}
+  \tilde{f}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{0},E)
+\end{align*}
+such that
+\begin{align*}
+  p
+  \circ
+  \tilde{f}
+  =
+  f
+\end{align*}
+The dual idea of lifting is extension: given a category $\mathbf{C}$ and objects $A,X$ as well as a morphism
+\begin{align*}
+  i
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(A,X)
+\end{align*}
+then for a morphism
+\begin{align*}
+  f
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(A,X_{0})
+\end{align*}
+an \textbf{extension (of $f$ by $i$)} is a morphism
+\begin{align*}
+  \tilde{f}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,X_{0})
+\end{align*}
+such that
+\begin{align*}
+  \tilde{f}
+  \circ
+  i
+  =
+  f
+\end{align*}
+$i$ and $p$ are arbitrary arrows in $\mathbf{C}$ or say objects in $\mathbf{C}_{\rightarrow}$ and we say that $p$ has the \textbf{lifting property (w.r.t. $i$)}, or equivalently, $i$ has the \textbf{extension property (w.r.t. $p$)} if for all
+\begin{align*}
+  (f_{1},f_{2})
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\rightarrow}}(i,p)
+\end{align*}
+there is
+\begin{align*}
+  \tilde{f}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X,E)
+\end{align*}
+such that $\tilde{f}$ is a lift of $f_{2}$ by $p$ and an extension of $f_{1}$ by $i$, that is, the diagram
+\[
+\begin{tikzcd}[sep=large]
+  A
+  \arrow{r}{f_{1}}
+  \arrow[swap]{d}{i}
+  &
+  E
+  \arrow{d}{p}
+  \\
+  X
+  \arrow{ur}{\tilde{f}}
+  \arrow{r}{f_{2}}
+  &
+  B
+\end{tikzcd}
+\]
+commutes.\footnote{it is common in literature to refer to the lifting property as right lifting property while to the extension property one commonly refers to as left lifting property}
+\\
+\begin{exa}
+\label{exa:liftextintop}
+To make sense of the above take $\mathbf{Top}$ as $\mathbf{C}$ and
+\begin{enumerate}
+\item[$\bullet$]
+in the lifting case the (closed) unit interval $[0,1]$ as $X$. Then we would talk about the lift of a path or ipso facto of {\glqq}path lifting{\grqq}.
+\item[$\bullet$]
+in the case of extensions $i$ as inclusion. Then we would clearly extend a map.
+\end{enumerate}
+Now for a space $Y$ let
+\begin{align*}
+  i_{0}^{Y}
+  \colon
+  Y
+  &\rightarrow
+  Y
+  \times
+  [0,1]
+  \\
+  y
+  &\mapsto
+  (y,0)
+\end{align*}
+Then a map $p \colon E \rightarrow B$ which has the lifting property with respect to $i_{0}^{Y}$ for all $Y$ is called \textbf{(Hurewicz) fibration} and if it only has the lifting property w.r.t. $i_{0}^{Y}$ with $Y$ a CW complex one says that $p$ is a \textbf{Serre fibration}. On the other hand, for a space $Y$ let
+\begin{align*}
+  p_{0}^{Y}
+  \colon
+  \mathrm{mor}_{\mathbf{Top}}([0,1],Y)
+  &\rightarrow
+  Y
+  \\
+  p
+  &\mapsto
+  p(0)
+\end{align*}
+where we require $\mathrm{mor}_{\mathbf{Top}}([0,1],Y)$ to be topologized such that a function
+\begin{align*}
+  H
+  \colon
+  Y_{1}
+  &\rightarrow
+  \mathrm{mor}_{\mathbf{Top}}([0,1],Y_{2})
+\end{align*}
+is continuous if and only if the curried one is continuous. This is one reason why one demands a convenient category of spaces for the purpose of (classical) homotopy theory. Anyways, a map $i \colon A \rightarrow X$ which has the extension property with respect to $p_{0}^{Y}$ for all $Y$ is called \textbf{cofibration}. The duality between fibrations and cofibrations is sometimes referred to as Eckmann-Hilton duality.
+\end{exa}
+\begin{prf}
+Look at \cite{8b5861fc} and \cite{78202e13} if you do not exactly know what we are talking about but want to know.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+This example \ref{exa:liftextintop} suggests to define fibration as something having the lifting property w.r.t. to a bunch of arrows and dually a cofibration as something having the extension property w.r.t. to a bunch of arrows. So let
+\begin{align*}
+  M
+  \subset
+  \mathrm{Mor}_{\mathbf{C}}
+\end{align*}
+Then a 
+\begin{align*}
+  p
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(E,B)
+\end{align*}
+is called \textbf{(generalized) fibration (in $\mathbf{C}$ w.r.t $M$)} if $p$ has the lifting property w.r.t. all $m \in M$ while a 
+\begin{align*}
+  i
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(A,X)
+\end{align*}
+is called \textbf{(generalized) cofibration (in $\mathbf{C}$ w.r.t $M$)} if $i$ has the extension property w.r.t. all $m \in M$. This definition is a little too broad for the purpose of homotopy theory. Therefore we used {\glqq}generalized{\grqq}. For fibration in the model category sense one only demands lifting w.r.t. cofibrations that are weak equivalences - so called acyclic cofibrations. And for cofibration in the model category sense one only demands extension w.r.t. fibrations that are weak equivalences - so called acyclic fibrations. In particular fibrations and cofibrations are not independent of each other.
+\\
+After this terminology interlude we turn back to $\pi_{P}$. Given a universe large enough we recognize $\pi_{P}$ for $\mathbf{J}$ a groupoid as a fibration in $\mathbf{Grpd}$ w.r.t. to functors $I$ which are an equivalence and for which $I_{\textrm{ob}}$ is the inclusion.\footnote{the keywords are isofibration and the canonical model structure on $\mathbf{Grpd}$} In the general case of $\pi_{P}$ a morphism in $\mathbf{Cat}$ the functor $\pi_{P}$ still satisfies some lifting property. Hence we might hope to abstract a definition for a special sort of fibration in $\mathbf{Cat}$ from $\pi_{P}$. This works and leads to the notion of Grothendieck fibration. Let $\mathbf{E}$ and $\mathbf{B}$ be small categories for the rest of this subsection. Moreover let
+\begin{align*}
+  \pi
+  \colon
+  \mathbf{E}
+  &\rightarrow
+  \mathbf{B}
+\end{align*}
+be a functor and agree to the notation
+\begin{align*}
+  B
+  &\in
+  \mathrm{ob}_{\mathbf{B}}
+  \\
+  E,
+  E_{1},
+  E_{2}
+  &\in
+  \mathrm{ob}_{\mathbf{E}}
+\end{align*}
+for the rest of this subsection. Then
+\begin{enumerate}
+\item[(1T)]
+for
+\begin{align*}
+  b
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    B,
+    \pi(E_{2})
+  \right)
+\end{align*}
+an arrow
+\begin{align*}
+  \widetilde{b}
+  \in
+  \mathrm{mor}_{\mathbf{E}}(E_{1},E_{2})
+\end{align*}
+is \textbf{(terminally $\pi$-)cartesian for $b$ and $E_{2}$} if
+\begin{enumerate}
+\item[(TC1)]
+\begin{align*}
+  \pi(\widetilde{b})
+  &=
+  b
+\end{align*}
+\item[(TC2)]
+for any
+\begin{align*}
+  e
+  &\in
+  \mathrm{mor}_{\mathbf{E}}(E,E_{2})
+  \\
+  \pi_{e}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    \pi(E),
+    B
+  \right)
+\end{align*}
+such that
+\begin{align*}
+  b
+  \circ
+  \pi_{e}
+  &=
+  \pi(e)
+\end{align*}
+that is, such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  B
+  \arrow{dr}{b}
+  &
+  \\
+  \pi(E)
+  \arrow{ur}{\pi_{e}}
+  \arrow{rr}{\pi(e)}
+  &
+  &
+  \pi(E_{2})
+\end{tikzcd}
+\]
+commutes there is a unique
+\begin{align*}
+  e_{!}
+  \in
+  \mathrm{mor}_{\mathbf{E}}(E,E_{1})
+\end{align*}
+such that
+\begin{align*}
+  \pi(e_{!})
+  &=
+  \pi_{e}
+  \\
+  \tilde{b}
+  \circ
+  e_{!}
+  &=
+  e
+\end{align*}
+that is, we have the informal partly commutative diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  E_{1}
+  \arrow{dr}{\tilde{b}}
+  &
+  \\
+  E
+  \arrow{ur}{e_{!}}
+  \arrow{rr}{e}
+  &
+  \arrow[shorten <= 10pt, shorten >= 10pt]{dd}{\pi}
+  &
+  E_{2}
+  \\
+  &
+  &
+  \\
+  &
+  B
+  \arrow{dr}{b}
+  &
+  \\
+  \pi(E)
+  \arrow{ur}{\pi_{e}}
+  \arrow{rr}{\pi(e)}
+  &
+  &
+  \pi(E_{2})
+\end{tikzcd}
+\]
+involving different categories.
+\end{enumerate}
+$\pi$ is a \textbf{(terminal Grothendieck) fibration} if there is a terminally $\pi$-cartesian arrow for all
+\begin{align*}
+  b
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    B,
+    \pi(E_{2})
+  \right)
+\end{align*}
+$\mathbf{E}$ is said to be \textbf{(terminally) fibered (over $\mathbf{B}$)} if $\pi$ is a terminal Grothendieck fibration. Furthermore $\mathbf{E}$ is called \textbf{total category of $\pi$} while $\mathbf{B}$ is called \textbf{base category of $\pi$}.
+\\
+Since for a fibration $\pi$ we must provide a terminally $\pi$-cartesian arrow $\tilde{b}$ for all
+\begin{align*}
+  b
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    B,
+    \pi(E_{2})
+  \right)
+\end{align*}
+there is a function mapping $(b,E_{2})$ to $\tilde{b}$, that is, we have a function
+\begin{align*}
+  \gamma_{\pi}
+  \colon
+  \left\lbrace
+      (b,E_{2})
+      \in
+      \mathrm{Mor}_{\mathbf{B}}
+      \times
+      \mathrm{ob}_{\mathbf{E}}
+    \,
+    \vert
+    \,
+      \mathrm{cod}_{\mathbf{B}}(b)
+      =
+      \pi(E_{2})
+  \right\rbrace
+  &\rightarrow
+  \mathrm{Mor}_{\mathbf{E}}
+  \\
+  (b,E_{2})
+  &\mapsto
+  \tilde{b}
+\end{align*}
+where $\tilde{b}$ denotes the same morphism as above. $\gamma_{\pi}$ is called \textbf{cleavage (for $\pi$)}. It is clear that cleavages which respect identity arrows and composition of arrows are particularly nice (as functors are). In this case one speaks of splitting. Formally, a cleavage $\gamma_{\pi}$ for $\pi$ is a \textbf{splitting (of $\pi$)} if
+\begin{enumerate}
+\item[(TS1)]
+for $B = \pi(E_{2})$ the equation
+\begin{align*}
+  \gamma_{\pi}(\mathrm{id}_{B},E_{2})
+  &=
+  \mathrm{id}_{E_{2}}
+\end{align*}
+holds
+\item[(TS2)]
+for
+\begin{align*}
+  b_{1}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    B,
+    \pi(E_{1})
+  \right)
+  \\
+  b_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    \pi(E_{1}),
+    \pi(E_{2})
+  \right)
+\end{align*}
+such that
+\begin{align*}
+  E_{1}
+  &=
+  \mathrm{dom}_{\mathbf{E}}
+  \left(
+    \gamma_{\pi}(b_{12},E_{2})
+  \right)
+\end{align*}
+the equation
+\begin{align*}
+  \gamma_{\pi}(b_{12},E_{2})
+  \circ
+  \gamma_{\pi}(b_{1},E_{1})
+  &=
+  \gamma_{\pi}(b_{12} \circ b_{1},E_{2})
+\end{align*}
+holds
+\end{enumerate}
+\item[(1I)]
+for
+\begin{align*}
+  b
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    \pi(E_{1}),
+    B
+  \right)
+\end{align*}
+an arrow
+\begin{align*}
+  \widetilde{b}
+  \in
+  \mathrm{mor}_{\mathbf{E}}(E_{1},E_{2})
+\end{align*}
+is \textbf{(initially $\pi$-)cartesian for $b$ and $E_{1}$} if
+\begin{enumerate}
+\item[(IC1)]
+\begin{align*}
+  \pi(\widetilde{b})
+  &=
+  b
+\end{align*}
+\item[(IC2)]
+for any
+\begin{align*}
+  e
+  &\in
+  \mathrm{mor}_{\mathbf{E}}(E_{1},E)
+  \\
+  \pi_{e}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    B,
+    \pi(E)
+  \right)
+\end{align*}
+such that
+\begin{align*}
+  \pi_{e}
+  \circ
+  b
+  &=
+  \pi(e)
+\end{align*}
+that is, such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  B
+  \arrow[swap]{dl}{\pi_{e}}
+  &
+  \\
+  \pi(E)
+  &
+  &
+  \pi(E_{1})
+  \arrow[swap]{ll}{\pi(e)}
+  \arrow[swap]{ul}{b}
+\end{tikzcd}
+\]
+commutes there is a unique
+\begin{align*}
+  e_{!}
+  \in
+  \mathrm{mor}_{\mathbf{E}}(E_{2},E)
+\end{align*}
+such that
+\begin{align*}
+  \pi(e_{!})
+  &=
+  \pi_{e}
+  \\
+  e_{!}
+  \circ
+  \tilde{b}
+  &=
+  e
+\end{align*}
+that is, we have the informal partly commutative diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  E_{2}
+  \arrow[swap]{dl}{e_{!}}
+  &
+  \\
+  E
+  &
+  \arrow[shorten <= 10pt, shorten >= 10pt]{dd}{\pi}
+  &
+  E_{1}
+  \arrow[swap]{ll}{e}
+  \arrow[swap]{ul}{\tilde{b}}
+  \\
+  &
+  &
+  \\
+  &
+  B
+  \arrow[swap]{dl}{\pi_{e}}
+  &
+  \\
+  \pi(E)
+  &
+  &
+  \pi(E_{1})
+  \arrow[swap]{ll}{\pi(e)}
+  \arrow[swap]{ul}{b}
+\end{tikzcd}
+\]
+involving different categories.
+\end{enumerate}
+$\pi$ is a \textbf{(initial Grothendieck) fibration} if there is an initially $\pi$-cartesian arrow for all
+\begin{align*}
+  b
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    \pi(E_{1}),
+    B
+  \right)
+\end{align*}
+$\mathbf{E}$ is said to be \textbf{(initially) fibered (over $\mathbf{B}$)} if $\pi$ is an initial Grothendieck fibration. Furthermore $\mathbf{E}$ is called \textbf{total category of $\pi$} while $\mathbf{B}$ is called \textbf{base category of $\pi$}.
+\\
+Since for a fibration $\pi$ we must provide an initially $\pi$-cartesian arrow $\tilde{b}$ for all
+\begin{align*}
+  b
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    \pi(E_{1}),
+    B
+  \right)
+\end{align*}
+there is a function mapping $(b,E_{1})$ to $\tilde{b}$, that is, we have a function
+\begin{align*}
+  \gamma_{\pi}
+  \colon
+  \left\lbrace
+      (b,E_{1})
+      \in
+      \mathrm{Mor}_{\mathbf{B}}
+      \times
+      \mathrm{ob}_{\mathbf{E}}
+    \,
+    \vert
+    \,
+      \mathrm{dom}_{\mathbf{B}}(b)
+      =
+      \pi(E_{1})
+  \right\rbrace
+  &\rightarrow
+  \mathrm{Mor}_{\mathbf{E}}
+  \\
+  (b,E_{1})
+  &\mapsto
+  \tilde{b}
+\end{align*}
+where $\tilde{b}$ denotes the same morphism as above. $\gamma_{\pi}$ is called \textbf{cleavage (for $\pi$)}. Again those functorial cleavages seem nice. So a cleavage $\gamma_{\pi}$ for $\pi$ is a \textbf{splitting (of $\pi$)} if
+\begin{enumerate}
+\item[(IS1)]
+for $B = \pi(E_{1})$ the equation
+\begin{align*}
+  \gamma_{\pi}(\mathrm{id}_{B},E_{1})
+  &=
+  \mathrm{id}_{E_{1}}
+\end{align*}
+holds
+\item[(IS2)]
+for
+\begin{align*}
+  b_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    \pi(E_{1}),
+    \pi(E_{2})
+  \right)
+  \\
+  b_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}
+  \left(
+    \pi(E_{2}),
+    B
+  \right)
+\end{align*}
+such that
+\begin{align*}
+  E_{2}
+  &=
+  \mathrm{cod}_{\mathbf{E}}
+  \left(
+    \gamma_{\pi}(b_{12},E_{2})
+  \right)
+\end{align*}
+the equation
+\begin{align*}
+  \gamma_{\pi}(b_{2},E_{2})
+  \circ
+  \gamma_{\pi}(b_{12},E_{1})
+  &=
+  \gamma_{\pi}(b_{2} \circ b_{12},E_{2})
+\end{align*}
+holds
+\end{enumerate}
+\end{enumerate}
+It is common to forgo the word {\glqq}terminal{\grqq} here and replace {\glqq}initial{\grqq} by {\glqq}op{\grqq}. That is, people usually speak of fibrations and opfibrations instead of terminal and initial fibrations, respectively. Grothendieck fibrations are not necessarily the fibrations of some model structure for $\mathbf{Cat}$. An exception is the groupoid case $\mathbf{Grpd}$ where Grothendieck fibrations are the same as so-called isofibrations. The problem is the universality condition for lifts. However, since the basic mathematical objects in UFP-HoTT are ($\infty$-)groupoids, Grothendieck fibrations are the models of fibrations of UFP-HoTT when interpreting UFP-HoTT in category theory. Moreover Grothendieck fibrations clearly satisfy a lifting property and hence can be considered generalized fibrations further vindicating the terminology. Next is an example.
+\\
+\begin{exa}
+\label{exa:catofarrpb}
+For a category $\mathbf{C}$ define a functor
+\begin{align*}
+  \pi_{\rightarrow}
+  \colon
+  \mathbf{C}_{\rightarrow}
+  &\rightarrow
+  \mathbf{C}
+  \\
+  f
+  &\mapsto
+  \mathrm{cod}_{\mathbf{C}}(f)
+  \\
+  (f_{13},f_{24})
+  &\mapsto
+  f_{24}
+\end{align*}
+What does it means for an arrow of $\mathbf{C}_{\rightarrow}$ to be (terminally) cartesian? Well, let
+\begin{align*}
+  E_{0},
+  E_{1},
+  E_{2}
+  &\in
+  \mathrm{ob}_{\mathbf{C}}
+  \\
+  p_{0}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(E_{0},X_{0})
+  \\
+  p
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(E_{1},X_{1})
+  \\
+  p^{\ast}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(E_{2},X_{2})
+\end{align*}
+then
+\begin{align*}
+  (\tilde{f}_{21},f_{21})
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\rightarrow}}(p^{\ast},p)
+\end{align*}
+is a cartesian arrow for $f_{21}$ and $p$ if for any
+\begin{align*}
+  (\tilde{f}_{01},f_{01})
+  &\in
+  \mathrm{mor}_{\mathbf{C}_{\rightarrow}}(p_{0},p)
+\end{align*}
+and any $f_{02}$ such that
+\begin{align*}
+  f_{21}
+  \circ
+  f_{02}
+  &=
+  f_{01}
+\end{align*}
+there is a unique
+\begin{align*}
+  f_{02}^{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(E_{0},E_{2})
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  E_{0}
+  \arrow[bend left=15,near end]{drr}{\tilde{f}_{01}}
+  \arrow{dr}{f_{02}^{!}}
+  \arrow[swap]{d}{p_{0}}
+  &
+  &
+  &
+  \\
+  X_{0}
+  \arrow[bend left=15,near end]{drr}{f_{01}}
+  \arrow[swap]{dr}{f_{02}}
+  &
+  E_{2}
+  \arrow{r}{\tilde{f}_{21}}
+  \arrow[swap,crossing over]{d}{p^{\ast}}
+  &
+  E_{1}
+  \arrow{d}{p}
+  \\
+  &
+  X_{2}
+  \arrow{r}{f_{21}}
+  &
+  X_{1}
+\end{tikzcd}
+\]
+commutes. If $\mathbf{C}$ has pullbacks then $f_{02}^{!}$ can be chosen as in the pullback diagram
+\[
+\begin{tikzcd}[sep=huge]
+  E_{0}
+  \arrow[bend left=30]{drr}{\tilde{f}_{01}}
+  \arrow{dr}{f_{02}^{!}}
+  \arrow[swap,bend right=30]{ddr}{f_{02} \circ p_{0}}
+  &
+  &
+  &
+  \\
+  &
+  E_{2}
+  \arrow{r}{\tilde{f}_{21}}
+  \arrow[swap]{d}{p^{\ast}}
+  &
+  E_{1}
+  \arrow{d}{p}
+  \\
+  &
+  X_{2}
+  \arrow{r}{f_{21}}
+  &
+  X_{1}
+\end{tikzcd}
+\]
+On the other hand, if $(\tilde{f}_{21},f_{21})$ is a cartesian arrow then the case
+\begin{align*}
+  X_{2}
+  &=
+  X_{0}
+  \\
+  f_{02}
+  &=
+  \mathrm{id}_{X_{2}}
+\end{align*}
+shows that $p^{\ast}$ is a pullback of $p$ along $f_{21}$. Hence $\pi_{\rightarrow}$ is a terminal Grothendieck fibration if and only if $\mathbf{C}$ has pullbacks. Pullbacks are sometimes called cartesian squares. Therefore the terminology cartesian arrows. Note that a cleavage for $\pi_{\rightarrow}$ as we would get from above is in general not a splitting. This is essentially since universals are only unique up to unique isomorphism. In this case this means pulling back $p$ along $f_{21}$ to get $p^{\ast}$ and then pulling back $p$ along $f_{32}$ is in general not equal but only isomorphic to pulling back $p$ along $f_{32} \circ f_{21}$. This is boldly expressed here by
+\begin{align*}
+  \left(
+    f_{21}
+    \circ
+    f_{32}
+  \right)^{\ast}
+  (E_{1})
+  &\cong
+  f_{32}^{\ast}
+  \left(
+    f_{21}^{\ast}(E_{1})
+  \right)
+\end{align*}
+It is just an expression of the fact that pulling back along something respects composition up to isomorphism which is all we can expect from a universal construction. This {\glqq}is up to isomorphism by pulling back{\grqq} setting is exactly what (terminal) Grothendieck fibrations shall formalize. Of course, it is instructive to consider the case $\mathbf{C} = \mathbf{Top}$ here. We recommend to ponder this a bit in the light of the pullback intuition in this case from example \ref{exa:oflimits} where we defined pullbacks.
+\end{exa}
+\begin{prf}
+The details are left to the reader.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+Let us elaborate further on this example \ref{exa:catofarrpb}. It seems to be a key to understand terminal Grothendieck fibrations better in general.\footnote{as an exercise you can try to translate the following discussion to initial Grothendieck fibrations where possible (see also \cite{ab8cfa22} which is in general a nice introduction to Grothendieck fibrations in some respect deeper than here)} To this end fix a terminal Grothendieck fibration
+\begin{align*}
+  \pi
+  \colon
+  \mathbf{E}
+  &\rightarrow
+  \mathbf{B}
+\end{align*}
+and assume a cleavage $\gamma_{\pi}$ for $\pi$. We introduced the terminology {\glqq}$\mathbf{E}$ is fibered over $\mathbf{B}${\grqq} and to make sense of this we would expect that there is a fiber over $B \in \mathrm{ob}_{\mathbf{B}}$ which yields a subcategory of $\mathbf{E}$ if we also take morphisms into account. In fact, this is true. For each $B \in \mathrm{ob}_{\mathbf{B}}$ define the subcategory $\mathbf{F}_{\pi}^{B}$ of $\mathbf{E}$ by
+\begin{enumerate}
+\item[$\bullet$]
+restricting the object set $\mathrm{ob}_{\mathbf{E}}$ to the set
+\begin{align*}
+  \left\lbrace
+      E
+      \in
+      \mathrm{ob}_{\mathbf{E}}
+    \,
+    \vert
+    \,
+      \pi(E)
+      =
+      B
+  \right\rbrace
+\end{align*}
+\item[$\bullet$]
+restricting the morphism set $\mathrm{mor}_{\mathbf{E}}(E,E^{\backprime})$ for all $E,E^{\backprime} \in \mathrm{ob}_{\mathbf{E}}$ to the set
+\begin{align*}
+  \left\lbrace
+      e
+      \in
+      \mathrm{mor}_{\mathbf{E}}(E,E^{\backprime})
+    \,
+    \vert
+    \,
+      \pi(e)
+      =
+      \mathrm{id}_{B}
+  \right\rbrace
+\end{align*}
+\end{enumerate}
+This is well-defined as can be shown and we call $\mathbf{F}_{\pi}^{B}$ the \textbf{fiber (category over $B$ of $\pi$)}. It is clear that this defines a function
+\begin{align*}
+  f_{\pi}
+  \colon
+  \mathrm{ob}_{\mathbf{B}}
+  &\rightarrow
+  \mathrm{ob}_{\mathbf{Cat}}
+  \\
+  B
+  &\mapsto
+  \mathbf{F}_{\pi}^{B}
+\end{align*}
+and if we make it to define functions on morphisms we can dream of a functor $F_{\pi} \colon \mathbf{B} \rightarrow \mathbf{Cat}$. So let's try to find a function
+\begin{align*}
+  f(B_{1},B_{2})
+  \colon
+  \mathrm{mor}_{\mathbf{B}}(B_{1},B_{2})
+  &\rightarrow
+  \mathrm{mor}_{\mathbf{Cat}}
+  \left(
+    \mathbf{F}_{\pi}^{B_{1}},
+    \mathbf{F}_{\pi}^{B_{2}}
+  \right)
+\end{align*}
+for all $B_{1},B_{2} \in \mathrm{ob}_{\mathbf{B}}$. The only thing we have roughly meeting the requirement of mapping a morphism in $\mathbf{B}$ to one in $\mathbf{E}$ is the cleavage $\gamma_{\pi}$. However, we then have to adjust the setting a bit to $F_{\gamma_{\pi}} \colon \mathbf{B}^{\mathrm{op}} \rightarrow \mathbf{Cat}$ since then we have
+\begin{align*}
+  f_{\gamma_{\pi}}(B_{1},B_{2})
+  \colon
+  \mathrm{mor}_{\mathbf{B}}(B_{2},B_{1})
+  &\rightarrow
+  \mathrm{mor}_{\mathbf{Cat}}
+  \left(
+    \mathbf{F}_{\pi}^{B_{1}},
+    \mathbf{F}_{\pi}^{B_{2}}
+  \right)
+  \\
+  b
+  &\mapsto
+  \left\lbrace
+  \begin{aligned}
+    b^{\ast}
+    \colon
+    \mathbf{F}_{\pi}^{B_{1}}
+    &\rightarrow
+    \mathbf{F}_{\pi}^{B_{2}}
+    \\
+    E
+    &\mapsto
+    \mathrm{dom}_{\mathbf{E}}
+    \left(
+      \gamma_{\pi}(b,E)
+    \right)
+    \\
+    e
+    &\mapsto
+    \left(
+      e
+      \circ
+      \gamma_{\pi}(b,\mathrm{dom}_{\mathbf{E}}(e))
+    \right)_{!}
+  \end{aligned}
+  \right.
+\end{align*}
+where the exclamation mark means the unique morphism we get by the universal property regarding $\pi$ from the next illustration while using the notation
+\begin{align*}
+  e
+  &\in
+  \mathrm{Mor}_{\mathbf{E}}
+  \\
+  E
+  &:=
+  \mathrm{dom}_{\mathbf{E}}(e)
+  \\
+  E^{\backprime}
+  &:=
+  \mathrm{cod}_{\mathbf{E}}(e)
+\end{align*}
+\[
+\begin{tikzcd}[sep=large]
+  &
+  \mathrm{dom}_{\mathbf{E}}
+  \left(
+    \gamma_{\pi}(b,E^{\backprime})
+  \right)
+  \arrow{dr}{\gamma_{\pi}(b,E^{\backprime})}
+  &
+  \\
+  \mathrm{dom}_{\mathbf{E}}
+  \left(
+    \gamma_{\pi}(b,E)
+  \right)
+  \arrow{ur}{(e \circ \gamma_{\pi}(b,E))_{!}}
+  \arrow{r}{\gamma_{\pi}(b,E)}
+  &
+  E
+  \arrow{r}{e}
+  \arrow[shorten <= 10pt, shorten >= 10pt]{dd}{\pi}
+  &
+  E^{\backprime}
+  \\
+  &
+  &
+  \\
+  &
+  B_{2}
+  \arrow{dr}{b}
+  &
+  \\
+  B_{2}
+  \arrow{ur}{\mathrm{id}_{B_{2}}}
+  \arrow{r}{b}
+  \arrow[swap,bend right=15]{rr}{\pi(e \circ \gamma_{\pi}(b,E))}
+  &
+  \pi(E)
+  \arrow{r}{\mathrm{id}_{B_{1}}}
+  &
+  \pi(E^{\backprime})
+\end{tikzcd}
+\]
+That $b^{\ast}$ is in fact a functor can be seen from pasting such pictures together with the same method as in lemma \ref{lem:adjointto} where we constructed a unique functor for an adjoint and a certain choice function. In general, if a functor on morphisms is defined by the uniqueness coming from a universal property this strategy to show functorialty seems to work always. At least, we are not aware of any counter example. Now while $b^{\ast}$ is a functor we cannot expect that for
+\begin{align*}
+  b_{21}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}(B_{2},B_{1})
+  \\
+  b_{32}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}(B_{3},B_{2})
+\end{align*}
+$b_{32}^{\ast} \circ b_{21}^{\ast}$ is equal to $(b_{21} \circ b_{32})^{\ast}$ as we saw by the counter example provided by example \ref{exa:catofarrpb}. Hence we cannot define a functor $F_{\gamma_{\pi}} \colon \mathbf{B}^{\mathrm{op}} \rightarrow \mathbf{Cat}$ we dreamed of in the way proposed. But example \ref{exa:catofarrpb} also suggests that we might hope for an isomorphism which is actually just as good. This would then result in something like a functor up to isomorphism which is often called \textit{pseudo functor}. We will not introduce this terminology here formally in a general form since we only need the pseudo functor made up by $f_{\pi}$ and $f_{\gamma_{\pi}}$.\footnote{if you have enough time think about how to abstract a pseudo functor definition from the following properties ($\psi$),($\psi1$) and ($\psi$2)} Yet we will a bit informally and inconsistently refer to
+\begin{align*}
+  F_{\gamma_{\pi}}
+  \colon
+  \mathbf{B}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Cat}
+  \doteq
+  \left(
+    f_{\pi},
+    f_{\gamma_{\pi}}
+  \right)
+\end{align*}
+as pseudo functor. What now follows are the properties which make $F_{\gamma_{\pi}}$ a pseudo functor:
+\begin{enumerate}
+\item[($\psi$)]
+For
+\begin{align*}
+  b_{21}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}(B_{2},B_{1})
+  \\
+  b_{32}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}(B_{3},B_{2})
+\end{align*}
+there is a natural isomorphism
+\begin{align*}
+  \mathsf{T}(b_{32},b_{21})
+  \colon
+  b_{32}^{\ast}
+  \circ
+  b_{21}^{\ast}
+  &\Rightarrow
+  \left(
+    b_{21}
+    \circ
+    b_{32}
+  \right)^{\ast}
+  \\
+  E
+  &\mapsto
+  \left(
+    \gamma_{\pi}(b_{21},E)
+    \circ
+    \gamma_{\pi}(b_{32},b_{21}^{\ast}(E))
+  \right)_{!}
+\end{align*}
+where the exclamation mark means the unique arrow from
+\[
+\begin{tikzcd}[sep=huge]
+  &
+  (b_{21} \circ b_{32})^{\ast}(E)
+  \arrow{dr}{\gamma_{\pi}(b_{21} \circ b_{32},E)}
+  &
+  \\
+  b_{32}^{\ast}
+  \left(
+    b_{21}^{\ast}(E)
+  \right)
+  \arrow{ur}{(\gamma_{\pi}(b_{21},E) \circ \gamma_{\pi}(b_{32},b_{21}^{\ast}(E)))_{!}}
+  \arrow{r}{\gamma_{\pi}(b_{32},b_{21}^{\ast}(E))}
+  &
+  b_{21}^{\ast}(E)
+  \arrow{r}{\gamma_{\pi}(b_{21},E)}
+  \arrow[shorten <= 10pt, shorten >= 10pt]{dd}{\pi}
+  &
+  E
+  \\
+  &
+  &
+  \\
+  &
+  B_{3}
+  \arrow{dr}{b_{21} \circ b_{32}}
+  &
+  \\
+  B_{3}
+  \arrow{ur}{\mathrm{id}_{B_{2}}}
+  \arrow{r}{b_{32}}
+  \arrow[swap,bend right=15]{rr}{\pi(\gamma_{\pi}(b_{21},E) \circ \gamma_{\pi}(b_{32},b_{21}^{\ast}(E)))}
+  &
+  B_{2}
+  \arrow{r}{b_{21}}
+  &
+  B_{1}
+\end{tikzcd}
+\]
+To see that $\mathsf{T}(b_{32},b_{21})$ is an isomorphism look at the diagram obtained from universality
+\[
+\begin{tikzcd}[row sep=13ex,column sep=13ex]
+  b_{32}^{\ast}
+  \left(
+    b_{21}^{\ast}(E)
+  \right)
+  \arrow{r}{\gamma_{\pi}(b_{32},b_{21}^{\ast}(E))}
+  &
+  b_{21}^{\ast}(E)
+  \arrow{dr}{\gamma_{\pi}(b_{21},E)}
+  &
+  \\
+  (b_{21} \circ b_{32})^{\ast}(E)
+  \arrow{u}{((\gamma_{\pi}(b_{21} \circ b_{32},E))_{!})_{!}}
+  \arrow[swap]{ur}{(\gamma_{\pi}(b_{21} \circ b_{32},E))_{!}}
+  \arrow{rr}{\gamma_{\pi}(b_{21} \circ b_{32},E)}
+  &
+  &
+  E
+\end{tikzcd}
+\]
+and reason as in theorem \ref{thm:uniqueuniarr} as one always does when one has a unique arrow provided by a universal property. Namely that
+\begin{align*}
+  ((\gamma_{\pi}(b_{21} \circ b_{32},E))_{!})_{!}
+  \circ
+  \left(
+    \gamma_{\pi}(b_{21},E)
+    \circ
+    \gamma_{\pi}(b_{32},b_{21}^{\ast}(E))
+  \right)_{!}
+  \\
+  \left(
+    \gamma_{\pi}(b_{21},E)
+    \circ
+    \gamma_{\pi}(b_{32},b_{21}^{\ast}(E))
+  \right)_{!}
+  \circ
+  ((\gamma_{\pi}(b_{21} \circ b_{32},E))_{!})_{!}
+\end{align*}
+are the unique arrows corresponding to the respective universal arrows and must hence be the respective identity. This is illustrated by
+\[
+\begin{tikzcd}[row sep=13ex,column sep=16ex]
+  (b_{21} \circ b_{32})^{\ast}(E))
+  \arrow[bend left=45]{ddrr}{\gamma_{\pi}(b_{21} \circ b_{32},E)}
+  &
+  &
+  \\
+  b_{32}^{\ast}
+  \left(
+    b_{21}^{\ast}(E)
+  \right)
+  \arrow[swap]{u}{(\gamma_{\pi}(b_{21},E) \circ \gamma_{\pi}(b_{32},b_{21}^{\ast}(E)))_{!}}
+  \arrow{r}{\gamma_{\pi}(b_{32},b_{21}^{\ast}(E))}
+  &
+  b_{21}^{\ast}(E)
+  \arrow{dr}{\gamma_{\pi}(b_{21},E)}
+  &
+  \\
+  (b_{21} \circ b_{32})^{\ast}(E))
+  \arrow[swap]{u}[pos=0.8]{((\gamma_{\pi}(b_{21} \circ b_{32},E))_{!})_{!}}
+  \arrow[bend left=60,crossing over]{uu}{\mathrm{id}_{(b_{21} \circ b_{32})^{\ast}(E))}}
+  \arrow[swap]{ur}{(\gamma_{\pi}(b_{21} \circ b_{32},E))_{!}}
+  \arrow{rr}{\gamma_{\pi}(b_{21} \circ b_{32},E)}
+  &
+  &
+  E
+  \\
+  b_{32}^{\ast}
+  \left(
+    b_{21}^{\ast}(E)
+  \right)
+  \arrow[swap]{u}{(\gamma_{\pi}(b_{21},E) \circ \gamma_{\pi}(b_{32},b_{21}^{\ast}(E)))_{!}}
+  \arrow[bend left=60,crossing over]{uu}{\mathrm{id}_{b_{32}^{\ast}(b_{21}^{\ast}(E))}}
+  \arrow{rr}{\gamma_{\pi}(b_{32},b_{21}^{\ast}(E))}
+  &
+  &
+  b_{21}^{\ast}(E)
+  \arrow{u}{\gamma_{\pi}(b_{21},E)}
+\end{tikzcd}
+\]
+To show naturality of $\mathsf{T}(b_{32},b_{21})$ take a morphism $e$ from $E$ to $E^{\backprime}$. Then
+\begin{align*}
+  &\phantom{=}
+  \gamma_{\pi}(b_{21} \circ b_{32},E^{\backprime})
+  \circ
+  \left(
+    b_{21}
+    \circ
+    b_{32}
+  \right)^{\ast}
+  (e)
+  \circ
+  \mathsf{T}(b_{32},b_{21})(E)
+  \\
+  &=
+  \gamma_{\pi}(b_{21} \circ b_{32},E^{\backprime})
+  \circ
+  \left(
+    e
+    \circ
+    \gamma_{\pi}(b_{21} \circ b_{32},E)
+  \right)_{!}
+  \circ
+  \left(
+    \gamma_{\pi}(b_{21},E)
+    \circ
+    \gamma_{\pi}(b_{32},b_{21}^{\ast}(E))
+  \right)_{!}
+  \\
+  &=
+  e
+  \circ
+  \gamma_{\pi}(b_{21} \circ b_{32},E)
+  \circ
+  \left(
+    \gamma_{\pi}(b_{21},E)
+    \circ
+    \gamma_{\pi}(b_{32},b_{21}^{\ast}(E))
+  \right)_{!}
+  \\
+  &=
+  e
+  \circ
+  \gamma_{\pi}(b_{21},E^{\backprime})
+  \circ
+  \gamma_{\pi}(b_{32},b_{21}^{\ast}(E^{\backprime}))
+\end{align*}
+and
+\begin{align*}
+  &\phantom{=}
+  \gamma_{\pi}(b_{21} \circ b_{32},E^{\backprime})
+  \circ
+  \mathsf{T}(b_{32},b_{21})
+  \left(
+    E^{\backprime}
+  \right)
+  \circ
+  b_{32}^{\ast}
+  \left(
+    b_{21}^{\ast}(e)
+  \right)
+  \\
+  &=
+  \gamma_{\pi}(b_{21} \circ b_{32},E^{\backprime})
+  \circ
+  \left(
+    \gamma_{\pi}(b_{21},E^{\backprime})
+    \circ
+    \gamma_{\pi}(b_{32},b_{21}^{\ast}(E^{\backprime}))
+  \right)_{!}
+  \circ
+  b_{32}^{\ast}
+  \left(
+    e
+    \circ
+    \gamma_{\pi}(b_{21},E)
+  \right)_{!}
+  \\
+  &=
+  \gamma_{\pi}(b_{21},E^{\backprime})
+  \circ
+  \gamma_{\pi}(b_{32},b_{21}^{\ast}(E^{\backprime}))
+  \circ
+  \left(
+    \left(
+      e
+      \circ
+      \gamma_{\pi}(b_{21},E)
+    \right)_{!}
+    \circ
+    \gamma_{\pi}(b_{32},b_{21}^{\ast}(E))
+  \right)_{!}
+  \\
+  &=
+  \gamma_{\pi}(b_{21},E^{\backprime})
+  \circ
+  \left(
+    e
+    \circ
+    \gamma_{\pi}(b_{21},E)
+  \right)_{!}
+  \circ
+  \gamma_{\pi}(b_{32},b_{21}^{\ast}(E))
+  \\
+  &=
+  e
+  \circ
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \gamma_{\pi}(b_{32},b_{21}^{\ast}(E))
+\end{align*}
+Universality then proves the claim (remember the naturality proof in the proof of corollary \ref{cor:yonedauniarr} about the left Kan extension). What now follows are coherenece conditions making the identity laws and associativity sensible. However, the identity law only works for cleavages $\gamma_{\pi}$ which fulfill the splitting property (TS1). But this is not really a problem since if we have a cleavage we can always derive one from it fulfilling this property. So:
+\begin{enumerate}
+\item[($\psi$1)]
+We have
+\begin{align*}
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \mathsf{T}(\mathrm{id}_{B_{2}},b_{21})(E)
+  &=
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \left(
+    \gamma_{\pi}(b_{21},E)
+    \circ
+    \gamma_{\pi}(\mathrm{id}_{B_{2}},b_{21}^{\ast}(E))
+  \right)_{!}
+  \\
+  &=
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \gamma_{\pi}(\mathrm{id}_{B_{2}},b_{21}^{\ast}(E))
+\end{align*}
+and
+\begin{align*}
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \mathsf{T}(b_{21},\mathrm{id}_{B_{1}})(E)
+  &=
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \left(
+    \gamma_{\pi}(\mathrm{id}_{B_{1}},E)
+    \circ
+    \gamma_{\pi}(b_{21},\mathrm{id}_{B_{1}}^{\ast}(E))
+  \right)_{!}
+  \\
+  &=
+  \gamma_{\pi}(\mathrm{id}_{B_{1}},E)
+  \circ
+  \gamma_{\pi}(b_{21},\mathrm{id}_{B_{1}}^{\ast}(E))
+  \\
+  &=
+  \gamma_{\pi}(\mathrm{id}_{B_{1}},E)
+  \circ
+  \gamma_{\pi}(b_{21},\mathrm{id}_{B_{1}}^{\ast}(E))
+  \circ
+  \mathrm{id}_{b_{21}^{\ast}}(E)
+\end{align*}
+Then, again by universality, we find
+\begin{align*}
+  \mathsf{T}(\mathrm{id}_{B_{2}},b_{21})
+  &=
+  \mathrm{id}_{b_{21}^{\ast}}
+  \\
+  \mathsf{T}(b_{21},\mathrm{id}_{B_{1}})
+  &=
+  \mathrm{id}_{b_{21}^{\ast}}
+\end{align*}
+At least for cleavages fulfilling (TS1)
+\item[($\psi$2)]
+For a further
+\begin{align*}
+  b_{43}
+  &\in
+  \mathrm{mor}_{\mathbf{B}}(B_{4},B_{3})
+\end{align*}
+we want to show that the diagram commutes
+\[
+\begin{tikzcd}[sep=large]
+  &
+  b_{43}^{\ast}
+  \circ
+  b_{32}^{\ast}
+  \circ
+  b_{21}^{\ast}
+  \arrow{dr}{\mathsf{T}(b_{43},b_{32})^{\mathrm{lw}}(b_{21}^{\ast})}
+  \arrow[swap]{dl}{\mathsf{T}(b_{32},b_{21})^{\mathrm{rw}}(b_{43}^{\ast})}
+  &
+  \\
+  b_{43}^{\ast}
+  \circ
+  \left(
+    b_{21}
+    \circ
+    b_{32}
+  \right)^{\ast}
+  \arrow[swap]{dr}{\mathsf{T}(b_{43},b_{21} \circ b_{32})}
+  &
+  &
+  \left(
+    b_{32}
+    \circ
+    b_{43}
+  \right)^{\ast}
+  \circ
+  b_{21}^{\ast}
+  \arrow{dl}{\mathsf{T}(b_{32} \circ b_{43},b_{21})}
+  \\
+  &
+  \left(
+    b_{21}
+    \circ
+    b_{32}
+    \circ
+    b_{43}
+  \right)^{\ast}
+\end{tikzcd}
+\]
+We proceed as always here and calculate
+\begin{align*}
+  &\phantom{=}
+  \gamma_{\pi}(b_{21} \circ b_{32} \circ b_{43},E)
+  \circ
+  \mathsf{T}(b_{43},b_{21} \circ b_{32})(E)
+  \circ
+  \mathsf{T}(b_{32},b_{21})^{\mathrm{rw}}(b_{43}^{\ast})
+  (E)
+  \\
+  &=
+  \gamma_{\pi}(b_{21} \circ b_{32},E)
+  \circ
+  \gamma_{\pi}
+  \left(
+    b_{43},
+    (b_{21} \circ b_{32})^{\ast}(E)
+  \right)
+  \circ
+  b_{43}^{\ast}
+  \left(
+    \mathsf{T}(b_{32},b_{21})(E)
+  \right)
+  \\
+  &=
+  \gamma_{\pi}(b_{21} \circ b_{32},E)
+  \circ
+  \gamma_{\pi}
+  \left(
+    b_{43},
+    (b_{21} \circ b_{32})^{\ast}(E)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \left(
+    \left(
+      \gamma_{\pi}(b_{21},E)
+      \circ
+      \gamma_{\pi}
+      \left(
+        b_{32},
+        (b_{21})^{\ast}(E)
+      \right)
+    \right)_{!}
+    \circ
+    \gamma_{\pi}
+    \left(
+      b_{43},
+      b_{32}^{\ast}
+      \left(
+        b_{21}^{\ast}(E)
+      \right)
+    \right)
+  \right)_{!}
+  \\
+  &=
+  \gamma_{\pi}(b_{21} \circ b_{32},E)
+  \\
+  &\phantom{=}
+  \circ
+  \left(
+    \gamma_{\pi}(b_{21},E)
+    \circ
+    \gamma_{\pi}
+    \left(
+      b_{32},
+      (b_{21})^{\ast}(E)
+    \right)
+  \right)_{!}
+  \circ
+  \gamma_{\pi}
+  \left(
+    b_{43},
+    b_{32}^{\ast}
+    \left(
+      b_{21}^{\ast}(E)
+    \right)
+  \right)
+  \\
+  &=
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \gamma_{\pi}
+  \left(
+    b_{32},
+    (b_{21})^{\ast}(E)
+  \right)
+  \circ
+  \gamma_{\pi}
+  \left(
+    b_{43},
+    b_{32}^{\ast}
+    \left(
+      b_{21}^{\ast}(E)
+    \right)
+  \right)
+\end{align*}
+and
+\begin{align*}
+  &\phantom{=}
+  \gamma_{\pi}(b_{21} \circ b_{32} \circ b_{43},E)
+  \circ
+  \mathsf{T}(b_{32} \circ b_{43},b_{21})(E)
+  \circ
+  \mathsf{T}(b_{43},b_{32})^{\mathrm{lw}}(b_{21}^{\ast})
+  (E)
+  \\
+  &=
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \gamma_{\pi}
+  \left(
+    b_{32}
+    \circ
+    b_{43},
+    b_{21}^{\ast}(E)
+  \right)
+  \circ
+  \mathsf{T}(b_{43},b_{32})(b_{21}^{\ast}(E))
+  \\
+  &=
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \gamma_{\pi}
+  \left(
+    b_{32}
+    \circ
+    b_{43},
+    b_{21}^{\ast}(E)
+  \right)
+  \\
+  &\phantom{=}
+  \circ
+  \left(
+    \gamma_{\pi}(b_{32},(b_{21}^{\ast}(E))
+    \circ
+    \gamma_{\pi}
+    \left(
+      b_{43},
+      b_{32}^{\ast}
+      \left(
+        b_{21}^{\ast}(E)
+      \right)
+    \right)
+  \right)_{!}
+  \\
+  &=
+  \gamma_{\pi}(b_{21},E)
+  \circ
+  \gamma_{\pi}(b_{32},(b_{21}^{\ast}(E))
+  \circ
+  \gamma_{\pi}
+  \left(
+    b_{43},
+    b_{32}^{\ast}
+    \left(
+      b_{21}^{\ast}(E)
+    \right)
+  \right)
+\end{align*}
+Universality is now proving the commutativity.
+\end{enumerate}
+\end{enumerate}
+What have we achieved now? Well, we have given a process of how to derive from a terminal Grothendieck fibration
+\begin{align*}
+  \pi
+  \colon
+  \mathbf{E}
+  &\rightarrow
+  \mathbf{B}
+\end{align*}
+together with a cleavage $\gamma_{\pi}$ fulfilling splitting property (TS1) a pseudo functor
+\begin{align*}
+  F_{\gamma_{\pi}}
+  \colon
+  \mathbf{B}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Cat}
+  \doteq
+  \left(
+    f_{\pi},
+    f_{\gamma_{\pi}}
+  \right)
+\end{align*}
+which is a functor if $\gamma_{\pi}$ is a splitting for $\pi$ (this latter statement can also be seen from universality as above). Moreover this process is reversible in the sense that a pseudo functor from $\mathbf{B}^{\mathrm{op}}$ to $\mathbf{Cat}$ yields a terminal Grothendieck fibration with base category $\mathbf{B}$ togther with a cleavage fulfilling (TS1). This reversed process is usually referred to as {\glqq}Grothendieck construction{\grqq} and a landmark of category theory. All this can be formalized in a certain weak $2$-categorical setting. We abstracted Grothendieck fibrations from
+\begin{align*}
+  \pi_{P}
+  \colon
+  \int_{\mathbf{J}}^{\prime}
+  P
+  &\rightarrow
+  \mathbf{J}
+  \\
+  (J,z)
+  &\mapsto
+  J
+  \\
+  j_{21}^{\mathrm{op}}
+  &\mapsto
+  j_{12}
+\end{align*}
+This can be regarded as a primitive version of the Grothendieck construction for the presheaf $P$. Historically, this primitive case was done by Yoneda and Mac Lane\footnote{at least Mac Lane and Moerdijk claim so in \cite{c55c71e8} where it sounds like they would terminologically prefer Yoneda-Mac Lane construction or so} before Grothendieck constructed Grothendieck fibrations from pseudo functors. So in our discussion we actually followed time in the wrong direction. Anyways, we ended up with something like a weak $\mathbf{Cat}$-valued presheaf on $\mathbf{B}$
+\begin{align*}
+  \left(
+    F_{\gamma_{\pi}}
+    \colon
+    \mathbf{B}^{\mathrm{op}}
+    \rightarrow
+    \mathbf{Cat}
+  \right)
+  &\doteq
+  \left(
+    f_{\pi},
+    f_{\gamma_{\pi}}
+  \right)
+\end{align*}
+which on morphisms is formally similar to pulling back as was abstracted from example \ref{exa:catofarrpb} with the arrow catgeory of the base category as total category. We have already learned that pulling back is closely related to restricting. Both the pullback part of example \ref{exa:catofarrpb} and the Grothendieck topology part from the generalized spaces II example \ref{exa:gs2} provide some evidence for this point of view. Thus we might wonder if the weak $\mathbf{Cat}$-valued presheaf $F_{\gamma_{\pi}}$ allows a sensible definition of weak $\mathbf{Cat}$-valued sheaf in the sense that the objects of $F_{\gamma_{\pi}}(B_{1})$ are the sections over $B_{1}$ while the morphisms of $F_{\gamma_{\pi}}(B_{1})$ are the allowed ways of transforming one section to another and restricting to $B_{2}$ by $F_{\gamma_{\pi}}(b_{21})$ must be consistent at least in so far that matching restrictions of transformations can be uniquely patched together while sections matching up to isomorphisms can be regarded as uniquely patched together by these isomorphisms in an approriate sense. We already know what this {\glqq}descent{\grqq} is from the bundles 2 example \ref{exa:bundles2}. What we called weak $\mathbf{Cat}$-valued sheaf so far is usually called {\glqq}stack in categories{\grqq} and was pursued by Grothendieck to generalize the notion of scheme in his famous notes {\glqq}Pursuing Stacks{\grqq}. Now to realize a stacks definition we should at least have a notion of covering for $\mathbf{B}$. The most general thing coming to our mind so far is Grothendieck topology but for the sake of simplicity and intuition we restrict ourselves to the case $\mathbf{B} = \mathbf{Open}_{S}$ for some topological space $S$ when we define stacks in a moment. If you want to see the general definition of stacks using Grothendieck topology we refer to \cite{d9dadd6d} which seems to contain everything what mankind knows about stacks. We still recommend to look at our definition first since the more general one differs not so much from ours on an intuitive level but might be harder for beginners to imagine. Let us wrap the stacks discussion up in a final fourth part of our continuant example about generalized spaces from examples \ref{exa:gs1}, \ref{exa:gs2} and \ref{exa:gs3}.
+\\
+\begin{exa}[Generalized Spaces IV]
+\label{exa:gs4}
+The setting is that we are given a pseudo functor
+\begin{align*}
+  \left(
+    F_{\gamma_{\pi}}
+    \colon
+    \mathbf{Open}_{S}^{\mathrm{op}}
+    \rightarrow
+    \mathbf{Grpd}
+  \right)
+  &\doteq
+  \left(
+    f_{\pi},
+    f_{\gamma_{\pi}}
+  \right)
+\end{align*}
+corresponding to a terminal Grothendieck fibration
+\begin{align*}
+  \pi
+  \colon
+  \mathbf{E}
+  &\rightarrow
+  \mathbf{Open}_{S}
+\end{align*}
+together with a cleavage $\gamma_{\pi}$ fulfilling splitting property (TS1). What we do also translates quite literally\footnote{since we carefully distinct $\mathrm{mor}$ and $\mathrm{iso}$ which is actually not necessary for groupoids} to $\mathbf{Cat}$ instead of $\mathbf{Grpd}$ and is actually a somewhat artificial restriction. But it is the case we are interested in (since it is easier to generalize to higher levels) and it seems somehow the more common case in literature.
+\\
+We first build some terminology in the style of the generalized spaces II example \ref{exa:gs2}. For $U \in \mathrm{ob}_{\mathbf{Open}_{S}}$ an object
+\begin{align*}
+  s
+  &\in
+  \mathrm{ob}_{F_{\gamma_{\pi}}(U)}
+  =
+  \mathrm{ob}_{f_{\pi}(U)}
+\end{align*}
+is called \textbf{section (over $U$ in $F_{\gamma_{\pi}}$)}. Next note our convention on inclusions from example \ref{exa:topology} about topological spaces with the further convenience
+\begin{align*}
+  U_{1},
+  U_{2}
+  &\in
+  \mathrm{ob}_{\mathbf{Open}_{S}}
+  \\
+  \mathrm{i}_{12}
+  &\doteq
+  \mathrm{i}^{S}(U_{1},U_{2})
+\end{align*}
+Then the functor
+\begin{align*}
+  \mathrm{i}_{12}^{\ast}
+  &\doteq
+  F_{\gamma_{\pi}}(\mathrm{i}_{12})
+  =
+  f_{\pi}(U_{1},U_{2})(\mathrm{i}_{12})
+\end{align*}
+is called the \textbf{restriction from $U_{2}$ to $U_{1}$ (in $F_{\gamma_{\pi}}$)}. Further, for sections over some $V \in \mathbf{Open}_{S}$
+\begin{align*}
+  s,
+  s^{\backprime}
+  &\in
+  \mathrm{ob}_{F_{\gamma_{\pi}}(V)}
+\end{align*}
+we have a presheaf
+\begin{align*}
+  \mathcal{T}_{V}(s,s^{\backprime})
+  \colon
+  \mathbf{Open}_{V}^{\mathrm{op}}
+  &\rightarrow
+  \mathbf{Set}
+  \\
+  U
+  &\mapsto
+  \mathrm{hom}_{F_{\gamma_{\pi}}(U)}
+  \left(
+    \mathrm{i}_{U}^{\ast}(s),
+    \mathrm{i}_{U}^{\ast}(s^{\backprime})
+  \right)
+  \\
+  \mathrm{i}_{12}
+  &\mapsto
+  \left(
+    \tau
+    \mapsto
+    \mathsf{T}(\mathrm{i}_{12},\mathrm{i}_{U_{2}})(s^{\backprime})
+    \circ
+    \mathrm{i}_{12}^{\ast}(\tau)
+    \circ
+    \mathsf{T}(\mathrm{i}_{12},\mathrm{i}_{U_{2}})^{-1}(s)
+  \right)
+\end{align*}
+We call $\mathcal{T}_{V}(s,s^{\backprime})$ the \textbf{presheaf of ($V$-)transitions (from $s$ to $s^{\backprime}$ in $F_{\gamma_{\pi}}$)} while we call an element of
+\begin{align*}
+  \mathcal{T}_{V}(s,s^{\backprime})(V)
+\end{align*}
+a \textbf{($V$-)transition (from $s$ to $s^{\backprime}$ in $F_{\gamma_{\pi}}$)}. We said that we want to be able patch matching transformations together in a unique way. This is to say that $\mathcal{T}_{V}(s,s^{\backprime})$ is a sheaf. But since this is not all we need we say that $F_{\gamma_{\pi}}$ is a\footnote{note that the terminology is a bit misleading since it is quite a bit more than just a {\glqq}weak $\mathbf{Grpd}$-valued preshaf{\grqq}} \textbf{prestack (on $\mathbf{Open}_{S}$)} if for all
+\begin{align*}
+  V
+  &\in
+  \mathrm{ob}_{\mathbf{Open}_{S}}
+  \\
+  s,
+  s^{\backprime}
+  &\in
+  \mathrm{ob}_{F_{\gamma_{\pi}}(V)}
+\end{align*}
+the presheaf of $V$-transitions $\mathcal{T}_{V}(s,s^{\backprime})$ is a sheaf. Next we want to go the step from prestacks to stacks. This means that the category $F_{\gamma_{\pi}}(U)$ should look like a groupoid with objects families of sections over $U_{k}$ for some open cover generator $\mathrm{cov}_{U}$ such that any two sections restricted to some open set from the cover are related by an isomorphism with some further consistency satisfied by the isomorphims. This can be regarded as formally patching the sections together and if all objects are so this is clearly unique. So, formally, for an open cover generator $\mathrm{cov}_{U}$ use the additional notational convention on inclusions that
+\begin{align*}
+  \mathrm{i}_{12,1}
+  &\doteq
+  \mathrm{i}^{U_{k_{1}}}
+  \left(
+    U_{k_{1}}
+    \cap
+    U_{k_{2}},
+    U_{k_{1}}
+  \right)
+  \\
+  \mathrm{i}_{12,2}
+  &\doteq
+  \mathrm{i}^{U_{k_{2}}}
+  \left(
+    U_{k_{1}}
+    \cap
+    U_{k_{2}},
+    U_{k_{2}}
+  \right)
+  \\
+  \mathrm{i}_{13,1}
+  &\doteq
+  \mathrm{i}^{U_{k_{1}}}
+  \left(
+    U_{k_{1}}
+    \cap
+    U_{k_{3}},
+    U_{k_{1}}
+  \right)
+  \\
+  \mathrm{i}_{13,3}
+  &\doteq
+  \mathrm{i}^{U_{k_{3}}}
+  \left(
+    U_{k_{1}}
+    \cap
+    U_{k_{3}},
+    U_{k_{3}}
+  \right)
+  \\
+  \mathrm{i}_{23,2}
+  &\doteq
+  \mathrm{i}^{U_{k_{2}}}
+  \left(
+    U_{k_{2}}
+    \cap
+    U_{k_{3}},
+    U_{k_{2}}
+  \right)
+  \\
+  \mathrm{i}_{23,3}
+  &\doteq
+  \mathrm{i}^{U_{k_{3}}}
+  \left(
+    U_{k_{2}}
+    \cap
+    U_{k_{3}},
+    U_{k_{3}}
+  \right)
+  \\
+  \mathrm{i}_{1}
+  &\doteq
+  \mathrm{i}^{U_{k_{2}} \cap U_{k_{3}}}
+  \left(
+    U_{k_{1}}
+    \cap
+    U_{k_{2}}
+    \cap
+    U_{k_{3}},
+    U_{k_{2}}
+    \cap
+    U_{k_{3}}
+  \right)
+  \\
+  \mathrm{i}_{2}
+  &\doteq
+  \mathrm{i}^{U_{k_{1}} \cap U_{k_{3}}}
+  \left(
+    U_{k_{1}}
+    \cap
+    U_{k_{2}}
+    \cap
+    U_{k_{3}},
+    U_{k_{1}}
+    \cap
+    U_{k_{3}}
+  \right)
+  \\
+  \mathrm{i}_{3}
+  &\doteq
+  \mathrm{i}^{U_{k_{1}} \cap U_{k_{2}}}
+  \left(
+    U_{k_{1}}
+    \cap
+    U_{k_{2}}
+    \cap
+    U_{k_{3}},
+    U_{k_{1}}
+    \cap
+    U_{k_{2}}
+  \right)
+\end{align*}
+to define a category
+\begin{align*}
+  \mathbf{Des}(\mathrm{cov}_{U},F_{\gamma_{\pi}})
+\end{align*}
+with
+\begin{enumerate}
+\item[$\bullet$]
+objects (dependent) pairs consisting of a dependent function
+\begin{align*}
+  \sigma
+  &\in
+  \prod_{k \in K}
+  \mathrm{ob}_{F_{\gamma_{\pi}}(U_{k})}
+\end{align*}
+where for all $k \in K$ we denote
+\begin{align*}
+  s_{k}
+  &:=
+  \sigma(k)
+\end{align*}
+together with a dependent function
+\begin{align*}
+  \tau_{\sigma}
+  &\in
+  \prod_{(k_{1},k_{2}) \in K \times K}
+  \mathrm{iso}_{F_{\gamma_{\pi}}(U_{k_{1}} \cap U_{k_{2}})}
+  \left(
+    \mathrm{i}_{12,1}^{\ast}(s_{k_{1}}),
+    \mathrm{i}_{12,2}^{\ast}(s_{k_{2}})
+  \right)
+\end{align*}
+for which we agree to the slightly inconsistent notation\footnote{we have to consider the projections of $\tau$ as morphisms in $F_{\gamma_{\pi}}(U_{k_{1}} \cap U_{k_{2}} \cap U_{k_{3}})$ for what we want to do}
+\begin{align*}
+  \tau_{\sigma}(k_{2},k_{3})
+  &\doteq
+  \left(
+    \mathcal{T}_{U_{k_{2}} \cap U_{k_{3}}}
+    \left(
+      \mathrm{i}_{23,2}^{\ast}(s_{k_{2}}),
+      \mathrm{i}_{23,3}^{\ast}(s_{k_{3}})
+    \right)
+    (\mathrm{i}_{1})
+  \right)
+  \left(
+    \tau_{\sigma}(k_{2},k_{3})
+  \right)
+  \\
+  \tau_{\sigma}(k_{1},k_{2})
+  &\doteq
+  \left(
+    \mathcal{T}_{U_{k_{1}} \cap U_{k_{2}}}
+    \left(
+      \mathrm{i}_{12,1}^{\ast}(s_{k_{1}}),
+      \mathrm{i}_{12,2}^{\ast}(s_{k_{2}})
+    \right)
+    (\mathrm{i}_{3})
+  \right)
+  \left(
+    \tau_{\sigma}(k_{1},k_{2})
+  \right)
+  \\
+  \tau_{\sigma}(k_{1},k_{3})
+  &\doteq
+  \left(
+    \mathcal{T}_{U_{k_{1}} \cap U_{k_{3}}}
+    \left(
+      \mathrm{i}_{13,1}^{\ast}(s_{k_{1}}),
+      \mathrm{i}_{13,3}^{\ast}(s_{k_{3}})
+    \right)
+    (\mathrm{i}_{2})
+  \right)
+  \left(
+    \tau_{\sigma}(k_{1},k_{3})
+  \right)
+\end{align*}
+such that
+\begin{enumerate}
+\item[(CCC)]
+for all $k_{1},k_{2},k_{3} \in K$ the equality
+\begin{align*}
+  \tau_{\sigma}(k_{2},k_{3})
+  \circ
+  \tau_{\sigma}(k_{1},k_{2})
+  &=
+  \tau_{\sigma}(k_{1},k_{3})
+\end{align*}
+is true
+\end{enumerate}
+\item[$\bullet$]
+morphisms from $(\sigma,\tau_{\sigma})$ to $(\sigma^{\backprime},\tau_{\sigma^{\backprime}})$ are dependent functions
+\begin{align*}
+  f_{\sigma}^{\sigma^{\backprime}}
+  &\in
+  \prod_{k \in K}
+  \mathrm{mor}_{F_{\gamma_{\pi}}(U_{k})}
+  \left(
+    \sigma(k),
+    \sigma^{\backprime}(k)
+  \right)
+\end{align*}
+for which we agree to the slightly inconsistent notation
+\begin{align*}
+  f_{\sigma}^{\sigma^{\backprime}}(k_{1})
+  &\doteq
+  \left(
+    \mathcal{T}_{U_{k_{1}}}
+    \left(
+      \sigma(k_{1}),
+      \sigma^{\backprime}(k_{1})
+    \right)
+    \left(
+      \mathrm{i}_{12,1}
+    \right)
+  \right)
+  \left(
+    f_{\sigma}^{\sigma^{\backprime}}(k_{1})
+  \right)
+  \\
+  f_{\sigma}^{\sigma^{\backprime}}(k_{2})
+  &\doteq
+  \left(
+    \mathcal{T}_{U_{k_{2}}}
+    \left(
+      \sigma(k_{2}),
+      \sigma^{\backprime}(k_{2})
+    \right)
+    \left(
+      \mathrm{i}_{12,2}
+    \right)
+  \right)
+  \left(
+    f_{\sigma}^{\sigma^{\backprime}}(k_{2})
+  \right)
+\end{align*}
+such that
+\begin{enumerate}
+\item[(CBC)]
+for all $k_{1},k_{2} \in K$ the equality
+\begin{align*}
+  \tau_{\sigma^{\backprime}}(k_{1},k_{2})
+  \circ
+  f_{\sigma}^{\sigma^{\backprime}}(k_{1})
+  &=
+  f_{\sigma}^{\sigma^{\backprime}}(k_{2})
+  \circ
+  \tau_{\sigma}(k_{1},k_{2})
+\end{align*}
+is true, that is, the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  \mathrm{i}_{12,1}^{\ast}
+  \left(
+    \sigma(k_{1})
+  \right)
+  \arrow{r}{f_{\sigma}^{\sigma^{\backprime}}(k_{1})}
+  \arrow[swap]{d}{\tau_{\sigma}(k_{1},k_{2})}
+  &
+  \mathrm{i}_{12,1}^{\ast}
+  \left(
+    \sigma^{\backprime}(k_{1})
+  \right)
+  \arrow{d}{\tau_{\sigma^{\backprime}}(k_{1},k_{2})}
+  \\
+  \mathrm{i}_{12,2}^{\ast}
+  \left(
+    \sigma(k_{2})
+  \right)
+  \arrow{r}{f_{\sigma}^{\sigma^{\backprime}}(k_{2})}
+  &
+  \mathrm{i}_{12,2}^{\ast}
+  \left(
+    \sigma^{\backprime}(k_{2})
+  \right)
+\end{tikzcd}
+\]
+commutes
+\end{enumerate}
+\end{enumerate}
+Property (CCC) is referred to as \textbf{cocycle condition (in $\mathbf{Des}(\mathrm{cov}_{U},F_{\gamma_{\pi}})$)} while property (CBC) is referred to as \textbf{coboundary condition (in $\mathbf{Des}(\mathrm{cov}_{U},F_{\gamma_{\pi}})$)}. $\mathbf{Des}(\mathrm{cov}_{U},F_{\gamma_{\pi}})$ is called the \textbf{category of descent data (on $\mathrm{cov}_{U}$ for $F_{\gamma_{\pi}}$)}. A categorical prestack $F_{\gamma_{\pi}}$ on $\mathbf{Open}_{S}$ is called \textbf{stack (on $\mathbf{Open}_{S}$)} if
+\begin{enumerate}
+\item[(DC)]
+for all $U \in \mathrm{ob}_{\mathbf{Open}_{S}}$ and all open cover generators covers $\mathrm{cov}_{U}$ the functor
+\begin{align*}
+  \mathrm{DF}_{\mathrm{cov}_{U}}
+  \colon
+  F_{\gamma_{\pi}}(U)
+  &\rightarrow
+  \mathbf{Des}(\mathrm{cov_{U}},F_{\gamma_{\pi}})
+  \\
+  s
+  &\mapsto
+  \left(
+    k
+    \mapsto
+    \mathrm{i}_{U_{k}}^{\ast}(s),
+    (k_{1},k_{2})
+    \mapsto
+    \mathrm{id}_{\mathrm{i}_{12,1}^{\ast}\left( \mathrm{i}_{U_{k_{1}}}^{\ast}(s) \right)}
+  \right)
+  \\
+  f
+  &\mapsto
+  \left(
+    k
+    \mapsto
+    \mathrm{i}_{U_{k}}^{\ast}(f)
+  \right)
+\end{align*}
+is an equivalence (of groupoids)
+\end{enumerate}
+We refer to the property (DC) as \textbf{descent condition (for stacks on $\mathbf{Open}_{S}$)}.
+\\
+Now observe that instead of a $\mathbf{Grpd}$-valued pseudo functor why should we not allow for $n$-groupoids or even $\infty$-groupoids to define $n$-stack and $\infty$-stack, respectively? Of course, the descent becomes more complicated since we have to take transitions between transitions and so on into account. But this should not intimidate us to go that promising way. In particular, by $\mathbf{Top}^{\textrm{CW}}$, we essentially know a category of $\infty$-groupoids in the light of the homotopy hypothesis \ref{prp:groth}. So an $\infty$-stack is supposed to be something like a functor from $\mathbf{Open}_{S}^{\mathrm{op}}$ to $\mathbf{Top}^{\textrm{CW}}$ with some appropriate consistency conditions regarding the descent. But one also should take care of {\glqq}equivalence{\grqq} due to the higher homotopy structure. Further, instead of $\mathbf{Open}_{S}$, we should allow for any site $(\mathbf{C},\mathrm{J})$. Then there is, in fact, a sensible formal construction of $\infty$-stacks. However, there are some subtle questions on the terminology since we should actually generalize what we said a bit in the following way:
+\begin{enumerate}
+\item[(a)]
+One should interpret $\mathbf{Top}^{\textrm{CW}}$ as what it is is: namely an $(\infty,1)$-category. So we should look at the $(\infty,1)$-category of $\infty$-groupoids.
+\item[(b)]
+The previous point (a) suggests to consider not only an ordinary site $(\mathbf{C},\mathrm{J})$ but an \textit{$(\infty,1)$-site} where $\mathbf{C}$ would be an $(\infty,1)$-category.
+\item[(c)]
+(a) and (b) together suggest to consider an $(\infty,1)$-functor from an $(\infty,1)$-site to the $(\infty,1)$-category of $\infty$-groupoids.
+\end{enumerate}
+When one does this one is led to a so-called \textit{$(\infty,1)$-sheaf}. Then just like sheaves form a topos $\mathbf{Sh}(S)$ so do $(\infty,1)$-sheaves form an $(\infty,1)$-topos ${}_{\infty}\mathbf{Sh}(S)$. Hence $(\infty,1)$-sheaves can be regarded homotopy-theoretic versions of sheaves since we consider the objects of an $(\infty,1)$-topos homotopy types in the same spirit as we consider the objects of a topos sets. In the end we have arrived at a notion of generalized space which allows to do homotopy theory.
+\\
+Last, note that the terminological distinction of $(\infty,1)$-sheaf and $\infty$-stack is a bit blurry in literature and many use $(\infty,1)$-sheaf and $\infty$-stack synonymously. This is in contrast to our terminology. Sometimes the terminological issues are just ignored and $\infty$-stack means slightly different things at the same time. The terminological situation is a bit complicated and before writing down a terminology dump let's stop here and refer to \cite{wiki-nlab0000} where you can start with any suited term and then click through if you have become curious.
+\end{exa}
+\begin{prf}
+We do not prove anything here but only give interesting references.
+\begin{enumerate}
+\item[$\bullet$]
+The whole series of examples about generalized spaces is abstracted from the \cite{wiki-nlab0000} article: motivation for sheaves, cohomology and higher stacks.
+\item[$\bullet$]
+The stacks definition is based on \cite{c82f5e22}.
+\item[$\bullet$]
+To formally understand $(\infty,1)$-topoi and $\infty$-stacks/$(\infty,1)$-sheaves we recommend \cite{0349e8ea} which seems to be the undisputed standard reference on $(\infty,1)$-topoi as already noted in these notes. This reference in particular seems to formalize homotopy theory as the theory of $(\infty,1)$-topoi as an alternative to model categories.\footnote{but in the end synthetic homotopy theories such as UFP-HoTT seem most reasonable to us simply because they seem to be the easiest theories to learn}
+\end{enumerate}
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}

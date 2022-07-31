@@ -1,0 +1,91 @@
+%\nocite{a565d200}
+In this chapter we want to recap a bit which of our initial goals from chapter \ref{chap:initcontext} we have achieved and what is still missing. Some of the things we are missing are intuitively tackled in the first two sections of this chapter while the last section proposes a way to learn about the still missing pieces by listing the important literature (we already referred to in the preceding chapters).
+\\
+Our overall question was how to use (higher) category theory in physics. In chapter \ref{chap:initcontext} we pondered a synthetic continuity and some important principles of physics. We found that physical spaces should be smooth continuums allowing to do homotopy theory. Classically, we thought of $n$-dimensional manifolds: topological spaces which look like $\mathbb{R}^{n}$ locally in a smooth way. In chapter \ref{chap:cattg} we learned about the problems of topological spaces w.r.t. homotopy theory and we opted to rather look at homotopy types: synthetically in UFP-HoTT or as objects of an $(\infty,1)$-topos modeled in TG or whatever seems equivalent. But we didn't say what it means to be {\glqq}smooth{\grqq} for such homotopy spaces. Yet there is a way to make these homotopy types behave like smooth spaces - or say smooth homotopy types. This is similar in spirit to the definition of manifold and described right at the beginning of \cite{a565d200}. If we further follow the attitude from chapter \ref{chap:cattg} that spaces should be generalized spaces then we get:
+\begin{enumerate}
+\item[$\bullet$]
+The $(\infty,1)$-topos of (smooth) $(\infty,1)$-sheaves on the {\glqq}correct{\grqq} $(\infty,1)$-site provides a setting for physiscs.
+\end{enumerate}
+This fits also very well to our point in chapter \ref{chap:initcontext} that the (quantum) fields in physics should be rather formalized as\footnote{there we said sheaf and stack but now we know better} $(\infty,1)$-sheaves than as sections through fiber bundles. The homotopy version of sheaves was particularly important when we had to take local symmetry information into account. We identified such {\glqq}gauge fields with local symmetry (Lie) group $G${\grqq} with {\glqq}$G$-principal bundles with connection (in $\mathbf{Diff}_{\infty}$){\grqq}. But as we told you in chapter \ref{chap:cattg} in the bundles 2 example \ref{exa:bundles2} the theory of principal bundles seems to work very well in $(\infty,1)$-topoi. In some manner even better than in $\mathbf{Top}$. For $\mathbf{Top}^{\textrm{CW}}$ we stated in theorem \ref{thm:repofbundlefunc} the representabilty of $\mathcal{P}_{G}$, that is,
+\begin{align*}
+  \mathcal{P}_{G}
+  &\cong
+  \mathrm{hom}_{\mathbf{HTop}^{\textrm{CW}}}(\cdot,\mathrm{B}G)
+\end{align*}
+for some representing object $\mathrm{B}G$ we can call classifying space here since it classifies isomorphism classes of principal bundles. For $G$ abelian, one can deduce from the Brown representability theorem mentioned in example \ref{exa:loopradjoint} that
+\begin{align*}
+  \mathrm{hom}_{\mathbf{HTop}_{\ast}^{\textrm{CW}}}(\cdot,\mathrm{B}G)
+  &\cong
+  h_{G}^{1}
+\end{align*}
+if $h_{G}^{1}$ denotes the first reduced singular cohomology functor which can be calculated as \v{C}ech cohomology $\check{H}_{G}^{1}$ as we have pointed out section \ref{sec:sset} of chapter \ref{chap:cattg}. But as discussed in chapter \ref{chap:initcontext} isomorphism classes of principal bundles are too narrow and hence we do not want to consider $\mathcal{P}_{G}$ but rather the groupoid of $G$-principal bundles over a CW complex $X$. And actually we want things to be smooth while taking connections into account. If we do all this can we then still classify by homotopy classes and cohomology? Well, not quite it seems. There are two points:
+\begin{enumerate}
+\item[(a)]
+If we do not factor out isomorphism of principal bundles we could actually not expect homotopy classes but we also need the higher homotopy.
+\item[(b)]
+Even if we factor out isomorphism of principal bundles then {\glqq}smooth{\grqq} together with {\glqq}connection{\grqq} does not seem to work as is claimed in \cite{wiki-nlab0000}: motivations for sheaves, cohomology and higher stacks.
+\end{enumerate}
+But all these things seem to work in the $(\infty,1)$-topos setting. To say more explicitly what we mean let ${}_{(\infty,1)}\mathbf{C}$ an $(\infty,1)$-topos and for objects $X_{1},X_{2}$ of ${}_{(\infty,1)}\mathbf{C}$ denote the $\infty$-groupoid of morphisms from $X_{1}$ to $X_{2}$
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X_{1},
+    X_{2}
+  \right)
+\end{align*}
+If $\mathbf{PB}_{G}(X)$ denotes the $\infty$-groupoid of $G$-principal bundles in ${}_{(\infty,1)}\mathbf{C}$ over $X$ for some group $G$ and object $X$ of ${}_{(\infty,1)}\mathbf{C}$ then there is an object $\mathrm{B}G$ in ${}_{(\infty,1)}\mathbf{C}$ such that
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    \mathrm{B}G
+  \right)
+  &\simeq
+  \mathbf{PB}_{G}(X)
+\end{align*}
+This equivalence of $\infty$-groupoids/homotopy types can be taken as mapping an object $f$ of
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    \mathrm{B}G
+  \right)
+\end{align*}
+to the projection of the homotopy fiber of $f$ w.r.t. some $y \colon \mathrm{B}G$ to the first coordinate. Note that in UFP-HoTT the homotopy fiber of $f$ w.r.t. some $y \colon \mathrm{B}G$ is
+\begin{align*}
+  \mathrm{fib}_{f}(y)
+  &:=
+  \sum_{x \colon X}
+  f(x)
+  =_{\mathrm{B}G}
+  y
+\end{align*}
+This can be read: the homotopy fiber of $f$ w.r.t. $y$ are all $(x,p)$ such that $p$ is a path from $f(x)$ to $y$. Note that the idea makes sense in an $(\infty,1)$-topos, too.\footnote{in fact, also in classical homotopy theory where you will most likely encounter this idea when fiber sequences are discussed} Anyways, in UFP-HoTT we get a function
+\begin{align*}
+  \pi_{f}
+  :=
+  \left(
+    (x,p)
+    \mapsto
+    x
+  \right)
+  \colon
+  \mathrm{fib}_{f}(y)
+  &\rightarrow
+  X
+\end{align*}
+and the equivalence we mean is then defined by
+\begin{align*}
+  f
+  &\mapsto
+  \pi_{f}
+\end{align*}
+$\mathrm{B}G$ is then the classifying space (or better say moduli space and perhaps moduli stack) of the $G$-principle bundles over $X$. But contrary to the classical case it contains all available symmetry information.\footnote{in the guise of all the homotopy information} What is quite interesting now is that
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    \mathrm{B}G
+  \right)
+\end{align*}
+allows for a more or less direct interpretation as cohomology. We will present this idea in section \ref{sec:cohomology}. This is followed by an elaboration on the {\glqq}\v{C}ech-ideas{\grqq} from section \ref{sec:sset} of chapter \ref{chap:cattg} in section \ref{sec:check} which leads towards a way to {\glqq}calculate{\grqq} this new cohomology. In the end, one can also take connections into account. This should yield a moduli stack $\mathrm{B}G_{\textrm{conn}}$ {\glqq}over{\grqq} $\mathrm{B}G$ containing the information about physical fields with local symmetry. We would like to be more precise at this point. But we do not understand this stuff yet. However, it is part of \cite{a565d200}. Actually, what we have described so far in this chapter seems to be the footing of \cite{a565d200} to construct modern physics. But we are not completely sure since we didn't read that book yet. In fact, it is one of the main purposes of these notes to understand the basic mathematics (i.p. category theory) needed for \cite{a565d200}. We already know that what we provide here is not enough. This is why we summerize in section \ref{sec:whatsnext} the literature which a reader (and to some extent the authors) may still lack to understand \cite{a565d200}.

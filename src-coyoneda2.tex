@@ -1,0 +1,2236 @@
+%\nocite{70961a11}
+%\nocite{791993d6}
+%\nocite{7a40623d}
+For the record: for functors
+\begin{align*}
+  F
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{C}_{\omega}
+\end{align*}
+define functors
+\begin{align*}
+  \Pi_{F}(X_{0}^{\omega})
+  \colon
+  \left(
+    \mathrm{c}_{X_{0}^{\omega}}
+    \downarrow
+    F
+  \right)
+  &\rightarrow
+  \mathbf{C}
+  \\
+  (X_{0}^{\omega},X,w)
+  &\mapsto
+  X
+  \\
+  \left(
+    \mathrm{id}_{X_{0}^{\omega}},
+    f_{12}
+  \right)
+  &\mapsto
+  f_{12}
+  \\\\
+  \Pi_{F}^{\prime}(X_{0}^{\omega})
+  \colon
+  \left(
+    F
+    \downarrow
+    \mathrm{c}_{X_{0}^{\omega}}
+  \right)
+  &\rightarrow
+  \mathbf{C}^{\textrm{op}}
+  \\
+  (X,X_{0}^{\omega},w)
+  &\mapsto
+  X
+  \\
+  \left(
+    f_{12},
+    \mathrm{id}_{X_{0}^{\omega}}
+  \right)
+  &\mapsto
+  f_{21}^{\textrm{op}}
+\end{align*}
+$\Pi_{F}(X_{0}^{\omega})$ is called \textbf{canonical projection (of $F$ w.r.t. $X_{0}^{\omega}$)} while $\Pi_{F}^{\prime}(X_{0}^{\omega})$ is called \textbf{canonical coprojection (of $F$ w.r.t. $X_{0}^{\omega}$)}. Furthermore, for this subsubsection, let us make the agreement that $\mathbf{J}$ denotes a small category and $P \colon \mathbf{J}^{\textrm{op}} \rightarrow \mathbf{Set}$ a presheaf on $\mathbf{J}$. If $\Phi_{1}$ and $\Phi_{2}$ denote the isomorphisms
+\begin{align*}
+  \mathbf{J}
+  \slash
+  J_{0}
+  &\cong
+  \left(
+    \mathrm{id}_{\mathbf{J}}
+    \downarrow
+    \mathrm{c}_{J_{0}}
+  \right)
+  \\
+  \int_{\mathbf{J}}^{\prime}
+  P
+  &\cong
+  \left(
+    P
+    \downarrow
+    \mathrm{c}_{1_{\mathbf{Set}}}
+  \right)
+\end{align*}
+respectively, from subsection \ref{sec:comcat} then we have for
+\begin{align*}
+  \Pi_{J_{0}}
+  \colon
+  \mathbf{J}
+  \slash
+  J_{0}
+  &\rightarrow
+  \mathbf{J}^{\textrm{op}}
+  \\
+  j
+  &\mapsto
+  \mathrm{dom}_{\mathbf{J}}(j)
+  \\
+  j_{12}
+  &\mapsto
+  j_{21}^{\textrm{op}}
+\end{align*}
+and
+\begin{align*}
+  \pi_{P}
+  \colon
+  \int_{\mathbf{J}}^{\prime}
+  P
+  &\rightarrow
+  \mathbf{J}
+  \\
+  (J,z)
+  &\mapsto
+  J
+  \\
+  j_{21}^{\textrm{op}}
+  &\mapsto
+  j_{12}
+\end{align*}
+the equalities
+\begin{align*}
+  \Pi_{J_{0}}
+  &=
+  \Pi_{\mathrm{id}_{\mathbf{J}}}^{\prime}(J_{0})
+  \circ
+  \Phi_{1}
+  \\
+  \pi_{P}
+  &=
+  \Pi_{P}^{\prime}(1_{\mathbf{Set}})
+  \circ
+  \Phi_{2}
+\end{align*}
+Now presheaves $P$ have the property that they can be expressed by a hom-functor even if they are not representable. This is because an element $y$ of a set $Y$ is structurally the same as the function
+\begin{align*}
+  f_{y}
+  \colon
+  1_{\mathbf{Set}}
+  &\rightarrow
+  Y
+  \\
+  \emptyset
+  &\mapsto
+  y
+\end{align*}
+This is one of the main features of ETCS as we will see in subsection \ref{sec:internaliz}. Anyways, this suggests that
+\begin{align*}
+  P
+  \cong
+  \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(\cdot))
+\end{align*}
+and it might be interesting to take this new perspective into account. When it comes to presheaves the yoneda lemma \ref{lem:yoneda} is clearly worth to look at. So let's see what we can do with the applied yoneda probing
+\begin{align*}
+  \mathrm{prob}_{\mathrm{y}}
+  \left(
+    \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(\cdot)),
+    J_{0}
+  \right)
+\end{align*}
+Elements of this set are natural transformations
+\begin{align*}
+  \mathsf{T}
+  \colon
+  \mathrm{hom}_{\mathbf{J}}(\cdot,J_{0})
+  &\Rightarrow
+  \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(\cdot))
+\end{align*}
+This is to say that for all $J_{1},J_{2},j_{21}^{\textrm{op}}$ the diagram
+\[
+\begin{tikzcd}[row sep=huge, column sep=8em]
+  \mathrm{hom}_{\mathbf{J}}(J_{2},J_{0})
+  \arrow{r}{\mathrm{hom}_{\mathbf{J}}(j_{21}^{\textrm{op}},J_{0})}
+  \arrow[swap]{d}{\mathsf{T}(J_{2})}
+  &
+  \mathrm{hom}_{\mathbf{J}}(J_{1},J_{0})
+  \arrow{d}{\mathsf{T}(J_{1})}
+  \\
+  \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(J_{2}))
+  \arrow{r}{\mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(j_{21}^{\textrm{op}}))}
+  &
+  \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(J_{1}))
+\end{tikzcd}
+\]
+commutes. Since for each $j \in \mathrm{hom}_{\mathbf{J}}(J,J_{0})$ we get a morphism
+\begin{align*}
+  (\mathsf{T}(J))(j)
+  &\in
+  \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(J))
+\end{align*}
+we can consider $\mathsf{T}$ a familiy of morphisms indexed by the slice category $\mathbf{J} \slash J_{0}$ such that the naturality diagram commutes. To this end, first define
+\begin{align*}
+  P_{J_{0}}
+  &=
+  P
+  \circ
+  \Pi_{J_{0}}
+\end{align*}
+and note that
+\begin{align*}
+  P_{J_{0}}(j_{12})
+  =
+  P(j_{21}^{\textrm{op}})
+\end{align*}
+for
+\begin{align*}
+  j_{12}
+  \in
+  \mathrm{Mor}_{\mathbf{J} \slash J_{0}}
+\end{align*}
+Then more formally
+\begin{align*}
+  \mathsf{C}
+  \colon
+  \mathrm{ob}_{\mathbf{J} \slash J_{0}}
+  &\rightarrow
+  \bigcup_{J}
+  \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(J))
+  \\
+  j
+  &\mapsto
+  (\mathsf{T}(\mathrm{dom}_{\mathbf{J}}(j)))(j)
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  &
+  1_{\mathbf{Set}}
+  \arrow{dr}{\mathsf{C}(j_{1})}
+  \arrow[swap]{dl}{\mathsf{C}(j_{2})}
+  &
+  \\
+  P_{J_{0}}(j_{2})
+  \arrow{rr}{P_{J_{0}}(j_{12})}
+  &
+  &
+  P_{J_{0}}(j_{1})
+\end{tikzcd}
+\]
+commutes for all
+\begin{align*}
+  j_{1}
+  &\in
+  \mathrm{mor}_{\mathbf{J}}(J_{1},J_{0})
+  \\
+  j_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{J}}(J_{1},J_{0})
+  \\
+  j_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{J} \slash J_{0}}(j_{1},j_{2})
+\end{align*}
+is equivalent to $\mathsf{T}$ natural. This is since if $\mathsf{T}$ is natural then for all
+\begin{align*}
+  j_{1}
+  &\in
+  \mathrm{mor}_{\mathbf{J}}(J_{1},J_{0})
+  \\
+  j_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{J}}(J_{1},J_{0})
+  \\
+  j_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{J} \slash J_{0}}(j_{1},j_{2})
+\end{align*}
+we get
+\begin{align*}
+  P_{J_{0}}(j_{12})
+  \circ
+  \mathsf{C}(j_{2})
+  &=
+  \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P_{J_{0}}(j_{12}))
+  (\mathsf{C}(j_{2}))
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{Set}}
+  \left(
+    1_{\mathbf{Set}},
+    P(j_{21}^{\textrm{op}})
+  \right)
+  \left(
+    (\mathsf{T}(J_{2}))(j_{2})
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{T}(J_{1})
+    \circ
+    \mathrm{hom}_{\mathbf{J}}
+    \left(
+      j_{21}^{\textrm{op}},
+      J_{0}
+    \right)
+  \right)
+  (j_{2})
+  \tag{NT}
+  \\
+  &=
+  \mathsf{T}(J_{1})
+  \left(
+    j_{2}
+    \circ
+    j_{12}
+  \right)
+  \\
+  &=
+  \mathsf{T}(J_{1})(j_{1})
+  \\
+  &=
+  \mathsf{C}(j_{1})
+\end{align*}
+while on the other hand we get for all $J_{1},J_{2},j_{21}^{\textrm{op}}$ and all
+\begin{align*}
+  j_{2}
+  &\in
+  \mathrm{mor}_{\mathbf{J}}(J_{2},J_{0})
+\end{align*}
+due to
+\begin{align*}
+  j_{12}
+  &\in
+  \mathrm{mor}_{\mathbf{J} \slash J_{0}}
+  \left(
+    j_{2}
+    \circ
+    j_{12},
+    j_{2}
+  \right)
+\end{align*}
+which is true by definition of the slice catgeory
+\begin{align*}
+  \left(
+    \mathsf{T}(J_{1})
+    \circ
+    \mathrm{hom}_{\mathbf{J}}
+    \left(
+      j_{21}^{\textrm{op}},
+      J_{0}
+    \right)
+  \right)
+  (j_{2})
+  &=
+  \mathsf{T}(J_{1})
+  \left(
+    j_{2}
+    \circ
+    j_{12}
+  \right)
+  \\
+  &=
+  \mathsf{C}
+  \left(
+    j_{2}
+    \circ
+    j_{12}
+  \right)
+  \\
+  &=
+  P_{J_{0}}(j_{12})
+  \circ
+  \mathsf{C}(j_{2})
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{Set}}
+  \left(
+    1_{\mathbf{Set}},
+    P_{J_{0}}(j_{12})
+  \right)
+  (\mathsf{C}(j_{2}))
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{Set}}
+  \left(
+    1_{\mathbf{Set}},
+    P(j_{21}^{\textrm{op}})
+  \right)
+  \left(
+    (\mathsf{T}(J_{2}))(j_{2})
+  \right)
+  \\
+  &=
+  \left(
+    \mathrm{hom}_{\mathbf{Set}}
+    \left(
+      1_{\mathbf{Set}},
+      P(j_{21}^{\textrm{op}})
+    \right)
+    \circ
+    \mathsf{T}(J_{2})
+  \right)
+  (j_{2})
+\end{align*}
+What we have shown is that $\mathsf{T}$ is natural if and only if $\mathsf{C}$ is a cone to $P_{J_{0}}$ with apex $1_{\mathbf{Set}}$. As a formula
+\begin{align*}
+  \mathrm{prob}_{\mathrm{y}}
+  \left(
+    P,
+    J_{0}
+  \right)
+  &\cong
+  \mathrm{prob}_{\mathrm{y}}
+  \left(
+    \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(\cdot)),
+    J_{0}
+  \right)
+  \\
+  &=
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+  \left(
+    \mathrm{hom}_{\mathbf{J}}(\cdot,J_{0}),
+    \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(\cdot))
+  \right)
+  \\
+  &\cong
+  \mathrm{Cone}_{P_{J_{0}}}(1_{\mathbf{Set}})
+\end{align*}
+But in theorem \ref{thm:setcomplete} we have seen that
+\begin{align*}
+  \mathrm{Cone}_{P_{J_{0}}}(1_{\mathbf{Set}})
+  &\cong
+  \varprojlim_{\mathbf{J} \slash J_{0}}
+  \left(
+    P
+    \circ
+    \Pi_{J_{0}}
+  \right)
+\end{align*}
+This suggests the striking theorem
+\\
+\begin{thm}
+\label{thm:yonedalimit}
+The yoneda lemma \ref{lem:yoneda} holds if and only if
+\begin{align*}
+  P(J_{0})
+  &\cong
+  \varprojlim_{\mathbf{J} \slash J_{0}}
+  \left(
+    P
+    \circ
+    \Pi_{J_{0}}
+  \right)
+\end{align*}
+for all $P$ and $J_{0}$.
+\end{thm}
+\begin{prf}
+The isomorphism
+\begin{align*}
+  \mathrm{prob}_{\mathrm{y}}
+  \left(
+    P,
+    J_{0}
+  \right)
+  &\cong
+  \varprojlim_{\mathbf{J} \slash J_{0}}
+  \left(
+    P
+    \circ
+    \Pi_{J_{0}}
+  \right)
+\end{align*}
+we deduced above makes the claim immediate.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+This allows to potentially generalize the yoneda lemma \ref{lem:yoneda} to the following statement.
+\\
+\begin{prp}
+\label{prp:genyoneda}
+Assume $\mathbf{C}$ locally small.
+\begin{enumerate}
+\item[(Y)]
+For a functor $A \colon \mathbf{J}^{\textrm{op}} \to \mathbf{C}$ we have
+\begin{align*}
+  A(J)
+  &\cong
+  \varprojlim_{(\mathrm{id}_{\mathbf{J}} \downarrow \mathrm{c}_{J})}
+  \left(
+    A
+    \circ
+    \Pi_{\mathrm{id}_{\mathbf{J}}}^{\prime}(J)
+  \right)
+\end{align*}
+for all $J$ if the limits exists.
+\item[(Y$_{\mathbf{C}}^{\prime}$)]
+For a functor $A \colon \mathbf{J} \to \mathbf{C}$ we have
+\begin{align*}
+  A(J)
+  &\cong
+  \varinjlim_{(\mathrm{c}_{J} \downarrow \mathrm{id}_{\mathbf{J}})}
+  \left(
+    A
+    \circ
+    \Pi_{\mathrm{id}_{\mathbf{J}}}(J)
+  \right)
+\end{align*}
+for all $J$ if the colimits exist.
+\end{enumerate}
+\end{prp}
+\begin{prf}
+We consider propositions just as statements which one has to prove or disprove. So no proof here.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+If proposition \ref{prp:genyoneda} is provable then it makes sense to refer to part (Y) as generalized yoneda lemma and to part (Y$_{\mathbf{C}}^{\prime}$) as generalized co-Yoneda lemma due to theorem \ref{thm:yonedalimit}. The case of $\mathbf{C} = \mathbf{Set}$ in part (Y$_{\mathbf{C}}^{\prime}$) would then consequently be referred to as co-Yoneda lemma. To spoil the answer: proposition \ref{prp:genyoneda} is provable. However, it is more convenient to use Kan extensions in the discussion as in \cite{52fbba46} in the chapter about Kan extensions. And the discussion should take place in a further subsection called {\glqq}Kan extension{\grqq} we don't have. The technical backbone is essentially the next lemma about a more general version of a Yoneda probing characterization by cones. For this purpose note that
+\begin{align*}
+  P
+  &\cong
+  \mathrm{hom}_{\mathbf{Set}}(1_{\mathbf{Set}},P(\cdot))
+\end{align*}
+and for any functor $A \colon \mathbf{J}^{\textrm{op}} \to \mathbf{C}$
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}(X,A(\cdot))
+\end{align*}
+is still a presheaf for all $X$. But the interpretation of corollaries \ref{cor:yoneda1} to \ref{cor:yoneda3} suggest that the set
+\begin{align*}
+  \bigcup_{X}
+  \mathrm{hom}_{\mathbf{C}}(X,A(J))
+\end{align*}
+fully determines $A(J)$ for all $J$ and that
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}
+  \left(
+    \cdot,
+    A(j_{21}^{\textrm{op}})
+  \right)
+\end{align*}
+determines $A(j_{21}^{\textrm{op}})$. Hence the family of presheaves
+\begin{align*}
+  \mathrm{hom}_{\mathbf{C}}(X,A(\cdot))
+\end{align*}
+indexed by $X$ contains essentially all the information about the functor $A$. This suggests that we can treat arbitrary functors with methods known from presheaves. That this works will become clearer in the following.
+\\
+\begin{lem}
+\label{lem:genyonedaprobing}
+Let $\mathbf{C}_{\alpha}$ and $\mathbf{C}_{\beta}$ be locally small. Moreover
+\begin{enumerate}
+\item[(YP)]
+let
+\begin{align*}
+  A_{\alpha}
+  \colon
+  \mathbf{J}^{\textrm{op}}
+  &\rightarrow
+  \mathbf{C}_{\alpha}
+  \\
+  A_{\beta}
+  \colon
+  \mathbf{J}^{\textrm{op}}
+  &\rightarrow
+  \mathbf{C}_{\beta}
+\end{align*}
+be functors. If we define
+\begin{align*}
+  A^{\prime}
+  &:=
+  A_{\beta}^{\textrm{op}}
+  \circ
+  \Pi_{A_{\alpha}}^{\prime}(X_{0}^{\alpha})
+\end{align*}
+then there is an isomorphism
+\begin{align*}
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\alpha}}
+    \left(
+      X_{0}^{\alpha},
+      A_{\alpha}(\cdot)
+    \right),
+    \mathrm{hom}_{\mathbf{C}_{\beta}}
+    \left(
+      X_{0}^{\beta},
+      A_{\beta}(\cdot)
+    \right)
+  \right)
+  &\cong
+  \mathrm{Cone}_{A^{\prime}}(X_{0}^{\beta})
+\end{align*}
+\item[(YP$_{\mathbf{C}_{\alpha},\mathbf{C}_{\beta}}^{\prime}$)]
+let
+\begin{align*}
+  A_{\alpha}
+  \colon
+  \mathbf{J}
+  &\rightarrow
+  \mathbf{C}_{\alpha}
+  \\
+  A_{\beta}
+  \colon
+  \mathbf{J}
+  &\rightarrow
+  \mathbf{C}_{\beta}
+\end{align*}
+be functors. If we define
+\begin{align*}
+  A
+  &:=
+  A_{\beta}
+  \circ
+  \Pi_{A_{\alpha}}(X_{0}^{\alpha})
+\end{align*}
+then there is an isomorphism
+\begin{align*}
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+  \left(
+    \mathrm{hom}_{\mathbf{C}_{\alpha}}
+    \left(
+      A_{\alpha}^{\textrm{op}}(\cdot),
+      X_{0}^{\alpha}
+    \right),
+    \mathrm{hom}_{\mathbf{C}_{\beta}}
+    \left(
+      A_{\beta}^{\textrm{op}}(\cdot),
+      X_{0}^{\beta}
+    \right)
+  \right)
+  &\cong
+  \mathrm{Cone}_{A}^{\prime}(X_{0}^{\beta})
+\end{align*}
+\end{enumerate}
+\end{lem}
+\begin{prf}
+We put this as reader's exercise since you just have to emulate the proof of one of the two special cases we proved before and after this lemma. This is just a little more cumbersome in our setting regarding the comma categories serving as index categories.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+We only prove the special case
+\begin{align*}
+  A_{\alpha}
+  &=
+  P
+  \\
+  X_{0}^{\alpha}
+  &=
+  1_{\mathbf{Set}}
+\end{align*}
+in case of (YP) of lemma \ref{lem:genyonedaprobing} and its dual w.r.t. $\mathbf{C}_{\beta}$.
+\\
+\begin{lem}
+\label{lem:elemyonedaprobing}
+Assume $\mathbf{C}$ locally small.
+\begin{enumerate}
+\item[(YP)]
+Let
+\begin{align*}
+  A
+  \colon
+  \mathbf{J}^{\textrm{op}}
+  &\rightarrow
+  \mathbf{C}
+\end{align*}
+be a functor. If we define
+\begin{align*}
+  A_{P}
+  &:=
+  A^{\textrm{op}}
+  \circ
+  \pi_{P}
+\end{align*}
+then there is an isomorphism
+\begin{align*}
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+  \left(
+    P,
+    \mathrm{hom}_{\mathbf{C}}
+    \left(
+      X_{0},
+      A(\cdot)
+    \right)
+  \right)
+  &\cong
+  \mathrm{Cone}_{A_{P}}(X_{0})
+\end{align*}
+\item[(YP$_{\mathbf{C}}^{\prime}$)]
+Let
+\begin{align*}
+  A
+  \colon
+  \mathbf{J}
+  &\rightarrow
+  \mathbf{C}
+\end{align*}
+be a functor. If we define
+\begin{align*}
+  A_{P}
+  &:=
+  A
+  \circ
+  \pi_{P}
+\end{align*}
+then there is an isomorphism
+\begin{align*}
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+  \left(
+    P,
+    \mathrm{hom}_{\mathbf{C}}
+    \left(
+      A^{\textrm{op}}(\cdot),
+      X_{0}
+    \right)
+  \right)
+  &\cong
+  \mathrm{Cone}_{A_{P}}^{\prime}(X_{0})
+\end{align*}
+\end{enumerate}
+\end{lem}
+\begin{prf}
+\begin{enumerate}
+\item[(YP)]
+Part (YP$_{\mathbf{C}}^{\prime}$) of this lemma and the duality principle \ref{thm:dp} w.r.t. the category variable $\mathbf{C}$.
+\item[(YP$_{\mathbf{C}}^{\prime}$)]
+Naturality of
+\begin{align*}
+  \mathsf{T}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+  \left(
+    P,
+    \mathrm{hom}_{\mathbf{C}}
+    \left(
+      A^{\textrm{op}}(\cdot),
+      X_{0}
+    \right)
+  \right)
+\end{align*}
+means that for all $J_{1},J_{2},j_{12}^{\textrm{op}}$ the diagram
+\[
+\begin{tikzcd}[row sep=huge, column sep=8em]
+  P(J_{2})
+  \arrow{r}{P(j_{21}^{\textrm{op}})}
+  \arrow[swap]{d}{\mathsf{T}(J_{2})}
+  &
+  P(J_{1})
+  \arrow{d}{\mathsf{T}(J_{1})}
+  \\
+  \mathrm{hom}_{\mathbf{C}}(A^{\textrm{op}}(J_{2}),X_{0})
+  \arrow{r}{\mathrm{hom}_{\mathbf{C}}(A^{\textrm{op}}(j_{21}^{\textrm{op}}),X_{0})}
+  &
+  \mathrm{hom}_{\mathbf{C}}(A^{\textrm{op}}(J_{1}),X_{0})
+\end{tikzcd}
+\]
+commutes. Since for each $z \in P(J)$ we get a morphism
+\begin{align*}
+  (\mathsf{T}(J))(z)
+  &\in
+  \mathrm{hom}_{\mathbf{C}}(A^{\textrm{op}}(J),X_{0})
+\end{align*}
+we can consider $\mathsf{T}$ a family of morphisms indexed by the category of coelements of $P$ such that the naturality diagram commutes. To this end note that
+\begin{align*}
+  A_{P}(j_{21}^{\textrm{op}})
+  =
+  A^\textrm{op}(j_{21}^{\textrm{op}})
+\end{align*}
+for
+\begin{align*}
+  j_{21}^{\textrm{op}}
+  \in
+  \mathrm{Mor}_{\int_{\mathbf{J}}^{\prime}P}
+\end{align*}
+Then more formally
+\begin{align*}
+  \mathsf{C}^{\prime}
+  \colon
+  \mathrm{ob}_{\int_{\mathbf{J}}^{\prime}P}
+  &\rightarrow
+  \bigcup_{J}
+  \mathrm{hom}_{\mathbf{C}}(A^{\textrm{op}}(J),X_{0})
+  \\
+  (J,z)
+  &\mapsto
+  (\mathsf{T}(J))(z)
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=huge]
+  A_{P}(J_{1},z_{1})
+  \arrow{rr}{A_{P}(j_{21}^{\textrm{op}})}
+  \arrow[swap]{dr}{\mathsf{C}^{\prime}(J_{1},z_{1})}
+  &
+  &
+  A_{P}(J_{2},z_{2})
+  \arrow{dl}{\mathsf{C}^{\prime}(J_{2},z_{2})}
+  \\
+  &
+  X_{0}
+  &
+\end{tikzcd}
+\]
+commutes for all
+\begin{align*}
+  (J_{1},z_{1}),
+  (J_{2},z_{2})
+  &\in
+  \mathrm{ob}_{\int_{\mathbf{J}}^{\prime}P}
+  \\
+  j_{21}^{\textrm{op}}
+  &\in
+  \mathrm{mor}_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    (J_{1},z_{1}),
+    (J_{1},z_{2})
+  \right)
+\end{align*}
+is equivalent to $\mathsf{T}$ natural. This is since if $\mathsf{T}$ is natural then for all
+\begin{align*}
+  j_{21}^{\textrm{op}}
+  &\in
+  \mathrm{mor}_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    (J_{1},z_{1}),
+    (J_{2},z_{2})
+  \right)
+\end{align*}
+we get
+\begin{align*}
+  \mathsf{C}^{\prime}(J_{2},z_{2})
+  \circ
+  A_{P}(j_{21}^{\textrm{op}})
+  &=
+  \mathrm{hom}_{\mathbf{C}}
+  \left(
+    A_{P}(j_{21}^{\textrm{op}}),
+    X_{0}
+  \right)
+  \left(
+    \mathsf{C}^{\prime}(J_{2},z_{2})
+  \right)
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{C}}
+  \left(
+    A^{\textrm{op}}(j_{21}^{\textrm{op}}),
+    X_{0}
+  \right)
+  \left(
+    (\mathsf{T}(J_{2}))(z_{2})
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{T}(J_{1})
+    \circ
+    P(j_{21}^{\textrm{op}})
+  \right)
+  (z_{2})
+  \tag{NT}
+  \\
+  &=
+  \mathsf{T}(J_{1})(z_{1})
+  \\
+  &=
+  \mathsf{C}^{\prime}(J_{1},z_{1})
+\end{align*}
+while on the other hand we get for all $J_{1},J_{2},j_{21}^{\textrm{op}}$ and all $z_{2} \in P(J_{2})$ due to
+\begin{align*}
+  j_{21}^{\textrm{op}}
+  &\in
+  \mathrm{mor}_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    (J_{1},P(j_{21}^{\textrm{op}})(z_{2})),
+    (J_{2},z_{2})
+  \right)
+\end{align*}
+which is true by definition of the catgeory of colements
+\begin{align*}
+  \left(
+    \mathsf{T}(J_{1})
+    \circ
+    P(j_{21}^{\textrm{op}})
+  \right)
+  (z_{2})
+  &=
+  \mathsf{C}^{\prime}
+  \left(
+    J_{1},
+    P(j_{21}^{\textrm{op}})(z_{2})
+  \right)
+  \\
+  &=
+  \mathsf{C}^{\prime}
+  \left(
+    J_{2},
+    z_{2}
+  \right)
+  \circ
+  A_{P}(j_{21}^{\textrm{op}})
+  \\
+  &=
+  (\mathsf{T}(J_{2}))(z_{2})
+  \circ
+  A^{\textrm{op}}(j_{21}^{\textrm{op}})
+  \\
+  &=
+  \mathrm{hom}_{\mathbf{C}}
+  \left(
+    A^{\textrm{op}}(j_{21}^{\textrm{op}}),
+    X_{0}
+  \right)
+  \left(
+    (\mathsf{T}(J_{2}))(z_{2})
+  \right)
+  \\
+  &=
+  \left(
+    \mathrm{hom}_{\mathbf{C}}
+    \left(
+      A^{\textrm{op}}(j_{21}^{\textrm{op}}),
+      X_{0}
+    \right)
+    \circ
+    \mathsf{T}(J_{2})
+  \right)
+  \left(
+    z_{2}
+  \right)
+\end{align*}
+\end{enumerate}
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+With this characterization by cones the next interesting question which comes to our mind is if limiting cones and colimiting cocones correspond to $F$-terminal arrows and $F$-initial arrows, respectively, for some functor $F$. But due to our asymmetric special case we considered in lemma \ref{lem:elemyonedaprobing} where we used $P$ just as indexing the initial case seems more interseting. Hence let's see what happens if there are always colimiting cocones.
+\\
+\begin{thm}
+\label{thm:initprobisinitcone}
+Let $\mathbf{C}$ be a cocomplete category and let $A \colon \mathbf{J} \rightarrow \mathbf{C}$ be a functor. Then the functor
+\begin{align*}
+  R_{A}
+  \colon
+  \mathbf{C}
+  &\rightarrow
+  \mathbf{Set}^{\mathbf{J}^{\textrm{op}}}
+  \\
+  X
+  &\mapsto
+  \mathrm{hom}_{\mathbf{C}}
+  \left(
+    A^{\textrm{op}}(\cdot),
+    X
+  \right)
+  \\
+  f_{12}
+  &\mapsto
+  \mathrm{hom}_{\mathbf{C}}
+  \left(
+    A^{\textrm{op}}(\cdot),
+    f_{12}
+  \right)
+\end{align*}
+is right adjoint.
+\end{thm}
+\begin{prf}
+We are looking for an $R_{A}$-initial morphism for all $P$. So take $P$ arbitrary but fixed. $R_{A}$-initiality is to say that for some $X_{P}$ we have a morphism
+\begin{align*}
+  \mathsf{i}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}(P,R_{A}(X_{P}))
+\end{align*}
+such that for all $X$ and all
+\begin{align*}
+  \mathsf{T}
+  &\in
+  \mathrm{mor}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}(P,R_{A}(X))
+\end{align*}
+there is exactly one
+\begin{align*}
+  \mathsf{T}_{!}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}(X_{P},X)
+\end{align*}
+making the diagram
+\[
+\begin{tikzcd}[sep=large]
+  &
+  R_{A}(X_{P})
+  \arrow[swap]{dl}{R_{A}(\mathsf{T}_{!})}
+  &
+  \\
+  R_{A}(X)
+  &
+  &
+  P
+  \arrow{ll}{\mathsf{T}}
+  \arrow[swap]{lu}{\mathsf{i}}
+\end{tikzcd}
+\]
+commute. But what we have shown in lemma \ref{lem:genyonedaprobing} is that the statement {\glqq}$\mathsf{T}$ is natural{\grqq} corresponds to a cocone $\mathsf{C}^{\prime}$ to
+\begin{align*}
+  A_{P}
+  &:=
+  A
+  \circ
+  \pi_{P}
+\end{align*}
+with apex $X$ and our premise is that $\mathbf{C}$ is cocomplete. Hence there must be a colimiting cocone $\mathsf{C}_{I}^{\prime} \doteq \mathsf{C}_{I}^{\prime}[P]$ to $A_{P}$ with apex $X_{P}$. This means that for each cocone $\mathsf{C}^{\prime}$ there is a unique
+\begin{align*}
+  \mathsf{T}_{!}
+  \in
+  \mathrm{mor}_{\mathbf{C}}(X_{P},X)
+\end{align*}
+such that
+\begin{align*}
+  \left(
+    R_{A}(\mathsf{T}_{!})(J)
+  \right)
+  \left(
+    \mathsf{C}_{I}^{\prime}(J,z)
+  \right)
+  &=
+  \mathrm{hom}_{\mathbf{C}}(A^{\textrm{op}}(J),\mathsf{T}_{!})
+  \left(
+    \mathsf{C}_{I}^{\prime}(J,z)
+  \right)
+  \\
+  &=
+  \mathsf{T}_{!}
+  \circ
+  \mathsf{C}_{I}^{\prime}(J,z)
+  \\
+  &=
+  \mathsf{C}^{\prime}(J,z)
+  \\
+  &=
+  (\mathsf{T}(J))(z)
+\end{align*}
+for all
+\begin{align*}
+  (J,z)
+  \in
+  \mathrm{ob}_{\int_{\mathbf{J}}^{\prime}P}
+\end{align*}
+since $\mathrm{C}_{I}^{\prime}$ is colimiting. Hence define
+\begin{align*}
+  \mathsf{i}
+  \doteq
+  \mathsf{i}[P]
+  \colon
+  P
+  &\Rightarrow
+  R_{A}(X_{P})
+  \\
+  J
+  &\mapsto
+  \left(
+    z
+    \mapsto
+    \mathsf{C}_{I}^{\prime}(J,z)
+  \right)
+\end{align*}
+Then
+\begin{align*}
+  \mathsf{T}_{!}
+  \in
+  \mathrm{mor}_{\mathbf{C}}(X_{P},X)
+\end{align*}
+is the unique morphism such that
+\begin{align*}
+  \left(
+    R_{A}(\mathsf{T}_{!})(J)
+  \right)
+  \left(
+    \mathsf{i}(J)(z)
+  \right)
+  &=
+  (\mathsf{T}(J))(z)
+\end{align*}
+for all $J$ and $z \in P(J)$. But these last equations are certainly equivalent to
+\begin{align*}
+  R_{A}(\mathsf{T}_{!})
+  \circ
+  \mathsf{i}
+  &=
+  \mathsf{T}
+\end{align*}
+Thus $R_{A}$ is right adjoint.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+We now look at the construction of the functor to which $R_{A}$ is right adjoint.
+\\
+\begin{cst}
+\label{cst:la}
+Staying in the notation of this theorem \ref{thm:initprobisinitcone} let us now inspect the proof of theorem \ref{thm:initprobisinitcone} and lemma \ref{lem:adjointto} to construct a functor to which $R_{A}$ is right adjoint. By assumption we have a colimiting cocone $\mathsf{C}_{I}^{\prime}[P]$ to $A_{P}$ with apex $X_{P}$ for each $P$ and hence a choice function $c_{\mathrm{Colim}}$ choosing a colimit of $A_{P}$ for each $P$ with
+\begin{align*}
+  c_{\mathrm{Colim}}(A_{P})
+  &=
+  \left(
+    A_{P},
+    X_{P},
+    \mathsf{C}_{I}^{\prime}[P]
+  \right)
+\end{align*}
+Note that we write
+\begin{align*}
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    A_{P}
+  \right)
+  &=
+  X_{P}
+\end{align*}
+in accordance with our convention concerning colimit functors with a choice function clear from context. This choice function allows us to choose $R_{A}$-initial morphisms for all $P$. Namely
+\begin{align*}
+  c_{\mathrm{Init}}
+  \colon
+  \mathrm{ob}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+  &\rightarrow
+  \bigcup_{P}
+  \mathrm{Init}_{R_{A}}(P)
+  \\
+  P
+  &\mapsto
+  \left(
+    P,
+    X_{P},
+    \mathsf{i}[P]
+  \right)
+\end{align*}
+where
+\begin{align*}
+  X_{P}
+  &=
+  \mathrm{pr}_{2}
+  \circ
+  c_{\mathrm{Colim}}(A_{P})
+  \\
+  \left(
+    \mathsf{i}[P](J)
+  \right)
+  (z)
+  &=
+  \left(
+    \mathrm{pr}_{3}
+    \circ
+    c_{\mathrm{Colim}}(A_{P})
+  \right)
+  (J,z)
+\end{align*}
+Hence from lemma \ref{lem:adjointto} we get a unique functor
+\begin{align*}
+  L_{A}
+  \doteq
+  L_{A}^{c_{\mathrm{Init}}}
+  \colon
+  \mathbf{Set}^{\mathbf{J}^{\textrm{op}}}
+  &\rightarrow
+  \mathbf{C}
+\end{align*}
+to which $R_{A}$ is right adjoint. This functor satisfies
+\begin{align*}
+  L_{A}^{c_{\mathrm{Init}}}(P)
+  &=
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}P}^{c_{\mathrm{Colim}}}
+  \left(
+    A
+    \circ
+    \pi_{P}
+  \right)
+\end{align*}
+for all $P$ or more briefly
+\begin{align*}
+  L_{A}(P)
+  &=
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    A
+    \circ
+    \pi_{P}
+  \right)
+\end{align*}
+Moreover for presheaves $P_{1},P_{2}$ on $\mathbf{J}$ and natural transformations
+\begin{align*}
+  \mathsf{P}_{12}
+  \colon
+  P_{1}
+  &\Rightarrow
+  P_{2}
+\end{align*}
+we get
+\begin{align*}
+  L_{A}^{c_{\mathrm{Init}}}(\mathsf{P}_{12})
+  &=
+  L_{\mathsf{P}_{12}}
+\end{align*}
+where $L_{\mathsf{P}_{12}}$ is the unique morphism such that
+\[
+\begin{tikzcd}[sep=large]
+  &
+  R_{A}(X_{P_{1}})
+  \arrow[swap]{dl}{R_{A}(L_{\mathsf{P}_{12}})}  
+  &
+  \\
+  R_{A}(X_{P_{2}})
+  &
+  P_{2}
+  \arrow[swap]{l}{\mathsf{i}[P_{2}]}
+  &
+  P_{1}
+  \arrow[swap]{l}{\mathsf{P}_{12}}
+  \arrow[swap]{ul}{\mathsf{i}[P_{1}]}
+\end{tikzcd}
+\]
+commutes. So if we can explicitly construct the colimits which prove cocompleteness of $\mathbf{C}$ in theorem \ref{thm:initprobisinitcone} then we can explicitly construct the functor $L_{A}$, too. For illustrative purposes (among other things) we construct $L_{A}$ on representable presheaves. First note that for all $J$ the object $(J,\mathrm{id}_{J})$ is a terminal object of
+\begin{align*}
+  \int_{\mathbf{J}}^{\prime}
+  \mathrm{y}_{\mathbf{J}}(J)
+\end{align*}
+where each morphism
+\begin{align*}
+  j_{1}
+  \in
+  \mathrm{mor}_{\mathbf{J}}(J_{1},J)
+\end{align*}
+is the unique arrow from $(J_{1},j_{1})$ to $(J,\mathrm{id}_{J})$ in
+\begin{align*}
+  \int_{\mathbf{J}}^{\prime}
+  \mathrm{y}_{\mathbf{J}}(J)
+\end{align*}
+But theorem \ref{thm:limonuniob} says that in this case we can explcitily give a colimiting cocone for each functor with domain
+\begin{align*}
+  \int_{\mathbf{J}}^{\prime}
+  \mathrm{y}_{\mathbf{J}}(J)
+\end{align*}
+In particular, those of
+\begin{align*}
+  A_{\mathrm{y}_{\mathbf{J}}(J)}
+  &:=
+  A
+  \circ
+  \pi_{\mathrm{y}_{\mathbf{J}}(J)}
+\end{align*}
+for all $J$. Hence let $c_{\mathrm{Colim}}$ be so that for all $J$
+\begin{align*}
+  c_{\mathrm{Colim}}
+  \left(
+    A_{\mathrm{y}_{\mathbf{J}}(J)}
+  \right)
+  &=
+  \left(
+    A_{\mathrm{y}_{\mathbf{J}}(J)},
+    X_{\mathrm{y}_{\mathbf{J}}(J)},
+    \mathsf{C}_{I}^{\prime}[\mathrm{y}_{\mathbf{J}}(J)]
+  \right)
+\end{align*}
+with
+\begin{align*}
+  X_{\mathrm{y}_{\mathbf{J}}(J)}
+  &=
+  A_{\mathrm{y}_{\mathbf{J}}(J)}
+  \left(
+    J,
+    \mathrm{id}_{J}
+  \right)
+  \\
+  \mathsf{C}_{I}^{\prime}[\mathrm{y}_{\mathbf{J}}(J)]
+  (J_{1},j_{1})
+  &=
+  A_{\mathrm{y}_{\mathbf{J}}(J)}(j_{1})
+\end{align*}
+Just as theorem \ref{thm:limonuniob} dictates. Now let $c_{\mathrm{Init}}$ according to $c_{\mathrm{Colim}}$ as earlier in the construction. Then we get
+\begin{align*}
+  L_{A}^{c_{\mathrm{Init}}}
+  \left(
+    \mathrm{y}_{\mathbf{J}}(J)
+  \right)
+  &=
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}\mathrm{y}_{\mathbf{J}}(J)}^{c_{\mathrm{Colim}}}
+  \left(
+    A
+    \circ
+    \pi_{\mathrm{y}_{\mathbf{J}}(J)}
+  \right)
+  =
+  \left(
+    A
+    \circ
+    \pi_{\mathrm{y}_{\mathbf{J}}(J)}
+  \right)
+  (J,\mathrm{id}_{J})
+  =
+  A(J)
+\end{align*}
+for all $J$. For $J_{1},J_{2},j_{12}$ take
+\begin{align*}
+  P_{1}
+  &:=
+  \mathrm{y}_{\mathbf{J}}
+  \left(
+    J_{1}
+  \right)
+  \\
+  P_{2}
+  &:=
+  \mathrm{y}_{\mathbf{J}}
+  \left(
+    J_{2}
+  \right)
+  \\
+  \mathsf{P}_{12}
+  &:=
+  \mathrm{y}_{\mathbf{J}}
+  \left(
+    j_{12}
+  \right)
+\end{align*}
+Then for all $J$ and all
+\begin{align*}
+  j
+  &\in
+  \mathrm{hom}_{\mathbf{J}}(J,J_{1})
+\end{align*}
+we get
+\begin{align*}
+  \left(
+    \left(
+      R_{A}(A(j_{12}))
+      \circ
+      \mathsf{i}[P_{1}]
+    \right)
+    (J)
+  \right)
+  (j)
+  &=
+  \mathrm{hom}_{\mathbf{C}}
+  \left(
+    A^{\textrm{op}}(J),
+    A(j_{12})
+  \right)
+  \left(
+    \mathsf{C}_{I}^{\prime}[P_{1}](J,j)
+  \right)
+  \\
+  &=
+  A(j_{12})
+  \circ
+  A_{\mathrm{y}_{\mathbf{J}}(J_{1})}(j)
+  \\
+  &=
+  A(j_{12})
+  \circ
+  A(j)
+  \\
+  &=
+  A
+  \left(
+    j_{12}
+    \circ
+    j
+  \right)
+  \\
+  &=
+  A_{\mathrm{y}_{\mathbf{J}}(J_{2})}
+  \left(
+    j_{12}
+    \circ
+    j
+  \right)
+  \\
+  &=
+  \mathsf{C}_{I}^{\prime}[P_{2}]
+  \left(
+    J,
+    j_{12}
+    \circ
+    j
+  \right)
+  \\
+  &=
+  \mathsf{C}_{I}^{\prime}[P_{2}]
+  \left(
+    J,
+    \left(
+      \mathsf{P}_{12}(J)
+    \right)
+    (j)
+  \right)
+  \\
+  &=
+  \left(
+    \mathsf{i}[P_{2}](J)
+  \right)
+  \left(
+    \left(
+      \mathsf{P}_{12}(J)
+    \right)
+    (j)
+  \right)
+  \\
+  &=
+  \left(
+    \left(
+      \mathsf{i}[P_{2}]
+      \circ
+      \mathsf{P}_{12}
+    \right)
+    (J)
+  \right)
+  (j)
+\end{align*}
+Thus we must have
+\begin{align*}
+  L_{\mathsf{P}_{12}}
+  &=
+  A(j_{12})
+\end{align*}
+since $L_{\mathsf{P}_{12}}$ is unique.
+\end{cst}
+\begin{prf}
+Essentially nothing left to prove.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+The careful reader might have recognized that the density theorem \ref{thm:density} is somehow contained in the preceding theorem \ref{thm:initprobisinitcone}. Namely if $A$ is taken to be the yoneda functor $\mathrm{y}_{\mathbf{C}}$.
+\\
+\begin{cor}[density]
+\label{cor:density}
+For all presheaves $P$ define
+\begin{align*}
+  \mathrm{y}_{P}
+  &:=
+  \mathrm{y}_{\mathbf{J}}
+  \circ
+  \pi_{P}
+\end{align*}
+then
+\begin{align*}
+  P
+  &\cong
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}P}(\mathrm{y}_{P})
+\end{align*}
+\end{cor}
+\begin{prf}
+By theorem \ref{thm:setcocomplete} and theorem \ref{thm:funccatbicomplete} we know that
+\begin{align*}
+  \mathbf{Set}^{\mathbf{J}^{\textrm{op}}}
+\end{align*}
+is cocomplete. So applying theorem \ref{thm:initprobisinitcone} to the Yoneda functor $\mathrm{y}_{\mathbf{J}}$ we get
+\begin{align*}
+  \left(
+    R_{\mathrm{y}_{\mathbf{J}}}(P)
+  \right)
+  (J)
+  &=
+  \mathrm{hom}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+  \left(
+    \mathrm{y}_{\mathbf{J}}(J),
+    P
+  \right)
+  \cong
+  P(J)
+\end{align*}
+by the Yoneda lemma \ref{lem:yoneda}. Hence
+\begin{align*}
+  R_{\mathrm{y}_{\mathbf{J}}}
+  \cong
+  \mathrm{id}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+\end{align*}
+naturally. But up to isomorphism the left adjoint to the identity functor is clearly the identity functor itself. By theorem \ref{thm:adjointuniq} about the uniqueness of adjoints we must then have
+\begin{align*}
+  L_{\mathrm{y}_{\mathbf{J}}}
+  &\cong
+  \mathrm{id}_{\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}}
+\end{align*}
+and thus
+\begin{align*}
+  P
+  &\cong
+  L_{\mathrm{y}_{\mathbf{J}}}(P)
+  =
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}P}(\mathrm{y}_{P})
+\end{align*}
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+By the way, from what we have seen here it is not surprising that the density theorem \ref{thm:density} has something to do with the co-Yoneda lemma from proposition \ref{prp:genyoneda}. More precisely it is a consequence of it as is shown in \cite{52fbba46}, for example. Another major implication from theorem \ref{thm:initprobisinitcone} concerning the yoneda functor is that the yoneda functor is sort of weakly universal. This will be the subject of the next corollary.
+\\
+\begin{cor}
+\label{cor:yonedauniarr}
+For a functor $A \colon \mathbf{J} \rightarrow \mathbf{C}$ with $\mathbf{C}$ cocomplete there exists a cocontinuous functor
+\begin{align*}
+  L
+  \colon
+  \mathbf{Set}^{\mathbf{J}^{\textrm{op}}}
+  &\rightarrow
+  \mathbf{C}
+\end{align*}
+such that
+\begin{align*}
+  A
+  &=
+  L
+  \circ
+  \mathrm{y}_{\mathbf{J}}
+\end{align*}
+and for any functor
+\begin{align*}
+  L^{\backprime}
+  \colon
+  \mathbf{Set}^{\mathbf{J}^{\textrm{op}}}
+  &\rightarrow
+  \mathbf{C}
+\end{align*}
+together with a natural transformation
+\begin{align*}
+  \mathsf{T}
+  \colon
+  A
+  &\Rightarrow
+  L^{\backprime}
+  \circ
+  \mathrm{y}_{\mathbf{J}}
+\end{align*}
+there is a unique natural transformation
+\begin{align*}
+  \mathsf{T}_{!}
+  \colon
+  L
+  &\Rightarrow
+  L^{\backprime}
+\end{align*}
+such that
+\begin{align*}
+  \mathsf{T}
+  &=
+  \mathsf{T}_{!}^{\textrm{lw}}
+  \left[
+    \mathrm{y}_{\mathbf{J}}
+  \right]
+\end{align*}
+This in particular means that for any other cocontinuous functor
+\begin{align*}
+  L^{\backprime}
+  \colon
+  \mathbf{Set}^{\mathbf{J}^{\textrm{op}}}
+  &\rightarrow
+  \mathbf{C}
+\end{align*}
+such that
+\begin{align*}
+  L^{\backprime}
+  \circ
+  \mathrm{y}_{\mathbf{J}}
+  &=
+  A
+\end{align*}
+we get
+\begin{align*}
+  L
+  &\cong
+  L^{\backprime}
+\end{align*}
+\end{cor}
+\begin{prf}
+We first show the unique up to isomorphism part directly. Taking $L$ to be $L_{A}$ from construction \ref{cst:la} will clearly do since in construction \ref{cst:la} we have shown that
+\begin{align*}
+  L
+  \circ
+  \mathrm{y}_{\mathbf{J}}
+  &=
+  A
+\end{align*}
+ and as left adjoint this $L$ is cocontinuous as theorem \ref{thm:adjointlimit} implies. Moreover by the density corollary \ref{cor:density} and the cocontinuity of $L$ and $L^{\backprime}$ we get
+\begin{align*}
+  L(P)
+  &\cong
+  L
+  \left(
+    \varinjlim_{\int_{\mathbf{J}}^{\prime}P}(\mathrm{y}_{P})
+  \right)
+  \\
+  &\cong
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    L
+    \circ
+    \mathrm{y}_{\mathbf{J}}
+    \circ
+    \pi_{P}
+  \right)
+  \\
+  &=
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    A
+    \circ
+    \pi_{P}
+  \right)
+  \\
+  &=
+  \varinjlim_{\int_{\mathbf{J}}^{\prime}P}
+  \left(
+    L^{\backprime}
+    \circ
+    \mathrm{y}_{\mathbf{J}}
+    \circ
+    \pi_{P}
+  \right)
+  \\
+  &\cong
+  L^{\backprime}
+  \left(
+    \varinjlim_{\int_{\mathbf{J}}^{\prime}P}(\mathrm{y}_{P})
+  \right)
+  \\
+  &\cong
+  L^{\backprime}(P)
+\end{align*}
+\\
+So assume $L$ as above for the rest. A natural transformation
+\begin{align*}
+  \mathsf{T}
+  \colon
+  A
+  &\Rightarrow
+  L^{\backprime}
+  \circ
+  \mathrm{y}_{\mathbf{J}}
+\end{align*}
+defines a cocone to $A \circ \pi_{P}$ with apex $L^{\backprime}(P)$ for all $P$ by
+\begin{align*}
+  \mathsf{T}_{P}(J,z)
+  &:=
+  L^{\backprime}
+  \left(
+    (\mathsf{Y}(P,J))^{-1}(z)
+  \right)
+  \circ
+  \mathsf{T}(J)
+\end{align*}
+which is quite immediate from the naturality of $\mathsf{T}$ and since $L(P)$ is isomorphic to the colimit of $A \circ \pi_{P}$ we get a unique morphism
+\begin{align*}
+  \mathsf{T}_{!}^{P}
+  &\in
+  \mathrm{mor}_{\mathbf{C}}
+  \left(
+    L(P),
+    L^{\backprime}(P)
+  \right)
+\end{align*}
+such that the diagram
+\[
+\begin{tikzcd}[sep=large]
+  A(J)
+  \arrow{dr}{\mathsf{C}_{I}^{\prime}(J,z)}
+  \arrow[swap]{ddr}{\mathsf{T}_{P}(J,z)}
+  &
+  \\
+  &
+  L(P)
+  \arrow{d}{\mathsf{T}_{!}^{P}}
+  \\
+  &
+  L^{\backprime}(P)
+\end{tikzcd}
+\]
+commutes for all $J$ and $z \in P(J)$. Therefore define a natural transformation
+\begin{align*}
+  \mathsf{T}_{!}
+  \colon
+  L
+  &\Rightarrow
+  L^{\backprime}
+  \\
+  P
+  &\mapsto
+  \mathsf{T}_{!}^{P}
+\end{align*}
+To see that this is indeed a natural transformation take a natural transformation $\mathsf{P}_{12}$ from $P_{1}$ to $P_{2}$ and calculate
+\begin{align*}
+  L^{\backprime}(\mathsf{P}_{12})
+  \circ
+  \mathsf{T}_{!}(P_{1})
+  \circ
+  \mathsf{C}_{I}^{\prime}(J,z)
+  &=
+  L^{\backprime}(\mathsf{P}_{12})
+  \circ
+  L^{\backprime}
+  \left(
+    (\mathsf{Y}(P_{1},J))^{-1}(z)
+  \right)
+  \circ
+  \mathsf{T}(J)
+  \\
+  &=
+  L^{\backprime}
+  \left(
+    \mathsf{P}_{12}
+    \circ
+    (\mathsf{Y}(P_{1},J))^{-1}(z)
+  \right)
+  \circ
+  \mathsf{T}(J)
+  \\\\
+  \mathsf{T}_{!}(P_{2})
+  \circ
+  L(\mathsf{P}_{12})
+  \circ
+  \mathsf{C}_{I}^{\prime}(J,z)
+  &=
+  \mathsf{T}_{!}(P_{2})
+  \circ
+  \mathrm{hom}_{\mathbf{C}}
+  \left(
+    A(J),
+    L(\mathsf{P}_{12})
+  \right)
+  \left(
+    \mathsf{C}_{I}^{\prime}(J,z)
+  \right)
+  \\
+  &=
+  \mathsf{T}_{!}(P_{2})
+  \circ
+  R_{A}
+  \left(
+    L(\mathsf{P}_{12})
+  \right)
+  \left(
+    \mathsf{C}_{I}^{\prime}(J,z)
+  \right)
+  \\
+  &=
+  \mathsf{T}_{!}(P_{2})
+  \circ
+  \mathsf{C}_{I}^{\prime}
+  \left(
+    J,
+    \mathsf{P}_{12}(J)(z)
+  \right)
+  \\
+  &=
+  L^{\backprime}
+  \left(
+    (\mathsf{Y}(P_{2},J))^{-1}(\mathsf{P}_{12}(J)(z))
+  \right)
+  \circ
+  \mathsf{T}(J)
+  \\
+  &=
+  L^{\backprime}
+  \left(
+    \mathsf{P}_{12}
+    \circ
+    (\mathsf{Y}(P_{1},J))^{-1}(z)
+  \right)
+  \circ
+  \mathsf{T}(J)
+  \tag{NT}
+\end{align*}
+for all $J$ and $z \in P_{1}(J)$ and use universality of $\mathsf{C}_{I}^{\prime}$ to conclude that
+\begin{align*}
+  L^{\backprime}(\mathsf{P}_{12})
+  \circ
+  \mathsf{T}_{!}(P_{1})
+  &=
+  \mathsf{T}_{!}(P_{2})
+  \circ
+  L(\mathsf{P}_{12})
+\end{align*}
+What is still to be shown is that $\mathsf{T}$ is left whiskering for $\mathsf{T}_{1}$ and the Yoneda functor plus that $\mathsf{T}_{!}$ is unique.
+\begin{description}
+\item[Step 1]
+If
+\begin{align*}
+  P
+  &=
+  \mathrm{y}_{\mathbf{J}}(J)
+\end{align*}
+Then since
+\begin{align*}
+  L
+  \circ
+  \mathrm{y}_{\mathbf{J}}
+  &=
+  A
+\end{align*}
+we must have
+\begin{align*}
+  \mathsf{C}_{I}^{\prime}[\mathrm{y}_{\mathbf{J}}(J)](J,\mathrm{id}_{J})
+  &=
+  A_{\mathrm{y}_{\mathbf{J}}}(\mathrm{id}_{J})
+  =
+  \mathrm{id}_{A(J)}
+\end{align*}
+and hence
+\begin{align*}
+  \mathsf{T}_{!}^{\textrm{lw}}
+  \left[
+    \mathrm{y}_{\mathbf{J}}
+  \right]
+  (J)
+  &=
+  \mathsf{T}_{!}
+  \left(
+    \mathrm{y}_{\mathbf{J}}(J)
+  \right)
+  \\
+  &=
+  \mathsf{T}_{!}
+  \left(
+    \mathrm{y}_{\mathbf{J}}(J)
+  \right)
+  \circ
+  \mathsf{C}_{I}^{\prime}[\mathrm{y}_{\mathbf{J}}(J)](J,\mathrm{id}_{J})
+  \\
+  &=
+  \mathsf{T}_{\mathrm{y}_{\mathbf{J}}(J)}(J,\mathrm{id}_{J})
+  \\
+  &=
+  L^{\backprime}
+  \left(
+    (\mathsf{Y}(\mathrm{y}_{\mathbf{J}}(J),J))^{-1}(\mathrm{id}_{J})
+  \right)
+  \circ
+  \mathsf{T}(J)
+  \\
+  &=
+  L^{\backprime}
+  \left(
+    \mathrm{y}_{\mathbf{J}}(\mathrm{id}_{J})
+  \right)
+  \circ
+  \mathsf{T}(J)
+  \\
+  &=
+  \mathsf{T}(J)
+\end{align*}
+\item[Step 2]
+To make
+\begin{align*}
+  \mathsf{T}_{!}^{\textrm{lw}}
+  \left[
+    \mathrm{y}_{\mathbf{J}}
+  \right]
+  (J)
+  &=
+  \mathsf{T}(J)
+\end{align*}
+true we must necessarily have
+\begin{align*}
+  \mathsf{T}_{!}
+  \left(
+    \mathrm{y}_{\mathbf{J}}(J)
+  \right)
+  &=
+  L^{\backprime}
+  \left(
+    (\mathsf{Y}(\mathrm{y}_{\mathbf{J}}(J),J))^{-1}(\mathrm{id}_{J})
+  \right)
+  \circ
+  \mathsf{T}(J)
+\end{align*}
+But to keep $\mathsf{T}_{!}$ natural we must for a natural transformation
+\begin{align*}
+  \mathsf{P}
+  \colon
+  \mathrm{y}_{\mathbf{J}}
+  &\Rightarrow
+  P
+\end{align*}
+particularly have
+\begin{align*}
+  L^{\backprime}(\mathsf{P})
+  \circ
+  \mathsf{T}_{!}
+  \left(
+    \mathrm{y}_{\mathbf{J}}(J)
+  \right)
+  \circ
+  \mathsf{C}_{I}^{\prime}(J,\mathrm{id}_{J})
+  &=
+  \mathsf{T}_{!}(P)
+  \circ
+  L(\mathsf{P})
+  \circ
+  \mathsf{C}_{I}^{\prime}(J,\mathrm{id_{J}})
+\end{align*}
+And this is to say
+\begin{align*}
+  L^{\backprime}
+  \left(
+    (\mathsf{Y}(P,J))^{-1}
+    \left(
+      \mathsf{P}(J)(\mathrm{id}_{J})
+    \right)
+  \right)
+  \circ
+  \mathsf{T}(J)
+  \tag{NT}
+  &=
+  L^{\backprime}(\mathsf{P})
+  \circ
+  \mathsf{T}_{!}
+  \left(
+    \mathrm{y}_{\mathbf{J}}(J)
+  \right)
+  \circ
+  \mathsf{C}_{I}^{\prime}(J,\mathrm{id}_{J})
+  \\
+  &=
+  \mathsf{T}_{!}(P)
+  \circ
+  L(\mathsf{P})
+  \circ
+  \mathsf{C}_{I}^{\prime}(J,\mathrm{id_{J}})
+  \\
+  &=
+  \mathsf{T}_{!}(P)
+  \circ
+  \mathsf{C}_{I}^{\prime}
+  \left(
+    J,
+    \mathsf{P}(\mathrm{id}_{J})
+  \right)
+\end{align*}
+giving us no other chance than defining $\mathsf{T}_{!}$ as we did.
+\end{description}
+The first statement we proved can now be proven more indirectly in a similar fashion as theorem \ref{thm:uniqueuniarr}.
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}
+There are two points which prevent the Yoneda functor from being an $F$-universal arrow for some (forgetful) functor $F$ and hence $F$ to be a right adjoint to the functor describing the most efficient way to make a category cocomplete.
+\begin{enumerate}
+\item[$\bullet$]
+The factoring through the Yoneda functor is only unique up to isomorphism. So we would need a structural theory with univalence.
+\item[$\bullet$]
+The Yoneda functor raises universe levels, that is, $\mathbf{J}$ is small but $\mathbf{Set}^{\mathbf{J}^{\textrm{op}}}$ is only locally small since $\mathbf{Set}$ is only locally small.
+\end{enumerate}
+Yet there is a way to see all this as an outgrowth of universality since corollary \ref{cor:yonedauniarr} in particular says that
+\begin{align*}
+  L
+  &\doteq
+  \left(
+    L,
+    \mathsf{id}_{L \circ \mathrm{y}_{\mathbf{J}}}
+  \right)
+\end{align*}
+is a left Kan extension of $A$ along $\mathrm{y}_{\mathbf{J}}$. And Kan extensions can be shown to be universal constructions as indicated in the introduction to this section \ref{sec:uni}. For the sake of completeness we define Kan extensions here. But as already mentioned: for a proper treatment we refer to the according chapter of \cite{52fbba46} which in particular provides a generalization of the whole discussion in this subsubsection until this point. Now given functors
+\begin{align*}
+  F
+  \colon
+  \mathbf{C}_{\alpha}
+  &\rightarrow
+  \mathbf{C}_{\gamma}
+  \\
+  K
+  \colon
+  \mathbf{C}_{\alpha}
+  &\rightarrow
+  \mathbf{C}_{\beta}
+\end{align*}
+\begin{enumerate}
+\item[(KE)]
+a \textbf{left Kan extension (of $F$ along $K$)} is a functor
+\begin{align*}
+  \mathrm{Lan}_{K}F
+  \colon
+  \mathbf{C}_{\beta}
+  &\rightarrow
+  \mathbf{C}_{\gamma}
+\end{align*}
+together with a natural transformation
+\begin{align*}
+  \eta
+  \colon
+  F
+  &\Rightarrow
+  \mathrm{Lan}_{K}F
+  \circ
+  K
+\end{align*}
+such that for any functor
+\begin{align*}
+  L
+  \colon
+  \mathbf{C}_{\beta}
+  &\rightarrow
+  \mathbf{C}_{\gamma}
+\end{align*}
+together with a natural transformation
+\begin{align*}
+  \mathsf{T}
+  \colon
+  F
+  &\Rightarrow
+  L
+  \circ
+  K
+\end{align*}
+there is a unique natural transformation
+\begin{align*}
+  \mathsf{T}_{!}
+  \colon
+  \mathrm{Lan}_{K}F
+  &\Rightarrow
+  L
+\end{align*}
+satisfying
+\begin{align*}
+  \mathsf{T}
+  &=
+  \mathsf{T}_{!}^{\mathrm{lw}}[K]
+  \circ
+  \eta
+\end{align*}
+In pictures
+\[
+\begin{tikzcd}[sep=normal]
+  \mathbf{C}_{\alpha}
+  \arrow{rr}[name=f1]{F}
+  \arrow[swap]{ddr}{K}
+  &
+  \arrow[swap,from=f1,shorten <= 20pt,shorten >= 20pt,Rightarrow]{dd}{\mathsf{T}}
+  &
+  \mathbf{C}_{\gamma}
+  &
+  &
+  \mathbf{C}_{\alpha}
+  \arrow{rr}[name=f2]{F}
+  \arrow[swap]{ddr}{K}
+  &
+  \arrow[swap,from=f2,shorten <= 20pt,shorten >= 20pt,Rightarrow]{dd}{\eta}
+  &
+  \mathbf{C}_{\gamma}
+  \\
+  &
+  &
+  &
+  =
+  &
+  &
+  &
+  \\
+  &
+  \mathbf{C}_{\beta}
+  \arrow[swap]{uur}{L}
+  &
+  &
+  &
+  &
+  \mathbf{C}_{\beta}
+  \arrow["\mathrm{Lan}_{K}F" description,near end]{uur}[name=lkf]{}
+  \arrow[swap,bend right=60]{uur}[name=any]{L}
+  &
+  \arrow[swap,from=lkf,to=any,shorten <= 10pt,shorten >= 10pt,Rightarrow]{}{\mathsf{T}_{!}}
+\end{tikzcd}
+\]
+\item[(KE$^{\prime}$)]
+a \textbf{right Kan extension (of $F$ along $K$)} is a functor
+\begin{align*}
+  \mathrm{Ran}_{K}F
+  \colon
+  \mathbf{C}_{\beta}
+  &\rightarrow
+  \mathbf{C}_{\gamma}
+\end{align*}
+together with a natural transformation
+\begin{align*}
+  \varepsilon
+  \colon
+  \mathrm{Ran}_{K}F
+  \circ
+  K
+  &\Rightarrow
+  F
+\end{align*}
+such that for any functor
+\begin{align*}
+  R
+  \colon
+  \mathbf{C}_{\beta}
+  &\rightarrow
+  \mathbf{C}_{\gamma}
+\end{align*}
+together with a natural transformation
+\begin{align*}
+  \mathsf{T}
+  \colon
+  R
+  \circ
+  K
+  &\Rightarrow
+  F
+\end{align*}
+there is a unique natural transformation
+\begin{align*}
+  \mathsf{T}_{!}
+  \colon
+  R
+  &\Rightarrow
+  \mathrm{Ran}_{K}F
+\end{align*}
+satisfying
+\begin{align*}
+  \mathsf{T}
+  &=
+  \varepsilon
+  \circ
+  \mathsf{T}_{!}^{\mathrm{lw}}[K]
+\end{align*}
+In pictures
+\[
+\begin{tikzcd}[sep=normal]
+  \mathbf{C}_{\alpha}
+  \arrow{rr}[name=f1]{F}
+  \arrow[swap]{ddr}{K}
+  &
+  &
+  \mathbf{C}_{\gamma}
+  &
+  &
+  \mathbf{C}_{\alpha}
+  \arrow{rr}[name=f2]{F}
+  \arrow[swap]{ddr}{K}
+  &
+  &
+  \mathbf{C}_{\gamma}
+  \\
+  &
+  &
+  &
+  =
+  &
+  &
+  &
+  \\
+  &
+  \mathbf{C}_{\beta}
+  \arrow[to=f1,shorten <= 20pt,shorten >= 20pt,Rightarrow]{uu}{\mathsf{T}}
+  \arrow[swap]{uur}{R}
+  &
+  &
+  &
+  &
+  \mathbf{C}_{\beta}
+  \arrow[to=f2,shorten <= 20pt,shorten >= 20pt,Rightarrow]{uu}{\varepsilon}
+  \arrow["\mathrm{Ran}_{K}F" description,near end]{uur}[name=rkf]{}
+  \arrow[swap,bend right=60]{uur}[name=any]{R}
+  &
+  \arrow[from=any,to=rkf,shorten <= 10pt,shorten >= 10pt,Rightarrow]{}{\mathsf{T}_{!}}
+\end{tikzcd}
+\]
+\end{enumerate}
+One often abbreviates for Kan extensions according to
+\begin{align*}
+  \mathrm{Lan}_{K}F
+  &\doteq
+  \left(
+    \mathrm{Lan}_{K}F,
+    \eta
+  \right)
+  \\
+  \mathrm{Ran}_{K}F
+  &\doteq
+  \left(
+    \mathrm{Ran}_{K}F,
+    \varepsilon
+  \right)
+\end{align*}
+These Kan extensions play a major role in homotopy theory for which so called {\glqq}model categories{\grqq} are a general formal setting. Loosely speaking, an arrow in a model category can be a weak equivalence or a fibration or a cofibration (in an inclusive way as usual in mathematics). People sometimes say in computer science language that if UFP-HoTT is native abstract homotopy theory then model categories are a homotopy theory emulator, or so. Unfortunately, for further information on model categories we have to refer to the literature. \cite{791993d6}, \cite{70961a11} and \cite{7a40623d} seem worthwhile though we admittedly have only read small parts of it and so cannot really make a serious recommendation.
+\\
+There are pretty useful and deep applications of left Kan extension along the Yoneda functor. We will encounter two cases of significant importance - \textit{geometric realization} and \textit{first truncation} - in section \ref{sec:sset}. But another one regarding sheaves is treated here. If you already knew sheaves before reading these notes you might know the correspondence to so-called {\'e}tale bundles.
+\\
+\begin{exa}
+\label{exa:sheafetale}
+{\'E}tale bundles are a certain kind of bundle of $\mathbf{Top}$, that is, certain objects of the category of bundles over some object of $\mathbf{Top}$ - or equivalently certain objects of the slice category over some object of $\mathbf{Top}$. Indeed, {\'e}tale bundles predate sheaves as we defined them and were originally called sheaves then. One can see this correspondence quite explicitly in \cite{c55c71e8}, for example. But we present another way (which is by the way also mentioned in \cite{c55c71e8}) utilizing a left Kan extension of a certain functor $A \colon \mathbf{Open}_{S} \rightarrow \mathbf{Top} \slash S$ along $\mathrm{y}_{\mathbf{Open}_{S}}$ for some topological space $S$ and its right adjoint. So in the notation of example \ref{exa:gs2} (Generalized Spaces 2) consider the functor
+\begin{align*}
+  A
+  \colon
+  \mathbf{Open}_{S}
+  &\rightarrow
+  \mathbf{Top}
+  \slash
+  S
+  \\
+  U
+  &\mapsto
+  \mathrm{i}_{U}
+  \\
+  \mathrm{i}_{12}
+  &\mapsto
+  \mathrm{i}_{12}
+\end{align*}
+Now $\mathbf{Top} \slash S$ is cocomplete and we can apply theorem \ref{thm:initprobisinitcone} to $A$ in order to get the right adjoint functor $R_{A}$. To understand what $R_{A}$ does let us apply it to a bundle $\pi \in \mathrm{ob}_{\mathbf{Top} \slash S}$:
+\begin{align*}
+  R_{A}(\pi)(U)
+  &=
+  \mathrm{hom}_{\mathbf{Top} \slash S}
+  \left(
+    A^{\textrm{op}}(U),
+    \pi
+  \right)
+  =
+  \mathrm{hom}_{\mathbf{Top} \slash S}
+  \left(
+    \mathrm{i}_{U},
+    \pi
+  \right)
+  \\
+  R_{A}(\pi)(\mathrm{i}_{12})
+  &=
+  \mathrm{hom}_{\mathbf{Top} \slash S}
+  \left(
+    \mathrm{i}_{12},
+    \pi
+  \right)
+  =
+  \left(
+    s
+    \mapsto
+    s
+    \vert
+    U_{1}
+  \right)
+\end{align*}
+But this is precisely our archetypical sheaf $\Gamma_{\pi}$ from example \ref{exa:gs2} from which we abstracted sheaves. So this is knowledge we already had: every bundle can be made into a sheaf by taking local sections. What is new is that this process is right adjoint and we hence must have a functor making a presheaf into a bundle over $S$. Construction \ref{cst:la} then provides the according left adjoint $L_{A}$ to $R_{A}$. It is clear that
+\begin{align*}
+  R_{A}
+  \circ
+  L_{A}
+\end{align*}
+turns a presheaf into a sheaf. $R_{A} \circ L_{A}$ is thus called \textbf{sheafification}. More important, one can show that if the presheaf is already a sheaf then sheafifying it does not structurally change it, that is, it is isomorphic to the original one. This has consequences. On the one hand any sheaf can in the end be considered as an archetypical sheaf. On the other hand corollary \ref{cor:adjointequiv} says that there are equivalent subcategories $\mathbf{Sh}(S)$ of $\mathbf{Set}^{\mathbf{Open}_{S}^{\textrm{op}}}$ and $\mathbf{Et}(S)$ of $\mathbf{Top} \slash S$ where $\mathbf{Sh}(S)$ is the category of sheaves on $S$ we defined in example \ref{exa:gs2}. Likewise we call $\mathbf{Et}(S)$ the \textbf{category of {\'e}tale bundles (over $S$)}. An object of $\mathbf{Et}(S)$ is called \textbf{{\'e}tale bundle (over $S$)}.\footnote{and not {\'e}tal{\'e} bundle (but: {\'e}space {\'e}tal{\'e})}
+\end{exa}
+\begin{prf}
+That the slice category $\mathbf{C} \slash X$ over $X$ of $\mathbf{C}$ is cocomplete if $\mathbf{C}$ is can be found in \cite{52fbba46}, for example. Then $\mathbf{Top} \slash X$ is cocomplete since $\mathbf{Top}$ is according to theorem \ref{thm:topcocomplete}. The rest should be clear or can be looked up in \cite{c55c71e8} to some extent.
+\\
+\phantom{proven}
+\hfill
+$\square$
+\end{prf}

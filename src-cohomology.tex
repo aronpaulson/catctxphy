@@ -1,0 +1,305 @@
+%\nocite{66edf75b}
+%\nocite{0349e8ea}
+%\nocite{7a40623d}
+%\nocite{00000011}
+In this section we want to motivate how to generalize the idea of \textit{axiomatic cohomology} to the context of $(\infty,1)$-categories, that is, to categories up to coherent isomorphism with the {\glqq}morphism sets{\grqq} behaving as $\infty$-groupoids.\footnote{note that this is to say a bit as we would (weakly) enrich over a category of $\infty$-groupoids or topological spaces or so} The Brown representability theorem for $\Omega$-spectra discussed in example \ref{exa:loopradjoint} suggests considering axiomatic cohomology as special case of homotopy theory. And this is what we milk in the following. In particular, we explain how to include the idea of characteristic classes which allow to examine the {\glqq}twists{\grqq} of a principle bundle (and hence instantons).
+\\\\
+First we want to remind the reader of example \ref{exa:loopradjoint} about the loop space functor $\Omega$. Loop spaces are of high interest in homotopy theory. Besides the definition of homotopy groups in terms of loop spaces there is an interesting theorem in \cite{8b5861fc} - proposition 4.66 - which in the end leads to an interesting hypothesis of higher category theory. It says that the fiber $p^{-1}(b)$ (for some $b \in B$) of a fibration $p \colon E \rightarrow B$ is (weakly) homotopy equivalent to the loop space $\Omega(B)$ of $B$ if $E$ is contractible. Now since prinicipal $G$-bundles with structure group a topological group $G$ are in particular fibrations for sufficiently nice base spaces $B$ (particularly CW complexes which is all we are interested in) one gets
+\begin{align*}
+  G
+  &\cong
+  \Omega(\mathrm{B}G)
+\end{align*}
+in $\mathbf{HTop}$. This is why one calls the classyfying space $\mathrm{B}G$ the delooping of $G$. More generally, assume a category $\mathbf{C}$ with terminal object $1_{\mathbf{C}}$. Then for an object $X$ an object $\mathrm{B}X \in \mathrm{ob}_{\mathbf{C}}$ together with a global element $e \colon 1_{\mathbf{C}} \rightarrow \mathrm{B}X$ is called the \textbf{delooping (of $X$)} if it is the unique (up to equivalence) such pair with the property that $X$ is isomorphic to the so-called \textit{loop space object of $\mathrm{B}X$}. The loop space object is a certain homotopy pullback. We didn't define homotopy pullback but it is essentially a pullback up to homotopy in a category allowing for a bit homotopy theory. So the loop space object of an object $X_{0}$ together with a global element $e_{0} \colon 1_{\mathbf{C}} \rightarrow X_{0}$ is the pullback of $e_{0}$ along itself but commutativity is only up to homotopy in the right sense. For $e_{0}$ a global element in $\mathbf{Top}$ we get precisely the loops with base point $e_{0}(1_{\mathbf{Top}})$. If you have become curious we suggest to learn more about homotopy limits in \cite{7a40623d} for example. Or the delooping hypothesis which roughly links monoidal categories (see subsubsection \ref{sec:hlm} in chapter \ref{chap:cattg}) and their higher analogs in higher category theory. For this we refer to \cite{00000011}. But you can additionally look at \cite{66edf75b}.
+\\
+Now let us look at a very special $\Omega$-spectrum in this context. Assume a group $G$ and $n \in \mathbb{N}^{\times}$. A CW complex $K(G,n)$ is called \textbf{Eilenberg-Mac Lane space for $(G,n)$} if
+\begin{align*}
+  \pi_{k}(K(G,n))
+  &=
+  \begin{cases}
+    G
+    &
+    \text{if }
+    k
+    =
+    n
+    \\
+    1_{\mathbf{Grp}}
+    &
+    \text{else}
+  \end{cases}
+\end{align*}
+One can show that
+\begin{align*}
+  K(G,\cdot)
+  \colon
+  \mathbb{Z}
+  &\rightarrow
+  \mathbf{HTop}_{\ast}^{\textrm{CW}}
+  \\
+  n
+  &\mapsto
+  \begin{cases}
+    K(G,n)
+    &
+    \text{if }
+    n
+    \geq
+    1
+    \\
+    \Omega^{-n+1}(K(G,1))
+    &
+    \text{else}
+  \end{cases}
+\end{align*}
+defines an $\Omega$-spectrum if $\Omega^{n}$ denotes the $n$ times application of the loop space functor $\Omega$.\footnote{see \cite{8b5861fc} for this fact} This means that
+\begin{align*}
+  K(G,0)
+  &\cong
+  \Omega^{n}(K(G,n))
+\end{align*}
+for all $n \in \mathbb{N}^{\times}$ and hence suggests to consider $K(G,n)$ as the $n$-times delooping of $K(G,0)$ written $\mathrm{B}^{n}K(G,0)$ for $n \in \mathbb{N}$. In section \ref{sec:sset} of chapter \ref{chap:cattg} we constructed $K(G,1)$ as classifying space for discrete topological groups, that is, topological groups with topology the power set of the group. But then the loop space of $K(G,1)$ which is $K(G,0)$ is just the discrete space $G$. So
+\begin{align*}
+  G
+  &\cong
+  K(G,0)
+\end{align*}
+with $G$ considered as discrete topological space. After all, for an abelian group $G$ we get that
+\begin{align*}
+  h_{G}^{n}(X)
+  &=
+  \mathrm{hom}_{\mathbf{HTop}_{\ast}^{\textrm{CW}}}
+  \left(
+    X,
+    \mathrm{B}^{n}G
+  \right)
+\end{align*}
+is the $n$-th reduced singular cohomology for a CW complex $X$ with coefficients in $G$ for $n \in \mathbb{N}$.\footnote{this fact is also proved in \cite{8b5861fc}} Let us briefly demonstrate that this is sensible by considering the example $n = 0$. A full discussion together with a pretty nice motivation for cohomology can be found - although a bit fragmented - in \cite{8b5861fc}.
+\begin{enumerate}
+\item[$\bullet$]
+A $0$-cochain in singular cohomology for $X$ with coefficients in $G$ is just a morphism $\phi$ in $\mathbf{Set}$ from $X$ to $G$. To make this $0$-cochain $\phi$ into a $0$-cocycle we must demand that $\phi$ is constant on the path components of $X$. So $0$-cocycles are precisely the continuous functions from $X$ to $G$ when $G$ is regarded as discrete space. The only $0$-coboundary is the constant function
+\begin{align*}
+  \phi_{e_{G}}
+  \colon
+  X
+  &\rightarrow
+  G
+  \\
+  x
+  &\mapsto
+  e_{G}
+\end{align*}
+where $e_{G}$ denotes the identity element of $G$. So for unreduced singular cohomology the $0$-cocycles already are the degree-$0$ singular cohomology classes. However, $0$-cocycles also correspond to the homotopy classes of continuous functions from $X$ to $G$ since $G$ is discrete and the only homotopies are the ones from $\phi$ to $\phi$ which are constant. This is to say they are defined by adding $\phi_{e_{G}}$.
+\\
+Now for the reduced case one has to divide out the constant\footnote{overall and not only on path components} functions on $X$ with codomain $G$ from the $0$-cocycles above since these are the $0$-coboundaries in the reduced case. Note that for any $0$-cocycle $\phi$ there is $g \in G$ such that $\phi + \phi_{g}$ - here $\phi_{g}$ denotes the constant function on $X$ with target $g$ and is thus a $0$-coboundary in the reduced case - is a basepoint preserving continuous function from $X$ to $G$. Hence the reduced degree-$0$ singular cohomology classes corrspond precisely to the basepoint preserving continuous functions from $X$ to $G$ since the $0$-cocycles are constant on path-components and are always cohomologous to a basepoint-preserving one. Reduced degree-$0$ singular cohomology classes then also correspond to the homotopy classes of basepoint preserving continuous functions from $X$ to $G$ since $G$ is discrete. Also in this case the only homotopies are the constant ones defined by $\phi_{e_{G}}$ but they do not longer correspond to the reduced $0$-coboundaries. This is because neither the reduced $0$-cocycle nor the reduced $0$-coboundaries are required to be basepoint-preserving. So perhaps we could argue that we use the wrong chain complex here in the sense that it does not take basepoints into account.
+\end{enumerate}
+In the end this special case shows explicitly that
+\begin{align*}
+  \mathrm{hom}_{\mathbf{HTop}_{\ast}^{\textrm{CW}}}
+  \left(
+    X,
+    G
+  \right)
+\end{align*}
+is precisely the $0$-th reduced singular cohomology for a CW complex $X$ with coefficients in an abelian group $G$. Moreover it allows for the idea that it is maybe more sensible to consider the elements of
+\begin{align*}
+  \mathrm{hom}_{\mathbf{Top}_{\ast}^{\textrm{CW}}}
+  \left(
+    X,
+    G
+  \right)
+\end{align*}
+as $0$-cocycles and a homotopy between such elements as $0$-coboundary. This idea directly suggests to also consider
+\begin{align*}
+  \mathrm{hom}_{\mathbf{Top}_{\ast}^{\textrm{CW}}}
+  \left(
+    X,
+    \mathrm{B}^{n}G
+  \right)
+\end{align*}
+as $n$-cocycles and homotopies between such $n$-cocycles as $n$-coboundaries. And if this is reasonable then why cut off the homotopy information at all? Just imagine the $(\infty,1)$-topos ${}_{(\infty,1)}\mathbf{Top}_{\ast}^{\textrm{CW}}$ with objects the CW complexes with basepoint and $1$-morphisms basepoint preserving continuous maps between CW complexes $X_{1},X_{2}$ regarded as an $\infty$-groupoid denoted
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{Top}_{\ast}^{\textrm{CW}}(X_{1},X_{2})
+\end{align*}
+Clearly $K(G,0)$ (with a basepoint) is an object of ${}_{(\infty,1)}\mathbf{Top}_{\ast}^{\textrm{CW}}$ and for all CW complexes $X$ the $0$-truncation of
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{Top}_{\ast}^{\textrm{CW}}
+  \left(
+    X,
+    \mathrm{B}^{n}G
+  \right)
+\end{align*}
+or by using the homotopy hypothesis \ref{prp:groth} the zero-th homotopy group\footnote{the path components} $\pi_{0}$ of this $\infty$-groupoid as topological space is precisely the $n$-th reduced singular cohomology for a CW complex $X$ with coefficients in $G$ for $n \in \mathbb{N}$. But instead of the $0$-truncation we can also look at $n$-truncations for $n \in \mathbb{N}$ to get more interesting (homotopy) information or even at the $\infty$-groupoid
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{Top}_{\ast}^{\textrm{CW}}
+  \left(
+    X,
+    \mathrm{B}^{n}G
+  \right)
+\end{align*}
+to get all homotopy information. For instance, we have pointed out that $h_{G}^{1}(X)$ classifies isomorphism classes of $G$-principal bundles. But this misses the physically crucial information of local symmetry needed for the principle of locality and we said that we need
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{Top}_{\ast}^{\textrm{CW}}
+  \left(
+    X,
+    \mathrm{B}^{1}G
+  \right)
+\end{align*}
+for a classification containing this information.
+\\
+At this point there is also a way how one could generalize \textit{characteristic class} measuring the non-triviality of $G$-principal bundles. Characteristic classes are natural transformations from $\mathcal{P}_{G}$ (see example \ref{thm:repofbundlefunc}) to the functor $h_{\mathbb{Z}}^{\ast}$ consisting of all the $h_{\mathbb{Z}}^{n}$ in an appropriate way\footnote{keyword is cohomology as graded ring (see e.g. \cite{8b5861fc}) and forgetting the abelian group structure}. Namely any $G$-principal bundle over $X$ is the pullback $f^{\ast}\pi$ of the universal bundle $\pi \colon \mathrm{E}G \rightarrow \mathrm{B}G$ along a suited $f \colon X \rightarrow \mathrm{B}G$. So naturality of a characteristic class $\mathsf{C}$ is determined by
+\begin{align*}
+  \mathsf{C}(X)
+  \left(
+    [f^{\ast}\pi]
+  \right)
+  &=
+  h_{\mathbb{Z}}^{\ast}(f)
+  \circ
+  \mathsf{C}(\mathrm{B}G)(\pi)
+\end{align*}
+But $\mathsf{C}(\mathrm{B}G)(\pi)$ is just a sequence of classes
+\begin{align*}
+  [c_{n}]
+  &\in
+  \mathrm{hom}_{\mathbf{HTop}_{\ast}^{\textrm{CW}}}
+  \left(
+    \mathrm{B}G,
+    \mathrm{B}^{n}\mathbb{Z}
+  \right)
+\end{align*}
+and composing with $h_{\mathbb{Z}}^{\ast}(f)$ is thus just a sequence of homotopy classes of $c_{n}$ precomposed with $f$. Hence the sequence determined by
+\begin{align*}
+  [c_{n} \circ f]
+\end{align*}
+must be
+\begin{align*}
+  \mathsf{C}(X)
+  \left(
+    [f^{\ast}\pi]
+  \right)
+\end{align*}
+and encode the twisting information of the bundles in  $[f^{\ast}\pi]$. So we are tempted to say that a characteristic class of a cocycle is just the homotopy class of its precomposition with some cocycle. One could argue that one always has to take all the deloopings into account at this point. But we do not care about this here since this is not our main focus.
+\\\\
+The nice thing about what we have said so far is that it essentially make sense 
+in any $(\infty,1)$-topos - and even $(\infty,1)$-category. Both are a well-developed and formalized parts of higher category theory e.g. in \cite{0349e8ea}. In fact, Lurie's higher topos theory \cite{0349e8ea} begins with the classification of principal bundles by cohomology. Anyways, let us give a definition of cohomology in this general setting.
+\\
+Assume an $(\infty,1)$-category ${}_{(\infty,1)}\mathbf{C}$ and objects $X$ plus $A$ of ${}_{(\infty,1)}\mathbf{C}$. Moreover denote the $\infty$-groupoid of morphisms from $X$ to $A$
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+and its $0$-truncation\footnote{this is in general the morphism set of the homotopy category of ${}_{(\infty,1)}\mathbf{C}$ in analogy to $\mathbf{HTop}$ for $\mathbf{Top}$}
+\begin{align*}
+  \pi_{0}
+  \mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+  &\doteq
+  \mathrm{mor}_{\mathrm{Ho}({}_{(\infty,1)}\mathbf{C})}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+\begin{enumerate}
+\item[$\bullet$]
+The $\infty$-groupoid of morphisms
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+is called the \textbf{($A$-)cohomology (of $X$)} or equivalently the \textbf{(degree-$0$) cohomology (of $X$ with coefficients in $A$)}. An object of the $\infty$-groupoid of morphisms
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+that is, a $1$-morphism in ${}_{(\infty,1)}\mathbf{C}$ from $X$ to $A$, is called \textbf{cocycle (on $X$ with coefficients in $A$)}
+\item[$\bullet$]
+A ($1$-)path of the $\infty$-groupoid
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+is called \textbf{coboundary (on $X$ with coefficients in $A$)}. Moreover given cocycles $\phi_{1},\phi_{2}$ on $X$ with coefficients in $A$ we say $\phi_{1}$ is \textbf{cohomologous} to $\phi_{2}$ or equivalently $\phi_{1}$ and $\phi_{2}$ are \textbf{cohomologous} if there is a ($1$-)path from $\phi_{1}$ to $\phi_{2}$ in
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+\item[$\bullet$]
+The set
+\begin{align*}
+  \pi_{0}
+  \mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+is called the \textbf{($A$-)cohomology set (of $X$)} or equivalently the \textbf{(degree-$0$) cohomology set (of $X$ with coefficients in $A$)} while an element of
+\begin{align*}
+  \pi_{0}
+  \mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+is called a \textbf{($A$-)cohomology class (on $X$)}. Moreover assume a cocycle $\phi$ on $X$ with coefficients in $A$. Then we call its homotopy class
+\begin{align*}
+  [\phi]
+  &\in
+  \pi_{0}
+  \mathbf{C}
+  \left(
+    X,
+    A
+  \right)
+\end{align*}
+the \textbf{($A$-)cohomology class (of $\phi$)}.
+\item[$\bullet$]
+Assume objects $A_{1},A_{2}$ of ${}_{(\infty,1)}\mathbf{C}$. Moreover assume a cocycle $\phi$ on $X$ with coefficients in $A_{1}$ and a cocycle $c$ on $A_{1}$ with coefficients in $A_{2}$, that is, morphisms $\phi$ from $X$ to $A_{1}$ and $c$ from $A_{1}$ to $A_{2}$. These morphisms can be composed to give a morphism $c \circ \phi$ from $X$ to $A_{2}$. The $A_{2}$-cohomology class $[c \circ \phi]$ of $c \circ \phi$ is called \textbf{characteristic class (of $\phi$ w.r.t. $c$)}.
+\end{enumerate}
+Sometimes it is convenient to also have terminology for cohomology when the coefficients are known to be some $n$-fold delooping of some object for some $n \in \mathbb{Z}$. So for $n \in \mathbb{Z}$ let
+\begin{align*}
+  A_{n}
+  &:=
+  \mathrm{B}^{n}A
+\end{align*}
+denote the $n$-fold delooping of $A$. Then the $\infty$-groupoid of morphisms
+\begin{align*}
+  {}_{(\infty,1)}\mathbf{C}
+  \left(
+    X,
+    A_{n}
+  \right)
+\end{align*}
+that is, $A_{n}$-cohomology of $X$, is called the \textbf{(degree-$n$) cohomology (of $X$ with coefficients in $A$)}. One could go on for cocycle and so on in this manner but we refrain here from doing so.
+\\\\
+After this heap of terminology we have to admit that this general idea of cohomology seems quite a stretch regarding the motivation of singular homology we gave. Thus one might believe that this idea of cohomology is a bit flimsily built. But it isn't. Quite the opposite, it encompasses almost everything what is commonly understood as cohomology. Most importantly it allows to fully describe:
+\begin{enumerate}
+\item[(1)]
+reduced axiomatic cohomology which is not too hard to intuitively understand from the Brown representability theorem and what we have done for the singular case here.
+\item[(2)]
+non-abelian cohomology which contains e.g. sheaf cohomology.
+\item[(3)]
+twisted cohomology which contains e.g. differential cohomology.
+\end{enumerate}
+One has just to choose a fitting $(\infty,1)$-category. Of course, this is just a claim here. But look at the \cite{wiki-nlab0000} article: cohomology. Besides a more detailed discussion of what we have given here it lists many references which should convince the wary reader after reading that this is a sensible conception of cohomology.

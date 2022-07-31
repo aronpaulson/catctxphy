@@ -1,0 +1,182 @@
+In general we will follow mathematical convention with respect to notation, that is, e.g. the union of sets is written $\cup$, the intersection $\cap$ and the element and subset relation $\in$ and $\subset$, respectively. However, for the sake of the authors' convenience and hopefully better readability we will fix some symbols for variables in the table at the end of this section. Further, we shall adapt the notation given in the definitions. Our first definition is about a certain set $\mathbf{C}$ which always has a coordinate $\mathrm{ob}_{\mathbf{C}}$. What we mean by adapting the notation then is e.g. that we always write $\mathrm{ob}_{\mathbf{C}}$ for this coordinate - regardless if $\mathbf{C}$ is another token, in which case the index of $\mathrm{ob}_{\mathbf{C}}$ is replaced by the new token, of course. If an explicit set is given a name it will retain its name like the category of sets which will always be written $\mathbf{Set}$ and vice versa this token always stands for the category of sets. Phrases like {\glqq}we (usually) write{\grqq} also indicate that the notation is fixed throughout the text. Overall, we tried to choose a consistent notation in the sense of {\glqq}different symbol styles for different things{\grqq}. We also try to use notation which does not leave much room for ambiguities. But this can become quite cumbersome. Therefore we usually allow for less cumbersome notations by the token $\doteq$ even if the notation then becomes inconsistent. The correct notation is on the right of $\doteq$ while the more convenient (but perhaps inconsistent) one is on the left. An example for what we mean is that we have a thing depending on some set $Y$ which we denote $T_{Y}$. If the set is clear from context it makes sense to only write $T$ for the thing. We indicate that this is allowed by
+\begin{align*}
+  T
+  &\doteq
+  T_{Y}
+\end{align*}
+Last but not least note: if there appear undefined tokens like $f_{12}$ in the text we strongly recommend referring to the following table first.
+\begin{longtable}{cl}
+  \hline
+  Symbol
+  &
+  Meaning
+  \\
+  \hline
+  \endhead
+  \hline
+  \endfoot
+  $\mathbb{N}_{n}$
+  &
+  set of natural numbers $\lbrace 0,\ldots,n \rbrace$
+  \\[5pt]
+  $\mathbb{N}_{n}^{\times}$
+  &
+  set of natural numbers $\lbrace 1,\ldots,n \rbrace$
+  \\[5pt]
+  $\mathbb{N}_{0}^{\times}$
+  &
+  other notation for empty set $\emptyset$
+  \\[5pt]
+  $\mathbb{G}$
+  &
+  set of small greek letters $\alpha,\beta,\ldots,\omega$
+  \\[5pt]
+  $\mathcal{U}$
+  &
+  a variable for a Grothendieck universe
+  \\[5pt]
+  $K$
+  &
+  variable for a small set
+  \\[5pt]
+  $K_{a}$
+  &
+  variable for a small set for all $a \in \mathbb{G}$
+  \\[5pt]
+  $Y$
+  &
+  variable for a set
+  \\[5pt]
+  $\mathfrak{P}(Y)$
+  &
+  power set of $Y$
+  \\[5pt]
+  $\mathrm{pr}_{n}^{N}$
+  &
+  projection to the $n$-th coordinate of an $N$-tuple
+  for $n \leq N$ and $n,N \in \mathbb{N}^{\times}$
+  \\[5pt]
+  $\mathbf{C}$
+  &
+  variable for a category
+  \\[5pt]
+  $X$
+  &
+  variable for an object of $\mathbf{C}$
+  \\[5pt]
+  $X_{n}$
+  &
+  variables for objects of $\mathbf{C}$ for all $n \in \mathbb{N}_{9}$
+  \\[5pt]
+  $f_{n_{1}n_{2}}$
+  &
+  variables for morphisms from $X_{n_{1}}$ to $X_{n_{2}}$ of
+  $\mathbf{C}$ for all $n_{1},n_{2} \in \mathbb{N}_{9}$
+  \\[5pt]
+  $\mathbf{C}_{a}$
+  &
+  variables for categories for all $a \in \mathbb{G}$
+  \\[5pt]
+  $X^{a}$
+  &
+  variable for objects of $\mathbf{C}_{a}$ for all $a \in \mathbb{G}$
+  \\[5pt]
+  $X_{n}^{a}$
+  &
+  variables for objects of $\mathbf{C}_{a}$
+  for all $n \in \mathbb{N}_{9}$ and all $a \in \mathbb{G}$
+  \\[5pt]
+  $f_{n_{1}n_{2}}^{a}$
+  &
+  variables for morphisms from $X_{n_{1}}^{a}$ to $X_{n_{2}}^{a}$
+  of $\mathbf{C}_{a}$
+  for all $n_{1},n_{2} \in \mathbb{N}_{9}$ and all $a \in \mathbb{G}$
+  \\[5pt]
+  $\mathbf{J}$
+  &
+  variable for a category
+  \\[5pt]
+  $J$
+  &
+  variable for an object of $\mathbf{J}$
+  \\[5pt]
+  $J_{n}$
+  &
+  variables for objects of $\mathbf{J}$ for all $n \in \mathbb{N}_{9}$
+  \\[5pt]
+  $j_{n_{1}n_{2}}$
+  &
+  variables for morphisms from $J_{n_{1}}$ to $J_{n_{2}}$ of
+  $\mathbf{J}$ for all $n_{1},n_{2} \in \mathbb{N}_{9}$
+  \\[5pt]
+  $F_{a_{1}a_{2}}$
+  &
+  variable for a functor from $\mathbf{C}_{a_{1}}$ to $\mathbf{C}_{a_{2}}$
+  for all $a_{1},a_{2} \in \mathbb{G}$
+  \\[5pt]
+  $F_{n}$
+  &
+  variables for functors from $\mathbf{C}$ to $\mathbf{C}_{\alpha}$
+  for all $n \in \mathbb{N}_{9}$
+  \\[5pt]
+  $\mathsf{T}_{n_{1}n_{2}}$
+  &
+  variables for natural transformations from $F_{n_{1}}$ to $F_{n_{2}}$
+  for all $n_{1},n_{2} \in \mathbb{N}_{9}$
+  \\[5pt]
+  $\mathcal{M}_{\mathbf{C}}$
+  &
+  variable for a monoidal category
+  $(\mathbf{C},\otimes,\mathsf{A},1,\mathsf{L},\mathsf{R})$ 
+  \\[5pt]
+  $\mathcal{M}_{\mathbf{C}_{\alpha}}$
+  &
+  variables for monoidal categories
+  $(\mathbf{C}_{a},\otimes_{a},\mathsf{A}_{a},1_{a},
+  \mathsf{L}_{a},\mathsf{R}_{a})$
+  for all $a \in \mathbb{G}$
+  \\[5pt]
+  $\mathcal{B}_{\mathbf{C}}$
+  &
+  variable for a braided monoidal category
+  $(\mathbf{C},\otimes,\mathsf{A},1,\mathsf{L},\mathsf{R},\mathsf{B})$ 
+  \\[5pt]
+  $\mathcal{B}_{\mathbf{C}_{\alpha}}$
+  &
+  variables for braided monoidal categories
+  $(\mathbf{C}_{a},\otimes_{a},\mathsf{A}_{a},1_{a},
+  \mathsf{L}_{a},\mathsf{R}_{a},\mathsf{B}_{a})$
+  for all $a \in \mathbb{G}$
+  \\[5pt]
+  $\mathcal{M}_{F_{a_{1}a_{2}}}$
+  &
+  variables for monoidal functors
+  $(F_{a_{1}a_{2}},\mathsf{H}_{a_{1}a_{2}},\Phi_{a_{1}a_{2}})$
+  \\
+  $\phantom{\mathcal{M}_{F_{a_{1}a_{2}}}}$
+  &
+  from $\mathcal{M}_{\mathbf{C}_{a_{1}}}$ to $\mathcal{M}_{\mathbf{C}_{a_{2}}}$
+  for all $a_{1},a_{2} \in \mathbb{G}$
+  \\[5pt]
+  $\mathcal{B}_{F_{a_{1}a_{2}}}$
+  &
+  variables for braided monoidal functors
+  $(F_{a_{1}a_{2}},\mathsf{H}_{a_{1}a_{2}},\Phi_{a_{1}a_{2}})$
+  \\
+  $\phantom{\mathcal{B}_{F_{a_{1}a_{2}}}}$
+  &
+  from $\mathcal{M}_{\mathbf{C}_{a_{1}}}$ to $\mathcal{M}_{\mathbf{C}_{a_{2}}}$
+  for all $a_{1},a_{2} \in \mathbb{G}$
+  \\[5pt]
+  $\mathcal{M}_{F_{n}}$
+  &
+  variables for monoidal functors $(F_{n},\mathsf{H}_{n},\Phi_{n})$
+  from $\mathbf{C}$ to $\mathbf{C}_{\alpha}$ for all $n \in \mathbb{N}_{9}$
+  \\[5pt]
+  $\mathcal{B}_{F_{n}}$
+  &
+  variables for braided monoidal functors $(F_{n},\mathsf{H}_{n},\Phi_{n})$
+  from $\mathbf{C}$ to $\mathbf{C}_{\alpha}$ for all $n \in \mathbb{N}_{9}$
+  \\
+  \hline
+\end{longtable}
