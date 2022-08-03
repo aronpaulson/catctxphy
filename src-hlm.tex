@@ -4,10 +4,6 @@
 %\nocite{de09a3f9}
 \nocite{bc53e62a}
 %\nocite{00000011}
-%TODO
-%  cite somthing understadable for coherence and strictification
-%  more on operads
-%  monadicity theorem
 In this subsubsection we categorify monoids with the method described earlier in this subsection to get the notion of monoidal category. Subsequently, it turns out that that we can define functors and natural transformations preserving the monoidal structure. We then do the same when the monoid is commutative. After this we look at an example regarding vector spaces before generalizing category theory to enriched category theory. From all this it will become quite clear that we can internalize monoids in monoidal categories and this will be utilized to define monads as oidification of monoid objects in monoidal categories. The original case of monads is the case $\mathbf{Cat}$. An even more special case is the restriction to a certain category of set-valued functors we allude to and provide references for. The monoidal objects there are operads\footnote{a word built from operation an monad} which were developed by May (among others) to study iterated loop spaces which can be used to define the homotopy groups and are hence of interest regarding the coherence conditions for higher categories
 \\
 But be warned that the discussion in this subsubsection is mostly superficial and we mostly provide only terminology. Unfortunately, we do not have the time (and means) here to prove any deep theorems like coherence theorems or the strictification theorem. We only provide the bare necessities needed to delve into the literaure we refer to.
@@ -901,7 +897,9 @@ commutes
 \end{enumerate}
 If $X$ as object of the underlying category of a monoidal category $\mathcal{M}_{\mathbf{C}}$ has a left dual then $\mathrm{ev}_{X}$ is called \textbf{(left) evaluation (of $X$)} and $\mathrm{coev}_{X}$ is called \textbf{(left) coevaluation (of $X$)}.\footnote{by the way, a right dual can be defined in the same way with the roles of $X$ and $X^{\prime}$ interchanged} Now, a monoidal category is \textbf{left rigid} if every object has a left dual.
 \\\\
-All this is important in a try to formalize the still informal idea of quantum field theory - at least when the quantum field theory does not depend on the metric. The formalization is called topological quantum fied theory (abbr. TQFT) and is just a symmetric monoidal functor from a certain {\glqq}geometric{\grqq} symmetric monoidal category to the {\glqq}algebraic{\grqq} one of $\mathbf{Finvec}_{K}$ for some field $K$. The keyword for the geometric one is \textit{cobordism}. A clean discussion of TQFTs including a concise motivation from path integrals is given in \cite{00000011}. This source does also try to explain the connection of TQFTs to higher category theory. In particular, it contains a semi-formal discussion of Lurie's formulation of the cobordism hypothesis due to Baez. In low space-time dimensions TQFTs have to do with knot theory. This has much to do with Turaev's work on the subject and is part of his book \cite{24253327}. Another source trying to build a bridge between TQFTs and knot theory is \cite{00000020}. In particular, it contains a proof of Mac Lane's strictification theorem which says that a monoidal\footnote{the same holds in case of braided and symmetric} category is (monoidally) equivalent to a strict monoidal category where strict means identity isomorphisms like always. It also contains a proof of the Tannaka reconstruction theorem which is of major importance in category theory and the backbone of \cite{00000020}. Essentially it is a consequence of the \textit{enriched} Yoneda lemma. {\glqq}Enrichment{\grqq} is an idea you could have come up with\footnote{admittedly it is not as obvious as we pretend here} yourself while reading these notes. At one place, at least, in these notes we had the problem that
+All this is important in a try to formalize the still informal idea of quantum field theory - at least when the quantum field theory does not depend on the metric. The formalization is called topological quantum fied theory (abbr. TQFT) and is just a symmetric monoidal functor from a certain {\glqq}geometric{\grqq} symmetric monoidal category to the {\glqq}algebraic{\grqq} one of $\mathbf{Finvec}_{K}$ for some field $K$. The keyword for the geometric one is \textit{cobordism}. A clean discussion of TQFTs including a concise motivation from path integrals is given in \cite{00000011}. This source does also try to explain the connection of TQFTs to higher category theory. In particular, it contains a semi-formal discussion of Lurie's formulation of the cobordism hypothesis due to Baez. In low space-time dimensions TQFTs have to do with knot theory. This has much to do with Turaev's work on the subject and is part of his book \cite{24253327}.
+\\
+This is a good point to discuss the notion of {\glqq}enrichment{\grqq}. At one place, at least, in these notes we had the problem that
 \begin{align*}
   \mathrm{mor}_{\mathbf{C}}(X_{1},X_{2})
 \end{align*}
@@ -913,7 +911,7 @@ to be the the vector space dual to $V$. Another case will be the path space
 \begin{align*}
   \mathrm{mor}_{\mathbf{Top}}([0,1],Y)
 \end{align*}
-for some space $Y$ which we need when we define \textit{cofibration} in section \ref{sec:fibration} to make currying possible. This case is the original motivation for enrichment. Anyways, monoidal categories provide a way for a definition of so-called enriched categories where the set of morphisms from one object to a second one is itself an object of the category.\footnote{we could potentially also achieve this by internalizing categories in a category with enough structure (pullbacks suffice, that is, i.p. topoi) as briefly discussed in subsection \ref{sec:internaliz} but then also the object set becomes an object} We now give a precise definition of enriched categories but refer to other sources such as e.g. \cite{00000020} for more on this. It should be noted that almost all of category theory has its counterpart in the enriched case. Most prominently: the Yoneda lemma. Assume a monoidal category $\mathcal{M}_{\mathbf{C}}$. A set $\mathbf{E}^{+\mathbf{C}}$ is an \textbf{enriched category (over $\mathcal{M}_{\mathbf{C}}$)} or equivalently \textbf{($\mathcal{M}_{\mathbf{C}}$-)enriched category} if it is a $3$-tuple consisting of a set $\mathrm{ob}_{\mathbf{E}^{+\mathbf{C}}}$, a function
+for some space $Y$ which we need when we define \textit{cofibration} in section \ref{sec:fibration} to make currying possible. This case is the original motivation for enrichment. Anyways, monoidal categories provide a way for a definition of so-called enriched categories where the set of morphisms from one object to a second one is itself an object of the category.\footnote{we could potentially also achieve this by internalizing categories in a category with enough structure (pullbacks suffice, that is, i.p. topoi) as briefly discussed in subsection \ref{sec:internaliz} but then also the object set becomes an object} We now give a precise definition of enriched categories. It should be noted that almost all of category theory has its counterpart in the enriched case. Most prominently: the Yoneda lemma. Assume a monoidal category $\mathcal{M}_{\mathbf{C}}$. A set $\mathbf{E}^{+\mathbf{C}}$ is an \textbf{enriched category (over $\mathcal{M}_{\mathbf{C}}$)} or equivalently \textbf{($\mathcal{M}_{\mathbf{C}}$-)enriched category} if it is a $3$-tuple consisting of a set $\mathrm{ob}_{\mathbf{E}^{+\mathbf{C}}}$, a function
 \begin{align*}
   \mathrm{mor}_{\mathbf{E}^{+\mathbf{C}}}
   \colon
@@ -1613,7 +1611,7 @@ commutes. Moreover $F$-algebras have their names from generalizing abstract alge
   \sqcup
   X
 \end{align*}
-for all $X$. By the universal property\footnote{in the representability version} of coproducts, to define a morphism
+for all $X$. By the universal property of coproducts, to define a morphism
 \begin{align*}
   f
   &\in
@@ -1633,40 +1631,7 @@ it suffices to provide morphisms
   &\in
   \mathrm{mor}_{\mathbf{C}}(X,X)
 \end{align*}
-If we subject $(\mathrm{m},\mathrm{id},\mathrm{inv})$ to group object properties (GO1)-(GO3) from subsection \ref{sec:internaliz} and take $\mathbf{C}$ to be $\mathbf{Set}$ then we have a definition for groups in set theory. This strategy works in general for algebraic structures. Another interesting point here are the initial $F$-algebras in the category built of $F$-algebras and their homomorphisms since these contain induction priniciples. The most prominent examples are the natural numbers or more precisely the natural numbers objects. Initial $F$-algebras are used in UFP-HoTT to generally define inductive types which are of major significance for type theory. These are the types one wants to have in type theory: basic mathematical objects whose elements construct the type obeying an induction principle\footnote{the type freely constructed by its elements as are for example the natural number by zero and the successor function}. But in UFP-HoTT one also wants \textit{higher inductive types} which can also be constructed by higher dimensional paths and not only zero dimensional ones as for ordinary inductive types. This is a topic of current research with progress made in recent years. But now back to monads in $\mathbf{Cat}$. If $F_{\alpha\beta}$ is left adjoint to $F_{\beta\alpha}$ then by theorem \ref{thm:adjoints} we have natural transformations
-\begin{align*}
-  \varepsilon
-  &\colon
-  F_{\alpha\beta}
-  \circ
-  F_{\beta\alpha}
-  \Rightarrow
-  \mathrm{id}_{\mathbf{C}_{\beta}}
-  \\
-  \eta
-  &\colon
-  \mathrm{id}_{\mathbf{C}_{\alpha}}
-  \Rightarrow
-  F_{\beta\alpha}
-  \circ
-  F_{\alpha\beta}
-\end{align*}
-and it is not hard to see that
-\begin{align*}
-  \left(
-    \mathbf{C}_{\alpha},
-    F_{\beta\alpha}
-    \circ
-    F_{\alpha\beta},
-    \eta,
-    \mathrm{id}_{F_{\beta\alpha}}
-    \circ^{\textrm{h}}
-    \varepsilon
-    \circ^{\textrm{h}}
-    \mathrm{id}_{F_{\alpha\beta}}
-  \right)
-\end{align*}
-is a monad of $\mathbf{Cat}$. You should definitely verify that this is true for didactical reasons. The converse statement is not generally true. But the question which adjoints yield the same given monad is interesting. For why this might be important we just say {\glqq}Beck's monadicity theorem{\grqq} and refer to chapter IV in \cite{c55c71e8}. Last, a few words on the importance of monads. Monads are very pervasive in category theory for that reason alone because they contain the notion of adjoints\footnote{look what happens in case of free monoid or more general free objects}. But we have also seen how we can use them in the formulation of abstract algebra. Further Beck's monadicity theorem which we referred to a few lines earlier is very useful (esp. in descent theory, that is: sheaves, stacks, \ldots, or just generalized gluing). By the way, monads are indispensable in computer science and are often among the first categorical concepts computer scientists get to know.
+If we subject $(\mathrm{m},\mathrm{id},\mathrm{inv})$ to group object properties (GO1)-(GO3) from subsection \ref{sec:internaliz} and take $\mathbf{C}$ to be $\mathbf{Set}$ then we have a definition for groups in set theory. This strategy works in general for algebraic structures. Another interesting point here are the initial $F$-algebras in the category built of $F$-algebras and their homomorphisms since these contain induction priniciples. The most prominent examples are the natural numbers or more precisely the natural numbers objects. Initial $F$-algebras are used in UFP-HoTT to generally define inductive types which are of major significance for type theory. These are the types one wants to have in type theory: types freely constructed by its constructors as are for example the natural number by zero and the successor function. But in UFP-HoTT one also wants \textit{higher inductive types} which can also be constructed by higher dimensional paths and not only zero dimensional ones as for ordinary inductive types. This is a topic of current research with progress made in recent years.
 \\
 Last, let us take a brief look at operads. $\mathbf{C}$-operads can be defined as monoid objects of a monoidal category with underlying category
 \begin{align*}
